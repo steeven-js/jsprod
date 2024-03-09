@@ -8,12 +8,7 @@ import { SplashScreen } from 'src/components/loading-screen';
 import { authRoutes } from './auth';
 import { errorRoutes } from './error';
 import { commonRoutes } from './common';
-import { careerRoutes } from './career';
-import { travelRoutes } from './travel';
 import { marketingRoutes } from './marketing';
-import { eLearningRoutes } from './elearning';
-import { eCommerceRoutes } from './ecommerce';
-import { componentsRoutes } from './components';
 
 // ----------------------------------------------------------------------
 
@@ -50,16 +45,6 @@ export default function Router() {
         },
 
         ...marketingRoutes,
-
-        ...travelRoutes,
-
-        ...careerRoutes,
-
-        ...eLearningRoutes,
-
-        ...eCommerceRoutes,
-
-        ...componentsRoutes,
 
         ...authRoutes,
 
