@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import { Outlet } from 'react-router-dom';
 
 import MainLayout from 'src/layouts/main';
+import Pricing01Page from 'src/pages/pricing-01';
 
 // ----------------------------------------------------------------------
 
@@ -42,6 +43,7 @@ export const marketingRoutes = [
           { path: 'post', element: <PostPage /> },
           { path: 'about', element: <AboutPage /> },
           { path: 'contact', element: <ContactPage /> },
+          { path: 'pricing01', element: <Pricing01Page /> },
         ],
       },
     ],

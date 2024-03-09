@@ -62,7 +62,7 @@ export default function NavMobile({ data }) {
               fullWidth
               variant="contained"
               color="inherit"
-              href={paths.zoneStore}
+              href={paths.pricing02}
               target="_blank"
               rel="noopener"
             >

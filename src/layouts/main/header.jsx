@@ -23,7 +23,7 @@ import { NavBasicDesktop } from 'src/components/nav-basic';
 
 import NavMobile from './nav/mobile';
 import { HEADER } from '../config-layout';
-import Searchbar from '../common/searchbar';
+// import Searchbar from '../common/searchbar';
 import HeaderShadow from '../common/header-shadow';
 import SettingsButton from '../common/settings-button';
 
@@ -81,30 +81,10 @@ export default function Header({ headerOnDark }) {
                 icon: <Iconify icon="solar:home-2-bold-duotone" />,
                 path: '/',
               },
-              { title: 'About us', path: '/about' },
-              {
-                title: 'Pages1',
-                path: '/pages1',
-                icon: <Iconify icon="solar:file-bold-duotone" />,
-                children: [
-                  { title: 'FAQs', path: '/pagespages/faqs' },
-                  { title: 'Pricing', path: '/pagespages/pricing' },
-                ],
-              },
-              {
-                title: 'Pages2',
-                path: '/pages2',
-                icon: <Iconify icon="solar:file-bold-duotone" />,
-                children: [
-                  { title: 'Payment', path: '/pagespages/payment' },
-                  { title: 'Maintenance', path: '/pages/maintenance' },
-                ],
-              },
-              {
-                title: 'Docs',
-                icon: <Iconify icon="solar:notebook-bold-duotone" />,
-                path: paths.docs,
-              },
+              { title: 'A propos', path: '/marketing/about' },
+              { title: 'Services', path: '/marketing/services' },
+              { title: 'Projets', path: '/marketing/case-studies' },
+              { title: 'Contact', path: '/marketing/contact' },
             ]}
           />
         </Stack>
@@ -114,7 +94,7 @@ export default function Header({ headerOnDark }) {
 
       <Stack spacing={2} direction="row" alignItems="center" justifyContent="flex-end">
         <Stack spacing={1} direction="row" alignItems="center">
-          <Searchbar />
+          {/* <Searchbar /> */}
 
           <SettingsButton />
         </Stack>
@@ -122,7 +102,7 @@ export default function Header({ headerOnDark }) {
         <Button
           variant="contained"
           color="inherit"
-          href={paths.zoneStore}
+          href={paths.pricing02}
           target="_blank"
           rel="noopener"
           sx={{
@@ -136,34 +116,14 @@ export default function Header({ headerOnDark }) {
       {!mdUp && <NavMobile
         data={[
           {
-            title: 'Home',
+            title: 'Accueil',
             icon: <Iconify icon="solar:home-2-bold-duotone" />,
             path: '/',
           },
-          { title: 'About us', path: '/about' },
-          {
-            title: 'Pages1',
-            path: '/pages1',
-            icon: <Iconify icon="solar:file-bold-duotone" />,
-            children: [
-              { title: 'FAQs', path: '/pagespages/faqs' },
-              { title: 'Pricing', path: '/pagespages/pricing' },
-            ],
-          },
-          {
-            title: 'Pages2',
-            path: '/pages2',
-            icon: <Iconify icon="solar:file-bold-duotone" />,
-            children: [
-              { title: 'Payment', path: '/pagespages/payment' },
-              { title: 'Maintenance', path: '/pages/maintenance' },
-            ],
-          },
-          {
-            title: 'Docs',
-            icon: <Iconify icon="solar:notebook-bold-duotone" />,
-            path: paths.docs,
-          },
+          { title: 'À propos', icon: <Iconify icon="solar:file-bold-duotone" />, path: '/marketing/about' },
+          { title: 'Services', icon: <Iconify icon="solar:file-bold-duotone" />, path: '/marketing/services' },
+          { title: 'Projets', icon: <Iconify icon="solar:file-bold-duotone" />, path: '/marketing/case-studies' },
+          { title: 'Contact', icon: <Iconify icon="solar:file-bold-duotone" />, path: '/marketing/contact' },
         ]}
       />}
     </>
