@@ -77,7 +77,7 @@ export default function Header({ headerOnDark }) {
             }}
             data={[
               {
-                title: 'Home',
+                title: 'Accueil',
                 icon: <Iconify icon="solar:home-2-bold-duotone" />,
                 path: '/',
               },
