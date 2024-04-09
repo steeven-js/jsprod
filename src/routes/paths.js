@@ -102,6 +102,7 @@ export const paths = {
   },
   // Others
   pages: '/pages',
+  tarifs: '/pricing-02',
   portfolio: 'https://steeven-jacques.vercel.app/',
   docs: 'https://zone-docs.vercel.app',
   license: 'https://material-ui.com/store/license/#i-standard-license',

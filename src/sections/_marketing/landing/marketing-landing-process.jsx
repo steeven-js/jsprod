@@ -19,15 +19,15 @@ const SERVICES = [
     icon: '/assets/icons/ic_sketch_design.svg',
   },
   {
-    name: 'Research',
+    name: 'Recherche',
     icon: '/assets/icons/ic_search.svg',
   },
   {
-    name: 'Optimizing',
+    name: 'Optimisation',
     icon: '/assets/icons/ic_optimization.svg',
   },
   {
-    name: 'Results',
+    name: 'Résultats',
     icon: '/assets/icons/ic_analysis.svg',
   },
 ];
@@ -54,10 +54,11 @@ export default function MarketingLandingProcess() {
           Work Flow
         </Typography>
 
-        <Typography variant="h2">Working Process</Typography>
+        <Typography variant="h2">Mon processus de travail</Typography>
 
         <Typography sx={{ color: 'text.secondary' }}>
-          Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.
+          Je suis un développeur web full-stack passionné par la création de sites web et d&apos;applications web. Je suis
+          spécialisé dans le développement d&apos;application web dynamique et d&apos;application mobile pour Android et iOS.
         </Typography>
       </Stack>
 

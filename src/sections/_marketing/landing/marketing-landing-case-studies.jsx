@@ -41,10 +41,10 @@ export default function MarketingLandingCaseStudies({ caseStudies }) {
         }}
       >
         <Typography variant="overline" sx={{ color: 'text.disabled' }}>
-          Our Work
+          Mes réalisations
         </Typography>
 
-        <Typography variant="h2">Case Studies</Typography>
+        <Typography variant="h2">Illustrations de mon travail</Typography>
       </Stack>
 
       <Grid

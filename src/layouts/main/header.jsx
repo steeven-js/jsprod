@@ -120,14 +120,14 @@ export default function Header({ headerOnDark }) {
         <Button
           variant="contained"
           color="inherit"
-          href={paths.zoneStore}
+          href={paths.tarifs}
           target="_blank"
           rel="noopener"
           sx={{
             display: { xs: 'none', md: 'inline-flex' },
           }}
         >
-          Buy Now
+          Tarifs
         </Button>
       </Stack>
 

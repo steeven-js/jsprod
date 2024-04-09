@@ -7,6 +7,8 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { alpha, useTheme } from '@mui/material/styles';
 
+import { paths } from 'src/routes/paths';
+
 import { useResponsive } from 'src/hooks/use-responsive';
 
 import { bgGradient } from 'src/theme/css';
@@ -49,16 +51,15 @@ export default function MarketingLandingHero() {
             }}
           >
             <Typography variant="overline" sx={{ color: 'secondary.main' }}>
-              Digital Marketing
+              Développent web et mobile
             </Typography>
 
             <Typography variant="h1" sx={{ my: 3 }}>
-              Boosts Your Website Traffic
+              Concepteur développeur d&apos;application
             </Typography>
 
             <Typography sx={{ color: 'text.secondary' }}>
-              Etiam sollicitudin, ipsum eu pulvinar rutrum, tellus ipsum laoreet sapien, quis
-              venenatis ante odio sit amet eros.
+              Créez des apps sur mesure, révolutionnez votre présence digitale.
             </Typography>
 
             <Stack
@@ -68,15 +69,20 @@ export default function MarketingLandingHero() {
               justifyContent={{ xs: 'center', md: 'unset' }}
               sx={{ mt: 5 }}
             >
-              <Button variant="contained" color="inherit" size="large">
-                Try For Free
+              <Button
+                variant="contained"
+                color="inherit"
+                size="large"
+                href={paths.tarifs}
+              >
+                Tarifs
               </Button>
 
               <Stack direction="row" alignItems="center" sx={{ typography: 'h6' }}>
                 <Fab size="medium" sx={{ mr: 1 }}>
                   <Iconify width={24} icon="carbon:play" />
                 </Fab>
-                See Our Work
+                Visitez mes projets
               </Stack>
             </Stack>
           </Grid>
