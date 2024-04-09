@@ -62,7 +62,7 @@ export default function MarketingLatestPosts({ posts }) {
         alignItems="center"
         justifyContent={{ xs: 'center', md: 'space-between' }}
       >
-        <Typography variant="h3">Latest Posts</Typography>
+        <Typography variant="h3">Mes publications récentes</Typography>
 
         {mdUp && viewAllBtn}
       </Stack>
