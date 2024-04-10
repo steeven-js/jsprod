@@ -80,28 +80,29 @@ export default function Header({ headerOnDark }) {
                 icon: <Iconify icon="solar:home-2-bold-duotone" />,
                 path: '/',
               },
-              { title: 'Services', path: '/marketing/services' },
+              { title: 'About us', path: '/about' },
               {
-                title: 'Cases Studies',
-                path: '/marketing/case-studies',
+                title: 'Pages1',
+                path: '/pages1',
                 icon: <Iconify icon="solar:file-bold-duotone" />,
                 children: [
-                  { title: 'Case Study', path: '/marketing/case-study' },
+                  { title: 'FAQs', path: '/pagespages/faqs' },
+                  { title: 'Pricing', path: '/pagespages/pricing' },
                 ],
               },
               {
-                title: 'Blogs',
-                path: '/marketing/posts',
+                title: 'Pages2',
+                path: '/pages2',
                 icon: <Iconify icon="solar:file-bold-duotone" />,
                 children: [
-                  { title: 'Blog', path: '/marketing/post' },
+                  { title: 'Payment', path: '/pagespages/payment' },
+                  { title: 'Maintenance', path: '/pages/maintenance' },
                 ],
               },
-              { title: 'About', path: '/marketing/about' },
               {
-                title: 'Portfolio',
+                title: 'Docs',
                 icon: <Iconify icon="solar:notebook-bold-duotone" />,
-                path: paths.portfolio,
+                path: paths.docs,
               },
             ]}
           />
@@ -120,14 +121,14 @@ export default function Header({ headerOnDark }) {
         <Button
           variant="contained"
           color="inherit"
-          href={paths.tarifs}
+          href={paths.zoneStore}
           target="_blank"
           rel="noopener"
           sx={{
             display: { xs: 'none', md: 'inline-flex' },
           }}
         >
-          Tarifs
+          Buy Now
         </Button>
       </Stack>
 
@@ -140,38 +141,34 @@ export default function Header({ headerOnDark }) {
               icon: <Iconify icon="solar:home-2-bold-duotone" />,
               path: '/',
             },
+            { title: 'About us', path: '/about' },
             {
-              title: 'Services',
-              icon: <Iconify icon="solar:home-2-bold-duotone" />,
-              path: '/marketing/services'
-            },
-            {
-              title: 'Cases Studies',
-              path: '/marketing/case-studies',
+              title: 'Pages1',
+              path: '/pages1',
               icon: <Iconify icon="solar:file-bold-duotone" />,
               children: [
-                { title: 'Case Study', path: '/marketing/case-study' },
+                { title: 'FAQs', path: '/pagespages/faqs' },
+                { title: 'Pricing', path: '/pagespages/pricing' },
               ],
             },
             {
-              title: 'Blogs',
-              path: '/marketing/posts',
+              title: 'Pages2',
+              path: '/pages2',
               icon: <Iconify icon="solar:file-bold-duotone" />,
               children: [
-                { title: 'Blog', path: '/marketing/post' },
+                { title: 'Payment', path: '/pagespages/payment' },
+                { title: 'Maintenance', path: '/pages/maintenance' },
               ],
             },
-            { title: 'About',
-            icon: <Iconify icon="solar:file-bold-duotone" />,
-            path: '/marketing/about'
-          },
             {
-              title: 'Portfolio',
+              title: 'Docs',
               icon: <Iconify icon="solar:notebook-bold-duotone" />,
-              path: paths.portfolio,
+              path: paths.docs,
             },
           ]}
-        />}
+        />
+
+      }
     </>
   );
 

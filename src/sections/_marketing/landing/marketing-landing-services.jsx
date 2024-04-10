@@ -20,27 +20,27 @@ const COLORS = ['primary', 'secondary', 'success', 'warning'];
 
 const SERVICES = [
   {
-    name: 'Site Web personnalisé',
+    name: 'SEO',
     icon: '/assets/icons/service/ic_service_seo.svg',
-    content: 'Création de site statique et application web dynamique',
+    content: 'Nunc nonummy metus. Donec elit libero',
     path: paths.marketing.services,
   },
   {
-    name: 'Ecommerce',
+    name: 'Email Marketing',
     icon: '/assets/icons/service/ic_service_mail.svg',
-    content: 'Création de site ecommerce et application mobile',
+    content: 'Nunc nonummy metus. Donec elit libero',
     path: paths.marketing.services,
   },
   {
-    name: 'Applicatif Mobile',
+    name: 'Search Engine Oprimization',
     icon: '/assets/icons/service/ic_service_analysis.svg',
-    content: 'Création d\'application mobile pour Android et iOS',
+    content: 'Nunc nonummy metus. Donec elit libero',
     path: paths.marketing.services,
   },
   {
-    name: 'Application Personnalisée',
+    name: 'Social Marketing',
     icon: '/assets/icons/service/ic_service_bullhorn.svg',
-    content: 'Développement d\'application sur mesure pour vos besoins',
+    content: 'Nunc nonummy metus. Donec elit libero',
     path: paths.marketing.services,
   },
 ];
@@ -64,13 +64,13 @@ export default function MarketingLandingServices() {
         }}
       >
         <Typography variant="overline" sx={{ color: 'text.disabled' }}>
-          Mes services
+          Our Services
         </Typography>
 
-        <Typography variant="h2">Mes domaines d&apos;activités</Typography>
+        <Typography variant="h2">We Provide</Typography>
 
         <Typography sx={{ color: 'text.secondary' }}>
-          En tant que développeur web, je vous propose mes services pour divers domaines d&apos;activités. Que vous soyez une entreprise, une association ou un particulier, je vous accompagne dans la réalisation de vos projets.
+          Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.
         </Typography>
       </Stack>
 

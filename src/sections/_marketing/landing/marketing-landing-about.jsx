@@ -6,8 +6,6 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 
-import { paths } from 'src/routes/paths';
-
 import { fShortenNumber } from 'src/utils/format-number';
 
 import Image from 'src/components/image';
@@ -66,25 +64,27 @@ export default function MarketingLandingAbout() {
           }}
         >
           <Typography component="div" variant="overline" sx={{ color: 'text.disabled' }}>
-            A propos
+            About us
           </Typography>
 
           <Typography variant="h2" sx={{ my: 3 }}>
-            Qui suis-je?
+            Who We Are
           </Typography>
 
           <Typography sx={{ color: 'text.secondary' }}>
-            Je suis un concepteur d&apos;applications passionné et dévoué avec plus de 20 ans d&apos;expérience dans la création de solutions logicielles innovantes. J&apos;ai travaillé sur plus de 20 projets et j&apos;ai réussi à satisfaire plus de 32000 clients au fil des ans. Mon objectif est de créer des applications qui non seulement répondent aux besoins des utilisateurs, mais les surpassent également.
+            In hac habitasse platea dictumst. Aliquam lobortis. Lorem ipsum dolor sit amet,
+            consectetuer adipiscing elit. In dui magna, posuere eget, vestibulum et, tempor auctor,
+            justo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
+            turpis egestas.
           </Typography>
 
           <Button
             size="large"
             color="inherit"
-            href={paths.marketing.about}
             endIcon={<Iconify icon="carbon:chevron-right" />}
             sx={{ my: 5 }}
           >
-            Apprendre plus
+            Lean more
           </Button>
         </Grid>
 

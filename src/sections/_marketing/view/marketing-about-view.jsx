@@ -7,7 +7,7 @@ import MarketingAboutStory from '../about/marketing-about-story';
 import MarketingLandingFaqs from '../landing/marketing-landing-faqs';
 import MarketingAboutOurClients from '../marketing-about-our-clients';
 import MarketingTestimonial from '../testimonial/marketing-testimonial';
-// import MarketingAboutOurVision from '../about/marketing-about-our-vision';
+import MarketingAboutOurVision from '../about/marketing-about-our-vision';
 import MarketingLandingFreeSEO from '../landing/marketing-landing-free-seo';
 import MarketingAboutCoreValues from '../about/marketing-about-core-values';
 
@@ -18,7 +18,7 @@ export default function MarketingAboutView() {
     <>
       <MarketingAbout />
 
-      {/* <MarketingAboutOurVision /> */}
+      <MarketingAboutOurVision />
 
       <MarketingAboutCoreValues />
 

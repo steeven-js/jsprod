@@ -34,14 +34,14 @@ export default function PricingMarketing({ plans }) {
           }}
         >
           <Typography variant="overline" sx={{ color: 'text.disabled' }}>
-            Tarifs
+            Pricing
           </Typography>
 
-          <Typography variant="h2">Découvrez mes offres et tarifs</Typography>
+          <Typography variant="h2">Check Our Pricing</Typography>
 
           <Typography sx={{ color: 'text.secondary' }}>
-          Choisissez le plan parfait pour vos besoins.
-            <br /> Toujours flexible pour évoluer.
+            Choose the perfect plan for your needs.
+            <br /> Always flexible to grow
           </Typography>
         </Stack>
 

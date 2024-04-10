@@ -8,23 +8,23 @@ import SvgColor from 'src/components/svg-color';
 
 const CORE_VALUES = [
   {
-    title: 'Satisfaction client',
-    description: 'Votre satisfaction est notre priorité.',
+    title: 'Customer Satisfaction',
+    description: 'Aenean urna dictum adipiscing nec, cras quisque.',
     icon: '/assets/icons/ic_agreement.svg',
   },
   {
-    title: 'Transparence',
-    description: 'Nous valorisons la transparence dans tout ce que nous faisons.',
+    title: 'Transparency',
+    description: 'Aenean urna dictum adipiscing nec, cras quisque.',
     icon: '/assets/icons/ic_transparency.svg',
   },
   {
-    title: 'Réputation',
-    description: 'Notre réputation parle d\'elle-même.',
+    title: 'Reputation',
+    description: 'Aenean urna dictum adipiscing nec, cras quisque.',
     icon: '/assets/icons/ic_reputation.svg',
   },
   {
-    title: 'Coopération',
-    description: 'Ensemble, nous atteignons plus.',
+    title: 'Cooperation',
+    description: 'Aenean urna dictum adipiscing nec, cras quisque.',
     icon: '/assets/icons/ic_popularity.svg',
   },
 ];
@@ -41,7 +41,7 @@ export default function MarketingAboutCoreValues() {
       }}
     >
       <Typography variant="h2" sx={{ mb: { xs: 8, md: 10 } }}>
-        Ce qui nous guide
+        Our Core Values
       </Typography>
 
       <Box

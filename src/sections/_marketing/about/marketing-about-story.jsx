@@ -64,10 +64,10 @@ export default function MarketingAboutStory() {
             mb: { xs: 8, md: 10 },
           }}
         >
-          <Typography variant="h2">Mon histoire en quelques mots</Typography>
+          <Typography variant="h2">Our Story</Typography>
 
           <Typography sx={{ color: 'text.secondary' }}>
-            Innovation, passion et engagement envers l&apos;excellence.
+            Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.
           </Typography>
         </Stack>
 

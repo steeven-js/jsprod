@@ -80,13 +80,16 @@ export default function MarketingAbout() {
             textAlign: { xs: 'center', md: 'left' },
           }}
         >
-          <Typography variant="h2">À propos de moi</Typography>
+          <Typography variant="h2">Who We Are?</Typography>
 
           <Typography sx={{ mt: 3, mb: 5, color: 'text.secondary' }}>
-            Passionné par l&apos;innovation et la création, je m&apos;efforce de repousser les limites pour offrir des solutions remarquables dans la conception d&apos;application. Mon engagement envers l&apos;excellence guide chacune de mes actions, et je suis déterminé à inspirer et à transformer à travers chaque projet.
+            Vivamus consectetuer hendrerit lacus. Curabitur a felis in nunc fringilla tristique.
+            Nulla neque dolor, sagittis eget, iaculis quis, molestie non, velit.
             <br />
             <br />
-            Professionnel polyvalent avec une passion pour l&apos;exploration, j&apos;ai acquis une compréhension approfondie des défis dans la programmation. Ma flexibilité et mon dévouement envers mes clients me permettent de livrer des résultats exceptionnels et de créer des partenariats solides qui inspirent la croissance.
+            Nam pretium turpis et arcu. Praesent porttitor, nulla vitae posuere iaculis, arcu nisl
+            dignissim dolor, a pretium mi sem ut ipsum. Praesent venenatis metus at tortor pulvinar
+            varius.
           </Typography>
 
           <Button
@@ -95,7 +98,7 @@ export default function MarketingAbout() {
             size="large"
             endIcon={<Iconify icon="carbon:chevron-right" />}
           >
-            Explorez mes réalisations
+            Check Our Work
           </Button>
         </Grid>
       </Grid>
