@@ -76,28 +76,40 @@ export default function Header({ headerOnDark }) {
             }}
             data={[
               {
-                title: 'Home',
+                title: 'Accueil',
                 icon: <Iconify icon="solar:home-2-bold-duotone" />,
                 path: '/',
               },
-              { title: 'About us', path: '/about' },
               {
-                title: 'Pages1',
-                path: '/pages1',
+                title: 'Services',
+                icon: <Iconify icon="solar:home-2-bold-duotone" />,
+                path: '/marketing/services'
+              },
+              {
+                title: 'A propos',
+                icon: <Iconify icon="solar:home-2-bold-duotone" />,
+                path: '/marketing/about'
+              },
+              {
+                title: 'Case Studies',
+                path: '/marketing/case-studies',
                 icon: <Iconify icon="solar:file-bold-duotone" />,
                 children: [
-                  { title: 'FAQs', path: '/pagespages/faqs' },
-                  { title: 'Pricing', path: '/pagespages/pricing' },
+                  { title: 'Case Study', path: '/marketing/case-study' },
                 ],
               },
               {
-                title: 'Pages2',
-                path: '/pages2',
+                title: 'Posts',
+                path: '/marketing/posts',
                 icon: <Iconify icon="solar:file-bold-duotone" />,
                 children: [
-                  { title: 'Payment', path: '/pagespages/payment' },
-                  { title: 'Maintenance', path: '/pages/maintenance' },
+                  { title: 'Posts', path: '/marketing/post' },
                 ],
+              },
+              {
+                title: 'Contact',
+                icon: <Iconify icon="solar:home-2-bold-duotone" />,
+                path: '/marketing/contact'
               },
               {
                 title: 'Docs',
@@ -137,28 +149,40 @@ export default function Header({ headerOnDark }) {
         <NavMobile
           data={[
             {
-              title: 'Home',
+              title: 'Accueil',
               icon: <Iconify icon="solar:home-2-bold-duotone" />,
               path: '/',
             },
-            { title: 'About us', path: '/about' },
             {
-              title: 'Pages1',
-              path: '/pages1',
+              title: 'Services',
+              icon: <Iconify icon="solar:home-2-bold-duotone" />,
+              path: '/marketing/services'
+            },
+            {
+              title: 'A propos',
+              icon: <Iconify icon="solar:home-2-bold-duotone" />,
+              path: '/marketing/about'
+            },
+            {
+              title: 'Case Studies',
+              path: '/marketing/case-studies',
               icon: <Iconify icon="solar:file-bold-duotone" />,
               children: [
-                { title: 'FAQs', path: '/pagespages/faqs' },
-                { title: 'Pricing', path: '/pagespages/pricing' },
+                { title: 'Case Study', path: '/marketing/case-study' },
               ],
             },
             {
-              title: 'Pages2',
-              path: '/pages2',
+              title: 'Posts',
+              path: '/marketing/posts',
               icon: <Iconify icon="solar:file-bold-duotone" />,
               children: [
-                { title: 'Payment', path: '/pagespages/payment' },
-                { title: 'Maintenance', path: '/pages/maintenance' },
+                { title: 'Posts', path: '/marketing/post' },
               ],
+            },
+            {
+              title: 'Contact',
+              icon: <Iconify icon="solar:home-2-bold-duotone" />,
+              path: '/marketing/contact'
             },
             {
               title: 'Docs',
