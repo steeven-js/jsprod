@@ -112,9 +112,9 @@ export default function Header({ headerOnDark }) {
                 path: '/marketing/contact'
               },
               {
-                title: 'Docs',
+                title: 'Tests',
                 icon: <Iconify icon="solar:notebook-bold-duotone" />,
-                path: paths.docs,
+                path: '/marketing/tests'
               },
             ]}
           />
@@ -185,9 +185,9 @@ export default function Header({ headerOnDark }) {
               path: '/marketing/contact'
             },
             {
-              title: 'Docs',
+              title: 'Test',
               icon: <Iconify icon="solar:notebook-bold-duotone" />,
-              path: paths.docs,
+              path: '/test'
             },
           ]}
         />
