@@ -92,19 +92,13 @@ export default function Header({ headerOnDark }) {
               },
               {
                 title: 'Case Studies',
-                path: '/marketing/case-studies',
                 icon: <Iconify icon="solar:file-bold-duotone" />,
-                children: [
-                  { title: 'Case Study', path: '/marketing/case-study' },
-                ],
+                path: '/marketing/case-studies',
               },
               {
                 title: 'Posts',
-                path: '/marketing/posts',
                 icon: <Iconify icon="solar:file-bold-duotone" />,
-                children: [
-                  { title: 'Posts', path: '/marketing/post' },
-                ],
+                path: '/marketing/posts',
               },
               {
                 title: 'Contact',
@@ -112,9 +106,9 @@ export default function Header({ headerOnDark }) {
                 path: '/marketing/contact'
               },
               {
-                title: 'Tests',
+                title: 'Test',
                 icon: <Iconify icon="solar:notebook-bold-duotone" />,
-                path: '/marketing/tests'
+                path: '/test'
               },
             ]}
           />
@@ -165,19 +159,13 @@ export default function Header({ headerOnDark }) {
             },
             {
               title: 'Case Studies',
-              path: '/marketing/case-studies',
               icon: <Iconify icon="solar:file-bold-duotone" />,
-              children: [
-                { title: 'Case Study', path: '/marketing/case-study' },
-              ],
+              path: '/marketing/case-studies',
             },
             {
               title: 'Posts',
-              path: '/marketing/posts',
               icon: <Iconify icon="solar:file-bold-duotone" />,
-              children: [
-                { title: 'Posts', path: '/marketing/post' },
-              ],
+              path: '/marketing/posts',
             },
             {
               title: 'Contact',

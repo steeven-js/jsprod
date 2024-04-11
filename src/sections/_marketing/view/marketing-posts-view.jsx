@@ -1,6 +1,8 @@
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 
+import useFetchPosts from 'src/hooks/use-fetchPosts';
+
 import { _tags, _mock, _categories, _marketingPosts } from 'src/_mock';
 
 import PostSidebar from '../../blog/common/post-sidebar';
@@ -13,11 +15,12 @@ import BlogMarketingFeaturedPosts from '../../blog/marketing/marketing-featured-
 // ----------------------------------------------------------------------
 
 export default function MarketingPostsView() {
+  const { posts } = useFetchPosts();
   return (
     <>
       <PostSearchMobile />
 
-      <BlogMarketingFeaturedPosts posts={_marketingPosts.slice(0, 5)} />
+      <BlogMarketingFeaturedPosts posts={posts.slice(0, 5)} />
 
       <Container
         sx={{

@@ -2,9 +2,7 @@ import PropTypes from 'prop-types';
 
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
 
-import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { fDate } from 'src/utils/format-time';
@@ -25,7 +23,10 @@ export default function MarketingFeaturedPostItem({ post }) {
       }}
       sx={{ bgcolor: 'background.default', borderRadius: 2 }}
     >
-      <Image src={post.coverUrl} alt={post.title} sx={{ flexGrow: 1, height: { md: 560 } }} />
+      <Image src={
+        post.media && post.media.length > 0
+          ? post.media[0].original_url : ''
+      } alt={post.title} sx={{ flexGrow: 1, height: { md: 560 } }} />
 
       <Stack
         justifyContent="space-between"
@@ -38,7 +39,13 @@ export default function MarketingFeaturedPostItem({ post }) {
         <Stack spacing={1}>
           <PostTimeBlock createdAt={fDate(post.createdAt)} duration={post.duration} />
 
-          <Link component={RouterLink} href={paths.marketing.post} color="inherit" variant="h3">
+          <Link
+            component={RouterLink}
+            key={post.id}
+            to={`/marketing/post/${post.id}`}
+            color="inherit"
+            variant="h3"
+          >
             {post.title}
           </Link>
 
@@ -48,8 +55,8 @@ export default function MarketingFeaturedPostItem({ post }) {
         </Stack>
 
         <Stack direction="row" alignItems="center" sx={{ pt: 2, typography: 'body2' }}>
-          <Avatar src={post.author.avatarUrl} sx={{ mr: 1 }} />
-          {post.author.name}
+          {/* <Avatar src={post.author.avatarUrl} sx={{ mr: 1 }} /> */}
+          {/* {post.author.name} */}
         </Stack>
       </Stack>
     </Stack>
@@ -58,6 +65,7 @@ export default function MarketingFeaturedPostItem({ post }) {
 
 MarketingFeaturedPostItem.propTypes = {
   post: PropTypes.shape({
+    id: PropTypes.string,
     title: PropTypes.string,
     coverUrl: PropTypes.string,
     duration: PropTypes.string,
@@ -67,5 +75,6 @@ MarketingFeaturedPostItem.propTypes = {
       avatarUrl: PropTypes.string,
       name: PropTypes.string,
     }),
+    media: PropTypes.array,
   }),
 };

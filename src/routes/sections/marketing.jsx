@@ -6,7 +6,7 @@ import MainLayout from 'src/layouts/main';
 // ----------------------------------------------------------------------
 
 const BlogPage = lazy(() => import('src/pages/marketing/posts'));
-const PostPage = lazy(() => import('src/pages/marketing/post'));
+const PostPage = lazy(() => import('src/pages/marketing/post/[id]'));
 const AboutPage = lazy(() => import('src/pages/marketing/about'));
 const ContactPage = lazy(() => import('src/pages/marketing/contact'));
 const TestsPage = lazy(() => import('src/pages/marketing/tests'));
@@ -41,7 +41,7 @@ export const marketingRoutes = [
           { path: 'case-studies', element: <CaseStudiesPage /> },
           { path: 'case-study', element: <CaseStudyPage /> },
           { path: 'posts', element: <BlogPage /> },
-          { path: 'post', element: <PostPage /> },
+          { path: 'post/:id', element: <PostPage /> },
           { path: 'about', element: <AboutPage /> },
           { path: 'contact', element: <ContactPage /> },
           { path: 'tests', element: <TestsPage /> },
