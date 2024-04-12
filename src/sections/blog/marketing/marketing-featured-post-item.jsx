@@ -56,7 +56,10 @@ export default function MarketingFeaturedPostItem({ post }) {
         </Stack>
 
         <Stack direction="row" alignItems="center" sx={{ pt: 2, typography: 'body2' }}>
-          <Avatar src="/assets/images/avatar/avatar_10.jpg" sx={{ mr: 1 }} />
+          <Avatar src={
+            post.author.media && post.author.media.length > 0
+              ? post.author.media[0].original_url : "/assets/images/avatar/avatar_10.jpg"}
+            sx={{ mr: 1 }} />
           {post.author.name}
         </Stack>
       </Stack>
@@ -76,6 +79,7 @@ MarketingFeaturedPostItem.propTypes = {
     author: PropTypes.shape({
       avatarUrl: PropTypes.string,
       name: PropTypes.string,
+      media: PropTypes.array,
     }),
     media: PropTypes.array,
   }),
