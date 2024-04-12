@@ -9,8 +9,6 @@ const BlogPage = lazy(() => import('src/pages/marketing/posts'));
 const PostPage = lazy(() => import('src/pages/marketing/post/[id]'));
 const AboutPage = lazy(() => import('src/pages/marketing/about'));
 const ContactPage = lazy(() => import('src/pages/marketing/contact'));
-const TestsPage = lazy(() => import('src/pages/marketing/tests'));
-const TestPage = lazy(() => import('src/pages/marketing/test/[id]'));
 const LandingPage = lazy(() => import('src/pages/marketing/landing'));
 const ServicesPage = lazy(() => import('src/pages/marketing/services'));
 const CaseStudyPage = lazy(() => import('src/pages/marketing/case-study'));
@@ -44,8 +42,6 @@ export const marketingRoutes = [
           { path: 'post/:id', element: <PostPage /> },
           { path: 'about', element: <AboutPage /> },
           { path: 'contact', element: <ContactPage /> },
-          { path: 'tests', element: <TestsPage /> },
-          { path: 'test/:id', element: <TestPage /> },
         ],
       },
     ],
