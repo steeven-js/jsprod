@@ -1,3 +1,4 @@
+import { useParams } from 'react-router';
 import { useState, useCallback } from 'react';
 
 import Stack from '@mui/material/Stack';
@@ -13,13 +14,16 @@ import IconButton from '@mui/material/IconButton';
 
 import { paths } from 'src/routes/paths';
 
+import useFetchPost from 'src/hooks/use-fetchPost';
+import { useMarkdownParser } from 'src/hooks/test';
+
 import { fDate } from 'src/utils/format-time';
 
 import { _socials, _marketingPosts } from 'src/_mock';
 
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
-import Markdown from 'src/components/markdown';
+import Markdown from 'src/components/markdown/markdown';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
 import PostTags from '../../blog/common/post-tags';
@@ -34,6 +38,13 @@ import BlogMarketingLatestPosts from '../../blog/marketing/marketing-latest-post
 export default function MarketingPostView() {
   const { title, description, duration, createdAt, author, favorited, heroUrl, tags, content } =
     _marketingPosts[0];
+
+  const { id } = useParams();
+
+  const { post } = useFetchPost(id);
+
+  // Utilisez le hook pour parser le contenu Markdown
+  const htmlContent = useMarkdownParser(post?.content);
 
   const [favorite, setFavorite] = useState(favorited);
 
@@ -117,7 +128,7 @@ export default function MarketingPostView() {
 
             <Divider sx={{ mb: 6 }} />
 
-            <Markdown content={content} firstLetter />
+            <Markdown content={htmlContent} firstLetter />
 
             {tags.length && <PostTags tags={tags} />}
 
