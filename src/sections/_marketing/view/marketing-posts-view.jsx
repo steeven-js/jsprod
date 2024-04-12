@@ -3,7 +3,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import useFetchPosts from 'src/hooks/use-fetchPosts';
 
-import { _tags, _mock, _categories, _marketingPosts } from 'src/_mock';
+import { _tags, _mock, _categories } from 'src/_mock';
 
 import PostSidebar from '../../blog/common/post-sidebar';
 import MarketingNewsletter from '../marketing-newsletter';
@@ -36,7 +36,7 @@ export default function MarketingPostsView() {
             <PostSidebar
               popularTags={_tags}
               categories={_categories}
-              recentPosts={{ list: _marketingPosts.slice(-4) }}
+              recentPosts={{ list: posts.slice(-4) }}
               advertisement={{
                 title: 'Advertisement',
                 description: 'Duis leo. Donec orci lectus, aliquam ut, faucibus non',
