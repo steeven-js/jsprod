@@ -105,11 +105,6 @@ export default function Header({ headerOnDark }) {
                 icon: <Iconify icon="solar:home-2-bold-duotone" />,
                 path: '/marketing/contact'
               },
-              {
-                title: 'Test',
-                icon: <Iconify icon="solar:notebook-bold-duotone" />,
-                path: '/test'
-              },
             ]}
           />
         </Stack>
@@ -171,11 +166,6 @@ export default function Header({ headerOnDark }) {
               title: 'Contact',
               icon: <Iconify icon="solar:home-2-bold-duotone" />,
               path: '/marketing/contact'
-            },
-            {
-              title: 'Test',
-              icon: <Iconify icon="solar:notebook-bold-duotone" />,
-              path: '/test'
             },
           ]}
         />
