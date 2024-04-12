@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 
 import Link from '@mui/material/Link';
+import { Avatar } from '@mui/material';
 import Stack from '@mui/material/Stack';
 
 import { RouterLink } from 'src/routes/components';
@@ -25,7 +26,7 @@ export default function MarketingFeaturedPostItem({ post }) {
     >
       <Image src={
         post.media && post.media.length > 0
-          ? post.media[0].original_url : ''
+          ? post.media[0].original_url : '/assets/images/marketing/marketing_post_hero.jpg'
       } alt={post.title} sx={{ flexGrow: 1, height: { md: 560 } }} />
 
       <Stack
@@ -37,7 +38,7 @@ export default function MarketingFeaturedPostItem({ post }) {
         }}
       >
         <Stack spacing={1}>
-          <PostTimeBlock createdAt={fDate(post.createdAt)} duration={post.duration} />
+          <PostTimeBlock createdAt={fDate(post.created_at)} duration={post.duration} />
 
           <Link
             component={RouterLink}
@@ -55,7 +56,7 @@ export default function MarketingFeaturedPostItem({ post }) {
         </Stack>
 
         <Stack direction="row" alignItems="center" sx={{ pt: 2, typography: 'body2' }}>
-          {/* <Avatar src={post.author.avatarUrl} sx={{ mr: 1 }} /> */}
+          <Avatar src="/assets/images/avatar/avatar_10.jpg" sx={{ mr: 1 }} />
           {/* {post.author.name} */}
         </Stack>
       </Stack>
@@ -71,6 +72,7 @@ MarketingFeaturedPostItem.propTypes = {
     duration: PropTypes.string,
     description: PropTypes.string,
     createdAt: PropTypes.instanceOf(Date),
+    created_at: PropTypes.string,
     author: PropTypes.shape({
       avatarUrl: PropTypes.string,
       name: PropTypes.string,

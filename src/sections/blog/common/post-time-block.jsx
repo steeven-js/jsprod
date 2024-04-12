@@ -31,7 +31,7 @@ export default function PostTimeBlock({ createdAt, duration, sx, ...other }) {
             }}
           />
 
-          {duration}
+          {duration} {duration > 1 ? 'minutes' : 'minute'}
         </>
       )}
     </Stack>
