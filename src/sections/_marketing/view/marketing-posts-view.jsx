@@ -29,7 +29,7 @@ export default function MarketingPostsView() {
       >
         <Grid container columnSpacing={{ xs: 0, md: 8 }}>
           <Grid xs={12} md={8}>
-            <BlogMarketingPosts posts={_marketingPosts} />
+            <BlogMarketingPosts posts={posts} />
           </Grid>
 
           <Grid xs={12} md={4}>

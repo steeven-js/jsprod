@@ -6,7 +6,6 @@ import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import { alpha, useTheme } from '@mui/material/styles';
 
-import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { fDate } from 'src/utils/format-time';
@@ -32,12 +31,14 @@ export default function MarketingPostItem({ post }) {
     >
       <m.div variants={varHover(1.25)} transition={varTranHover()}>
         <Image
-          src={post.coverUrl}
+          src={
+            post.media && post.media.length > 0
+              ? post.media[0].original_url : '/assets/images/marketing/marketing_6.jpg'
+          }
           alt={post.title}
           ratio="3/4"
-          overlay={`linear-gradient(to top, ${alpha(theme.palette.common.black, 0)} 0%, ${
-            theme.palette.common.black
-          } 75%)`}
+          overlay={`linear-gradient(to top, ${alpha(theme.palette.common.black, 0)} 0%, ${theme.palette.common.black
+            } 75%)`}
         />
       </m.div>
 
@@ -54,17 +55,20 @@ export default function MarketingPostItem({ post }) {
         <Stack spacing={2}>
           <PostTimeBlock
             duration={post.duration}
-            createdAt={fDate(post.createdAt)}
+            createdAt={fDate(post.created_at)}
             sx={{ color: 'inherit', opacity: 0.72 }}
           />
 
-          <Link component={RouterLink} href={paths.marketing.post} sx={{ color: 'common.white' }}>
+          <Link component={RouterLink} to={`/marketing/post/${post.id}`} sx={{ color: 'common.white' }}>
             <TextMaxLine variant="h4">{post.title}</TextMaxLine>
           </Link>
         </Stack>
 
         <Stack direction="row" alignItems="center" sx={{ typography: 'body2' }}>
-          <Avatar src={post.author.avatarUrl} sx={{ mr: 1 }} />
+          <Avatar src={
+            post.author.media && post.author.media.length > 0
+              ? post.author.media[0].original_url : "/assets/images/avatar/avatar_10.jpg"
+          } sx={{ mr: 1 }} />
           {post.author.name}
         </Stack>
       </Stack>
@@ -74,13 +78,17 @@ export default function MarketingPostItem({ post }) {
 
 MarketingPostItem.propTypes = {
   post: PropTypes.shape({
+    id: PropTypes.string,
     title: PropTypes.string,
     coverUrl: PropTypes.string,
     duration: PropTypes.string,
     createdAt: PropTypes.instanceOf(Date),
+    created_at: PropTypes.string,
     author: PropTypes.shape({
       avatarUrl: PropTypes.string,
       name: PropTypes.string,
+      media: PropTypes.array,
     }),
+    media: PropTypes.array,
   }),
 };
