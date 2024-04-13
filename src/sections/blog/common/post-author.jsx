@@ -2,17 +2,17 @@ import PropTypes from 'prop-types';
 
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
+import { IconButton } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 import { _socials } from 'src/_mock';
 
 import Iconify from 'src/components/iconify';
 
+
 // ----------------------------------------------------------------------
 
-export default function PostAuthor({ author }) {
-  const { name, role, about, quotes, avatarUrl } = author;
+export default function PostAuthor({authorName, authorAvatar, authorBio, authorSince, authorRole }) {
 
   return (
     <Stack
@@ -22,7 +22,7 @@ export default function PostAuthor({ author }) {
         py: { xs: 5, md: 10 },
       }}
     >
-      <Avatar src={avatarUrl} sx={{ width: 96, height: 96 }} />
+      <Avatar src={authorAvatar} sx={{ width: 96, height: 96 }} />
 
       <Stack spacing={2}>
         <Stack
@@ -32,10 +32,10 @@ export default function PostAuthor({ author }) {
           justifyContent={{ md: 'space-between' }}
         >
           <Stack spacing={0.5}>
-            <Typography variant="h5">{name}</Typography>
+            <Typography variant="h5">{authorName}</Typography>
 
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-              {role}
+              {authorRole}
             </Typography>
           </Stack>
 
@@ -49,11 +49,11 @@ export default function PostAuthor({ author }) {
         </Stack>
 
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          {about}
+          {authorBio}
         </Typography>
 
         <Typography variant="caption" sx={{ color: 'text.disabled' }}>
-          {quotes}
+          {'Auteur depuis le'}{' '}{authorSince}
         </Typography>
       </Stack>
     </Stack>
@@ -61,11 +61,9 @@ export default function PostAuthor({ author }) {
 }
 
 PostAuthor.propTypes = {
-  author: PropTypes.shape({
-    about: PropTypes.string,
-    avatarUrl: PropTypes.string,
-    name: PropTypes.string,
-    quotes: PropTypes.string,
-    role: PropTypes.string,
-  }),
+  authorName: PropTypes.string,
+  authorAvatar: PropTypes.string,
+  authorBio: PropTypes.string,
+  authorSince: PropTypes.string,
+  authorRole: PropTypes.string,
 };
