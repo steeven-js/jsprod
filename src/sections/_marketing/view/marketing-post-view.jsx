@@ -1,6 +1,8 @@
-import Markdown from 'markdown-to-jsx';
+import Markdown from 'react-markdown'
 import { useParams } from 'react-router';
 import { useState, useCallback } from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
@@ -15,7 +17,6 @@ import IconButton from '@mui/material/IconButton';
 
 import { paths } from 'src/routes/paths';
 
-import Code from 'src/hooks/code';
 import useFetchPost from 'src/hooks/use-fetchPost';
 
 import { fDate } from 'src/utils/format-time';
@@ -62,128 +63,139 @@ export default function MarketingPostView() {
 
   return (
     <>
-    <Image alt="hero" src={heroUrl} ratio="21/9" />
+      <Image alt="hero" src={heroUrl} ratio="21/9" />
 
-    <Container>
-      <CustomBreadcrumbs
-        sx={{ my: 3 }}
-        links={[
-          { name: 'Home', href: '/' },
-          { name: 'Blog', href: paths.marketing.posts },
-          { name: post.title ?? '...' },
-        ]}
-      />
-    </Container>
+      <Container>
+        <CustomBreadcrumbs
+          sx={{ my: 3 }}
+          links={[
+            { name: 'Home', href: '/' },
+            { name: 'Blog', href: paths.marketing.posts },
+            { name: post.title ?? '...' },
+          ]}
+        />
+      </Container>
 
-    <Divider />
+      <Divider />
 
-    <Container>
-      <Grid container spacing={3} justifyContent={{ md: 'center' }}>
-        <Grid item xs={12} md={8}>
-          <Stack
-            spacing={3}
-            sx={{
-              textAlign: 'center',
-              pt: { xs: 5, md: 10 },
-              pb: 5,
-            }}
-          >
-            <Typography variant="body2" sx={{ color: 'text.disabled' }}>
-              {post.duration ?? ''} {post.duration > 1 ? 'minutes' : 'minute'}
-            </Typography>
-
-            <Typography variant="h2" component="h1">
-              {post.title ?? '...'}
-            </Typography>
-            <Typography variant="h5">{post.description ?? '...'}</Typography>
-          </Stack>
-
-          <Divider />
-          <Stack direction="row" justifyContent="space-between" spacing={1.5} sx={{ py: 3 }}>
-            <Avatar src={authorAvatar} sx={{ width: 48, height: 48 }} />
-
-            <Stack spacing={0.5} flexGrow={1}>
-              <Typography variant="subtitle2">{authorName}</Typography>
-              <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                {fDate(post.created_at, 'dd/MM/yyyy p') ?? '...'}
+      <Container>
+        <Grid container spacing={3} justifyContent={{ md: 'center' }}>
+          <Grid item xs={12} md={8}>
+            <Stack
+              spacing={3}
+              sx={{
+                textAlign: 'center',
+                pt: { xs: 5, md: 10 },
+                pb: 5,
+              }}
+            >
+              <Typography variant="body2" sx={{ color: 'text.disabled' }}>
+                {post.duration ?? ''} {post.duration > 1 ? 'minutes' : 'minute'}
               </Typography>
+
+              <Typography variant="h2" component="h1">
+                {post.title ?? '...'}
+              </Typography>
+              <Typography variant="h5">{post.description ?? '...'}</Typography>
             </Stack>
 
-            <Stack direction="row" alignItems="center">
-              <IconButton onClick={handleOpen} color={open ? 'primary' : 'default'}>
-                <Iconify icon="carbon:share" />
-              </IconButton>
+            <Divider />
+            <Stack direction="row" justifyContent="space-between" spacing={1.5} sx={{ py: 3 }}>
+              <Avatar src={authorAvatar} sx={{ width: 48, height: 48 }} />
 
-              <Checkbox
-                color="error"
-                checked={favorite}
-                onChange={handleChangeFavorite}
-                icon={<Iconify icon="carbon:favorite" />}
-                checkedIcon={<Iconify icon="carbon:favorite-filled" />}
-              />
+              <Stack spacing={0.5} flexGrow={1}>
+                <Typography variant="subtitle2">{authorName}</Typography>
+                <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+                  {fDate(post.created_at, 'dd/MM/yyyy p') ?? '...'}
+                </Typography>
+              </Stack>
+
+              <Stack direction="row" alignItems="center">
+                <IconButton onClick={handleOpen} color={open ? 'primary' : 'default'}>
+                  <Iconify icon="carbon:share" />
+                </IconButton>
+
+                <Checkbox
+                  color="error"
+                  checked={favorite}
+                  onChange={handleChangeFavorite}
+                  icon={<Iconify icon="carbon:favorite" />}
+                  checkedIcon={<Iconify icon="carbon:favorite-filled" />}
+                />
+              </Stack>
             </Stack>
-          </Stack>
 
-          <Divider sx={{ mb: 6 }} />
+            <Divider sx={{ mb: 6 }} />
 
-          <Markdown
-            options={
-              {
-                overrides: {
-                  code: {
-                    component: Code,
-                  },
-                },
-              }
-            }
-          >
-            {post?.content}
-          </Markdown>
+            <Markdown
+              children={post.content}
+              components={{
+                code(props) {
+                  // eslint-disable-next-line react/prop-types, no-unused-vars
+                  const { children, className, node, ...rest } = props
+                  const match = /language-(\w+)/.exec(className || '')
+                  return match ? (
+                    <SyntaxHighlighter
+                      {...rest}
+                      PreTag="div"
+                      children={String(children).replace(/\n$/, '')}
+                      language={match[1]}
+                      style={dracula}
+                    />
+                  ) : (
+                    <code {...rest} className={className}>
+                      {children}
+                    </code>
+                  )
+                }
+              }}
+            />
 
-          {tags.length > 0 && <PostTags tags={tags} />}
+            {tags.length > 0 && <PostTags tags={tags} />}
 
-          <PostSocialsShare />
+            <PostSocialsShare />
 
-          <Divider sx={{ mt: 8 }} />
+            <Divider sx={{ mt: 8 }} />
 
-          <PostAuthor
-            authorName={authorName}
-            authorAvatar={authorAvatar}
-            authorBio={authorBio}
-            authorSince={authorSince}
-            authorRole={authorRole}
-          />
+            <PostAuthor
+              authorName={authorName}
+              authorAvatar={authorAvatar}
+              authorBio={authorBio}
+              authorSince={authorSince}
+              authorRole={authorRole}
+            />
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
 
-    <Divider />
+      <Divider />
 
-    <BlogMarketingLatestPosts posts={_marketingPosts.slice(0, 4)} />
+      <BlogMarketingLatestPosts posts={_marketingPosts.slice(0, 4)} />
 
-    <MarketingLandingFreeSEO />
+      <MarketingLandingFreeSEO />
 
-    <MarketingNewsletter />
+      <MarketingNewsletter />
 
-    <Popover
-      open={!!open}
-      onClose={handleClose}
-      anchorEl={open}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-      transformOrigin={{ vertical: 'top', horizontal: 'center' }}
-      slotProps={{
-        paper: {
-          sx: { width: 220 },
-        },
-      }}
-    >
-      {_socials.map((social) => (
-        <MenuItem key={social.value} onClick={handleClose}>
-          <Iconify icon={social.icon} width={24} sx={{ mr: 1, color: social.color }} />
-          Share via {social.label}
-        </MenuItem>
-      ))}
-    </Popover>
-  </>
+      <Popover
+        open={!!open}
+        onClose={handleClose}
+        anchorEl={open}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+        slotProps={{
+          paper: {
+            sx: { width: 220 },
+          },
+        }}
+      >
+        {_socials.map((social) => (
+          <MenuItem key={social.value} onClick={handleClose}>
+            <Iconify icon={social.icon} width={24} sx={{ mr: 1, color: social.color }} />
+            Share via {social.label}
+          </MenuItem>
+        ))}
+      </Popover>
+    </>
   );
 };
+
