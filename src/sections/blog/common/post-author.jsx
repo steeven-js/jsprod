@@ -5,12 +5,26 @@ import Avatar from '@mui/material/Avatar';
 import { IconButton } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
-import { _socials } from 'src/_mock';
-
 import Iconify from 'src/components/iconify';
 
 
 // ----------------------------------------------------------------------
+
+export const socials = [
+  {
+    value: 'github',
+    label: 'GitHub',
+    icon: 'carbon:logo-github',
+    color: '#181717',
+    bg: '#FFFFFF',
+  },
+  {
+    value: 'linkedin',
+    label: 'Linkedin',
+    icon: 'carbon:logo-linkedin',
+    color: '#007EBB',
+  },
+];
 
 export default function PostAuthor({authorName, authorAvatar, authorBio, authorSince, authorRole }) {
 
@@ -40,9 +54,9 @@ export default function PostAuthor({authorName, authorAvatar, authorBio, authorS
           </Stack>
 
           <Stack direction="row">
-            {_socials.map((social) => (
+            {socials.map((social) => (
               <IconButton key={social.value}>
-                <Iconify icon={social.icon} sx={{ color: social.color }} />
+                <Iconify icon={social.icon} sx={{ color: social.color, backgroundColor: social.bg }} />
               </IconButton>
             ))}
           </Stack>
