@@ -81,7 +81,7 @@ MarketingPostItem.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
     coverUrl: PropTypes.string,
-    duration: PropTypes.number,
+    duration: PropTypes.string,
     created_at: PropTypes.string,
     author: PropTypes.shape({
       avatarUrl: PropTypes.string,

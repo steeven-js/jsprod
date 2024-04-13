@@ -74,7 +74,6 @@ MarketingFeaturedPostItem.propTypes = {
     coverUrl: PropTypes.string,
     duration: PropTypes.number,
     description: PropTypes.string,
-    createdAt: PropTypes.instanceOf(Date),
     created_at: PropTypes.string,
     author: PropTypes.shape({
       avatarUrl: PropTypes.string,
