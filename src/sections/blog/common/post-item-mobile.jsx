@@ -58,9 +58,8 @@ PostItemMobile.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
     coverUrl: PropTypes.string,
-    duration: PropTypes.string,
-    created_at: PropTypes.instanceOf(Date),
-    createdAt: PropTypes.instanceOf(Date),
+    duration: PropTypes.number,
+    created_at: PropTypes.string,
     media: PropTypes.array,
   }),
 };

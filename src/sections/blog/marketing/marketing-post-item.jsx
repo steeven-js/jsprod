@@ -78,11 +78,10 @@ export default function MarketingPostItem({ post }) {
 
 MarketingPostItem.propTypes = {
   post: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     title: PropTypes.string,
     coverUrl: PropTypes.string,
-    duration: PropTypes.string,
-    createdAt: PropTypes.instanceOf(Date),
+    duration: PropTypes.number,
     created_at: PropTypes.string,
     author: PropTypes.shape({
       avatarUrl: PropTypes.string,

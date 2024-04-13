@@ -42,4 +42,7 @@ export default function MarketingPosts({ posts }) {
 
 MarketingPosts.propTypes = {
   posts: PropTypes.array,
+  post: PropTypes.shape({
+    id: PropTypes.number,
+  }),
 };

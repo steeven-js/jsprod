@@ -88,4 +88,13 @@ export default function MarketingFeaturedPosts({ posts }) {
 
 MarketingFeaturedPosts.propTypes = {
   posts: PropTypes.array,
+  post: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    coverUrl: PropTypes.string,
+    duration: PropTypes.number,
+    description: PropTypes.string,
+    createdAt: PropTypes.instanceOf(Date),
+    created_at: PropTypes.string,
+  }),
 };

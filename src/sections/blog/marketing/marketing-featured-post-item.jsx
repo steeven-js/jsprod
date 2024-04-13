@@ -69,10 +69,10 @@ export default function MarketingFeaturedPostItem({ post }) {
 
 MarketingFeaturedPostItem.propTypes = {
   post: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     title: PropTypes.string,
     coverUrl: PropTypes.string,
-    duration: PropTypes.string,
+    duration: PropTypes.number,
     description: PropTypes.string,
     createdAt: PropTypes.instanceOf(Date),
     created_at: PropTypes.string,
