@@ -16,6 +16,7 @@ import BlogMarketingFeaturedPosts from '../../blog/marketing/marketing-featured-
 
 export default function MarketingPostsView() {
   const { posts } = useFetchPosts();
+
   return (
     <>
       <PostSearchMobile />

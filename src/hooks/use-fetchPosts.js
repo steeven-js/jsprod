@@ -17,28 +17,23 @@ const useFetchPosts = () => {
 
     try {
       const response = await fetch(endpoint);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
       const result = await response.json();
-      setPosts(result);
-      dispatch(_setPosts(result));
+      setPosts(result.data);
+      dispatch(_setPosts(result.data));
     } catch (error) {
-      setPostsError(error);
+      setPostsError(error.message);
       console.error(error);
     } finally {
       setIsPostsLoading(false);
     }
-  }, [dispatch]);
+  }, [dispatch, endpoint]);
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
-
-  // Attente de la promesse
-  useEffect(() => {
-    if (!isPostsLoading && posts.length > 0) {
-      // Les données sont prêtes, vous pouvez les retourner ici
-      console.log("Posts Data is ready");
-    }
-  }, [isPostsLoading, posts]);
 
   return { posts, isPostsLoading, postsError };
 }
