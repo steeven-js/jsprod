@@ -1,3 +1,5 @@
+import useFetchPosts from 'src/hooks/use-fetchPosts';
+
 import {
   _brands,
   _members,
@@ -24,6 +26,10 @@ import MarketingLandingCaseStudies from '../landing/marketing-landing-case-studi
 // ----------------------------------------------------------------------
 
 export default function MarketingLandingView() {
+
+  // Au lancement de la page, on récupère les posts
+  useFetchPosts();
+
   return (
     <>
       <MarketingLandingHero />

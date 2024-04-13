@@ -5,6 +5,7 @@ import MarketingLandingView from 'src/sections/_marketing/view/marketing-landing
 // ----------------------------------------------------------------------
 
 export default function MarketingLandingPage() {
+
   return (
     <>
       <Helmet>

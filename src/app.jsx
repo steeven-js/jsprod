@@ -4,6 +4,8 @@ import 'src/global.css';
 // ----------------------------------------------------------------------
 
 import Router from 'src/routes/sections';
+import { Provider } from 'react-redux';
+import store from 'src/redux/store';
 import { useScrollToTop } from 'src/hooks/use-scroll-to-top';
 
 import ThemeProvider from 'src/theme';
@@ -19,22 +21,24 @@ export default function App() {
   useScrollToTop();
 
   return (
-    <LocalizationProvider>
-      <SettingsProvider
-        defaultSettings={{
-          themeMode: 'light', // 'light' | 'dark'
-          themeDirection: 'ltr', //  'rtl' | 'ltr'
-          themeColorPresets: 'default', // 'default' | 'preset01' | 'preset02' | 'preset03' | 'preset04' | 'preset05'
-        }}
-      >
-        <ThemeProvider>
-          <MotionLazy>
-            <ProgressBar />
-            <SettingsDrawer />
-            <Router />
-          </MotionLazy>
-        </ThemeProvider>
-      </SettingsProvider>
-    </LocalizationProvider>
+    <Provider store={store}>
+      <LocalizationProvider>
+        <SettingsProvider
+          defaultSettings={{
+            themeMode: 'light', // 'light' | 'dark'
+            themeDirection: 'ltr', //  'rtl' | 'ltr'
+            themeColorPresets: 'default', // 'default' | 'preset01' | 'preset02' | 'preset03' | 'preset04' | 'preset05'
+          }}
+        >
+          <ThemeProvider>
+            <MotionLazy>
+              <ProgressBar />
+              <SettingsDrawer />
+              <Router />
+            </MotionLazy>
+          </ThemeProvider>
+        </SettingsProvider>
+      </LocalizationProvider>
+    </Provider>
   );
 }
