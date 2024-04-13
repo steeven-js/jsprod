@@ -1,3 +1,4 @@
+import remarkGfm from 'remark-gfm'
 import Markdown from 'react-markdown'
 import { useParams } from 'react-router';
 import { useState, useCallback } from 'react';
@@ -129,6 +130,7 @@ export default function MarketingPostView() {
 
             <Markdown
               children={post.content}
+              remarkPlugins={[remarkGfm]}
               components={{
                 code(props) {
                   // eslint-disable-next-line react/prop-types, no-unused-vars
