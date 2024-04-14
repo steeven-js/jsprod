@@ -23,7 +23,6 @@ import { NavBasicDesktop } from 'src/components/nav-basic';
 
 import NavMobile from './nav/mobile';
 import { HEADER } from '../config-layout';
-import Searchbar from '../common/searchbar';
 import HeaderShadow from '../common/header-shadow';
 import SettingsButton from '../common/settings-button';
 
@@ -114,7 +113,7 @@ export default function Header({ headerOnDark }) {
 
       <Stack spacing={2} direction="row" alignItems="center" justifyContent="flex-end">
         <Stack spacing={1} direction="row" alignItems="center">
-          <Searchbar />
+          {/* <Searchbar /> */}
 
           <SettingsButton />
         </Stack>
