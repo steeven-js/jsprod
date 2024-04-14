@@ -4,20 +4,20 @@ import { useState, useCallback } from 'react';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
-import Pagination, { paginationClasses } from '@mui/material/Pagination';
 
 import MarketingCaseStudyItem from './marketing-case-study-item';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingCaseStudyList({ caseStudies }) {
-  const [tab, setTab] = useState('All');
+export default function MarketingCaseStudyList({ caseStudies, studies, categories }) {
 
-  const getCategories = caseStudies.map((project) => project.category);
+  const [tab, setTab] = useState('Tous');
 
-  const categories = ['All', ...Array.from(new Set(getCategories))];
+  const getCategories = categories.map((category) => category.name);
 
-  const filtered = applyFilter(caseStudies, tab);
+  const _categories = ['Tous', ...Array.from(new Set(getCategories))];
+
+  const filtered = applyFilter(studies, tab);
 
   const handleChangeTab = useCallback((event, newValue) => {
     setTab(newValue);
@@ -32,7 +32,7 @@ export default function MarketingCaseStudyList({ caseStudies }) {
         allowScrollButtonsMobile
         onChange={handleChangeTab}
       >
-        {categories.map((category) => (
+        {_categories.map((category) => (
           <Tab key={category} value={category} label={category} />
         ))}
       </Tabs>
@@ -55,7 +55,7 @@ export default function MarketingCaseStudyList({ caseStudies }) {
         ))}
       </Box>
 
-      <Pagination
+      {/* <Pagination
         count={10}
         color="primary"
         sx={{
@@ -64,20 +64,22 @@ export default function MarketingCaseStudyList({ caseStudies }) {
             justifyContent: 'center',
           },
         }}
-      />
+      /> */}
     </>
   );
 }
 
 MarketingCaseStudyList.propTypes = {
   caseStudies: PropTypes.array,
+  studies: PropTypes.array,
+  categories: PropTypes.array,
 };
 
 // ----------------------------------------------------------------------
 
 function applyFilter(arr, category) {
-  if (category !== 'All') {
-    arr = arr.filter((project) => project.category === category);
+  if (category !== 'Tous') {
+    arr = arr.filter((studies) => studies.category.name === category);
   }
   return arr;
 }

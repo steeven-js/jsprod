@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
@@ -12,7 +14,7 @@ import BlogMarketingLatestPosts from '../../blog/marketing/marketing-latest-post
 
 // ----------------------------------------------------------------------
 
-export default function MarketingCaseStudiesView() {
+export default function MarketingCaseStudiesView({ studies, categories }) {
   return (
     <>
       <Container>
@@ -31,7 +33,7 @@ export default function MarketingCaseStudiesView() {
           </Typography>
         </Stack>
 
-        <MarketingCaseStudyList caseStudies={_caseStudies} />
+        <MarketingCaseStudyList caseStudies={_caseStudies} studies={studies} categories={categories} />
       </Container>
 
       <MarketingTestimonial testimonials={_testimonials} />
@@ -44,3 +46,8 @@ export default function MarketingCaseStudiesView() {
     </>
   );
 }
+
+MarketingCaseStudiesView.propTypes = {
+  studies: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
+};

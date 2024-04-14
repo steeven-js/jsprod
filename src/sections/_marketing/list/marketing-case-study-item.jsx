@@ -13,20 +13,28 @@ import TextMaxLine from 'src/components/text-max-line';
 // ----------------------------------------------------------------------
 
 export default function MarketingCaseStudyItem({ project }) {
-  const { title, coverUrl, category } = project;
 
   return (
     <div>
-      <Image src={coverUrl} alt={title} ratio="1/1" sx={{ borderRadius: 2 }} />
+      <Image
+        src={
+          project.media && project.media.length > 0
+            ? project.media[0].original_url
+            : '/assets/images/marketing/marketing_1.jpg'
+        }
+        alt={project.title}
+        ratio="1/1"
+        sx={{ borderRadius: 2 }}
+      />
 
       <Stack spacing={1} sx={{ pt: 2.5, px: 2.5 }}>
         <Typography variant="overline" sx={{ color: 'text.disabled' }}>
-          {category}
+          {project.category.name}
         </Typography>
 
         <Link component={RouterLink} href={paths.marketing.caseStudy} color="inherit">
           <TextMaxLine variant="h5" line={1}>
-            {title}
+            {project.title}
           </TextMaxLine>
         </Link>
       </Stack>
@@ -35,9 +43,5 @@ export default function MarketingCaseStudyItem({ project }) {
 }
 
 MarketingCaseStudyItem.propTypes = {
-  project: PropTypes.shape({
-    category: PropTypes.string,
-    coverUrl: PropTypes.string,
-    title: PropTypes.string,
-  }),
+  project: PropTypes.object.isRequired,
 };
