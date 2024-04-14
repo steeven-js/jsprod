@@ -92,7 +92,7 @@ export default function PostSidebar({
 
   const renderPopularTags = popularTags && (
     <Stack spacing={3}>
-      <Typography variant="h5">Popular Tags</Typography>
+      <Typography variant="h5">Tags populaires</Typography>
 
       <Stack direction="row" flexWrap="wrap" spacing={1}>
         {popularTags.map((tag) => (

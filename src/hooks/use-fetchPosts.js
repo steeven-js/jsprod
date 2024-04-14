@@ -34,11 +34,17 @@ const useFetchPosts = () => {
       // Attendre à la fois la réponse du fetch et les URLs des images des posts
       const _postCoverUrls = await Promise.all(coverUrlsPromises);
 
+      // Définir les URLs des images des posts
       setPostCoverUrls(_postCoverUrls);
 
+      // Mettre à jour le nombre total de pages
       setTotalPages(result.last_page);
 
+      // Mettre à jour le state global
       dispatch(_setPosts(result.data));
+
+      // Tags
+      // setTags(result.tags.map(tag => tag.name.fr));
 
     } catch (error) {
       setPostsError(error.message);

@@ -1,9 +1,10 @@
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 
+import useFetchTags from 'src/hooks/use-fetchTags';
 import useFetchPosts from 'src/hooks/use-fetchPosts';
 
-import { _tags, _mock, _categories } from 'src/_mock';
+import { _mock, _categories } from 'src/_mock';
 
 import PostSidebar from '../../blog/common/post-sidebar';
 import MarketingNewsletter from '../marketing-newsletter';
@@ -16,6 +17,7 @@ import BlogMarketingFeaturedPosts from '../../blog/marketing/marketing-featured-
 
 export default function MarketingPostsView() {
   const { posts } = useFetchPosts();
+  const { tags } = useFetchTags();
 
   return (
     <>
@@ -35,9 +37,9 @@ export default function MarketingPostsView() {
 
           <Grid xs={12} md={4}>
             <PostSidebar
-              popularTags={_tags}
+              popularTags={tags}
               categories={_categories}
-              recentPosts={{ list: posts.slice(-4) }}
+              recentPosts={{ list: posts.slice(0, 5) }}
               advertisement={{
                 title: 'Advertisement',
                 description: 'Duis leo. Donec orci lectus, aliquam ut, faucibus non',
