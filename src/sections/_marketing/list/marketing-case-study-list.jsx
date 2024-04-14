@@ -9,7 +9,7 @@ import MarketingCaseStudyItem from './marketing-case-study-item';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingCaseStudyList({ caseStudies, studies, categories }) {
+export default function MarketingCaseStudyList({ studies, categories }) {
 
   const [tab, setTab] = useState('Tous');
 
@@ -70,7 +70,6 @@ export default function MarketingCaseStudyList({ caseStudies, studies, categorie
 }
 
 MarketingCaseStudyList.propTypes = {
-  caseStudies: PropTypes.array,
   studies: PropTypes.array,
   categories: PropTypes.array,
 };

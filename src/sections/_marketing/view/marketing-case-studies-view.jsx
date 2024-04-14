@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { _caseStudies, _testimonials, _marketingPosts } from 'src/_mock';
+import { _testimonials, _marketingPosts } from 'src/_mock';
 
 import MarketingNewsletter from '../marketing-newsletter';
 import MarketingCaseStudyList from '../list/marketing-case-study-list';
@@ -33,7 +33,7 @@ export default function MarketingCaseStudiesView({ studies, categories }) {
           </Typography>
         </Stack>
 
-        <MarketingCaseStudyList caseStudies={_caseStudies} studies={studies} categories={categories} />
+        <MarketingCaseStudyList studies={studies} categories={categories} />
       </Container>
 
       <MarketingTestimonial testimonials={_testimonials} />
