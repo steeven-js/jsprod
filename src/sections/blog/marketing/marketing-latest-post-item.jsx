@@ -6,7 +6,6 @@ import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import { alpha, useTheme } from '@mui/material/styles';
 
-import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { fDate } from 'src/utils/format-time';
@@ -18,7 +17,7 @@ import PostTimeBlock from '../common/post-time-block';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingLatestPostItem({ post }) {
+export default function MarketingLatestPostItem({ post, postCoverUrls }) {
   const theme = useTheme();
 
   return (
@@ -34,12 +33,13 @@ export default function MarketingLatestPostItem({ post }) {
     >
       <m.div variants={varHover(1.25)} transition={varTranHover()}>
         <Image
-          src={post.coverUrl}
+          src={
+            postCoverUrls[post.id] ? postCoverUrls[post.id] : '/assets/images/marketing/marketing_1.jpg'
+          }
           alt={post.title}
           ratio="3/4"
-          overlay={`linear-gradient(to top, ${alpha(theme.palette.common.black, 0)} 0%, ${
-            theme.palette.common.black
-          } 75%)`}
+          overlay={`linear-gradient(to top, ${alpha(theme.palette.common.black, 0)} 0%, ${theme.palette.common.black
+            } 75%)`}
         />
       </m.div>
 
@@ -56,14 +56,14 @@ export default function MarketingLatestPostItem({ post }) {
       >
         <Stack spacing={2}>
           <PostTimeBlock
-            createdAt={fDate(post.createdAt)}
+            createdAt={fDate(post.created_at)}
             duration={post.duration}
             sx={{ color: 'inherit', opacity: 0.72 }}
           />
 
           <Link
             component={RouterLink}
-            href={paths.marketing.post}
+            to={`/marketing/post/${post.id}`}
             variant="h4"
             color="inherit"
             underline="none"
@@ -83,13 +83,14 @@ export default function MarketingLatestPostItem({ post }) {
 
 MarketingLatestPostItem.propTypes = {
   post: PropTypes.shape({
+    id: PropTypes.number,
     title: PropTypes.string,
-    coverUrl: PropTypes.string,
-    duration: PropTypes.string,
-    createdAt: PropTypes.instanceOf(Date),
+    duration: PropTypes.number,
+    created_at: PropTypes.string,
     author: PropTypes.shape({
       avatarUrl: PropTypes.string,
       name: PropTypes.string,
     }),
   }),
+  postCoverUrls: PropTypes.array,
 };

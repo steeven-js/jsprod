@@ -9,6 +9,7 @@ const useFetchPosts = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [isPostsLoading, setIsPostsLoading] = useState(false);
   const [postsError, setPostsError] = useState(null);
+  const [postCoverUrls, setPostCoverUrls] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -22,9 +23,23 @@ const useFetchPosts = () => {
         throw new Error('La réponse du réseau n\'était pas valide');
       }
       const result = await response.json();
+
       setPosts(result.data);
+
+      // Récupérer les URLs des images des posts
+      const coverUrlsPromises = result.data.map(post =>
+        post.media && post.media.length > 0 ? post.media[0].original_url : '/assets/images/marketing/marketing_1.jpg'
+      );
+
+      // Attendre à la fois la réponse du fetch et les URLs des images des posts
+      const _postCoverUrls = await Promise.all(coverUrlsPromises);
+
+      setPostCoverUrls(_postCoverUrls);
+
       setTotalPages(result.last_page);
+
       dispatch(_setPosts(result.data));
+
     } catch (error) {
       setPostsError(error.message);
       console.error(error);
@@ -37,7 +52,15 @@ const useFetchPosts = () => {
     fetchData();
   }, [fetchData, currentPage]);
 
-  return { posts, isPostsLoading, postsError, currentPage, totalPages, setCurrentPage };
+  return {
+    posts,
+    isPostsLoading,
+    postsError,
+    currentPage,
+    totalPages,
+    setCurrentPage,
+    postCoverUrls
+  };
 }
 
 export default useFetchPosts;

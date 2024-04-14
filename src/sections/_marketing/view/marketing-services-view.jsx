@@ -1,4 +1,4 @@
-import { _testimonials, _marketingPosts } from 'src/_mock';
+import { _testimonials } from 'src/_mock';
 
 import MarketingNewsletter from '../marketing-newsletter';
 import MarketingServices from '../services/marketing-services';
@@ -27,7 +27,7 @@ export default function MarketingServicesView() {
 
       <MarketingTestimonial testimonials={_testimonials} />
 
-      <BlogMarketingLatestPosts posts={_marketingPosts.slice(0, 4)} />
+      <BlogMarketingLatestPosts />
 
       <MarketingLandingFreeSEO />
 

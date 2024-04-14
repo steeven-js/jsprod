@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
+import useFetchPosts from 'src/hooks/use-fetchPosts';
 import { useResponsive } from 'src/hooks/use-responsive';
 
 import Iconify from 'src/components/iconify';
@@ -19,10 +20,12 @@ import MarketingLatestPostItem from './marketing-latest-post-item';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingLatestPosts({ posts }) {
+export default function MarketingLatestPosts() {
   const theme = useTheme();
 
   const mdUp = useResponsive('up', 'md');
+
+  const { posts, postCoverUrls } = useFetchPosts();
 
   const carousel = useCarousel({
     slidesToShow: 3,
@@ -47,7 +50,7 @@ export default function MarketingLatestPosts({ posts }) {
       color="inherit"
       endIcon={<Iconify icon="carbon:chevron-right" />}
     >
-      View All
+      Tout voir
     </Button>
   );
 
@@ -62,7 +65,7 @@ export default function MarketingLatestPosts({ posts }) {
         alignItems="center"
         justifyContent={{ xs: 'center', md: 'space-between' }}
       >
-        <Typography variant="h3">Latest Posts</Typography>
+        <Typography variant="h3">Derniers Posts</Typography>
 
         {mdUp && viewAllBtn}
       </Stack>
@@ -83,7 +86,7 @@ export default function MarketingLatestPosts({ posts }) {
                   py: { xs: 8, md: 10 },
                 }}
               >
-                <MarketingLatestPostItem post={post} />
+                <MarketingLatestPostItem post={post} postCoverUrls={postCoverUrls} />
               </Box>
             ))}
           </Carousel>
@@ -101,4 +104,11 @@ export default function MarketingLatestPosts({ posts }) {
 
 MarketingLatestPosts.propTypes = {
   posts: PropTypes.array,
+  post: PropTypes.shape({
+    id: PropTypes.number,
+    title: PropTypes.string,
+    coverUrl: PropTypes.string,
+    duration: PropTypes.string,
+    created_at: PropTypes.string,
+  }),
 };
