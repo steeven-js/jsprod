@@ -17,7 +17,7 @@ import MarketingCaseStudyItem from './marketing-case-study-item';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingCaseStudyListSimilar({ caseStudies }) {
+export default function MarketingCaseStudyListSimilar({ studies }) {
   const mdUp = useResponsive('up', 'md');
 
   const viewAllBtn = (
@@ -27,7 +27,7 @@ export default function MarketingCaseStudyListSimilar({ caseStudies }) {
       color="inherit"
       endIcon={<Iconify icon="carbon:chevron-right" />}
     >
-      View All
+      Tout voir
     </Button>
   );
 
@@ -61,7 +61,7 @@ export default function MarketingCaseStudyListSimilar({ caseStudies }) {
           },
         }}
       >
-        {caseStudies.map((project) => (
+        {studies.map((project) => (
           <MarketingCaseStudyItem key={project.id} project={project} />
         ))}
       </Box>
@@ -76,5 +76,5 @@ export default function MarketingCaseStudyListSimilar({ caseStudies }) {
 }
 
 MarketingCaseStudyListSimilar.propTypes = {
-  caseStudies: PropTypes.array,
+  studies: PropTypes.array,
 };

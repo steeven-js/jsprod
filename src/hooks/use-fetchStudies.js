@@ -3,8 +3,6 @@ import { useState, useEffect, useCallback } from "react";
 const useFetchStudies = () => {
   const [studies, setStudies] = useState([]);
   const [categories, setCategories] = useState([]);
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [totalPages, setTotalPages] = useState(0);
   const [isStudiesLoading, setIsStudiesLoading] = useState(false);
   const [studiesError, setStudiesError] = useState(null);
   const [studyCoverUrls, setStudyCoverUrls] = useState([]);
@@ -34,11 +32,6 @@ const useFetchStudies = () => {
       // Définir les URLs des images des posts
       setStudyCoverUrls(_studyCoverUrls);
 
-      // Tableau des categories de façon unique si l'id et le nom sont identiques
-
-      // Mettre à jour le nombre total de pages
-      // setTotalPages(result.last_page);
-
       // Tags
       // setTags(result.tags.map(tag => tag.name.fr));
 
@@ -59,9 +52,6 @@ const useFetchStudies = () => {
     categories,
     isStudiesLoading,
     studiesError,
-    // currentPage,
-    // totalPages,
-    // setCurrentPage,
     studyCoverUrls
   };
 }
