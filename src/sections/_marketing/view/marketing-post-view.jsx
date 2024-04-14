@@ -19,10 +19,9 @@ import IconButton from '@mui/material/IconButton';
 import { paths } from 'src/routes/paths';
 
 import useFetchPost from 'src/hooks/use-fetchPost';
+import useFetchPosts from 'src/hooks/use-fetchPosts';
 
 import { fDate } from 'src/utils/format-time';
-
-import { _socials, _marketingPosts } from 'src/_mock';
 
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
@@ -30,23 +29,47 @@ import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
 import PostTags from '../../blog/common/post-tags';
 import PostAuthor from '../../blog/common/post-author';
-import MarketingNewsletter from '../marketing-newsletter';
 import PostSocialsShare from '../../blog/common/post-socials-share';
-import MarketingLandingFreeSEO from '../landing/marketing-landing-free-seo';
 import BlogMarketingLatestPosts from '../../blog/marketing/marketing-latest-posts';
 
 // ----------------------------------------------------------------------
 
+export const _socials = [
+  {
+    value: 'facebook',
+    label: 'FaceBook',
+    icon: 'carbon:logo-facebook',
+    color: '#1877F2',
+  },
+  {
+    value: 'instagram',
+    label: 'Instagram',
+    icon: 'carbon:logo-instagram',
+    color: '#E02D69',
+  },
+  {
+    value: 'linkedin',
+    label: 'Linkedin',
+    icon: 'carbon:logo-linkedin',
+    color: '#007EBB',
+  },
+  {
+    value: 'twitter',
+    label: 'Twitter',
+    icon: 'carbon:logo-twitter',
+    color: '#00AAEC',
+  },
+];
+
 export default function MarketingPostView() {
-  const { favorited, heroUrl } =
-    _marketingPosts[0];
-  // /assets/images/avatar/avatar_1.jpg
 
   const { id } = useParams();
 
   const { post, authorName, authorAvatar, authorBio, authorSince, tags, authorRole } = useFetchPost(id);
 
-  const [favorite, setFavorite] = useState(favorited);
+  const { posts } = useFetchPosts();
+
+  const [favorite, setFavorite] = useState();
 
   const [open, setOpen] = useState(null);
 
@@ -64,7 +87,7 @@ export default function MarketingPostView() {
 
   return (
     <>
-      <Image alt="hero" src={heroUrl} ratio="21/9" />
+      <Image alt="hero" src="/assets/images/marketing/marketing_post_hero.jpg" ratio="21/9" />
 
       <Container>
         <CustomBreadcrumbs
@@ -81,7 +104,7 @@ export default function MarketingPostView() {
 
       <Container>
         <Grid container spacing={3} justifyContent={{ md: 'center' }}>
-          <Grid item xs={12} md={8}>
+          <Grid xs={12} md={8}>
             <Stack
               spacing={3}
               sx={{
@@ -118,7 +141,7 @@ export default function MarketingPostView() {
 
                 <Checkbox
                   color="error"
-                  checked={favorite}
+                  checked={favorite === 'true'} // Utiliser une chaîne pour la propriété checked
                   onChange={handleChangeFavorite}
                   icon={<Iconify icon="carbon:favorite" />}
                   checkedIcon={<Iconify icon="carbon:favorite-filled" />}
@@ -172,11 +195,11 @@ export default function MarketingPostView() {
 
       <Divider />
 
-      <BlogMarketingLatestPosts posts={_marketingPosts.slice(0, 4)} />
+      <BlogMarketingLatestPosts posts={posts.slice(0, 4)} />
 
-      <MarketingLandingFreeSEO />
+      {/* <MarketingLandingFreeSEO />
 
-      <MarketingNewsletter />
+      <MarketingNewsletter /> */}
 
       <Popover
         open={!!open}
@@ -200,4 +223,3 @@ export default function MarketingPostView() {
     </>
   );
 };
-
