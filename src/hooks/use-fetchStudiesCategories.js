@@ -1,25 +1,25 @@
 import { useState, useEffect, useCallback } from "react";
 
-const useFetchStudies = () => {
-  const [studies, setStudies] = useState([]);
+const useFetchStudiesCategories = () => {
+  const [studiesCategories, setStudiesCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const [isStudiesLoading, setIsStudiesLoading] = useState(false);
-  const [studiesError, setStudiesError] = useState(null);
+  const [isStudiesCategoriesLoading, setIsStudiesCategoriesLoading] = useState(false);
+  const [studiesErrorCategories, setStudiesCategoriesError] = useState(null);
   const [studyCoverUrls, setStudyCoverUrls] = useState([]);
 
   const fetchData = useCallback(async () => {
-    setIsStudiesLoading(true);
+    setIsStudiesCategoriesLoading(true);
 
     try {
-      const endpoint = `http://127.0.0.1:8000/api/studies?page=${currentPage}`;
+      const endpoint = `http://127.0.0.1:8000/api/categories?page=${currentPage}`;
       const response = await fetch(endpoint);
       if (!response.ok) {
         throw new Error('La réponse du réseau n\'était pas valide');
       }
       const result = await response.json();
 
-      setStudies(result.data);
+      setStudiesCategories(result.data);
 
       // Récupérer les URLs des images des posts
       const coverUrlsPromises = result.data.map(study =>
@@ -39,10 +39,10 @@ const useFetchStudies = () => {
       // setTags(result.tags.map(tag => tag.name.fr));
 
     } catch (error) {
-      setStudiesError(error.message);
+      setStudiesCategoriesError(error.message);
       console.error(error);
     } finally {
-      setIsStudiesLoading(false);
+      setIsStudiesCategoriesLoading(false);
     }
   }, [currentPage]);
 
@@ -51,9 +51,9 @@ const useFetchStudies = () => {
   }, [fetchData, currentPage]);
 
   return {
-    studies,
-    isStudiesLoading,
-    studiesError,
+    studiesCategories,
+    isStudiesCategoriesLoading,
+    studiesErrorCategories,
     currentPage,
     totalPages,
     setCurrentPage,
@@ -61,4 +61,4 @@ const useFetchStudies = () => {
   };
 }
 
-export default useFetchStudies;
+export default useFetchStudiesCategories;

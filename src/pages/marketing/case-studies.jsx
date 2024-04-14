@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 
 import useFetchStudies from 'src/hooks/use-fetchStudies';
+import useFetchStudiesCategories from 'src/hooks/use-fetchStudiesCategories';
 
 import MarketingCaseStudiesView from 'src/sections/_marketing/view/marketing-case-studies-view';
 
@@ -8,7 +9,8 @@ import MarketingCaseStudiesView from 'src/sections/_marketing/view/marketing-cas
 
 export default function MarketingCaseStudiesPage() {
 
-  const { studies, isStudiesLoading, studiesError, currentPage, totalPages, setCurrentPage, studyCoverUrls } = useFetchStudies();
+  const { studiesCategories } = useFetchStudiesCategories();
+  const { studies } = useFetchStudies();
 
   console.log('studies', studies);
 
