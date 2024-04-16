@@ -16,9 +16,17 @@ export default function NavList({ data, depth, slotProps }) {
 
   const pathname = usePathname();
 
-  const active = useActiveLink(data.path, !!data.children);
+  // Vérifier si le chemin commence par "/plantmed/plante/"
+  const isStudy = pathname.startsWith('/marketing/case-study/');
 
-  const [openMenu, setOpenMenu] = useState(false);
+  // Vérifier si le chemin commence par "/plantmed/symptome/"
+  const isPost = pathname.startsWith('/marketing/post/');
+
+  const active = useActiveLink(data.path, !!data.children) ||
+    (isStudy && data.title === 'Case Studies') ||
+    (isPost && data.title === 'Posts');
+
+    const [openMenu, setOpenMenu] = useState(false);
 
   useEffect(() => {
     if (openMenu) {
