@@ -11,7 +11,6 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { alpha, useTheme } from '@mui/material/styles';
 
-import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { useResponsive } from 'src/hooks/use-responsive';
@@ -27,7 +26,7 @@ export default function MarketingLandingCaseStudies({ caseStudies }) {
   const mdUp = useResponsive('up', 'md');
 
   const newTable = caseStudies.map((caseStudy, index) => {
-    const id = index;
+    const {id} = caseStudy;
     const { title } = caseStudy;
     const categoryName = caseStudy.category.name;
     const { description } = caseStudy;
@@ -117,7 +116,7 @@ export default function MarketingLandingCaseStudies({ caseStudies }) {
       <Stack alignItems={{ xs: 'center', md: 'flex-end' }}>
         <Button
           component={RouterLink}
-          href={paths.marketing.caseStudies}
+          to="/marketing/case-studies"
           size="large"
           color="inherit"
           endIcon={<Iconify icon="carbon:chevron-right" />}
@@ -169,7 +168,7 @@ function LargeItem({ caseStudy }) {
 
         <Button
           component={RouterLink}
-          href={paths.marketing.caseStudy}
+          to={`/marketing/case-study/${caseStudy.id}`}
           size="small"
           color="inherit"
           endIcon={<Iconify icon="carbon:chevron-right" />}
@@ -183,6 +182,7 @@ function LargeItem({ caseStudy }) {
 
 LargeItem.propTypes = {
   caseStudy: PropTypes.shape({
+    id: PropTypes.number,
     categoryName: PropTypes.string,
     coverUrl: PropTypes.string,
     description: PropTypes.string,
@@ -198,7 +198,7 @@ function SmallItem({ caseStudy, square }) {
   const mdUp = useResponsive('up', 'md');
 
   return (
-    <Link component={RouterLink} href={paths.marketing.caseStudy}>
+    <Link component={RouterLink} to={`/marketing/case-study/${caseStudy.id}`}>
       <Paper
         component={m.div}
         whileHover="hover"
@@ -243,8 +243,10 @@ function SmallItem({ caseStudy, square }) {
 
 SmallItem.propTypes = {
   caseStudy: PropTypes.shape({
+    id: PropTypes.number,
     categoryName: PropTypes.string,
     coverUrl: PropTypes.string,
+    description: PropTypes.string,
     title: PropTypes.string,
   }),
   square: PropTypes.bool,
