@@ -1,13 +1,15 @@
-import useFetchPosts from 'src/hooks/use-fetchPosts';
+
+import useFetchStudies from 'src/hooks/use-fetchStudies';
 
 import {
   _brands,
   _members,
-  _caseStudies,
   _testimonials,
   _marketingPosts,
   _pricingMarketing,
 } from 'src/_mock';
+
+import { SplashScreen } from 'src/components/loading-screen';
 
 import MarketingTeam from '../team/marketing-team';
 import MarketingNewsletter from '../marketing-newsletter';
@@ -27,8 +29,11 @@ import MarketingLandingCaseStudies from '../landing/marketing-landing-case-studi
 
 export default function MarketingLandingView() {
 
-  // Au lancement de la page, on récupère les posts
-  useFetchPosts();
+  const { studies, isStudiesLoading } = useFetchStudies();
+
+  if (isStudiesLoading) {
+    return <SplashScreen />;
+  }
 
   return (
     <>
@@ -42,7 +47,7 @@ export default function MarketingLandingView() {
 
       <MarketingLandingProcess />
 
-      <MarketingLandingCaseStudies caseStudies={_caseStudies.slice(-6)} />
+      <MarketingLandingCaseStudies caseStudies={studies.slice(-6)} />
 
       <MarketingTeam members={_members} />
 
