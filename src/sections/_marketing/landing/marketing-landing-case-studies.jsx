@@ -2,12 +2,12 @@ import { m } from 'framer-motion';
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
-import { Grid } from '@mui/material';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
-import { Container } from '@mui/system';
 import Button from '@mui/material/Button';
+import Grid from '@mui/material/Unstable_Grid2';
+import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { alpha, useTheme } from '@mui/material/styles';
 
@@ -36,8 +36,6 @@ export default function MarketingLandingCaseStudies({ caseStudies }) {
     return { id, title, categoryName, description, coverUrl };
   });
 
-  console.log('newTable', newTable);
-
   return (
     <Container
       sx={{
@@ -60,7 +58,6 @@ export default function MarketingLandingCaseStudies({ caseStudies }) {
       </Stack>
 
       <Grid
-        item
         spacing={3}
         container
         alignItems="center"
@@ -68,18 +65,18 @@ export default function MarketingLandingCaseStudies({ caseStudies }) {
           py: { xs: 8, md: 10 },
         }}
       >
-        <Grid item xs={6} md={2}>
+        <Grid xs={6} md={2}>
           {newTable.length > 0 ? <SmallItem caseStudy={newTable[0]} /> : 'No data'}
         </Grid>
 
         {!mdUp && (
-          <Grid item xs={6} md={2}>
+          <Grid xs={6} md={2}>
             {newTable.length > 0 ? <SmallItem caseStudy={newTable[5]} /> : 'No data'}
           </Grid>
         )}
 
-        <Grid item container xs={12} sm={12} md={8}>
-          <Grid item xs={6} md={9}>
+        <Grid container xs={12} sm={12} md={8}>
+          <Grid xs={6} md={9}>
             {newTable.length > 0 && (
               mdUp ? (
                 <LargeItem caseStudy={newTable[1]} />
@@ -89,17 +86,17 @@ export default function MarketingLandingCaseStudies({ caseStudies }) {
             )}
           </Grid>
 
-          <Grid item xs={6} md={3}>
+          <Grid xs={6} md={3}>
             <Stack justifyContent={{ md: 'flex-end' }} sx={{ height: { md: 1 } }}>
               {newTable.length > 0 ? <SmallItem caseStudy={newTable[2]} square /> : 'No data'}
             </Stack>
           </Grid>
 
-          <Grid item xs={6} md={3}>
+          <Grid xs={6} md={3}>
             {newTable.length > 0 ? <SmallItem caseStudy={newTable[3]} square /> : 'No data'}
           </Grid>
 
-          <Grid item xs={6} md={9}>
+          <Grid xs={6} md={9}>
             {newTable.length > 0 && (
               mdUp ? (
                 <LargeItem caseStudy={newTable[4]} />
@@ -199,8 +196,6 @@ function SmallItem({ caseStudy, square }) {
   const theme = useTheme();
 
   const mdUp = useResponsive('up', 'md');
-
-  console.log('caseStudy', caseStudy)
 
   return (
     <Link component={RouterLink} href={paths.marketing.caseStudy}>
