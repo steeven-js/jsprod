@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 
+import { _Fetch } from "src/assets/data/fetch";
+
 const useFetchStudy = (id) => {
   const [study, setStudy] = useState({});
   const [isStudyLoading, setIsStudyLoading] = useState(false);
@@ -10,7 +12,7 @@ const useFetchStudy = (id) => {
     setIsStudyLoading(true);
 
     try {
-      const endpoint = `http://127.0.0.1:8000/api/studies/${id}`;
+      const endpoint = `${_Fetch[0].label}/studies/${id}`;
       const response = await fetch(endpoint);
       if (!response.ok) {
         throw new Error('La réponse du réseau n\'était pas valide');

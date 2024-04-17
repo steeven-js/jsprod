@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 
 import { fDate } from "src/utils/format-time";
 
+import { _Fetch } from "src/assets/data/fetch";
+
 const useFetchPost = (id) => {
   const [post, setPost] = useState([]);
   const [authorName, setAuthorName] = useState(null);
@@ -13,7 +15,7 @@ const useFetchPost = (id) => {
   const [isPostLoading, setIsPostLoading] = useState(false);
   const [postError, setPostError] = useState(null);
 
-  const endpoint = `http://127.0.0.1:8000/api/posts/${id}`;
+  const endpoint = `${_Fetch[0].label}/posts/${id}`;
 
   const fetchData = useCallback(async () => {
     setIsPostLoading(true);

@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useState, useEffect, useCallback } from "react";
 
+import { _Fetch } from "src/assets/data/fetch";
 import { _setPosts } from "src/redux/reducer/posts";
 
 const useFetchPosts = () => {
@@ -17,7 +18,8 @@ const useFetchPosts = () => {
     setIsPostsLoading(true);
 
     try {
-      const endpoint = `http://127.0.0.1:8000/api/posts?page=${currentPage}`;
+      const endpoint = `${_Fetch[0].label}/posts?page=${currentPage}`;
+
       const response = await fetch(endpoint);
       if (!response.ok) {
         throw new Error('La réponse du réseau n\'était pas valide');
