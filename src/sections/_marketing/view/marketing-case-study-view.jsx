@@ -7,8 +7,6 @@ import { paths } from 'src/routes/paths';
 
 import useFetchStudies from 'src/hooks/use-fetchStudies';
 
-import { _caseStudies } from 'src/_mock';
-
 import Image from 'src/components/image';
 import Markdown from 'src/components/markdown';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
@@ -67,7 +65,8 @@ export default function MarketingCaseStudyView({ study }) {
 
       {/* <MarketingTestimonial testimonials={_testimonials} /> */}
 
-      <MarketingCaseStudyListSimilar caseStudies={_caseStudies.slice(0, 3)} studies={studies.slice(0, 3)} />
+      {studies.length > 3 ? <MarketingCaseStudyListSimilar studies={studies.slice(0, 3)} /> : null}
+
 {/*
       <MarketingLandingFreeSEO />
 

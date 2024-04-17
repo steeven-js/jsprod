@@ -7,10 +7,8 @@ import useFetchPosts from 'src/hooks/use-fetchPosts';
 import { _mock, _categories } from 'src/_mock';
 
 import PostSidebar from '../../blog/common/post-sidebar';
-import MarketingNewsletter from '../marketing-newsletter';
 import PostSearchMobile from '../../blog/common/post-search-mobile';
 import BlogMarketingPosts from '../../blog/marketing/marketing-posts';
-import MarketingLandingFreeSEO from '../landing/marketing-landing-free-seo';
 import BlogMarketingFeaturedPosts from '../../blog/marketing/marketing-featured-posts';
 
 // ----------------------------------------------------------------------
@@ -50,9 +48,9 @@ export default function MarketingPostsView() {
           </Grid>
         </Grid>
       </Container>
-      <MarketingLandingFreeSEO />
+      {/* <MarketingLandingFreeSEO /> */}
 
-      <MarketingNewsletter />
+      {/* <MarketingNewsletter /> */}
     </>
   );
 }

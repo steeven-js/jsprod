@@ -62,13 +62,13 @@ export default function MarketingLandingCaseStudies({ caseStudies }) {
 
         {!mdUp && (
           <Grid xs={6} md={2}>
-            {caseStudies.length > 0 ? <SmallItem caseStudy={caseStudies[5]} /> : 'No data'}
+            {caseStudies.length > 5 ? <SmallItem caseStudy={caseStudies[5]} /> : 'No data'}
           </Grid>
         )}
 
         <Grid container xs={12} sm={12} md={8}>
           <Grid xs={6} md={9}>
-            {caseStudies.length > 0 && (
+            {caseStudies.length > 1 && (
               mdUp ? (
                 <LargeItem caseStudy={caseStudies[1]} />
               ) : (
@@ -79,16 +79,16 @@ export default function MarketingLandingCaseStudies({ caseStudies }) {
 
           <Grid xs={6} md={3}>
             <Stack justifyContent={{ md: 'flex-end' }} sx={{ height: { md: 1 } }}>
-              {caseStudies.length > 0 ? <SmallItem caseStudy={caseStudies[2]} square /> : 'No data'}
+              {caseStudies.length > 2 ? <SmallItem caseStudy={caseStudies[2]} square /> : 'No data'}
             </Stack>
           </Grid>
 
           <Grid xs={6} md={3}>
-            {caseStudies.length > 0 ? <SmallItem caseStudy={caseStudies[3]} square /> : 'No data'}
+            {caseStudies.length > 3 ? <SmallItem caseStudy={caseStudies[3]} square /> : 'No data'}
           </Grid>
 
           <Grid xs={6} md={9}>
-            {caseStudies.length > 0 && (
+            {caseStudies.length > 4 && (
               mdUp ? (
                 <LargeItem caseStudy={caseStudies[4]} />
               ) : (
@@ -100,7 +100,7 @@ export default function MarketingLandingCaseStudies({ caseStudies }) {
 
         {mdUp && (
           <Grid xs={6} md={2}>
-            {caseStudies.length > 0 ? <SmallItem caseStudy={caseStudies[5]} square /> : 'No data'}
+            {caseStudies.length > 5 ? <SmallItem caseStudy={caseStudies[5]} square /> : 'No data'}
           </Grid>
         )}
       </Grid>

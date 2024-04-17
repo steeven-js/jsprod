@@ -195,7 +195,7 @@ export default function MarketingPostView() {
 
       <Divider />
 
-      <BlogMarketingLatestPosts posts={posts.slice(0, 4)} />
+      {posts.length > 4 ? <BlogMarketingLatestPosts posts={posts.slice(0, 4)} /> : null}
 
       {/* <MarketingLandingFreeSEO />
 
