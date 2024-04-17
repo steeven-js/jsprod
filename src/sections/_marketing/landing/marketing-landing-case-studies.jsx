@@ -141,7 +141,7 @@ function LargeItem({ caseStudy }) {
     >
       <Box sx={{ p: 0.75 }}>
         <Image alt="cover" src={
-          caseStudy.coverUrl ? caseStudy.coverUrl : '/assets/images/marketing/marketing_6.jpg'
+          caseStudy ? caseStudy.media[0].original_url : '/assets/images/marketing/marketing_6.jpg'
         } ratio="3/4" sx={{ borderRadius: 2 }} />
       </Box>
 
@@ -180,6 +180,7 @@ LargeItem.propTypes = {
     category: PropTypes.shape({
       name: PropTypes.string,
     }),
+    media: PropTypes.array,
     coverUrl: PropTypes.string,
     description: PropTypes.string,
     title: PropTypes.string,
@@ -228,7 +229,7 @@ function SmallItem({ caseStudy, square }) {
           <Image
             alt="cover"
             src={
-              caseStudy.coverUrl ? caseStudy.coverUrl : '/assets/images/marketing/marketing_6.jpg'
+              caseStudy ? caseStudy.media[0].original_url : '/assets/images/marketing/marketing_6.jpg'
             }
             ratio={(square && '1/1') || (mdUp && '3/4') || '1/1'}
             overlay={alpha(theme.palette.grey[900], 0.48)}
@@ -245,6 +246,7 @@ SmallItem.propTypes = {
     category: PropTypes.shape({
       name: PropTypes.string,
     }),
+    media: PropTypes.array,
     coverUrl: PropTypes.string,
     description: PropTypes.string,
     title: PropTypes.string,
