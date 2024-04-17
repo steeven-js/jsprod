@@ -118,22 +118,27 @@ export const _MarketingLandingFaqs = [
 
 export const _faqs = [
   {
+    id: '1',
     question: 'Sed augue ipsum, egestas nec, vestibulum et',
     answer: 'Amazing experience i love it a lot. Thanks to the team that dreams come true, great! I appreciate there attitude and approach.'
   },
   {
+    id: '2',
     question: 'Alesuada adipiscing, dui vestibulum suscipit nulla quis orci.',
     answer: 'Amazing experience i love it a lot. Thanks to the team that dreams come true, great! I appreciate there attitude and approach.'
   },
   {
+    id: '3',
     question: 'Ut varius tincidunt libero',
     answer: 'Amazing experience i love it a lot. Thanks to the team that dreams come true, great! I appreciate there attitude and approach.'
   },
   {
+    id: '4',
     question: 'In ut quam vitae odio lacinia tincidunt.',
     answer: 'Amazing experience i love it a lot. Thanks to the team that dreams come true, great! I appreciate there attitude and approach.'
   },
   {
+    id: '5',
     question: 'Fusce vel dui Morbi nec metus.',
     answer: 'Amazing experience i love it a lot. Thanks to the team that dreams come true, great! I appreciate there attitude and approach.'
   }
