@@ -4,12 +4,17 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
+import useFetchPosts from 'src/hooks/use-fetchPosts';
+
 import MarketingCaseStudyList from '../list/marketing-case-study-list';
 import BlogMarketingLatestPosts from '../../blog/marketing/marketing-latest-posts';
 
 // ----------------------------------------------------------------------
 
 export default function MarketingCaseStudiesView({ studies, categories }) {
+
+  const { posts, postCoverUrls } = useFetchPosts();
+
   return (
     <>
       <Container>
@@ -33,7 +38,7 @@ export default function MarketingCaseStudiesView({ studies, categories }) {
 
       {/* <MarketingTestimonial testimonials={_testimonials} /> */}
 
-      <BlogMarketingLatestPosts />
+      {posts.length > 6 ? <BlogMarketingLatestPosts posts={posts} postCoverUrls={postCoverUrls} /> : null}
 
       {/* <MarketingLandingFreeSEO />
 

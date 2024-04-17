@@ -9,7 +9,6 @@ import Typography from '@mui/material/Typography';
 
 import { RouterLink } from 'src/routes/components';
 
-import useFetchPosts from 'src/hooks/use-fetchPosts';
 import { useResponsive } from 'src/hooks/use-responsive';
 
 import Iconify from 'src/components/iconify';
@@ -19,12 +18,10 @@ import MarketingLatestPostItem from './marketing-latest-post-item';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingLatestPosts() {
+export default function MarketingLatestPosts({posts, postCoverUrls}) {
   const theme = useTheme();
 
   const mdUp = useResponsive('up', 'md');
-
-  const { posts, postCoverUrls } = useFetchPosts();
 
   const carousel = useCarousel({
     slidesToShow: 3,
@@ -110,4 +107,5 @@ MarketingLatestPosts.propTypes = {
     duration: PropTypes.string,
     created_at: PropTypes.string,
   }),
+  postCoverUrls: PropTypes.object,
 };
