@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 import Link from '@mui/material/Link';
-import Masonry from '@mui/lab/Masonry';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
 import Collapse from '@mui/material/Collapse';
@@ -18,14 +17,12 @@ import { usePathname } from 'src/routes/hooks';
 import { RouterLink } from 'src/routes/components';
 
 import { useBoolean } from 'src/hooks/use-boolean';
-import { useResponsive } from 'src/hooks/use-responsive';
 
 import { _socials } from 'src/_mock';
 
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
 
-import { pageLinks, navConfig } from './config-navigation';
 
 // ----------------------------------------------------------------------
 
@@ -43,15 +40,15 @@ const StyledAppStoreButton = styled(Button)(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function Footer() {
-  const mdUp = useResponsive('up', 'md');
+  // const mdUp = useResponsive('up', 'md');
 
   const pathname = usePathname();
 
-  const mobileList = navConfig.find((i) => i.title === 'Pages')?.children || [];
+  // const mobileList = navConfig.find((i) => i.title === 'Pages')?.children || [];
 
-  const desktopList = pageLinks.sort((listA, listB) => Number(listA.order) - Number(listB.order));
+  // const desktopList = pageLinks.sort((listA, listB) => Number(listA.order) - Number(listB.order));
 
-  const renderLists = mdUp ? desktopList : mobileList;
+  // const renderLists = mdUp ? desktopList : mobileList;
 
   const isHome = pathname === '/';
 
@@ -144,7 +141,7 @@ export default function Footer() {
             </Stack>
           </Grid>
 
-          <Grid xs={12} md={6}>
+          {/* <Grid xs={12} md={6}>
             {mdUp ? (
               <Masonry columns={4} spacing={2} defaultColumns={4} defaultSpacing={2}>
                 {renderLists.map((list) => (
@@ -158,7 +155,7 @@ export default function Footer() {
                 ))}
               </Stack>
             )}
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
 
