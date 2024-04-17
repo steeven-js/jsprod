@@ -26,7 +26,7 @@ export default function MarketingLandingCaseStudies({ caseStudies }) {
   const mdUp = useResponsive('up', 'md');
 
   const newTable = caseStudies.map((caseStudy, index) => {
-    const {id} = caseStudy;
+    const { id } = caseStudy;
     const { title } = caseStudy;
     const categoryName = caseStudy.category.name;
     const { description } = caseStudy;
@@ -148,7 +148,9 @@ function LargeItem({ caseStudy }) {
       }}
     >
       <Box sx={{ p: 0.75 }}>
-        <Image alt="cover" src={caseStudy.coverUrl || '/assets/images/marketing/marketing_6.jpg'} ratio="3/4" sx={{ borderRadius: 2 }} />
+        <Image alt="cover" src={
+          caseStudy.coverUrl ? caseStudy.coverUrl : '/assets/images/marketing/marketing_6.jpg'
+        } ratio="3/4" sx={{ borderRadius: 2 }} />
       </Box>
 
       <Stack alignItems="flex-end" justifyContent="space-between" sx={{ p: 3, pt: 5, height: 1 }}>
@@ -231,7 +233,9 @@ function SmallItem({ caseStudy, square }) {
         <m.div variants={varHover(1.25)} transition={varTranHover()}>
           <Image
             alt="cover"
-            src={caseStudy.coverUrl || '/assets/images/marketing/marketing_6.jpg'}
+            src={
+              caseStudy.coverUrl ? caseStudy.coverUrl : '/assets/images/marketing/marketing_6.jpg'
+            }
             ratio={(square && '1/1') || (mdUp && '3/4') || '1/1'}
             overlay={alpha(theme.palette.grey[900], 0.48)}
           />
