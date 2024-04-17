@@ -1,18 +1,18 @@
 import { useState, useEffect, useCallback } from "react";
 
+import { apiUrl } from "src/assets/data/fetch";
+
 
 const useFetchTags = () => {
   const [tags, setTags] = useState([]);
   const [isTagsLoading, setIsTagsLoading] = useState(false);
   const [tagsError, setTagsError] = useState(null);
 
-  const jsProdApi = import.meta.env.VITE_REACT_APP_JSPROD_API;
-
   const fetchData = useCallback(async () => {
     setIsTagsLoading(true);
 
     try {
-      const endpoint = `${jsProdApi}/tags`;
+      const endpoint = `${apiUrl}/tags`;
       const response = await fetch(endpoint);
       if (!response.ok) {
         throw new Error('La réponse du réseau n\'était pas valide');
@@ -28,7 +28,7 @@ const useFetchTags = () => {
     } finally {
       setIsTagsLoading(false);
     }
-  }, [jsProdApi]);
+  }, []);
 
   useEffect(() => {
     fetchData();

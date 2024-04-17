@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 
 import { fDate } from "src/utils/format-time";
 
+import { apiUrl } from "src/assets/data/fetch";
+
 const useFetchPost = (id) => {
   const [post, setPost] = useState([]);
   const [authorName, setAuthorName] = useState(null);
@@ -13,13 +15,11 @@ const useFetchPost = (id) => {
   const [isPostLoading, setIsPostLoading] = useState(false);
   const [postError, setPostError] = useState(null);
 
-  const jsProdApi = import.meta.env.VITE_REACT_APP_JSPROD_API;
-
   const fetchData = useCallback(async () => {
     setIsPostLoading(true);
 
     try {
-      const endpoint = `${jsProdApi}/posts/${id}`;
+      const endpoint = `${apiUrl}/posts/${id}`;
       const response = await fetch(endpoint);
       const result = await response.json();
       setPost(result);
@@ -58,7 +58,7 @@ const useFetchPost = (id) => {
     } finally {
       setIsPostLoading(false);
     }
-  }, [id, jsProdApi]);
+  }, [id]);
 
   useEffect(() => {
     fetchData();
