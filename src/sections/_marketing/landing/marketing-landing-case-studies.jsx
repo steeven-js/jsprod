@@ -25,15 +25,7 @@ import { varHover, varTranHover } from 'src/components/animate';
 export default function MarketingLandingCaseStudies({ caseStudies }) {
   const mdUp = useResponsive('up', 'md');
 
-  const newTable = caseStudies.map((caseStudy, index) => {
-    const { id } = caseStudy;
-    const { title } = caseStudy;
-    const categoryName = caseStudy.category.name;
-    const { description } = caseStudy;
-    const { coverUrl } = caseStudy;
-
-    return { id, title, categoryName, description, coverUrl };
-  });
+  console.log('caseStudies', caseStudies)
 
   return (
     <Container
@@ -65,42 +57,42 @@ export default function MarketingLandingCaseStudies({ caseStudies }) {
         }}
       >
         <Grid xs={6} md={2}>
-          {newTable.length > 0 ? <SmallItem caseStudy={newTable[0]} /> : 'No data'}
+          {caseStudies.length > 0 ? <SmallItem caseStudy={caseStudies[0]} /> : 'No data'}
         </Grid>
 
         {!mdUp && (
           <Grid xs={6} md={2}>
-            {newTable.length > 0 ? <SmallItem caseStudy={newTable[5]} /> : 'No data'}
+            {caseStudies.length > 0 ? <SmallItem caseStudy={caseStudies[5]} /> : 'No data'}
           </Grid>
         )}
 
         <Grid container xs={12} sm={12} md={8}>
           <Grid xs={6} md={9}>
-            {newTable.length > 0 && (
+            {caseStudies.length > 0 && (
               mdUp ? (
-                <LargeItem caseStudy={newTable[1]} />
+                <LargeItem caseStudy={caseStudies[1]} />
               ) : (
-                <SmallItem caseStudy={newTable[1]} square />
+                <SmallItem caseStudy={caseStudies[1]} square />
               )
             )}
           </Grid>
 
           <Grid xs={6} md={3}>
             <Stack justifyContent={{ md: 'flex-end' }} sx={{ height: { md: 1 } }}>
-              {newTable.length > 0 ? <SmallItem caseStudy={newTable[2]} square /> : 'No data'}
+              {caseStudies.length > 0 ? <SmallItem caseStudy={caseStudies[2]} square /> : 'No data'}
             </Stack>
           </Grid>
 
           <Grid xs={6} md={3}>
-            {newTable.length > 0 ? <SmallItem caseStudy={newTable[3]} square /> : 'No data'}
+            {caseStudies.length > 0 ? <SmallItem caseStudy={caseStudies[3]} square /> : 'No data'}
           </Grid>
 
           <Grid xs={6} md={9}>
-            {newTable.length > 0 && (
+            {caseStudies.length > 0 && (
               mdUp ? (
-                <LargeItem caseStudy={newTable[4]} />
+                <LargeItem caseStudy={caseStudies[4]} />
               ) : (
-                <SmallItem caseStudy={newTable[4]} square />
+                <SmallItem caseStudy={caseStudies[4]} square />
               )
             )}
           </Grid>
@@ -108,7 +100,7 @@ export default function MarketingLandingCaseStudies({ caseStudies }) {
 
         {mdUp && (
           <Grid xs={6} md={2}>
-            {newTable.length > 0 ? <SmallItem caseStudy={newTable[5]} square /> : 'No data'}
+            {caseStudies.length > 0 ? <SmallItem caseStudy={caseStudies[5]} square /> : 'No data'}
           </Grid>
         )}
       </Grid>
@@ -121,7 +113,7 @@ export default function MarketingLandingCaseStudies({ caseStudies }) {
           color="inherit"
           endIcon={<Iconify icon="carbon:chevron-right" />}
         >
-          View all
+          Tout voir
         </Button>
       </Stack>
     </Container>
@@ -156,7 +148,7 @@ function LargeItem({ caseStudy }) {
       <Stack alignItems="flex-end" justifyContent="space-between" sx={{ p: 3, pt: 5, height: 1 }}>
         <div>
           <Typography variant="overline" sx={{ color: 'primary.main' }}>
-            {caseStudy.categoryName}
+            {caseStudy.category.name}
           </Typography>
 
           <Typography variant="h4" sx={{ mt: 1, mb: 2 }}>
@@ -185,7 +177,9 @@ function LargeItem({ caseStudy }) {
 LargeItem.propTypes = {
   caseStudy: PropTypes.shape({
     id: PropTypes.number,
-    categoryName: PropTypes.string,
+    category: PropTypes.shape({
+      name: PropTypes.string,
+    }),
     coverUrl: PropTypes.string,
     description: PropTypes.string,
     title: PropTypes.string,
@@ -225,7 +219,7 @@ function SmallItem({ caseStudy, square }) {
           }}
         >
           <Typography variant="overline" sx={{ opacity: 0.48 }}>
-            {caseStudy.categoryName}
+            {caseStudy.category.name}
           </Typography>
           <Typography variant="h6">{caseStudy.title}</Typography>
         </Stack>
@@ -248,7 +242,9 @@ function SmallItem({ caseStudy, square }) {
 SmallItem.propTypes = {
   caseStudy: PropTypes.shape({
     id: PropTypes.number,
-    categoryName: PropTypes.string,
+    category: PropTypes.shape({
+      name: PropTypes.string,
+    }),
     coverUrl: PropTypes.string,
     description: PropTypes.string,
     title: PropTypes.string,
