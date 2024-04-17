@@ -39,7 +39,7 @@ export default function MarketingLandingView() {
 
       <MarketingLandingProcess />
 
-      <MarketingLandingCaseStudies caseStudies={studies.slice(-6)} />
+      {studies.length > 5 ? <MarketingLandingCaseStudies caseStudies={studies.slice(-6)} /> : null}
 
       {/* <MarketingTeam members={_members} /> */}
 
@@ -49,7 +49,7 @@ export default function MarketingLandingView() {
 
       {/* <MarketingTestimonial testimonials={_testimonials} /> */}
 
-      <BlogMarketingLatestPosts posts={_marketingPosts.slice(0, 4)} />
+      {studies.length > 5 ? <BlogMarketingLatestPosts posts={_marketingPosts.slice(0, 4)} /> : null}
 
       {/* <MarketingLandingFreeSEO /> */}
 
