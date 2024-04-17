@@ -9,6 +9,8 @@ import { useResponsive } from 'src/hooks/use-responsive';
 
 import { fShortenNumber } from 'src/utils/format-number';
 
+import { _SUMMARY, _MarketingAbout } from 'src/assets/data';
+
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import CountUp from 'src/components/count-up';
@@ -16,13 +18,6 @@ import CountUp from 'src/components/count-up';
 // ----------------------------------------------------------------------
 
 const COLORS = ['primary', 'secondary', 'warning', 'success'];
-
-const SUMMARY = [
-  { title: 'Years of experience', total: 12, icon: 'carbon:increase-level' },
-  { title: 'Awards', total: 20, icon: 'carbon:trophy' },
-  { title: 'Projects', total: 150, icon: 'carbon:data-vis-4' },
-  { title: 'Happy clients', total: 32000, icon: 'carbon:user-certification' },
-];
 
 // ----------------------------------------------------------------------
 
@@ -80,16 +75,13 @@ export default function MarketingAbout() {
             textAlign: { xs: 'center', md: 'left' },
           }}
         >
-          <Typography variant="h2">Who We Are?</Typography>
+          <Typography variant="h2">{_MarketingAbout[0].label}</Typography>
 
           <Typography sx={{ mt: 3, mb: 5, color: 'text.secondary' }}>
-            Vivamus consectetuer hendrerit lacus. Curabitur a felis in nunc fringilla tristique.
-            Nulla neque dolor, sagittis eget, iaculis quis, molestie non, velit.
+            {_MarketingAbout[1].label}
             <br />
             <br />
-            Nam pretium turpis et arcu. Praesent porttitor, nulla vitae posuere iaculis, arcu nisl
-            dignissim dolor, a pretium mi sem ut ipsum. Praesent venenatis metus at tortor pulvinar
-            varius.
+            {_MarketingAbout[2].label}
           </Typography>
 
           <Button
@@ -98,7 +90,7 @@ export default function MarketingAbout() {
             size="large"
             endIcon={<Iconify icon="carbon:chevron-right" />}
           >
-            Check Our Work
+            {_MarketingAbout[3].label}
           </Button>
         </Grid>
       </Grid>
@@ -116,7 +108,7 @@ export default function MarketingAbout() {
           },
         }}
       >
-        {SUMMARY.map((value, index) => (
+        {_SUMMARY.map((value, index) => (
           <div key={value.title}>
             <StyledIcon color={COLORS[index]}>
               <Iconify icon={value.icon} width={48} />

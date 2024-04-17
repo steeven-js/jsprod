@@ -7,42 +7,9 @@ import Typography from '@mui/material/Typography';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
+import { _BENEFITS, _MarketingServicesBenefits } from 'src/assets/data';
+
 import Image from 'src/components/image';
-
-// ----------------------------------------------------------------------
-
-const BENEFITS = [
-  {
-    title: 'Online Media',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
-    iconColor: 'primary',
-  },
-  {
-    title: 'Design',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
-    iconColor: 'success',
-  },
-  {
-    title: 'Marketing',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
-    iconColor: 'secondary',
-  },
-  {
-    title: 'HR & Recruiting',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
-    iconColor: 'secondary',
-  },
-  {
-    title: 'Management',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
-    iconColor: 'success',
-  },
-  {
-    title: 'Branding',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
-    iconColor: 'primary',
-  },
-];
 
 // ----------------------------------------------------------------------
 
@@ -58,7 +25,7 @@ export default function MarketingServicesBenefits() {
     >
       <Container>
         <Typography variant="h2" sx={{ textAlign: 'center' }}>
-          Benefits Achieved
+          {_MarketingServicesBenefits[0].label}
         </Typography>
 
         <Typography
@@ -71,7 +38,7 @@ export default function MarketingServicesBenefits() {
             mb: { xs: 8, md: 10 },
           }}
         >
-          Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.
+          {_MarketingServicesBenefits[1].label}
         </Typography>
 
         <Box
@@ -83,7 +50,7 @@ export default function MarketingServicesBenefits() {
           }}
         >
           <Stack spacing={{ xs: 4, md: 10 }}>
-            {BENEFITS.slice(0, 3).map((benefit, index) => (
+            {_BENEFITS.slice(0, 3).map((benefit, index) => (
               <BenefitItem key={benefit.title} benefit={benefit} index={index} reverse />
             ))}
           </Stack>
@@ -91,7 +58,7 @@ export default function MarketingServicesBenefits() {
           {mdUp && <Image alt="benefits" src="/assets/illustrations/illustration_benefits.svg" />}
 
           <Stack spacing={{ xs: 4, md: 10 }}>
-            {BENEFITS.slice(-3).map((benefit, index) => (
+            {_BENEFITS.slice(-3).map((benefit, index) => (
               <BenefitItem key={benefit.title} benefit={benefit} index={index} />
             ))}
           </Stack>

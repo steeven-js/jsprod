@@ -11,34 +11,9 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
-// ----------------------------------------------------------------------
+import { _TIMELINESABOUT } from 'src/assets/data';
 
-const TIMELINES = [
-  {
-    year: '2021',
-    title: 'Customer Satisfaction',
-    description:
-      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
-  },
-  {
-    year: '2020',
-    title: 'Transparency',
-    description:
-      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
-  },
-  {
-    year: '2019',
-    title: 'Reputation',
-    description:
-      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
-  },
-  {
-    year: '2018',
-    title: 'Cooperation',
-    description:
-      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
-  },
-];
+// ----------------------------------------------------------------------
 
 const COLORS = ['primary', 'secondary', 'warning', 'success'];
 
@@ -72,7 +47,7 @@ export default function MarketingAboutStory() {
         </Stack>
 
         <Timeline position={mdUp ? 'alternate' : 'right'}>
-          {TIMELINES.map((value, index) => (
+          {_TIMELINESABOUT.map((value, index) => (
             <TimelineItem
               key={value.title}
               sx={{

@@ -9,7 +9,7 @@ import IconButton from '@mui/material/IconButton';
 
 import { RouterLink } from 'src/routes/components';
 
-import { _SERVICES, _MarketingLandingServices } from 'src/assets/data';
+import { _SERVICESLANDING, _MarketingLandingServices } from 'src/assets/data';
 
 import Iconify from 'src/components/iconify';
 import SvgColor from 'src/components/svg-color';
@@ -60,7 +60,7 @@ export default function MarketingLandingServices() {
           },
         }}
       >
-        {_SERVICES.map((service, index) => (
+        {_SERVICESLANDING.map((service, index) => (
           <ServiceItem key={service.name} service={service} index={index} />
         ))}
       </Box>

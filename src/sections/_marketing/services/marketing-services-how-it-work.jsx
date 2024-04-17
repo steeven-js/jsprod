@@ -12,35 +12,9 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import { useResponsive } from 'src/hooks/use-responsive';
 
 import { bgGradient } from 'src/theme/css';
+import { _TIMELINES, _MarketingServicesHowItWork } from 'src/assets/data';
 
 // ----------------------------------------------------------------------
-
-const TIMELINES = [
-  {
-    step: 'STEP 1',
-    title: 'Planning',
-    description:
-      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
-  },
-  {
-    step: 'STEP 2',
-    title: 'Research',
-    description:
-      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
-  },
-  {
-    step: 'STEP 3',
-    title: 'Optimizing',
-    description:
-      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
-  },
-  {
-    step: 'STEP 4',
-    title: 'Results',
-    description:
-      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
-  },
-];
 
 const COLORS = ['primary', 'secondary', 'warning', 'success'];
 
@@ -64,7 +38,7 @@ export default function MarketingServicesHowItWork() {
     >
       <Container>
         <Typography variant="h2" sx={{ textAlign: 'center' }}>
-          How It Works
+          {_MarketingServicesHowItWork[0].label}
         </Typography>
 
         <Typography
@@ -77,11 +51,11 @@ export default function MarketingServicesHowItWork() {
             mb: { xs: 8, md: 10 },
           }}
         >
-          Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.
+          {_MarketingServicesHowItWork[1].label}
         </Typography>
 
         <Timeline position={mdUp ? 'alternate' : 'right'}>
-          {TIMELINES.map((value, index) => (
+          {_TIMELINES.map((value, index) => (
             <TimelineItem
               key={value.title}
               sx={{

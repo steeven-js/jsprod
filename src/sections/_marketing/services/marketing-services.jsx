@@ -8,17 +8,10 @@ import Typography from '@mui/material/Typography';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
+import { _LISTS, _MarketingServices } from 'src/assets/data';
+
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
-
-// ----------------------------------------------------------------------
-
-const LISTS = [
-  'First Class Flights',
-  '5 Star Accommodations',
-  'Inclusive Packages',
-  'Latest Model Vehicles',
-];
 
 // ----------------------------------------------------------------------
 
@@ -37,16 +30,14 @@ export default function MarketingServices() {
 
         <Grid xs={12} md={6} lg={6}>
           <Stack spacing={3} sx={{ mb: 5 }}>
-            <Typography variant="h2">Offline SEO</Typography>
+            <Typography variant="h2">{_MarketingServices[0].label}</Typography>
 
             <Typography sx={{ color: 'text.secondary' }}>
-              Aenean commodo ligula eget dolor. Sed hendrerit. Vestibulum ante ipsum primis in
-              faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer
-              lacinia.
+              {_MarketingServices[1].label}
             </Typography>
 
             <Stack spacing={2}>
-              {LISTS.map((text) => (
+              {_LISTS.map((text) => (
                 <Stack key={text} direction="row" alignItems="center">
                   <Box
                     component="span"
@@ -72,7 +63,7 @@ export default function MarketingServices() {
             variant="outlined"
             endIcon={<Iconify icon="carbon:chevron-right" />}
           >
-            Check Our Work
+            {_MarketingServices[2].label}
           </Button>
         </Grid>
       </Grid>

@@ -52,7 +52,7 @@ export const _MarketingLandingServices = [
   },
 ];
 
-export const _SERVICES = [
+export const _SERVICESLANDING = [
   {
     name: 'SEO',
     icon: '/assets/icons/service/ic_service_seo.svg',

@@ -2,32 +2,9 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
+import { _CORE_VALUES, _MarketingAboutCoreValues } from 'src/assets/data';
+
 import SvgColor from 'src/components/svg-color';
-
-// ----------------------------------------------------------------------
-
-const CORE_VALUES = [
-  {
-    title: 'Customer Satisfaction',
-    description: 'Aenean urna dictum adipiscing nec, cras quisque.',
-    icon: '/assets/icons/ic_agreement.svg',
-  },
-  {
-    title: 'Transparency',
-    description: 'Aenean urna dictum adipiscing nec, cras quisque.',
-    icon: '/assets/icons/ic_transparency.svg',
-  },
-  {
-    title: 'Reputation',
-    description: 'Aenean urna dictum adipiscing nec, cras quisque.',
-    icon: '/assets/icons/ic_reputation.svg',
-  },
-  {
-    title: 'Cooperation',
-    description: 'Aenean urna dictum adipiscing nec, cras quisque.',
-    icon: '/assets/icons/ic_popularity.svg',
-  },
-];
 
 // ----------------------------------------------------------------------
 
@@ -41,7 +18,7 @@ export default function MarketingAboutCoreValues() {
       }}
     >
       <Typography variant="h2" sx={{ mb: { xs: 8, md: 10 } }}>
-        Our Core Values
+        {_MarketingAboutCoreValues[0].label}
       </Typography>
 
       <Box
@@ -55,7 +32,7 @@ export default function MarketingAboutCoreValues() {
           },
         }}
       >
-        {CORE_VALUES.map((value) => (
+        {_CORE_VALUES.map((value) => (
           <Box key={value.title}>
             <SvgColor
               src={value.icon}

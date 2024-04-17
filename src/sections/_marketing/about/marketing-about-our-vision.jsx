@@ -4,6 +4,8 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import { alpha, styled, useTheme } from '@mui/material/styles';
 
+import { _MarketingAboutOurVision } from 'src/assets/data';
+
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 
@@ -43,7 +45,7 @@ export default function MarketingAboutOurVision() {
             color: { md: 'common.white' },
           }}
         >
-          Our Vision
+          {_MarketingAboutOurVision[0].title}
         </Typography>
 
         <Stack
@@ -84,7 +86,7 @@ export default function MarketingAboutOurVision() {
             opacity: { md: 0.72 },
           }}
         >
-          Our vision offering the best product nulla vehicula tortor scelerisque ultrices malesuada.
+          {_MarketingAboutOurVision[0].description}
         </StyledTypography>
       </Stack>
     </Container>

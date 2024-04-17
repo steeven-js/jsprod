@@ -2,42 +2,9 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
+import { _SERVICES, _MarketingServicesInclude } from 'src/assets/data';
+
 import SvgColor from 'src/components/svg-color';
-
-// ----------------------------------------------------------------------
-
-const SERVICES = [
-  {
-    title: 'Search Engine Optimization',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
-    icon: '/assets/icons/ic_statistics.svg',
-  },
-  {
-    title: 'Social Media Strategy',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
-    icon: '/assets/icons/ic_social_media.svg',
-  },
-  {
-    title: 'Real Time and Data',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
-    icon: '/assets/icons/ic_real_time.svg',
-  },
-  {
-    title: 'Online Media Management',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
-    icon: '/assets/icons/ic_checklist.svg',
-  },
-  {
-    title: 'Reporting & Analysis',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
-    icon: '/assets/icons/ic_report.svg',
-  },
-  {
-    title: 'Penalty Recovery',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
-    icon: '/assets/icons/ic_file.svg',
-  },
-];
 
 // ----------------------------------------------------------------------
 
@@ -50,7 +17,7 @@ export default function MarketingServicesInclude() {
         pb: { xs: 10, md: 15 },
       }}
     >
-      <Typography variant="h2">Services Include</Typography>
+      <Typography variant="h2">{_MarketingServicesInclude[0].label}</Typography>
 
       <Typography
         sx={{
@@ -61,7 +28,7 @@ export default function MarketingServicesInclude() {
           mb: { xs: 8, md: 10 },
         }}
       >
-        Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.
+        {_MarketingServicesInclude[1].label}
       </Typography>
 
       <Box
@@ -76,7 +43,7 @@ export default function MarketingServicesInclude() {
           },
         }}
       >
-        {SERVICES.map((value) => (
+        {_SERVICES.map((value) => (
           <div key={value.title}>
             <SvgColor
               src={value.icon}
