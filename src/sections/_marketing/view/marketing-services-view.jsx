@@ -1,4 +1,6 @@
 
+import useFetchPosts from 'src/hooks/use-fetchPosts';
+
 import MarketingServices from '../services/marketing-services';
 import MarketingServicesInclude from '../services/marketing-services-include';
 import MarketingServicesBenefits from '../services/marketing-services-benefits';
@@ -8,6 +10,7 @@ import MarketingServicesHowItWork from '../services/marketing-services-how-it-wo
 // ----------------------------------------------------------------------
 
 export default function MarketingServicesView() {
+  const { posts, postCoverUrls } = useFetchPosts();
   return (
     <>
       {/* <MarketingServicesHero /> */}
@@ -22,7 +25,7 @@ export default function MarketingServicesView() {
 
       {/* <MarketingTestimonial testimonials={_testimonials} /> */}
 
-      <BlogMarketingLatestPosts />
+      {posts.length > 6 ? <BlogMarketingLatestPosts posts={posts} postCoverUrls={postCoverUrls} /> : null}
 
       {/* <MarketingLandingFreeSEO /> */}
 

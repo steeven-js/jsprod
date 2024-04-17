@@ -18,7 +18,7 @@ import MarketingLatestPostItem from './marketing-latest-post-item';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingLatestPosts({posts, postCoverUrls}) {
+export default function MarketingLatestPosts({ posts, postCoverUrls}) {
   const theme = useTheme();
 
   const mdUp = useResponsive('up', 'md');
@@ -107,5 +107,5 @@ MarketingLatestPosts.propTypes = {
     duration: PropTypes.string,
     created_at: PropTypes.string,
   }),
-  postCoverUrls: PropTypes.object,
+  postCoverUrls: PropTypes.array,
 };
