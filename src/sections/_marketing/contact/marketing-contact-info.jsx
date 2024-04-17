@@ -4,6 +4,8 @@ import Typography from '@mui/material/Typography';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
+import { _MarketingContactInfo } from 'src/assets/data';
+
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 
@@ -27,21 +29,21 @@ export default function MarketingContactInfo() {
 
         <Stack spacing={0.5}>
           <Stack spacing={1} direction="row" alignItems="center">
-            <Typography variant="h6">Visit us</Typography>
+            <Typography variant="h6">{_MarketingContactInfo[0].label}</Typography>
 
             <Link sx={{ lineHeight: 0 }}>
               <Iconify icon="carbon:launch" width={18} />
             </Link>
           </Stack>
 
-          <Typography variant="body2">508 Bridle Avenue Newnan, GA 30263e</Typography>
+          <Typography variant="body2">{_MarketingContactInfo[1].label}</Typography>
         </Stack>
       </Stack>
 
       <Stack spacing={2} alignItems="flex-start" direction="row">
         <Iconify width={28} icon="carbon:mobile" />
         <Stack spacing={0.5}>
-          <Typography variant="h6">Call us</Typography>
+          <Typography variant="h6">{_MarketingContactInfo[2].label}</Typography>
         </Stack>
       </Stack>
 
@@ -49,8 +51,8 @@ export default function MarketingContactInfo() {
         <Iconify width={28} icon="carbon:email" />
         <Stack spacing={0.5}>
           <Typography variant="h6">Talk to us</Typography>
-          <Link color="inherit" variant="body2" href="mailto:hello@example.com">
-            hello@example.com
+          <Link color="inherit" variant="body2" href={_MarketingContactInfo[3].label}>
+            {_MarketingContactInfo[5].label}
           </Link>
         </Stack>
       </Stack>
@@ -58,8 +60,8 @@ export default function MarketingContactInfo() {
       <Stack spacing={2} alignItems="flex-start" direction="row">
         <Iconify width={28} icon="carbon:time" />
         <Stack spacing={0.5}>
-          <Typography variant="h6">Working Hours</Typography>
-          <Typography variant="body2">Mon-Fri: 9 am — 6 pm</Typography>
+          <Typography variant="h6">{_MarketingContactInfo[6].label}</Typography>
+          <Typography variant="body2">{_MarketingContactInfo[7].label}</Typography>
         </Stack>
       </Stack>
     </Stack>
