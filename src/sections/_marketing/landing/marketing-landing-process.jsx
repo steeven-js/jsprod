@@ -7,30 +7,13 @@ import { alpha } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
+import { _LANDINGPROCESS, _MarketingLandingProcess } from 'src/assets/data';
+
 import SvgColor from 'src/components/svg-color';
 
 // ----------------------------------------------------------------------
 
 const COLORS = ['primary', 'secondary', 'warning', 'success'];
-
-const SERVICES = [
-  {
-    name: 'Planning',
-    icon: '/assets/icons/ic_sketch_design.svg',
-  },
-  {
-    name: 'Research',
-    icon: '/assets/icons/ic_search.svg',
-  },
-  {
-    name: 'Optimizing',
-    icon: '/assets/icons/ic_optimization.svg',
-  },
-  {
-    name: 'Results',
-    icon: '/assets/icons/ic_analysis.svg',
-  },
-];
 
 // ----------------------------------------------------------------------
 
@@ -51,13 +34,13 @@ export default function MarketingLandingProcess() {
         }}
       >
         <Typography variant="overline" sx={{ color: 'text.disabled' }}>
-          Work Flow
+          {_MarketingLandingProcess[0].label}
         </Typography>
 
-        <Typography variant="h2">Working Process</Typography>
+        <Typography variant="h2">{_MarketingLandingProcess[1].label}</Typography>
 
         <Typography sx={{ color: 'text.secondary' }}>
-          Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.
+          {_MarketingLandingProcess[2].label}
         </Typography>
       </Stack>
 
@@ -73,7 +56,7 @@ export default function MarketingLandingProcess() {
           },
         }}
       >
-        {SERVICES.map((service, index) => (
+        {_LANDINGPROCESS.map((service, index) => (
           <ServiceItem key={service.name} service={service} index={index} />
         ))}
       </Box>

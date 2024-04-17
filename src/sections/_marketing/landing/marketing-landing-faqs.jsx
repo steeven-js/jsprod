@@ -10,7 +10,7 @@ import AccordionSummary, { accordionSummaryClasses } from '@mui/material/Accordi
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { _faqs } from 'src/_mock';
+import { _faqs, _MarketingLandingFaqs } from 'src/assets/data';
 
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
@@ -40,10 +40,10 @@ export default function MarketingLandingFaqs() {
         <Grid xs={12} md={6} lg={6}>
           <Stack spacing={2} sx={{ mb: 5, textAlign: { xs: 'center', md: 'left' } }}>
             <Typography variant="overline" color="text.disabled">
-              FAQS
+              {_MarketingLandingFaqs[0].value}
             </Typography>
 
-            <Typography variant="h2">Frequently Asked Questions</Typography>
+            <Typography variant="h2">{_MarketingLandingFaqs[1].value}</Typography>
           </Stack>
 
           {_faqs.map((faq) => (

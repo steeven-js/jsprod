@@ -8,28 +8,10 @@ import Typography from '@mui/material/Typography';
 
 import { fShortenNumber } from 'src/utils/format-number';
 
+import { _ROWS, _MarketingLandingAbout } from 'src/assets/data';
+
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
-
-// ----------------------------------------------------------------------
-
-const ROWS = [
-  {
-    label: 'projects',
-    total: 20,
-    content: 'Praesent turpis. Praesent blandit laoreet nibh. Nunc nonummy metus.',
-  },
-  {
-    label: 'Happy clients',
-    total: 32000,
-    content: 'Praesent turpis. Praesent blandit laoreet nibh. Nunc nonummy metus.',
-  },
-  {
-    label: 'years of experience',
-    total: 20,
-    content: 'Praesent turpis. Praesent blandit laoreet nibh. Nunc nonummy metus.',
-  },
-];
 
 // ----------------------------------------------------------------------
 
@@ -64,18 +46,15 @@ export default function MarketingLandingAbout() {
           }}
         >
           <Typography component="div" variant="overline" sx={{ color: 'text.disabled' }}>
-            About us
+            {_MarketingLandingAbout[0].label}
           </Typography>
 
           <Typography variant="h2" sx={{ my: 3 }}>
-            Who We Are
+            {_MarketingLandingAbout[1].label}
           </Typography>
 
           <Typography sx={{ color: 'text.secondary' }}>
-            In hac habitasse platea dictumst. Aliquam lobortis. Lorem ipsum dolor sit amet,
-            consectetuer adipiscing elit. In dui magna, posuere eget, vestibulum et, tempor auctor,
-            justo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
-            turpis egestas.
+            {_MarketingLandingAbout[2].label}
           </Typography>
 
           <Button
@@ -84,13 +63,13 @@ export default function MarketingLandingAbout() {
             endIcon={<Iconify icon="carbon:chevron-right" />}
             sx={{ my: 5 }}
           >
-            Lean more
+            {_MarketingLandingAbout[3].label}
           </Button>
         </Grid>
 
         <Grid xs={12} md={6}>
           <Stack spacing={5}>
-            {ROWS.map((row) => (
+            {_ROWS.map((row) => (
               <Stack
                 key={row.label}
                 direction="row"

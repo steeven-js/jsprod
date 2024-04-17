@@ -10,6 +10,7 @@ import { alpha, useTheme } from '@mui/material/styles';
 import { useResponsive } from 'src/hooks/use-responsive';
 
 import { bgGradient } from 'src/theme/css';
+import {_MarketingLandingHero} from 'src/assets/data';
 
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
@@ -49,16 +50,15 @@ export default function MarketingLandingHero() {
             }}
           >
             <Typography variant="overline" sx={{ color: 'secondary.main' }}>
-              Digital Marketing
+              {_MarketingLandingHero[0].label}
             </Typography>
 
             <Typography variant="h1" sx={{ my: 3 }}>
-              Boosts Your Website Traffic
+              {_MarketingLandingHero[1].label}
             </Typography>
 
             <Typography sx={{ color: 'text.secondary' }}>
-              Etiam sollicitudin, ipsum eu pulvinar rutrum, tellus ipsum laoreet sapien, quis
-              venenatis ante odio sit amet eros.
+              {_MarketingLandingHero[2].label}
             </Typography>
 
             <Stack
@@ -69,14 +69,14 @@ export default function MarketingLandingHero() {
               sx={{ mt: 5 }}
             >
               <Button variant="contained" color="inherit" size="large">
-                Try For Free
+                {_MarketingLandingHero[3].label}
               </Button>
 
               <Stack direction="row" alignItems="center" sx={{ typography: 'h6' }}>
                 <Fab size="medium" sx={{ mr: 1 }}>
                   <Iconify width={24} icon="carbon:play" />
                 </Fab>
-                See Our Work
+                {_MarketingLandingHero[4].label}
               </Stack>
             </Stack>
           </Grid>

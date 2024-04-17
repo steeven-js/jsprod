@@ -7,8 +7,9 @@ import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 
-import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
+
+import { _SERVICES, _MarketingLandingServices } from 'src/assets/data';
 
 import Iconify from 'src/components/iconify';
 import SvgColor from 'src/components/svg-color';
@@ -17,33 +18,6 @@ import TextMaxLine from 'src/components/text-max-line';
 // ----------------------------------------------------------------------
 
 const COLORS = ['primary', 'secondary', 'success', 'warning'];
-
-const SERVICES = [
-  {
-    name: 'SEO',
-    icon: '/assets/icons/service/ic_service_seo.svg',
-    content: 'Nunc nonummy metus. Donec elit libero',
-    path: paths.marketing.services,
-  },
-  {
-    name: 'Email Marketing',
-    icon: '/assets/icons/service/ic_service_mail.svg',
-    content: 'Nunc nonummy metus. Donec elit libero',
-    path: paths.marketing.services,
-  },
-  {
-    name: 'Search Engine Oprimization',
-    icon: '/assets/icons/service/ic_service_analysis.svg',
-    content: 'Nunc nonummy metus. Donec elit libero',
-    path: paths.marketing.services,
-  },
-  {
-    name: 'Social Marketing',
-    icon: '/assets/icons/service/ic_service_bullhorn.svg',
-    content: 'Nunc nonummy metus. Donec elit libero',
-    path: paths.marketing.services,
-  },
-];
 
 // ----------------------------------------------------------------------
 
@@ -64,13 +38,13 @@ export default function MarketingLandingServices() {
         }}
       >
         <Typography variant="overline" sx={{ color: 'text.disabled' }}>
-          Our Services
+          {_MarketingLandingServices[0].label}
         </Typography>
 
-        <Typography variant="h2">We Provide</Typography>
+        <Typography variant="h2">{_MarketingLandingServices[1].label}</Typography>
 
         <Typography sx={{ color: 'text.secondary' }}>
-          Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.
+          {_MarketingLandingServices[2].label}
         </Typography>
       </Stack>
 
@@ -86,7 +60,7 @@ export default function MarketingLandingServices() {
           },
         }}
       >
-        {SERVICES.map((service, index) => (
+        {_SERVICES.map((service, index) => (
           <ServiceItem key={service.name} service={service} index={index} />
         ))}
       </Box>
