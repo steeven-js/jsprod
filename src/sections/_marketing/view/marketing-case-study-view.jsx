@@ -1,4 +1,8 @@
+import remarkGfm from 'remark-gfm'
 import PropTypes from 'prop-types';
+import Markdown from 'react-markdown'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
@@ -8,7 +12,6 @@ import { paths } from 'src/routes/paths';
 import useFetchStudies from 'src/hooks/use-fetchStudies';
 
 import Image from 'src/components/image';
-import Markdown from 'src/components/markdown';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
 import MarketingCaseStudyListSimilar from '../list/marketing-case-study-list-similar';
@@ -27,7 +30,7 @@ export default function MarketingCaseStudyView({ study }) {
   const galleryImgs = study.media && study.media.length > 0 ? study.media.filter(media => media.collection_name === 'study-gallery') : [];
   const galleryImages = galleryImgs.map(media => media.original_url);
 
-  const {studies} = useFetchStudies();
+  const { studies } = useFetchStudies();
 
   return (
     <>
@@ -57,8 +60,34 @@ export default function MarketingCaseStudyView({ study }) {
           </Grid>
 
           <Grid xs={12} md={8}>
-            <Markdown content={study.content} />
+
+            <Markdown
+              children={study.content}
+              remarkPlugins={[remarkGfm]}
+              components={{
+                code(props) {
+                  // eslint-disable-next-line react/prop-types, no-unused-vars
+                  const { children, className, node, ...rest } = props
+                  const match = /language-(\w+)/.exec(className || '')
+                  return match ? (
+                    <SyntaxHighlighter
+                      {...rest}
+                      PreTag="div"
+                      children={String(children).replace(/\n$/, '')}
+                      language={match[1]}
+                      style={dracula}
+                    />
+                  ) : (
+                    <code {...rest} className={className}>
+                      {children}
+                    </code>
+                  )
+                }
+              }}
+            />
+
             <MarketingCaseStudyDetailsGallery images={galleryImages} />
+
           </Grid>
         </Grid>
       </Container>
@@ -67,7 +96,7 @@ export default function MarketingCaseStudyView({ study }) {
 
       {studies.length > 3 ? <MarketingCaseStudyListSimilar studies={studies.slice(0, 3)} /> : null}
 
-{/*
+      {/*
       <MarketingLandingFreeSEO />
 
       <MarketingNewsletter /> */}
