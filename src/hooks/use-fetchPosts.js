@@ -1,7 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useState, useEffect, useCallback } from "react";
 
-import { _Fetch } from "src/assets/data/fetch";
 import { _setPosts } from "src/redux/reducer/posts";
 
 const useFetchPosts = () => {
@@ -12,13 +11,15 @@ const useFetchPosts = () => {
   const [postsError, setPostsError] = useState(null);
   const [postCoverUrls, setPostCoverUrls] = useState([]);
 
+  const jsProdApi = import.meta.env.VITE_REACT_APP_JSPROD_API;
+
   const dispatch = useDispatch();
 
   const fetchData = useCallback(async () => {
     setIsPostsLoading(true);
 
     try {
-      const endpoint = `${_Fetch[0].label}/posts?page=${currentPage}`;
+      const endpoint = `${jsProdApi}/posts?page=${currentPage}`;
 
       const response = await fetch(endpoint);
       if (!response.ok) {
@@ -54,7 +55,7 @@ const useFetchPosts = () => {
     } finally {
       setIsPostsLoading(false);
     }
-  }, [dispatch, currentPage]);
+  }, [jsProdApi, currentPage, dispatch]);
 
   useEffect(() => {
     fetchData();

@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
 
-import { _Fetch } from "src/assets/data/fetch";
 
 const useFetchStudies = () => {
   const [studies, setStudies] = useState([]);
@@ -9,11 +8,13 @@ const useFetchStudies = () => {
   const [studiesError, setStudiesError] = useState(null);
   const [studyCoverUrls, setStudyCoverUrls] = useState([]);
 
+  const jsProdApi = import.meta.env.VITE_REACT_APP_JSPROD_API;
+
   const fetchData = useCallback(async () => {
     setIsStudiesLoading(true);
 
     try {
-      const endpoint = `${_Fetch[0].label}/studies`;
+      const endpoint = `${jsProdApi}/studies`;
       const response = await fetch(endpoint);
       if (!response.ok) {
         throw new Error('La réponse du réseau n\'était pas valide');
@@ -43,7 +44,7 @@ const useFetchStudies = () => {
     } finally {
       setIsStudiesLoading(false);
     }
-  }, []);
+  }, [jsProdApi]);
 
   useEffect(() => {
     fetchData();
