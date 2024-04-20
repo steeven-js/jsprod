@@ -3,13 +3,15 @@ import { Helmet } from 'react-helmet-async';
 
 import useFetchStudy from 'src/hooks/use-fetchStudy';
 
+import { SplashScreen } from 'src/components/loading-screen';
+
 import MarketingCaseStudyView from 'src/sections/_marketing/view/marketing-case-study-view';
 
 // ----------------------------------------------------------------------
 
 export default function MarketingCaseStudyPage() {
   const { id } = useParams();
-  const { study } = useFetchStudy(id);
+  const { study, isStudyLoading } = useFetchStudy(id);
 
   return (
     <>
@@ -17,7 +19,7 @@ export default function MarketingCaseStudyPage() {
         <title> Marketing: {study.title ?? 'Case Study'}</title>
       </Helmet>
 
-      <MarketingCaseStudyView study={study} />
+      {isStudyLoading ? <SplashScreen/> : <MarketingCaseStudyView study={study} /> }
     </>
   );
 }
