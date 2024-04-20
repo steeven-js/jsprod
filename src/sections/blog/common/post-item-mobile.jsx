@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 
+import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { fDate } from 'src/utils/format-time';
@@ -41,7 +42,7 @@ export default function PostItemMobile({ post, onSiderbar }) {
           component={RouterLink}
           color="inherit"
           key={post.id}
-          to={`/marketing/post/${post.id}`}
+          to={`${paths.marketing.post}/${post.id}`}
         >
           <TextMaxLine variant={onSiderbar ? 'subtitle2' : 'h6'}>{post.title}</TextMaxLine>
         </Link>

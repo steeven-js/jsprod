@@ -4,6 +4,7 @@ import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
+import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import Image from 'src/components/image';
@@ -31,7 +32,7 @@ export default function MarketingCaseStudyItem({ project }) {
           {project.category.name}
         </Typography>
 
-        <Link component={RouterLink} to={`/marketing/case-study/${project.id}`} color="inherit">
+        <Link component={RouterLink} to={`${paths.marketing.caseStudy}/${project.id}`} color="inherit">
           <TextMaxLine variant="h5" line={1}>
             {project.title}
           </TextMaxLine>

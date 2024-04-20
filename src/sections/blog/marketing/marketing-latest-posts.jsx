@@ -7,6 +7,7 @@ import Container from '@mui/material/Container';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
+import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { useResponsive } from 'src/hooks/use-responsive';
@@ -42,7 +43,7 @@ export default function MarketingLatestPosts({ posts }) {
   const viewAllBtn = (
     <Button
       component={RouterLink}
-      to="/marketing/posts"
+      to={paths.marketing.posts}
       color="inherit"
       endIcon={<Iconify icon="carbon:chevron-right" />}
     >

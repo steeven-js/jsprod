@@ -6,6 +6,7 @@ import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import { alpha, useTheme } from '@mui/material/styles';
 
+import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { fDate } from 'src/utils/format-time';
@@ -59,7 +60,7 @@ export default function MarketingPostItem({ post }) {
             sx={{ color: 'inherit', opacity: 0.72 }}
           />
 
-          <Link component={RouterLink} to={`/marketing/post/${post.id}`} sx={{ color: 'common.white' }}>
+          <Link component={RouterLink} to={`${paths.marketing.post}/${post.id}`} sx={{ color: 'common.white' }}>
             <TextMaxLine variant="h4">{post.title}</TextMaxLine>
           </Link>
         </Stack>

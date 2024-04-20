@@ -36,8 +36,8 @@ export const marketingRoutes = [
         ),
         children: [
           { path: 'services', element: <ServicesPage /> },
-          { path: 'case-studies', element: <CaseStudiesPage /> },
-          { path: 'case-study/:id', element: <CaseStudyPage /> },
+          { path: 'projets', element: <CaseStudiesPage /> },
+          { path: 'projet/:id', element: <CaseStudyPage /> },
           { path: 'posts', element: <BlogPage /> },
           { path: 'post/:id', element: <PostPage /> },
           { path: 'about', element: <AboutPage /> },

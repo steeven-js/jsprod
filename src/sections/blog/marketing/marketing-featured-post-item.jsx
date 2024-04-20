@@ -4,6 +4,7 @@ import Link from '@mui/material/Link';
 import { Avatar } from '@mui/material';
 import Stack from '@mui/material/Stack';
 
+import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { fDate } from 'src/utils/format-time';
@@ -43,7 +44,7 @@ export default function MarketingFeaturedPostItem({ post }) {
           <Link
             component={RouterLink}
             key={post.id}
-            to={`/marketing/post/${post.id}`}
+            to={`${paths.marketing.post}/${post.id}`}
             color="inherit"
             variant="h3"
           >

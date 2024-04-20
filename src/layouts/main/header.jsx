@@ -87,9 +87,9 @@ export default function Header({ headerOnDark }) {
                 path: '/marketing/about'
               },
               {
-                title: 'Case Studies',
+                title: 'Projets',
                 icon: <Iconify icon="solar:file-bold-duotone" />,
-                path: '/marketing/case-studies',
+                path: '/marketing/projets',
               },
               {
                 title: 'Posts',
@@ -151,7 +151,7 @@ export default function Header({ headerOnDark }) {
             {
               title: 'Case Studies',
               icon: <Iconify icon="solar:file-bold-duotone" />,
-              path: '/marketing/case-studies',
+              path: '/marketing/projets',
             },
             {
               title: 'Posts',

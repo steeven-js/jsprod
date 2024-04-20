@@ -6,6 +6,7 @@ import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import { alpha, useTheme } from '@mui/material/styles';
 
+import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
 import { fDate } from 'src/utils/format-time';
@@ -61,7 +62,7 @@ export default function MarketingLatestPostItem({ post }) {
 
           <Link
             component={RouterLink}
-            to={`/marketing/post/${post.id}`}
+            to={`${paths.marketing.post}/${post.id}`}
             variant="h4"
             color="inherit"
             underline="none"

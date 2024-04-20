@@ -5,8 +5,8 @@ export const paths = {
   marketing: {
     root: '/marketing',
     services: '/marketing/services',
-    caseStudies: '/marketing/case-studies',
-    caseStudy: `/marketing/case-study`,
+    caseStudies: '/marketing/projets',
+    caseStudy: `/marketing/projet`,
     posts: '/marketing/posts',
     post: `/marketing/post`,
     about: '/marketing/about',
