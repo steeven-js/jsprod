@@ -1,7 +1,7 @@
+import axios from "axios";
 import { useState, useEffect, useCallback } from "react";
 
 import { apiUrl } from "src/assets/data/fetch";
-
 
 const useFetchStudies = () => {
   const [studies, setStudies] = useState([]);
@@ -15,24 +15,21 @@ const useFetchStudies = () => {
 
     try {
       const endpoint = `${apiUrl}/studies`;
-      const response = await fetch(endpoint);
-      if (!response.ok) {
-        throw new Error('La réponse du réseau n\'était pas valide');
-      }
-      const result = await response.json();
+      const response = await axios.get(endpoint);
+      const result = response.data;
 
       setStudies(result.studies);
       setCategories(result.categories);
 
-      // Récupérer les URLs des images des posts
+      // Retrieve study cover image URLs
       const coverUrlsPromises = result.studies.map(study =>
         study.media && study.media.length > 0 ? study.media[0].original_url : '/assets/images/marketing/marketing_6.jpg'
       );
 
-      // Attendre à la fois la réponse du fetch et les URLs des images des posts
+      // Wait for both fetch response and study cover image URLs
       const _studyCoverUrls = await Promise.all(coverUrlsPromises);
 
-      // Définir les URLs des images des posts
+      // Set study cover image URLs
       setStudyCoverUrls(_studyCoverUrls);
 
       // Tags

@@ -1,7 +1,7 @@
+import axios from "axios";
 import { useState, useEffect, useCallback } from "react";
 
 import { apiUrl } from "src/assets/data/fetch";
-
 
 const useFetchStudy = (id) => {
   const [study, setStudy] = useState({});
@@ -14,20 +14,17 @@ const useFetchStudy = (id) => {
 
     try {
       const endpoint = `${apiUrl}/studies/${id}`;
-      const response = await fetch(endpoint);
-      if (!response.ok) {
-        throw new Error('La réponse du réseau n\'était pas valide');
-      }
-      const result = await response.json();
+      const response = await axios.get(endpoint);
+      const result = response.data;
 
       setStudy(result);
 
-      // Récupérer les URLs des images des posts
+      // Retrieve study cover image URL
       const _studyCoverUrls = result.media && result.media.length > 0
         ? result.media[0].original_url
-        : '/assets/images/marketing/marketing_6.jpg'; // Utilisation de la variable 'result' plutôt que 'study'
+        : '/assets/images/marketing/marketing_6.jpg';
 
-      // Définir les URLs des images des posts
+      // Set study cover image URL
       setStudyCoverUrls(_studyCoverUrls);
 
       // Tags
@@ -39,11 +36,11 @@ const useFetchStudy = (id) => {
     } finally {
       setIsStudyLoading(false);
     }
-  }, [id]); // Correction de la dépendance
+  }, [id]);
 
   useEffect(() => {
     fetchData();
-  }, [fetchData, id]); // Utilisation de 'id' comme dépendance supplémentaire
+  }, [fetchData, id]);
 
   return {
     study,

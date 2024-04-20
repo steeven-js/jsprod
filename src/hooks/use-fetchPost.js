@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, useEffect, useCallback } from "react";
 
 import { fDate } from "src/utils/format-time";
@@ -20,8 +21,8 @@ const useFetchPost = (id) => {
 
     try {
       const endpoint = `${apiUrl}/posts/${id}`;
-      const response = await fetch(endpoint);
-      const result = await response.json();
+      const response = await axios.get(endpoint);
+      const result = response.data;
       setPost(result);
 
       // Author name
@@ -32,10 +33,10 @@ const useFetchPost = (id) => {
         ? result.author.media[0].original_url
         : '/assets/images/avatar/avatar_1.jpg';
 
-      // Attendre à la fois la réponse du fetch et l'URL de l'avatar de l'auteur
+      // Wait for both fetch response and author's avatar URL
       const [avatarUrl] = await Promise.all([avatarUrlPromise]);
 
-      // Définir l'URL de l'avatar de l'auteur
+      // Set author's avatar URL
       setAuthorAvatar(avatarUrl);
 
       // Author role
@@ -64,7 +65,8 @@ const useFetchPost = (id) => {
     fetchData();
   }, [fetchData]);
 
-  return { post,
+  return {
+    post,
     authorName,
     authorAvatar,
     authorBio,

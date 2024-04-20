@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useState, useEffect, useCallback } from "react";
 
@@ -20,29 +21,26 @@ const useFetchPosts = () => {
     try {
       const endpoint = `${apiUrl}/posts?page=${currentPage}`;
 
-      const response = await fetch(endpoint);
-      if (!response.ok) {
-        throw new Error('La réponse du réseau n\'était pas valide');
-      }
-      const result = await response.json();
+      const response = await axios.get(endpoint);
+      const result = response.data;
 
       setPosts(result.data);
 
-      // Récupérer les URLs des images des posts
+      // Retrieve post cover image URLs
       const coverUrlsPromises = result.data.map(post =>
         post.media && post.media.length > 0 ? post.media[0].original_url : '/assets/images/marketing/marketing_1.jpg'
       );
 
-      // Attendre à la fois la réponse du fetch et les URLs des images des posts
+      // Wait for both fetch response and post cover image URLs
       const _postCoverUrls = await Promise.all(coverUrlsPromises);
 
-      // Définir les URLs des images des posts
+      // Set post cover image URLs
       setPostCoverUrls(_postCoverUrls);
 
-      // Mettre à jour le nombre total de pages
+      // Update total number of pages
       setTotalPages(result.last_page);
 
-      // Mettre à jour le state global
+      // Update global state
       dispatch(_setPosts(result.data));
 
       // Tags
