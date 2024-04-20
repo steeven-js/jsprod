@@ -57,7 +57,7 @@ export default function Footer() {
       <Logo single />
 
       <Typography variant="caption" component="div" sx={{ color: 'text.secondary' }}>
-        © 2023. All rights reserved
+        © 2024. All rights reserved
       </Typography>
     </Container>
   );
@@ -169,7 +169,7 @@ export default function Footer() {
           sx={{ py: 3, textAlign: 'center' }}
         >
           <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-            © 2023. All rights reserved
+            © 2024. All rights reserved
           </Typography>
 
           <Stack direction="row" spacing={3} justifyContent="center">

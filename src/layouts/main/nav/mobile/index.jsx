@@ -15,8 +15,8 @@ import { useBoolean } from 'src/hooks/use-boolean';
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
-import { NavBasicMobile } from 'src/components/nav-basic';
 
+import NavList from './nav-list';
 import { NAV } from '../../../config-layout';
 
 // ----------------------------------------------------------------------
@@ -53,7 +53,9 @@ export default function NavMobile({ data }) {
           <Logo sx={{ mx: 2.5, my: 3 }} />
 
           <List component="nav" disablePadding>
-            <NavBasicMobile data={data} />
+            {data.map((list) => (
+              <NavList key={list.title} data={list} />
+            ))}
           </List>
 
           <Stack spacing={1.5} sx={{ p: 3 }}>

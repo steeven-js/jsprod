@@ -1,58 +1,58 @@
 export const _MarketingServices = [
-  { value: 'Offline SEO', label: 'Offline SEO' },
+  { value: 'Conception d\'Applications Mobiles', label: 'Conception d\'Applications Mobiles' },
   {
-    value: 'Aenean commodo ligula eget dolor. Sed hendrerit. Vestibulum ante ipsum primis infaucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.',
-    label: 'Aenean commodo ligula eget dolor. Sed hendrerit. Vestibulum ante ipsum primis infaucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia.'
+    value: 'Conception Graphique',
+    label: 'Conception Graphique'
   },
-  { value: 'Check Our Work', label: 'Check Our Work' },
+  { value: 'Découvrez nos Réalisations', label: 'Découvrez nos Réalisations' },
 ];
 
 export const _LISTS = [
-  'First Class Flights',
-  '5 Star Accommodations',
-  'Inclusive Packages',
-  'Latest Model Vehicles',
+  'Expérience Utilisateur Intuitive',
+  'Interfaces Modernes et Esthétiques',
+  'Fonctionnalités Innovantes',
+  'Compatibilité Multi-plateforme',
 ];
 
 // ----------------------------------------------------------------------
 
 export const _MarketingServicesInclude = [
-  { value: 'Services Include', label: 'Services Include' },
+  { value: 'Services Inclus', label: 'Services Inclus' },
   {
-    value: 'Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.',
-    label: 'Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.'
+    value: 'Analyse Approfondie des Besoins',
+    label: 'Analyse Approfondie des Besoins'
   },
 ];
 
 export const _SERVICES = [
   {
-    title: 'Search Engine Optimization',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
+    title: 'Conception d\'Applications Mobiles',
+    description: 'Conception et développement d\'applications sur mesure pour les plateformes iOS et Android.',
     icon: '/assets/icons/ic_statistics.svg',
   },
   {
-    title: 'Social Media Strategy',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
+    title: 'Conception de Sites Web',
+    description: 'Création de sites web modernes et réactifs pour offrir une expérience utilisateur optimale.',
     icon: '/assets/icons/ic_social_media.svg',
   },
   {
-    title: 'Real Time and Data',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
+    title: 'UI/UX Design',
+    description: 'Conception d\'interfaces utilisateur attrayantes et intuitives pour une expérience utilisateur exceptionnelle.',
     icon: '/assets/icons/ic_real_time.svg',
   },
   {
-    title: 'Online Media Management',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
+    title: 'Développement Backend',
+    description: 'Développement robuste et évolutif des fonctionnalités backend pour assurer des performances optimales.',
     icon: '/assets/icons/ic_checklist.svg',
   },
   {
-    title: 'Reporting & Analysis',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
+    title: 'Intégration de Services Cloud',
+    description: 'Intégration de services cloud pour le stockage, le traitement et l\'analyse des données.',
     icon: '/assets/icons/ic_report.svg',
   },
   {
-    title: 'Penalty Recovery',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
+    title: 'Sécurité des Données',
+    description: 'Mise en place de mesures de sécurité avancées pour protéger les données sensibles des utilisateurs.',
     icon: '/assets/icons/ic_file.svg',
   },
 ];
@@ -60,79 +60,79 @@ export const _SERVICES = [
 // ----------------------------------------------------------------------
 
 export const _MarketingServicesBenefits = [
-  { value: 'Benefits Achieved', label: 'Benefits Achieved' },
+  { value: 'Avantages Obtenus', label: 'Avantages Obtenus' },
   {
-    value: 'Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.',
-    label: 'Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.'
+    value: 'Augmentation de l\'Engagement Utilisateur',
+    label: 'Augmentation de l\'Engagement Utilisateur'
   },
 ];
 
 export const _BENEFITS = [
   {
-    title: 'Online Media',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
+    title: 'Amélioration de l\'Expérience Utilisateur',
+    description: 'Offre une interface intuitive et conviviale pour une expérience utilisateur optimale.',
     iconColor: 'primary',
   },
   {
-    title: 'Design',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
+    title: 'Expansion du Marché Cible',
+    description: 'Atteint de nouveaux segments de marché grâce à une présence mobile et web efficace.',
     iconColor: 'success',
   },
   {
-    title: 'Marketing',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
-    iconColor: 'secondary',
+    title: 'Augmentation des Ventes',
+    description: 'Stimule les ventes grâce à des fonctionnalités de commerce électronique intégrées et conviviales.',
+    iconColor: 'info',
   },
   {
-    title: 'HR & Recruiting',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
-    iconColor: 'secondary',
+    title: 'Optimisation des Processus Internes',
+    description: 'Améliore l\'efficacité opérationnelle en automatisant les processus métier et administratifs.',
+    iconColor: 'warning',
   },
   {
-    title: 'Management',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
-    iconColor: 'success',
-  },
-  {
-    title: 'Branding',
-    description: 'Suspendisse enim turpis, dictum sed, iaculis a, condimentum nec, nisi. ',
+    title: 'Fidélisation de la Clientèle',
+    description: 'Renforce la relation client en offrant des services personnalisés et une communication efficace.',
     iconColor: 'primary',
+  },
+  {
+    title: 'Analyse des Données Avancée',
+    description: 'Utilise des outils d\'analyse avancée pour prendre des décisions éclairées et optimiser les performances.',
+    iconColor: 'success',
   },
 ];
 
 // ----------------------------------------------------------------------
 
 export const _MarketingServicesHowItWork = [
-  { value: 'How It Works', label: 'How It Works' },
+  { value: 'Comment Ça Marche', label: 'Comment Ça Marche' },
   {
-    value: 'Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.',
-    label: 'Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.'
+    value: 'Découvrez comment nous concevons vos applications avec succès.',
+    label: 'Découvrez comment nous concevons vos applications avec succès.'
   },
 ];
 
 export const _TIMELINES = [
   {
-    step: 'STEP 1',
-    title: 'Planning',
+    step: 'ÉTAPE 1',
+    title: 'Planification',
     description:
-      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
+      'Nous commençons par une planification détaillée pour comprendre vos besoins et objectifs.',
   },
   {
-    step: 'STEP 2',
-    title: 'Research',
+    step: 'ÉTAPE 2',
+    title: 'Recherche',
     description:
-      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
+      'Nous effectuons une recherche approfondie pour identifier les tendances et les meilleures pratiques du marché.',
   },
   {
-    step: 'STEP 3',
-    title: 'Optimizing',
+    step: 'ÉTAPE 3',
+    title: 'Optimisation',
     description:
-      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
+      'Nous optimisons le processus de conception en mettant l\'accent sur l\'expérience utilisateur et les performances.',
   },
   {
-    step: 'STEP 4',
-    title: 'Results',
+    step: 'ÉTAPE 4',
+    title: 'Résultats',
     description:
-      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
+      'Nous vous présentons les résultats finaux et nous assurons que vos attentes sont pleinement satisfaites.',
   },
 ];
