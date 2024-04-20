@@ -5,6 +5,8 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
+import { _MarketingAboutOurClients } from 'src/assets/data';
+
 import Image from 'src/components/image';
 
 // ----------------------------------------------------------------------
@@ -14,10 +16,11 @@ export default function MarketingAboutOurClients({ brands }) {
     <Container
       sx={{
         pb: { xs: 7, md: 11 },
+        mt: { xs: 10, md: 15 },
       }}
     >
       <Stack alignItems="center" spacing={5}>
-        <Typography variant="h2">Our Clients</Typography>
+        <Typography variant="h2">{_MarketingAboutOurClients[0].label}</Typography>
 
         <Stack
           direction="row"

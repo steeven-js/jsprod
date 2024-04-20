@@ -1,54 +1,53 @@
 export const _MarketingAbout = [
-  { value: 'Who We Are?', label: 'Who We Are?' },
+  { value: 'Qui Nous Sommes ?', label: 'Qui Nous Sommes ?' },
   {
-    value: 'Vivamus consectetuer hendrerit lacus. Curabitur a felis in nunc fringilla tristique. Nulla neque dolor, sagittis eget, iaculis quis, molestie non, velit.',
-    label: 'Vivamus consectetuer hendrerit lacus. Curabitur a felis in nunc fringilla tristique. Nulla neque dolor, sagittis eget, iaculis quis, molestie non, velit.',
+    value: 'Découvrez qui nous sommes et comment nous pouvons aider votre entreprise à réussir avec des applications innovantes.',
+    label: 'Découvrez qui nous sommes et comment nous pouvons aider votre entreprise à réussir avec des applications innovantes.'
   },
   {
-    value: 'Nam pretium turpis et arcu. Praesent porttitor, nulla vitae posuere iaculis, arcu nisl dignissim dolor, a pretium mi sem ut ipsum. Praesent venenatis metus at tortor pulvinar varius.',
-    label: 'Nam pretium turpis et arcu. Praesent porttitor, nulla vitae posuere iaculis, arcu nisl dignissim dolor, a pretium mi sem ut ipsum. Praesent venenatis metus at tortor pulvinar varius.',
+    value: 'Découvrez qui nous sommes et comment nous pouvons aider votre entreprise à réussir avec des applications innovantes.',
+    label: 'Découvrez qui nous sommes et comment nous pouvons aider votre entreprise à réussir avec des applications innovantes.'
   },
-  { value: 'Check Our Work', label: 'Check Our Work' },
+  { value: 'Voir Nos Réalisations', label: 'Voir Nos Réalisations' },
 ];
 
 export const _SUMMARY = [
-  { title: 'Years of experience', total: 12, icon: 'carbon:increase-level' },
-  { title: 'Awards', total: 20, icon: 'carbon:trophy' },
-  { title: 'Projects', total: 150, icon: 'carbon:data-vis-4' },
-  { title: 'Happy clients', total: 32000, icon: 'carbon:user-certification' },
+  { title: 'Années d\'expérience', total: 12, icon: 'carbon:increase-level' },
+  { title: 'Récompenses', total: 20, icon: 'carbon:trophy' },
+  { title: 'Projets Réalisés', total: 150, icon: 'carbon:data-vis-4' },
+  { title: 'Clients Satisfaits', total: 32000, icon: 'carbon:user-certification' },
 ];
-
 // ----------------------------------------------------------------------
 
 export const _MarketingAboutOurVision = [
-  { value: 'Our Core Values', label: 'Our Core Values' },
+  { value: 'Nos Valeurs Fondamentales', label: 'Nos Valeurs Fondamentales' },
 ];
 
 // ----------------------------------------------------------------------
 
 export const _MarketingAboutCoreValues = [
-  { value: 'Our Core Values', label: 'Our Core Values' },
+  { value: 'Nos Valeurs Fondamentales', label: 'Nos Valeurs Fondamentales' },
 ];
 
 export const _CORE_VALUES = [
   {
-    title: 'Customer Satisfaction',
-    description: 'Aenean urna dictum adipiscing nec, cras quisque.',
+    title: 'Satisfaction Client',
+    description: 'Nous plaçons la satisfaction de nos clients au cœur de tout ce que nous faisons.',
     icon: '/assets/icons/ic_agreement.svg',
   },
   {
-    title: 'Transparency',
-    description: 'Aenean urna dictum adipiscing nec, cras quisque.',
+    title: 'Transparence',
+    description: 'Nous croyons en une communication ouverte et transparente avec nos clients.',
     icon: '/assets/icons/ic_transparency.svg',
   },
   {
-    title: 'Reputation',
-    description: 'Aenean urna dictum adipiscing nec, cras quisque.',
+    title: 'Réputation',
+    description: 'Nous construisons et protégeons une réputation d\'excellence et de fiabilité.',
     icon: '/assets/icons/ic_reputation.svg',
   },
   {
-    title: 'Cooperation',
-    description: 'Aenean urna dictum adipiscing nec, cras quisque.',
+    title: 'Collaboration',
+    description: 'Nous travaillons en étroite collaboration avec nos clients pour réaliser leurs visions.',
     icon: '/assets/icons/ic_popularity.svg',
   },
 ];
@@ -56,36 +55,46 @@ export const _CORE_VALUES = [
 // ----------------------------------------------------------------------
 
 export const _MarketingAboutStory = [
-  { value: 'Our Story', label: 'Our Story' },
+  { value: 'Notre Histoire', label: 'Notre Histoire' },
   {
-    value: 'Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.',
-    label: 'Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.'
+    value: 'Découvrez notre parcours et comment nous sommes devenus leaders dans la conception d\'applications innovantes.',
+    label: 'Découvrez notre parcours et comment nous sommes devenus leaders dans la conception d\'applications innovantes.'
   },
 ];
 
 export const _TIMELINESABOUT = [
   {
     year: '2021',
-    title: 'Customer Satisfaction',
+    title: 'Satisfaction Client',
     description:
-      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
+      'Nous avons continué à surpasser les attentes de nos clients en offrant des solutions innovantes et fiables.',
   },
   {
     year: '2020',
-    title: 'Transparency',
+    title: 'Transparence',
     description:
-      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
+      'Nous avons renforcé notre engagement envers la transparence et la communication ouverte avec nos clients.',
   },
   {
     year: '2019',
-    title: 'Reputation',
+    title: 'Réputation',
     description:
-      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
+      'Nous avons consolidé notre réputation en tant que partenaire de confiance pour la conception d\'applications.',
   },
   {
     year: '2018',
-    title: 'Cooperation',
+    title: 'Collaboration',
     description:
-      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
+      'Nous avons renforcé nos relations avec nos clients grâce à une collaboration étroite et un engagement mutuel.',
+  },
+];
+
+// ----------------------------------------------------------------------
+
+export const _MarketingAboutOurClients = [
+  { value: 'Nos Clients', label: 'Nos Clients' },
+  {
+    value: 'Découvrez les marques qui nous font confiance pour la conception de leurs applications et services numériques.',
+    label: 'Découvrez les marques qui nous font confiance pour la conception de leurs applications et services numériques.'
   },
 ];

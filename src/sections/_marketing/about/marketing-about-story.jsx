@@ -11,7 +11,7 @@ import TimelineSeparator from '@mui/lab/TimelineSeparator';
 
 import { useResponsive } from 'src/hooks/use-responsive';
 
-import { _TIMELINESABOUT } from 'src/assets/data';
+import { _TIMELINESABOUT, _MarketingAboutStory } from 'src/assets/data';
 
 // ----------------------------------------------------------------------
 
@@ -39,10 +39,10 @@ export default function MarketingAboutStory() {
             mb: { xs: 8, md: 10 },
           }}
         >
-          <Typography variant="h2">Our Story</Typography>
+          <Typography variant="h2">{_MarketingAboutStory[0].label}</Typography>
 
           <Typography sx={{ color: 'text.secondary' }}>
-            Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.
+            {_MarketingAboutStory[1].label}
           </Typography>
         </Stack>
 
