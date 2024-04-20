@@ -27,10 +27,11 @@ import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
+import BlogMarketingLatestPosts from 'src/sections/blog/marketing/marketing-latest-posts';
+
 import PostTags from '../../blog/common/post-tags';
 import PostAuthor from '../../blog/common/post-author';
 import PostSocialsShare from '../../blog/common/post-socials-share';
-import BlogMarketingLatestPosts from '../../blog/marketing/marketing-latest-posts';
 
 // ----------------------------------------------------------------------
 

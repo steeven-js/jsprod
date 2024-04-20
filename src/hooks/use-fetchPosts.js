@@ -11,7 +11,6 @@ const useFetchPosts = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [isPostsLoading, setIsPostsLoading] = useState(false);
   const [postsError, setPostsError] = useState(null);
-  const [postCoverUrls, setPostCoverUrls] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -25,17 +24,6 @@ const useFetchPosts = () => {
       const result = response.data;
 
       setPosts(result.data);
-
-      // Retrieve post cover image URLs
-      const coverUrlsPromises = result.data.map(post =>
-        post.media && post.media.length > 0 ? post.media[0].original_url : '/assets/images/marketing/marketing_1.jpg'
-      );
-
-      // Wait for both fetch response and post cover image URLs
-      const _postCoverUrls = await Promise.all(coverUrlsPromises);
-
-      // Set post cover image URLs
-      setPostCoverUrls(_postCoverUrls);
 
       // Update total number of pages
       setTotalPages(result.last_page);
@@ -65,7 +53,6 @@ const useFetchPosts = () => {
     currentPage,
     totalPages,
     setCurrentPage,
-    postCoverUrls
   };
 }
 

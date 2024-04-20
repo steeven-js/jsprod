@@ -17,7 +17,7 @@ import PostTimeBlock from '../common/post-time-block';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingLatestPostItem({ post, postCoverUrls }) {
+export default function MarketingLatestPostItem({ post }) {
   const theme = useTheme();
 
   return (
@@ -34,7 +34,7 @@ export default function MarketingLatestPostItem({ post, postCoverUrls }) {
       <m.div variants={varHover(1.25)} transition={varTranHover()}>
         <Image
           src={
-            postCoverUrls[post.id] ? postCoverUrls[post.id] : '/assets/images/marketing/marketing_1.jpg'
+            post.media > 0 ? post.media[0].original_url : '/assets/images/marketing/marketing_1.jpg'
           }
           alt={post.title}
           ratio="3/4"
@@ -73,7 +73,7 @@ export default function MarketingLatestPostItem({ post, postCoverUrls }) {
         </Stack>
 
         <Stack direction="row" alignItems="center" sx={{ typography: 'body2' }}>
-          <Avatar src={post.author.avatarUrl} sx={{ mr: 1 }} />
+          <Avatar src={post.author.media[0].original_url} sx={{ mr: 1 }} />
           {post.author.name}
         </Stack>
       </Stack>
@@ -87,10 +87,18 @@ MarketingLatestPostItem.propTypes = {
     title: PropTypes.string,
     duration: PropTypes.number,
     created_at: PropTypes.string,
+    media: PropTypes.arrayOf(
+      PropTypes.shape({
+        original_url: PropTypes.string,
+      })
+    ).isRequired,
     author: PropTypes.shape({
-      avatarUrl: PropTypes.string,
+      media: PropTypes.arrayOf(
+        PropTypes.shape({
+          original_url: PropTypes.string,
+        })
+      ),
       name: PropTypes.string,
-    }),
+    }).isRequired,
   }),
-  postCoverUrls: PropTypes.array,
 };
