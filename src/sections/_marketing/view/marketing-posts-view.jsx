@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 
-import { _mock, _categories } from 'src/_mock';
+import useFetchStudies from 'src/hooks/use-fetchStudies';
+
+import { _mock } from 'src/_mock';
 
 import PostSidebar from '../../blog/common/post-sidebar';
 import PostSearchMobile from '../../blog/common/post-search-mobile';
@@ -14,6 +16,7 @@ import BlogMarketingFeaturedPosts from '../../blog/marketing/marketing-featured-
 
 export default function MarketingPostsView({ posts, tags }) {
 
+  const {categories} =useFetchStudies();
 
   return (
     <>
@@ -34,7 +37,7 @@ export default function MarketingPostsView({ posts, tags }) {
           <Grid xs={12} md={4}>
             <PostSidebar
               popularTags={tags}
-              categories={_categories}
+              categories={categories}
               recentPosts={{ list: posts.slice(0, 5) }}
               advertisement={{
                 title: 'Advertisement',

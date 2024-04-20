@@ -9,7 +9,6 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
 import { useResponsive } from 'src/hooks/use-responsive';
-import useFetchStudies from 'src/hooks/use-fetchStudies';
 
 import { _socials } from 'src/_mock';
 
@@ -24,13 +23,12 @@ export default function PostSidebar({
   author,
   popularTags,
   recentPosts,
+  categories,
   advertisement,
   sx,
   ...other
 }) {
   const mdUp = useResponsive('up', 'md');
-
-  const {categories}=useFetchStudies();
 
   const renderAuthor = author && (
     <Stack spacing={2} direction="row" sx={{ mb: { md: 5 } }}>
