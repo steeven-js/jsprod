@@ -18,7 +18,7 @@ import MarketingLatestPostItem from './marketing-latest-post-item';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingLatestPosts({ posts, postCoverUrls}) {
+export default function MarketingLatestPosts({ posts }) {
   const theme = useTheme();
 
   const mdUp = useResponsive('up', 'md');
@@ -42,7 +42,7 @@ export default function MarketingLatestPosts({ posts, postCoverUrls}) {
   const viewAllBtn = (
     <Button
       component={RouterLink}
-      to={`/marketing/post/${posts.id}`}
+      to="/marketing/posts"
       color="inherit"
       endIcon={<Iconify icon="carbon:chevron-right" />}
     >
@@ -82,7 +82,7 @@ export default function MarketingLatestPosts({ posts, postCoverUrls}) {
                   py: { xs: 8, md: 10 },
                 }}
               >
-                <MarketingLatestPostItem post={post} postCoverUrls={postCoverUrls} />
+                <MarketingLatestPostItem post={post} />
               </Box>
             ))}
           </Carousel>

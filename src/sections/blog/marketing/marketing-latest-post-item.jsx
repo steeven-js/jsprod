@@ -33,9 +33,7 @@ export default function MarketingLatestPostItem({ post }) {
     >
       <m.div variants={varHover(1.25)} transition={varTranHover()}>
         <Image
-          src={
-            post.media > 0 ? post.media[0].original_url : '/assets/images/marketing/marketing_1.jpg'
-          }
+          src={post.media && post.media.length > 0 ? post.media[0].original_url : '/assets/images/marketing/marketing_1.jpg'}
           alt={post.title}
           ratio="3/4"
           overlay={`linear-gradient(to top, ${alpha(theme.palette.common.black, 0)} 0%, ${theme.palette.common.black
