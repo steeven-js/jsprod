@@ -1,8 +1,7 @@
+import PropTypes from 'prop-types';
+
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
-
-import useFetchTags from 'src/hooks/use-fetchTags';
-import useFetchPosts from 'src/hooks/use-fetchPosts';
 
 import { _mock, _categories } from 'src/_mock';
 
@@ -13,9 +12,8 @@ import BlogMarketingFeaturedPosts from '../../blog/marketing/marketing-featured-
 
 // ----------------------------------------------------------------------
 
-export default function MarketingPostsView() {
-  const { posts } = useFetchPosts();
-  const { tags } = useFetchTags();
+export default function MarketingPostsView({ posts, tags }) {
+
 
   return (
     <>
@@ -54,3 +52,9 @@ export default function MarketingPostsView() {
     </>
   );
 }
+
+MarketingPostsView.propTypes = {
+  posts: PropTypes.array.isRequired,
+  tags: PropTypes.array.isRequired,
+
+};
