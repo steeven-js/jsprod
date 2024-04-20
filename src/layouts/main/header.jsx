@@ -92,7 +92,7 @@ export default function Header({ headerOnDark }) {
                 path: '/marketing/projets',
               },
               {
-                title: 'Posts',
+                title: 'Blog',
                 icon: <Iconify icon="solar:file-bold-duotone" />,
                 path: '/marketing/posts',
               },
