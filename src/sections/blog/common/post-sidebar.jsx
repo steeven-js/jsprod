@@ -5,12 +5,11 @@ import Link from '@mui/material/Link';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
-import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import InputAdornment from '@mui/material/InputAdornment';
 
 import { useResponsive } from 'src/hooks/use-responsive';
+import useFetchStudies from 'src/hooks/use-fetchStudies';
 
 import { _socials } from 'src/_mock';
 
@@ -23,7 +22,6 @@ import PostItemMobile from './post-item-mobile';
 
 export default function PostSidebar({
   author,
-  categories,
   popularTags,
   recentPosts,
   advertisement,
@@ -31,6 +29,8 @@ export default function PostSidebar({
   ...other
 }) {
   const mdUp = useResponsive('up', 'md');
+
+  const {categories}=useFetchStudies();
 
   const renderAuthor = author && (
     <Stack spacing={2} direction="row" sx={{ mb: { md: 5 } }}>
@@ -61,7 +61,7 @@ export default function PostSidebar({
       </Typography>
 
       {categories.map((category) => (
-        <Stack key={category.label} direction="row" alignItems="center">
+        <Stack key={category.id} direction="row" alignItems="center">
           <Box
             sx={{
               mr: 2,
@@ -73,7 +73,7 @@ export default function PostSidebar({
           />
 
           <Link variant="body2" href={category.path} color="inherit">
-            {category.label}
+            {category.name}
           </Link>
         </Stack>
       ))}
@@ -106,7 +106,7 @@ export default function PostSidebar({
     <>
       {mdUp && renderAuthor}
 
-      {mdUp && (
+      {/* {mdUp && (
         <TextField
           fullWidth
           hiddenLabel
@@ -119,7 +119,7 @@ export default function PostSidebar({
             ),
           }}
         />
-      )}
+      )} */}
 
       <Stack
         spacing={5}
