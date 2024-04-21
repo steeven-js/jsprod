@@ -32,8 +32,6 @@ export default function MarketingCaseStudyView({ study }) {
 
   const { studies } = useFetchStudies();
 
-  console.log('galleryImages', galleryImages);
-
   return (
     <>
       <Container
