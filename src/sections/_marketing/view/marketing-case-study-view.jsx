@@ -32,6 +32,8 @@ export default function MarketingCaseStudyView({ study }) {
 
   const { studies } = useFetchStudies();
 
+  console.log('galleryImages', galleryImages);
+
   return (
     <>
       <Container
@@ -86,7 +88,7 @@ export default function MarketingCaseStudyView({ study }) {
               }}
             />
 
-            <MarketingCaseStudyDetailsGallery images={galleryImages} />
+            {galleryImages.length > 2 && (<MarketingCaseStudyDetailsGallery images={galleryImages} />)}
 
           </Grid>
         </Grid>
