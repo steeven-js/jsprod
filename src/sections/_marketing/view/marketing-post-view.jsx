@@ -90,7 +90,7 @@ export default function MarketingPostView() {
     <>
       <Image alt="hero"
         src={
-          post.media && post.media[0].original_url
+          post.media && post.media[0].original_url ? post.media[0].original_url : '/assets/images/marketing/marketing_post_hero.jpg'
         }
         ratio="21/9"
       />
