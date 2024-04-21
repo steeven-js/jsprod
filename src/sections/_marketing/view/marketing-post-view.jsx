@@ -1,6 +1,6 @@
 import remarkGfm from 'remark-gfm'
-import PropTypes from 'prop-types';
 import Markdown from 'react-markdown'
+import { useParams } from 'react-router';
 import { useState, useCallback } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
@@ -17,6 +17,9 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 
 import { paths } from 'src/routes/paths';
+
+import useFetchPost from 'src/hooks/use-fetchPost';
+import useFetchPosts from 'src/hooks/use-fetchPosts';
 
 import { fDate } from 'src/utils/format-time';
 
@@ -59,7 +62,13 @@ export const _socials = [
   },
 ];
 
-export default function MarketingPostView({ post, authorName, authorAvatar, authorBio, authorSince, tags, authorRole, posts }) {
+export default function MarketingPostView() {
+
+  const { id } = useParams();
+
+  const { post, authorName, authorAvatar, authorBio, authorSince, tags, authorRole } = useFetchPost(id);
+
+  const { posts } = useFetchPosts();
 
   const [favorite, setFavorite] = useState();
 
@@ -81,7 +90,7 @@ export default function MarketingPostView({ post, authorName, authorAvatar, auth
     <>
       <Image alt="hero"
         src={
-          post.media ? post.media[0].original_url : "/assets/images/marketing/marketing_post_hero.jpg"
+          post.media && post.media[0].original_url
         }
         ratio="21/9"
       />
@@ -219,17 +228,4 @@ export default function MarketingPostView({ post, authorName, authorAvatar, auth
       </Popover>
     </>
   );
-};
-
-// ----------------------------------------------------------------------
-
-MarketingPostView.propTypes = {
-  post: PropTypes.object.isRequired,
-  authorName: PropTypes.string.isRequired,
-  authorAvatar: PropTypes.string.isRequired,
-  authorBio: PropTypes.string.isRequired,
-  authorSince: PropTypes.string.isRequired,
-  tags: PropTypes.array.isRequired,
-  authorRole: PropTypes.string.isRequired,
-  posts: PropTypes.array.isRequired,
 };
