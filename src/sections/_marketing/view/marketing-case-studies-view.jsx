@@ -6,6 +6,8 @@ import Typography from '@mui/material/Typography';
 
 import useFetchPosts from 'src/hooks/use-fetchPosts';
 
+import { _MarketingCaseStudiesView } from 'src/assets/data/stydies';
+
 import MarketingCaseStudyList from '../list/marketing-case-study-list';
 import BlogMarketingLatestPosts from '../../blog/marketing/marketing-latest-posts';
 
@@ -25,11 +27,11 @@ export default function MarketingCaseStudiesView({ studies, categories }) {
             textAlign: { xs: 'center', md: 'left' },
           }}
         >
-          <Typography variant="h2">Our Case Studies</Typography>
+          <Typography variant="h2">{_MarketingCaseStudiesView[0].label}</Typography>
 
           <Typography sx={{ color: 'text.secondary' }}>
-            Nullam tincidunt adipiscing enim.
-            <br /> Mauris sollicitudin fermentum libero.
+            {_MarketingCaseStudiesView[1].label}
+            <br /> {_MarketingCaseStudiesView[2].label}
           </Typography>
         </Stack>
 
