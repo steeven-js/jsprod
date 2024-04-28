@@ -19,7 +19,7 @@ export default function MarketingCaseStudyItem({ project }) {
       <Image
         src={
           project.media && project.media.length > 0
-            ? project.media[0].original_url
+            ? project.media[1].original_url
             : '/assets/images/marketing/marketing_1.jpg'
         }
         alt={project.title}
