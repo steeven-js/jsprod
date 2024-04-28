@@ -9,13 +9,12 @@ import { alpha, useTheme } from '@mui/material/styles';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
-import { fDate } from 'src/utils/format-time';
-
 import Image from 'src/components/image';
 import TextMaxLine from 'src/components/text-max-line';
 import { varHover, varTranHover } from 'src/components/animate';
 
 import PostTimeBlock from '../common/post-time-block';
+
 
 // ----------------------------------------------------------------------
 
@@ -56,7 +55,7 @@ export default function MarketingPostItem({ post }) {
         <Stack spacing={2}>
           <PostTimeBlock
             duration={post.duration}
-            createdAt={fDate(post.created_at)}
+            createdAt={post.created_at}
             sx={{ color: 'inherit', opacity: 0.72 }}
           />
 

@@ -1,23 +1,24 @@
-import { format, getTime, formatDistanceToNow } from 'date-fns';
+import { fr } from 'date-fns/locale';
+import { format, getTime, formatDistanceToNow } from 'date-fns'; // Import de la localisation française
 
 // ----------------------------------------------------------------------
 
 export function fDate(date, newFormat) {
   const fm = newFormat || 'dd MMM yyyy';
 
-  return date ? format(new Date(date), fm) : '';
+  return date ? format(new Date(date), fm, { locale: fr }) : '';
 }
 
 export function fTime(date, newFormat) {
   const fm = newFormat || 'p';
 
-  return date ? format(new Date(date), fm) : '';
+  return date ? format(new Date(date), fm, { locale: fr }) : '';
 }
 
 export function fDateTime(date, newFormat) {
   const fm = newFormat || 'dd MMM yyyy p';
 
-  return date ? format(new Date(date), fm) : '';
+  return date ? format(new Date(date), fm, { locale: fr }) : '';
 }
 
 export function fTimestamp(date) {
@@ -28,6 +29,7 @@ export function fToNow(date) {
   return date
     ? formatDistanceToNow(new Date(date), {
         addSuffix: true,
+        locale: fr, // Utilisation de la localisation française pour fToNow
       })
     : '';
 }

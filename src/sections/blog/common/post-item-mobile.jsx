@@ -6,12 +6,11 @@ import Stack from '@mui/material/Stack';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
-import { fDate } from 'src/utils/format-time';
-
 import Image from 'src/components/image';
 import TextMaxLine from 'src/components/text-max-line';
 
 import PostTimeBlock from './post-time-block';
+
 
 // ----------------------------------------------------------------------
 
@@ -47,7 +46,7 @@ export default function PostItemMobile({ post, onSiderbar }) {
           <TextMaxLine variant={onSiderbar ? 'subtitle2' : 'h6'}>{post.title}</TextMaxLine>
         </Link>
 
-        <PostTimeBlock createdAt={fDate(post.created_at)} duration={post.duration} />
+        <PostTimeBlock createdAt={post.created_at} duration={post.duration} />
       </Stack>
     </Stack>
   );

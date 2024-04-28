@@ -7,12 +7,11 @@ import Stack from '@mui/material/Stack';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
-import { fDate } from 'src/utils/format-time';
-
 import Image from 'src/components/image';
 import TextMaxLine from 'src/components/text-max-line';
 
 import PostTimeBlock from '../common/post-time-block';
+
 
 // ----------------------------------------------------------------------
 
@@ -39,7 +38,7 @@ export default function MarketingFeaturedPostItem({ post }) {
         }}
       >
         <Stack spacing={1}>
-          <PostTimeBlock createdAt={fDate(post.created_at)} duration={post.duration} />
+          <PostTimeBlock createdAt={post.created_at} duration={post.duration} />
 
           <Link
             component={RouterLink}
