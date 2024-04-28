@@ -45,7 +45,7 @@ export default function MarketingCaseStudyListSimilar({ studies }) {
           mb: { xs: 8, md: 10 },
         }}
       >
-        <Typography variant="h3">You Might Like</Typography>
+        <Typography variant="h3">Vous allez aimer</Typography>
 
         {mdUp && viewAllBtn}
       </Stack>

@@ -40,6 +40,7 @@ export default function PostTimeBlock({ createdAt, duration, sx, ...other }) {
 
 PostTimeBlock.propTypes = {
   createdAt: PropTypes.string,
-  duration: PropTypes.number,
+  duration: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // Accepte les types number et string
   sx: PropTypes.object,
 };
+

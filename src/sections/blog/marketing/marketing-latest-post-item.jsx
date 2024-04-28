@@ -2,8 +2,8 @@ import { m } from 'framer-motion';
 import PropTypes from 'prop-types';
 
 import Link from '@mui/material/Link';
+import { Avatar } from '@mui/material';
 import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
 import { alpha, useTheme } from '@mui/material/styles';
 
 import { paths } from 'src/routes/paths';
@@ -17,6 +17,7 @@ import PostTimeBlock from '../common/post-time-block';
 // ----------------------------------------------------------------------
 
 export default function MarketingLatestPostItem({ post }) {
+
   const theme = useTheme();
 
   return (
@@ -70,7 +71,7 @@ export default function MarketingLatestPostItem({ post }) {
         </Stack>
 
         <Stack direction="row" alignItems="center" sx={{ typography: 'body2' }}>
-          <Avatar src={post.author.media[0].original_url} sx={{ mr: 1 }} />
+          <Avatar src={post.author.media && post.author.media.length > 0 ? post.author.media[0].original_url : '/assets/images/avatar/avatar_7.jpg'} sx={{ mr: 1 }} />
           {post.author.name}
         </Stack>
       </Stack>
@@ -80,15 +81,15 @@ export default function MarketingLatestPostItem({ post }) {
 
 MarketingLatestPostItem.propTypes = {
   post: PropTypes.shape({
-    id: PropTypes.number,
+    id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]), // Accepte les types number et string
     title: PropTypes.string,
-    duration: PropTypes.number,
+    duration: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     created_at: PropTypes.string,
     media: PropTypes.arrayOf(
       PropTypes.shape({
         original_url: PropTypes.string,
       })
-    ).isRequired,
+    ),
     author: PropTypes.shape({
       media: PropTypes.arrayOf(
         PropTypes.shape({

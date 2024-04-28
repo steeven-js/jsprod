@@ -26,7 +26,7 @@ import { varHover, varTranHover } from 'src/components/animate';
 export default function MarketingLandingCaseStudies({ caseStudies }) {
   const mdUp = useResponsive('up', 'md');
 
-  console.log('caseStudies', caseStudies)
+  // console.log('caseStudies', caseStudies)
 
   return (
     <Container
@@ -230,7 +230,7 @@ function SmallItem({ caseStudy, square }) {
           <Image
             alt="cover"
             src={
-              caseStudy ? caseStudy.media[0].original_url : '/assets/images/marketing/marketing_6.jpg'
+              caseStudy && caseStudy.media[0] ? caseStudy.media[0].original_url : '/assets/images/marketing/marketing_6.jpg'
             }
             ratio={(square && '1/1') || (mdUp && '3/4') || '1/1'}
             overlay={alpha(theme.palette.grey[900], 0.48)}

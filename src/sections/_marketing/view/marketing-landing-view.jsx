@@ -1,9 +1,9 @@
 
+import useFetchPosts from 'src/hooks/use-fetchPosts';
 import useFetchStudies from 'src/hooks/use-fetchStudies';
 
 import {
   _brands,
-  _marketingPosts,
 } from 'src/_mock';
 
 import { SplashScreen } from 'src/components/loading-screen';
@@ -22,6 +22,8 @@ import MarketingLandingCaseStudies from '../landing/marketing-landing-case-studi
 export default function MarketingLandingView() {
 
   const { studies, isStudiesLoading } = useFetchStudies();
+
+  const { posts } = useFetchPosts();
 
   if (isStudiesLoading) {
     return <SplashScreen />;
@@ -49,7 +51,7 @@ export default function MarketingLandingView() {
 
       {/* <MarketingTestimonial testimonials={_testimonials} /> */}
 
-      {studies.length > 5 ? <BlogMarketingLatestPosts posts={_marketingPosts.slice(0, 4)} /> : null}
+      {studies.length > 5 ? <BlogMarketingLatestPosts posts={posts.slice(0, 4)} /> : null}
 
       {/* <MarketingLandingFreeSEO /> */}
 
