@@ -25,6 +25,7 @@ import { fDate } from 'src/utils/format-time';
 
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
+import { SplashScreen } from 'src/components/loading-screen';
 import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
 
 import BlogMarketingLatestPosts from 'src/sections/blog/marketing/marketing-latest-posts';
@@ -66,7 +67,7 @@ export default function MarketingPostView() {
 
   const { id } = useParams();
 
-  const { post, authorName, authorAvatar, authorBio, authorSince, tags, authorRole } = useFetchPost(id);
+  const { post, authorName, authorAvatar, authorBio, authorSince, tags, authorRole, isPostLoading } = useFetchPost(id);
 
   const { posts } = useFetchPosts();
 
@@ -88,12 +89,19 @@ export default function MarketingPostView() {
 
   return (
     <>
-      <Image alt="hero"
-        src={
-          post.media && post.media[0].original_url ? post.media[0].original_url : '/assets/images/marketing/marketing_post_hero.jpg'
-        }
-        ratio="21/9"
-      />
+      {isPostLoading ?
+
+        <SplashScreen />
+
+        : (
+
+          <Image alt="hero"
+            src={
+              post.media && post.media[0].original_url ? post.media[0].original_url : '/assets/images/marketing/marketing_post_hero.jpg'
+            }
+            ratio="21/9"
+          />
+        )}
 
       <Container>
         <CustomBreadcrumbs
