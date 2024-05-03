@@ -87,7 +87,7 @@ export default function MarketingLandingHero() {
                 visibleByDefault
                 disabledEffect
                 alt="marketing market"
-                src="/assets/illustrations/illustration_marketing_market_1.svg"
+                src="/assets/illustrations/illustration_marketing_market_2.svg"
               />
             </Grid>
           )}

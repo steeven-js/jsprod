@@ -24,7 +24,7 @@ export default function MarketingLandingAbout() {
     >
       <Image
         alt="landing about"
-        src="/assets/images/marketing/marketing_post_hero.jpg"
+        src="/assets/images/marketing/marketing_post_hero_1.jpg"
         ratio="16/9"
         sx={{
           borderRadius: 1.5,
