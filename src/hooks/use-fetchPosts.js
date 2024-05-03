@@ -7,8 +7,8 @@ import { _setPosts } from "src/redux/reducer/posts";
 
 const useFetchPosts = () => {
   const [posts, setPosts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [totalPages, setTotalPages] = useState(0);
   const [isPostsLoading, setIsPostsLoading] = useState(false);
   const [postsError, setPostsError] = useState(null);
 
@@ -18,7 +18,8 @@ const useFetchPosts = () => {
     setIsPostsLoading(true);
 
     try {
-      const endpoint = `${apiUrl}/posts?page=${currentPage}`;
+      // const endpoint = `${apiUrl}/posts?page=${currentPage}`;
+      const endpoint = `${apiUrl}/posts`;
 
       const response = await axios.get(endpoint);
       const result = response.data;
@@ -26,7 +27,7 @@ const useFetchPosts = () => {
       setPosts(result.data);
 
       // Update total number of pages
-      setTotalPages(result.last_page);
+      // setTotalPages(result.last_page);
 
       // Update global state
       dispatch(_setPosts(result.data));
@@ -40,19 +41,19 @@ const useFetchPosts = () => {
     } finally {
       setIsPostsLoading(false);
     }
-  }, [currentPage, dispatch]);
+  }, [dispatch]);
 
   useEffect(() => {
     fetchData();
-  }, [fetchData, currentPage]);
+  }, [fetchData]);
 
   return {
     posts,
     isPostsLoading,
     postsError,
-    currentPage,
-    totalPages,
-    setCurrentPage,
+    // currentPage,
+    // totalPages,
+    // setCurrentPage,
   };
 }
 

@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
-import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,7 +13,6 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import { bgBlur } from 'src/theme/css';
 
 import Logo from 'src/components/logo';
-import Label from 'src/components/label';
 import Iconify from 'src/components/iconify';
 import { NavBasicDesktop } from 'src/components/nav-basic';
 
@@ -37,7 +35,7 @@ export default function Header({ headerOnDark }) {
       <Box sx={{ lineHeight: 0, position: 'relative' }}>
         <Logo />
 
-        <Link href="https://github.com/steeven-js" target="_blank" rel="noopener">
+        {/* <Link href="https://github.com/steeven-js" target="_blank" rel="noopener">
           <Label
             color="info"
             sx={{
@@ -53,7 +51,7 @@ export default function Header({ headerOnDark }) {
           >
             v2.4.0
           </Label>
-        </Link>
+        </Link> */}
       </Box>
 
       <>
