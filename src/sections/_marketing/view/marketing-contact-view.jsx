@@ -1,7 +1,9 @@
+import { Typography } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
 
 import MarketingContactInfo from '../contact/marketing-contact-info';
+import MarketingContactForm from '../contact/marketing-contact-form';
 
 // ----------------------------------------------------------------------
 
@@ -26,11 +28,11 @@ export default function MarketingContactView() {
           </Grid>
 
           <Grid xs={12} md={6} lg={6}>
-            {/* <Typography variant="h3" sx={{ mb: 5 }}>
-              Ready To Get Started?
+            <Typography variant="h3" sx={{ mb: 5 }}>
+              Prêt à commencer ?
             </Typography>
 
-            <MarketingContactForm /> */}
+            <MarketingContactForm />
           </Grid>
         </Grid>
       </Container>
