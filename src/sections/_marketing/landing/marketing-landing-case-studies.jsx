@@ -223,7 +223,9 @@ function SmallItem({ caseStudy, square }) {
           <Typography variant="overline" sx={{ opacity: 0.48 }}>
             {caseStudy.category.name}
           </Typography>
-          <Typography variant="h6">{caseStudy.title}</Typography>
+          <Typography variant="h6">
+            {caseStudy.title.length > 20 ? `${caseStudy.title.substring(0, 50)}...` : caseStudy.title}
+          </Typography>
         </Stack>
 
         <m.div variants={varHover(1.25)} transition={varTranHover()}>
