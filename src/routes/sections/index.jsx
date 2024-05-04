@@ -9,7 +9,6 @@ import { authRoutes } from './auth';
 import { errorRoutes } from './error';
 import { commonRoutes } from './common';
 import { marketingRoutes } from './marketing';
-import { componentsRoutes } from './components';
 
 // ----------------------------------------------------------------------
 
@@ -46,8 +45,6 @@ export default function Router() {
         },
 
         ...marketingRoutes,
-
-        ...componentsRoutes,
 
         ...authRoutes,
 
