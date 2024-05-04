@@ -2,10 +2,10 @@ import { paths } from "src/routes/paths";
 
 export const _MarketingLandingHero = [
   { value: 'Digital Marketing', label: "Conception d'applications" },
-  { value: 'Boosts Your Website Traffic', label: 'Vos applications, notre réalisation.' },
+  { value: 'Boosts Your Website Traffic', label: 'Je réalise votre application.' },
   {
     value: 'Etiam sollicitudin, ipsum eu pulvinar rutrum, tellus ipsum laoreet sapien, quis venenatis ante odio sit amet eros.',
-    label: 'Transformez vos concepts en applications remarquables avec notre expertise en développement sur mesure.'
+    label: 'Transformez vos concepts en applications remarquables avec mon expertise en développement sur mesure.'
   },
   { value: 'Try For Free', label: 'Mes services' },
   { value: 'See Our Work', label: 'Mes travaux' },
@@ -15,10 +15,10 @@ export const _MarketingLandingHero = [
 
 export const _MarketingLandingAbout = [
   { value: 'About us', label: 'À propos' },
-  { value: 'Who We Are', label: 'Qui sommes-nous?' },
+  { value: 'Who We Are', label: 'Qui suis-je?' },
   {
     value: 'In hac habitasse platea dictumst. Aliquam lobortis. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. In dui magna, posuere eget, vestibulum et, tempor auctor, justo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
-    label: 'Nous sommes des concepteurs d\'applications innovantes, spécialisés dans l\'expérience utilisateur. De la conception à la mise en œuvre, nous créons des solutions efficaces et conviviales pour répondre à vos besoins.'
+    label: 'Je suis un concepteur d\'applications innovant, spécialisé dans l\'expérience utilisateur. De la conception à la mise en œuvre, je crée des solutions efficaces et conviviales pour répondre à vos besoins.'
   },
   { value: 'Lean more', label: 'En savoir plus' },
 ];
@@ -36,8 +36,8 @@ export const _ROWS = [
   },
   {
     label: 'Années d\'expérience',
-    total: 10,
-    content: 'Plus de 10 années d\'expérience dans l\'industrie, spécialisée dans le développement logiciel et la gestion de projets.',
+    total: 5,
+    content: 'Plus de 5 années d\'expérience dans l\'industrie, spécialisée dans le développement d\'application et la gestion de projets.',
   },
 ];
 
@@ -45,7 +45,7 @@ export const _ROWS = [
 
 export const _MarketingLandingServices = [
   { value: 'Our Services', label: 'Nos services' },
-  { value: 'We Provide', label: 'Ce que nous offrons' },
+  { value: 'We Provide', label: 'Ce que j\' offre' },
   {
     value: 'Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.',
     label: 'Transformez vos idées en solutions numériques innovantes avec notre expertise.'
@@ -86,7 +86,7 @@ export const _MarketingLandingProcess = [
   { value: 'Working Process', label: 'Processus de travail' },
   {
     value: 'Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.',
-    label: 'Guidez votre stratégie de conception d\'application vers le succès avec notre processus éprouvé.'
+    label: 'Guidez votre stratégie de conception d\'application vers le succès avec mon processus éprouvé.'
   },
 ];
 
@@ -125,12 +125,12 @@ export const _faqs = [
   {
     id: '2',
     question: 'Comment fonctionne le processus de conception d\'application avec votre équipe ?',
-    answer: 'Notre équipe suit un processus de conception itératif, commençant par la collecte de vos besoins, puis la création de maquettes et de prototypes pour valider le concept, et enfin le développement et les tests pour assurer la qualité.'
+    answer: 'Je suis un processus de conception itératif, commençant par la collecte de vos besoins, puis la création de maquettes et de prototypes pour valider le concept, et enfin le développement et les tests pour assurer la qualité.'
   },
   {
     id: '3',
     question: 'Quelles sont les technologies utilisées pour développer les applications ?',
-    answer: 'Nous utilisons les dernières technologies de développement d\'applications, y compris les frameworks populaires tels que React Native pour le développement multiplateforme, garantissant ainsi des performances élevées et une compatibilité maximale.'
+    answer: 'J\'utilise les dernières technologies de développement d\'applications, y compris les frameworks populaires tels que React Native pour le développement multiplateforme, garantissant ainsi des performances élevées et une compatibilité maximale.'
   },
   {
     id: '4',
@@ -140,7 +140,7 @@ export const _faqs = [
   {
     id: '5',
     question: 'Quels sont les délais typiques pour la conception et le développement d\'une application ?',
-    answer: 'Les délais peuvent varier en fonction de la complexité du projet, mais nous nous efforçons de respecter des calendriers clairs et de vous tenir informé à chaque étape du processus, afin que vous sachiez exactement à quoi vous attendre.'
+    answer: 'Les délais peuvent varier en fonction de la complexité du projet, mais je m\' efforçe de respecter des calendriers clairs et de vous tenir informé à chaque étape du processus, afin que vous sachiez exactement à quoi vous attendre.'
   }
 ];
 
