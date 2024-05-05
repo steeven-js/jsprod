@@ -112,8 +112,8 @@ export const _LANDINGPROCESS = [
 // ----------------------------------------------------------------------
 
 export const _MarketingLandingFaqs = [
-  { value: 'FAQS', label: 'FAQS' },
-  { value: 'Frequently Asked Questions', label: 'Questions fréquentes' },
+  { label: 'FAQS' },
+  { label: 'Questions fréquentes' },
 ];
 
 export const _faqs = [

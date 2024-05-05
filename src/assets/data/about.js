@@ -1,53 +1,51 @@
 export const _MarketingAbout = [
-  { value: 'Qui Nous Sommes ?', label: 'Qui Nous Sommes ?' },
+  { label: 'Qui suis-je ?' },
   {
-    value: 'Découvrez qui nous sommes et comment nous pouvons aider votre entreprise à réussir avec des applications innovantes.',
-    label: 'Découvrez qui nous sommes et comment nous pouvons aider votre entreprise à réussir avec des applications innovantes.'
+    label: "Fort d'une expérience diversifiée en tant que concepteur d'applications et développeur web, j'ai entrepris une reconversion professionnelle motivée par ma passion pour la création numérique. Ayant évolué dans ces domaines, j'ai acquis une compréhension approfondie des besoins des utilisateurs ainsi que des exigences techniques pour développer des solutions innovantes. Ma transition vers ce nouveau domaine est le résultat d'un désir ardent d'explorer de nouveaux horizons et de relever de nouveaux défis."
   },
   {
-    value: 'Découvrez qui nous sommes et comment nous pouvons aider votre entreprise à réussir avec des applications innovantes.',
-    label: 'Découvrez qui nous sommes et comment nous pouvons aider votre entreprise à réussir avec des applications innovantes.'
+    label: "Je m'engage pleinement à appliquer mes compétences et mon expérience antérieure pour façonner des applications web et mobiles qui surpassent les attentes de mes clients, tout en restant à l'avant-garde des dernières tendances technologiques. Mon parcours reflète mon engagement envers l'apprentissage continu et ma détermination à créer un impact positif à travers chaque projet que j'entreprends."
   },
-  { value: 'Voir Nos Réalisations', label: 'Voir Nos Réalisations' },
+  { label: 'Voir Nos Réalisations' },
 ];
 
 export const _SUMMARY = [
-  { title: 'Années d\'expérience', total: 12, icon: 'carbon:increase-level' },
-  { title: 'Récompenses', total: 20, icon: 'carbon:trophy' },
-  { title: 'Projets Réalisés', total: 150, icon: 'carbon:data-vis-4' },
-  { title: 'Clients Satisfaits', total: 32000, icon: 'carbon:user-certification' },
+  { title: 'Années d\'expérience', total: 10, icon: 'carbon:increase-level' },
+  { title: 'Récompenses', total: 2, icon: 'carbon:trophy' },
+  { title: 'Projets Réalisés', total: 10, icon: 'carbon:data-vis-4' },
+  { title: 'Clients Satisfaits', total: 4, icon: 'carbon:user-certification' },
 ];
 // ----------------------------------------------------------------------
 
 export const _MarketingAboutOurVision = [
-  { value: 'Nos Valeurs Fondamentales', label: 'Nos Valeurs Fondamentales' },
+  { label: 'Nos Valeurs Fondamentales' },
 ];
 
 // ----------------------------------------------------------------------
 
 export const _MarketingAboutCoreValues = [
-  { value: 'Nos Valeurs Fondamentales', label: 'Nos Valeurs Fondamentales' },
+  { label: 'Nos Valeurs Fondamentales' },
 ];
 
 export const _CORE_VALUES = [
   {
     title: 'Satisfaction Client',
-    description: 'Nous plaçons la satisfaction de nos clients au cœur de tout ce que nous faisons.',
+    description: 'Je place la satisfaction de mes clients au cœur de tout ce que je fais.',
     icon: '/assets/icons/ic_agreement.svg',
   },
   {
     title: 'Transparence',
-    description: 'Nous croyons en une communication ouverte et transparente avec nos clients.',
+    description: 'Je crois en une communication ouverte et transparente avec mes clients.',
     icon: '/assets/icons/ic_transparency.svg',
   },
   {
     title: 'Réputation',
-    description: 'Nous construisons et protégeons une réputation d\'excellence et de fiabilité.',
+    description: 'Je construis et protège une réputation d\'excellence et de fiabilité.',
     icon: '/assets/icons/ic_reputation.svg',
   },
   {
     title: 'Collaboration',
-    description: 'Nous travaillons en étroite collaboration avec nos clients pour réaliser leurs visions.',
+    description: 'Je travaille en étroite collaboration avec mes clients pour réaliser leurs visions.',
     icon: '/assets/icons/ic_popularity.svg',
   },
 ];

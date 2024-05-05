@@ -40,10 +40,10 @@ export default function MarketingLandingFaqs() {
         <Grid xs={12} md={6} lg={6}>
           <Stack spacing={2} sx={{ mb: 5, textAlign: { xs: 'center', md: 'left' } }}>
             <Typography variant="overline" color="text.disabled">
-              {_MarketingLandingFaqs[0].value}
+              {_MarketingLandingFaqs[0].label}
             </Typography>
 
-            <Typography variant="h2">{_MarketingLandingFaqs[1].value}</Typography>
+            <Typography variant="h2">{_MarketingLandingFaqs[1].label}</Typography>
           </Stack>
 
           {_faqs.map((faq) => (
