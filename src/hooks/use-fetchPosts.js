@@ -9,7 +9,6 @@ const useFetchPosts = () => {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const [tags, setTags] = useState([]);
   const [isPostsLoading, setIsPostsLoading] = useState(false);
   const [postsError, setPostsError] = useState(null);
 
@@ -33,7 +32,7 @@ const useFetchPosts = () => {
       dispatch(_setPosts(result.data));
 
       // Tags
-      setTags(result.tags.map(tag => tag.name.fr));
+      // setTags(result.tags.map(tag => tag.name.fr));
 
     } catch (error) {
       setPostsError(error.message);
@@ -53,7 +52,6 @@ const useFetchPosts = () => {
     postsError,
     currentPage,
     totalPages,
-    tags,
     setCurrentPage,
   };
 }
