@@ -1,10 +1,8 @@
+// 0
 export const _MarketingServices = [
-  { value: 'Conception d\'Applications Mobiles', label: 'Conception d\'Applications Mobiles' },
-  {
-    value: 'Conception Graphique',
-    label: 'Conception Graphique'
-  },
-  { value: 'Découvrez nos Réalisations', label: 'Découvrez nos Réalisations' },
+  { label: 'Conception UX/UI' },
+  { label: 'Front-end' },
+  { label: 'Découvrez mes réalisations' },
 ];
 
 export const _LISTS = [
@@ -13,6 +11,49 @@ export const _LISTS = [
   'Fonctionnalités Innovantes',
   'Compatibilité Multi-plateforme',
 ];
+
+// 1
+export const _MarketingServices1 = [
+  { label: 'Conception d\'Applications Mobiles' },
+  { label: 'Android/Ios' },
+  { label: 'Découvrez mes réalisations' },
+];
+
+export const _LISTS1 = [
+  'Expérience Utilisateur Mobile Optimisée',
+  'Design Adapté aux Petits Écrans',
+  'Navigation Intuitive et Facile',
+  'Performance et Réactivité',
+];
+
+// 2
+export const _MarketingServices2 = [
+  { label: 'Développement Web' },
+  { label: 'Application web static et responsible' },
+  { label: 'Découvrez mes réalisations' },
+];
+
+export const _LISTS2 = [
+  'Conception Responsive',
+  'Performance Optimale',
+  'Navigation Intuitive',
+  'Sécurité Renforcée',
+];
+
+// 3
+export const _MarketingServices3 = [
+  { label: 'Développement Api' },
+  { label: 'Back-end' },
+  { label: 'Découvrez mes réalisations' },
+];
+
+export const _LISTS3 = [
+  'Architecture RESTful',
+  'Routes et Endpoints Clairs',
+  'Réponses Structurées en JSON',
+  'Gestion Appropriée des Erreurs',
+];
+
 
 // ----------------------------------------------------------------------
 

@@ -55,26 +55,26 @@ export const _MarketingLandingServices = [
 export const _SERVICESLANDING = [
   {
     name: 'Conception UX/UI',
-    icon: '/assets/icons/service/ic_service_seo.svg',
-    content: 'Concevez des expériences utilisateur remarquables pour vos applications.',
+    icon: '/assets/icons/service/ic_service_ux.svg',
+    content: "Je conçois des expériences numériques intuitives et esthétiquement plaisantes pour les utilisateurs.",
     path: paths.marketing.services,
   },
   {
-    name: 'Développement Mobile',
-    icon: '/assets/icons/service/ic_service_mail.svg',
-    content: 'Créez des applications mobiles performantes et intuitives pour tous les appareils.',
+    name: 'Conception d\'Applications Mobiles',
+    icon: '/assets/icons/service/ic_service_mobile.svg',
+    content: "Je crée des applications mobiles qui offrent une expérience utilisateur fluide et engageante.",
     path: paths.marketing.services,
   },
   {
-    name: 'Optimisation de la Performance',
-    icon: '/assets/icons/service/ic_service_analysis.svg',
-    content: 'Optimisez les performances de vos applications pour une expérience utilisateur fluide.',
+    name: 'Développement Web',
+    icon: '/assets/icons/service/ic_service_desktop.svg',
+    content: "Je développe des sites web innovants et fonctionnels, centrés sur l'expérience utilisateur.",
     path: paths.marketing.services,
   },
   {
-    name: 'Intégration de Réseaux Sociaux',
-    icon: '/assets/icons/service/ic_service_bullhorn.svg',
-    content: 'Intégrez des fonctionnalités de partage et de connexion avec les réseaux sociaux.',
+    name: 'Développement Api',
+    icon: '/assets/icons/service/ic_service_api.svg',
+    content: "Je construis des API robustes et évolutives pour connecter et dynamiser les applications et les services.",
     path: paths.marketing.services,
   },
 ];
