@@ -11,6 +11,7 @@ import ToggleButton, { toggleButtonClasses } from '@mui/material/ToggleButton';
 import { fCurrency } from 'src/utils/format-number';
 
 import { _tags } from 'src/_mock';
+import axios from 'src/lib/axios';
 
 import FormProvider, { RHFSlider, RHFTextField } from 'src/components/hook-form';
 
@@ -20,7 +21,7 @@ export default function MarketingContactForm() {
   const MarketingContactSchema = Yup.object().shape({
     services: Yup.array().required().min(1, 'Services field must have at least 1 items'),
     email: Yup.string().required('Email is required').email('That is not an email'),
-    compnany: Yup.string().required('Compnany is required'),
+    company: Yup.string().required('company is required'),
     website: Yup.string().required('Website is required'),
   });
 
@@ -30,7 +31,7 @@ export default function MarketingContactForm() {
     lastName: '',
     email: '',
     phoneNumber: '',
-    compnany: '',
+    company: '',
     website: '',
     budget: [2000, 10000],
     message: '',
@@ -48,11 +49,24 @@ export default function MarketingContactForm() {
     formState: { isSubmitting },
   } = methods;
 
+  const contactMailApi = 'http://localhost:8000/api/contacts';
+
   const onSubmit = handleSubmit(async (data) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
-      reset();
       console.log('DATA', data);
+      await axios.post(contactMailApi, {
+        services: data.services,
+        budget: data.budget,
+        company: data.company,
+        email: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        message: data.message,
+        phoneNumber: data.phoneNumber,
+        website: data.website,
+      });
+      reset();
     } catch (error) {
       console.error(error);
     }
@@ -125,7 +139,7 @@ export default function MarketingContactForm() {
           spacing={{ xs: 2.5, md: 2 }}
           sx={{ width: 1 }}
         >
-          <RHFTextField name="compnany" label="Compnany" />
+          <RHFTextField name="company" label="Company" />
 
           <RHFTextField name="website" label="Website" />
         </Stack>
