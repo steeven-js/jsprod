@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect, useCallback } from "react";
 
-import { apiUrl } from "src/assets/data/fetch";
+import { apiUrl } from "src/assets/data/endpoint";
 
 const useFetchStudies = () => {
   const [studies, setStudies] = useState([]);

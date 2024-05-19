@@ -12,6 +12,7 @@ import { fCurrency } from 'src/utils/format-number';
 
 import { _tags } from 'src/_mock';
 import axios from 'src/lib/axios';
+import { apiUrl } from 'src/assets/data/endpoint';
 
 import FormProvider, { RHFSlider, RHFTextField } from 'src/components/hook-form';
 
@@ -49,13 +50,11 @@ export default function MarketingContactForm() {
     formState: { isSubmitting },
   } = methods;
 
-  const contactMailApi = 'http://localhost:8000/api/contacts';
-
   const onSubmit = handleSubmit(async (data) => {
     try {
       await new Promise((resolve) => setTimeout(resolve, 500));
-      console.log('DATA', data);
-      await axios.post(contactMailApi, {
+      // console.log('DATA', data);
+      await axios.post(`${apiUrl}/contacts`, {
         services: data.services,
         budget: data.budget,
         company: data.company,

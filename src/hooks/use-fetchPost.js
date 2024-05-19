@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 
 import { fDate } from "src/utils/format-time";
 
-import { apiUrl } from "src/assets/data/fetch";
+import { apiUrl } from "src/assets/data/endpoint";
 
 const useFetchPost = (id) => {
   const [post, setPost] = useState([]);
