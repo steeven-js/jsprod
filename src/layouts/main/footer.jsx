@@ -79,7 +79,7 @@ export default function Footer() {
                 </Typography>
               </Stack>
 
-              <Stack spacing={1} alignItems="flex-start">
+              {/* <Stack spacing={1} alignItems="flex-start">
                 <Typography variant="h6">{_Footer[2].label}</Typography>
                 <Link variant="body2" sx={{ color: 'text.primary' }}>
                   {_Footer[3].label}
@@ -92,7 +92,7 @@ export default function Footer() {
                 <Link variant="body2" sx={{ color: 'text.primary' }}>
                   {_Footer[5].label}
                 </Link>
-              </Stack>
+              </Stack> */}
 
               {/* <Stack spacing={2}>
                 <Stack spacing={1}>

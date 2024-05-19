@@ -169,7 +169,7 @@ export default function MarketingContactForm() {
         loading={isSubmitting}
         sx={{ mt: 3 }}
       >
-        Send Request
+        Envoyer
       </LoadingButton>
     </FormProvider>
   );

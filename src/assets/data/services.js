@@ -1,7 +1,7 @@
 // 0
 export const _MarketingServices = [
   { label: 'Conception UX/UI' },
-  { label: 'Front-end' },
+  { label: 'Je conçois des expériences numériques intuitives et esthétiquement plaisantes pour les utilisateurs.' },
   { label: 'Découvrez mes réalisations' },
 ];
 
@@ -15,7 +15,7 @@ export const _LISTS = [
 // 1
 export const _MarketingServices1 = [
   { label: 'Conception d\'Applications Mobiles' },
-  { label: 'Android/Ios' },
+  { label: 'Je crée des applications mobiles qui offrent une expérience utilisateur fluide et engageante.' },
   { label: 'Découvrez mes réalisations' },
 ];
 
@@ -29,7 +29,7 @@ export const _LISTS1 = [
 // 2
 export const _MarketingServices2 = [
   { label: 'Développement Web' },
-  { label: 'Application web static et responsible' },
+  { label: 'Je développe des sites web innovants et fonctionnels, centrés sur l\'expérience utilisateur.' },
   { label: 'Découvrez mes réalisations' },
 ];
 
@@ -43,7 +43,7 @@ export const _LISTS2 = [
 // 3
 export const _MarketingServices3 = [
   { label: 'Développement Api' },
-  { label: 'Back-end' },
+  { label: 'Je construis des API robustes et évolutives pour connecter et dynamiser les applications et les services.' },
   { label: 'Découvrez mes réalisations' },
 ];
 
@@ -58,11 +58,8 @@ export const _LISTS3 = [
 // ----------------------------------------------------------------------
 
 export const _MarketingServicesInclude = [
-  { value: 'Services Inclus', label: 'Services Inclus' },
-  {
-    value: 'Analyse Approfondie des Besoins',
-    label: 'Analyse Approfondie des Besoins'
-  },
+  { label: 'Services Inclus' },
+  { label: 'Analyse Approfondie des Besoins' },
 ];
 
 export const _SERVICES = [
@@ -102,10 +99,7 @@ export const _SERVICES = [
 
 export const _MarketingServicesBenefits = [
   { value: 'Avantages Obtenus', label: 'Avantages Obtenus' },
-  {
-    value: 'Augmentation de l\'Engagement Utilisateur',
-    label: 'Augmentation de l\'Engagement Utilisateur'
-  },
+  { label: 'Augmentation de l\'Engagement Utilisateur' },
 ];
 
 export const _BENEFITS = [
@@ -144,11 +138,8 @@ export const _BENEFITS = [
 // ----------------------------------------------------------------------
 
 export const _MarketingServicesHowItWork = [
-  { value: 'Comment Ça Marche', label: 'Comment Ça Marche' },
-  {
-    value: 'Découvrez comment nous concevons vos applications avec succès.',
-    label: 'Découvrez comment nous concevons vos applications avec succès.'
-  },
+  { label: 'Comment Ça Marche' },
+  { label: 'Découvrez comment nous concevons vos applications avec succès.' },
 ];
 
 export const _TIMELINES = [

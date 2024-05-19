@@ -1,10 +1,10 @@
 export const _MarketingAbout = [
   { label: 'Qui suis-je ?' },
   {
-    label: "Fort d'une expérience diversifiée en tant que concepteur d'applications et développeur web, j'ai entrepris une reconversion professionnelle motivée par ma passion pour la création numérique. Ayant évolué dans ces domaines, j'ai acquis une compréhension approfondie des besoins des utilisateurs ainsi que des exigences techniques pour développer des solutions innovantes. Ma transition vers ce nouveau domaine est le résultat d'un désir ardent d'explorer de nouveaux horizons et de relever de nouveaux défis."
+    label: "Avec une solide expérience en conception d'applications et développement web, j'ai récemment embrassé une reconversion professionnelle motivée par ma passion pour le numérique. Ma compréhension approfondie des besoins des utilisateurs et des exigences techniques me permet de façonner des solutions innovantes qui dépassent les attentes des clients. Je reste constamment à l'affût des dernières tendances technologiques pour rester pertinent et créer un impact positif à travers chaque projet."
   },
   {
-    label: "Je m'engage pleinement à appliquer mes compétences et mon expérience antérieure pour façonner des applications web et mobiles qui surpassent les attentes de mes clients, tout en restant à l'avant-garde des dernières tendances technologiques. Mon parcours reflète mon engagement envers l'apprentissage continu et ma détermination à créer un impact positif à travers chaque projet que j'entreprends."
+    label: "Mon engagement pour l'apprentissage continu et mon désir de relever de nouveaux défis me poussent à rester à la pointe de mon domaine. Je suis déterminé à appliquer mes compétences et mon expérience antérieure pour façonner des applications web et mobiles de qualité, tout en restant flexible et adaptable aux évolutions du secteur."
   },
   { label: 'Voir Nos Réalisations' },
 ];

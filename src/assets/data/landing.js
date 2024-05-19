@@ -1,14 +1,13 @@
 import { paths } from "src/routes/paths";
 
 export const _MarketingLandingHero = [
-  { value: 'Digital Marketing', label: "Conception d'applications" },
-  { value: 'Boosts Your Website Traffic', label: 'Je réalise votre application.' },
+  { label: "Conception d'applications" },
+  { label: 'Je réalise votre application.' },
   {
-    value: 'Etiam sollicitudin, ipsum eu pulvinar rutrum, tellus ipsum laoreet sapien, quis venenatis ante odio sit amet eros.',
     label: 'Transformez vos concepts en applications remarquables avec mon expertise en développement sur mesure.'
   },
-  { value: 'Try For Free', label: 'Mes services' },
-  { value: 'See Our Work', label: 'Mes travaux' },
+  { label: 'Mes services' },
+  { label: 'Mes travaux' },
 ];
 
 // ----------------------------------------------------------------------
