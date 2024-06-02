@@ -6,7 +6,7 @@ export const _MarketingAbout = [
   {
     label: "Mon engagement pour l'apprentissage continu et mon désir de relever de nouveaux défis me poussent à rester à la pointe de mon domaine. Je suis déterminé à appliquer mes compétences et mon expérience antérieure pour façonner des applications web et mobiles de qualité, tout en restant flexible et adaptable aux évolutions du secteur."
   },
-  { label: 'Voir Nos Réalisations' },
+  { label: 'Voir Mes Réalisations' },
 ];
 
 export const _SUMMARY = [
@@ -18,13 +18,13 @@ export const _SUMMARY = [
 // ----------------------------------------------------------------------
 
 export const _MarketingAboutOurVision = [
-  { label: 'Nos Valeurs Fondamentales' },
+  { label: 'Mes Valeurs Fondamentales' },
 ];
 
 // ----------------------------------------------------------------------
 
 export const _MarketingAboutCoreValues = [
-  { label: 'Nos Valeurs Fondamentales' },
+  { label: 'Mes Valeurs Fondamentales' },
 ];
 
 export const _CORE_VALUES = [
@@ -90,7 +90,7 @@ export const _TIMELINESABOUT = [
 // ----------------------------------------------------------------------
 
 export const _MarketingAboutOurClients = [
-  { value: 'Nos Clients', label: 'Nos Clients' },
+  { value: 'Mes Clients', label: 'Mes Clients' },
   {
     value: 'Découvrez les marques qui nous font confiance pour la conception de leurs applications et services numériques.',
     label: 'Découvrez les marques qui nous font confiance pour la conception de leurs applications et services numériques.'

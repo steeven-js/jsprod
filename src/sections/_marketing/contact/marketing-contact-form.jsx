@@ -20,10 +20,9 @@ import FormProvider, { RHFSlider, RHFTextField } from 'src/components/hook-form'
 
 export default function MarketingContactForm() {
   const MarketingContactSchema = Yup.object().shape({
-    services: Yup.array().required().min(1, 'Services field must have at least 1 items'),
-    email: Yup.string().required('Email is required').email('That is not an email'),
-    company: Yup.string().required('company is required'),
-    website: Yup.string().required('Website is required'),
+    services: Yup.array().required().min(1, 'Le champ services doit contenir au moins 1 élément'),
+    email: Yup.string().required('L\'email est requis').email('Ce n\'est pas un email valide'),
+    company: Yup.string().required('Le nom de l\'entreprise est requis'),
   });
 
   const defaultValues = {
@@ -126,26 +125,26 @@ export default function MarketingContactForm() {
           direction={{ xs: 'column', md: 'row' }}
           sx={{ width: 1 }}
         >
-          <RHFTextField name="firstName" label="First Name" />
-          <RHFTextField name="lastName" label="Last Name" />
+          <RHFTextField name="firstName" label="Prénom" />
+          <RHFTextField name="lastName" label="Nom" />
         </Stack>
 
         <RHFTextField name="email" label="Email" />
-        <RHFTextField name="phoneNumber" label="Phone number" />
+        <RHFTextField name="phoneNumber" label="Téléphone portable" />
 
         <Stack
           direction={{ xs: 'column', md: 'row' }}
           spacing={{ xs: 2.5, md: 2 }}
           sx={{ width: 1 }}
         >
-          <RHFTextField name="company" label="Company" />
+          <RHFTextField name="company" label="Entreprise" />
 
-          <RHFTextField name="website" label="Website" />
+          <RHFTextField name="website" label="Site web" />
         </Stack>
 
         <Stack spacing={5} sx={{ py: 2, width: 1 }}>
           <Typography variant="overline" sx={{ color: 'text.disabled' }}>
-            Your Budget
+            Votre budget
           </Typography>
 
           <RHFSlider
