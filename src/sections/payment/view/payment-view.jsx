@@ -5,70 +5,59 @@ import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 
-import { useResponsive } from 'src/hooks/use-responsive';
-
-import PaymentSummary from '../payment-summary';
-import PaymentMethods from '../payment-methods';
+import { PaymentSummary } from '../payment-summary';
+import { PaymentMethods } from '../payment-methods';
 
 // ----------------------------------------------------------------------
 
-export default function PaymentView() {
-  const mdUp = useResponsive('up', 'md');
-
-  const renderBillingAddress = (
-    <div>
-      <Typography variant="h5">Billing Address</Typography>
-
-      <Stack spacing={2.5} mt={5}>
-        <TextField fullWidth label="Person name" />
-        <TextField fullWidth label="Phone number" />
-        <TextField fullWidth label="Email" />
-        <TextField fullWidth label="Address" />
-      </Stack>
-    </div>
-  );
-
+export function PaymentView() {
   return (
     <Container
       sx={{
-        overflow: 'hidden',
-        minHeight: 1,
-        pt: { xs: 13, md: 16 },
-        pb: { xs: 10, md: 15 },
+        pb: 10,
+        pt: { xs: 3, md: 5 },
       }}
     >
-      <Typography variant="h3" align="center" paragraph>
-        {`Let's Finish Powering You Up!`}
+      <Typography variant="h3" sx={{ mb: 2, textAlign: 'center' }}>
+        {`Let's finish powering you up!`}
       </Typography>
 
-      <Typography align="center" sx={{ color: 'text.secondary', mb: { xs: 5, md: 8 } }}>
+      <Typography sx={{ textAlign: 'center', color: 'text.secondary', mb: 5 }}>
         Professional plan is right for you.
       </Typography>
 
-      <Grid container spacing={mdUp ? 3 : 5}>
-        <Grid xs={12} md={8}>
+      <Grid container spacing={{ xs: 5, md: 3 }}>
+        <Grid xs={12} lg={8}>
           <Box
-            gap={5}
-            display="grid"
-            gridTemplateColumns={{
-              xs: 'repeat(1, 1fr)',
-              md: 'repeat(2, 1fr)',
-            }}
-            sx={{
-              p: { md: 5 },
+            sx={(theme) => ({
+              gap: 5,
               borderRadius: 2,
-              border: (theme) => ({
-                md: `dashed 1px ${theme.palette.divider}`,
-              }),
-            }}
+              display: 'grid',
+              gridTemplateColumns: 'repeat(1, 1fr)',
+              [theme.breakpoints.up('md')]: {
+                p: 5,
+                gridTemplateColumns: 'repeat(2, 1fr)',
+                border: `dashed 1px ${theme.vars.palette.divider}`,
+              },
+            })}
           >
-            {renderBillingAddress}
+            <div>
+              <Typography component="h6" variant="h5" sx={{ mb: { xs: 3, md: 5 } }}>
+                Billing address
+              </Typography>
+              <Stack spacing={3}>
+                <TextField fullWidth label="Person name" />
+                <TextField fullWidth label="Phone number" />
+                <TextField fullWidth label="Email" />
+                <TextField fullWidth label="Address" />
+              </Stack>
+            </div>
 
             <PaymentMethods />
           </Box>
         </Grid>
 
-        <Grid xs={12} md={4}>
+        <Grid xs={12} lg={4}>
           <PaymentSummary />
         </Grid>
       </Grid>

@@ -1,17 +1,32 @@
 import { Helmet } from 'react-helmet-async';
 
-import MarketingCaseStudyView from 'src/sections/_marketing/view/marketing-case-study-view';
+import { useParams } from 'src/routes/hooks';
+
+import { _caseStudies } from 'src/_mock';
+import { CONFIG } from 'src/config-global';
+
+import { MarketingCaseStudyView } from 'src/sections/_marketing/view/marketing-case-study-view';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingCaseStudyPage() {
+function fetchCaseStudy(paramId) {
+  return _caseStudies.find((caseStudy) => caseStudy.id === paramId);
+}
+
+// ----------------------------------------------------------------------
+
+export default function Page() {
+  const { id = '' } = useParams();
+
+  const data = fetchCaseStudy(id);
+
   return (
     <>
       <Helmet>
-        <title> Marketing: Case Study</title>
+        <title>{`${data?.title} | Marketing - ${CONFIG.appName}`}</title>
       </Helmet>
 
-      <MarketingCaseStudyView />
+      <MarketingCaseStudyView caseStudy={data} relatedCaseStudies={_caseStudies.slice(0, 3)} />
     </>
   );
 }

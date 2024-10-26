@@ -1,52 +1,45 @@
-import PropTypes from 'prop-types';
-
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { _MarketingAboutOurClients } from 'src/assets/data';
-
-import Image from 'src/components/image';
-
 // ----------------------------------------------------------------------
 
-export default function MarketingAboutOurClients({ brands }) {
+export function MarketingAboutOurClients({ brands, sx, ...other }) {
   return (
-    <Container
+    <Box
+      component="section"
       sx={{
-        pb: { xs: 7, md: 11 },
-        mt: { xs: 10, md: 15 },
+        textAlign: 'center',
+        pb: { xs: 10, md: 15 },
+        ...sx,
       }}
+      {...other}
     >
-      <Stack alignItems="center" spacing={5}>
-        <Typography variant="h2">{_MarketingAboutOurClients[0].label}</Typography>
+      <Container>
+        <Typography variant="h2" sx={{ mb: { xs: 5, md: 10 } }}>
+          Our clients
+        </Typography>
 
-        <Stack
-          direction="row"
+        <Box
+          rowGap={5}
+          display="flex"
           flexWrap="wrap"
           justifyContent="center"
-          sx={{ maxWidth: 680, overflow: 'hidden' }}
+          columnGap={{ xs: 4, md: 8 }}
+          sx={{ mx: 'auto', maxWidth: 680 }}
         >
-          {brands.slice(0, 8).map((brand) => (
-            <Box key={brand.id}>
-              <Image
-                alt={brand.name}
-                src={brand.image}
-                sx={{
-                  height: 32,
-                  mx: { xs: 2, md: 4 },
-                  my: { xs: 2.5, md: 4 },
-                }}
-              />
-            </Box>
+          {brands.map((brand) => (
+            <Box
+              key={brand.id}
+              component="img"
+              loading="lazy"
+              alt={brand.name}
+              src={brand.image.replace('.svg', '-original.svg')}
+              sx={{ width: 106, height: 32 }}
+            />
           ))}
-        </Stack>
-      </Stack>
-    </Container>
+        </Box>
+      </Container>
+    </Box>
   );
 }
-
-MarketingAboutOurClients.propTypes = {
-  brands: PropTypes.array,
-};

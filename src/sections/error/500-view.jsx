@@ -1,24 +1,25 @@
 import { m } from 'framer-motion';
 
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import { RouterLink } from 'src/routes/components';
 
-import CompactLayout from 'src/layouts/compact';
+import { CONFIG } from 'src/config-global';
+import { SimpleLayout } from 'src/layouts/simple';
 
-import Image from 'src/components/image';
 import { varBounce, MotionContainer } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
 
-export default function Error500View() {
+export function Error500View() {
   return (
-    <CompactLayout>
+    <SimpleLayout content={{ compact: true }}>
       <MotionContainer>
         <m.div variants={varBounce().in}>
-          <Typography variant="h3" paragraph>
-            500 Internal Server Error
+          <Typography variant="h3" sx={{ mb: 2 }}>
+            500 internal server error
           </Typography>
         </m.div>
 
@@ -29,21 +30,24 @@ export default function Error500View() {
         </m.div>
 
         <m.div variants={varBounce().in}>
-          <Image
-            alt="500"
-            src="/assets/illustrations/illustration_500.svg"
+          <Box
+            component="img"
+            alt="Error"
+            src={`${CONFIG.assetsDir}/assets/illustrations/illustration-500.svg`}
             sx={{
               mx: 'auto',
-              maxWidth: 320,
-              my: { xs: 5, sm: 8 },
+              width: 320,
+              maxWidth: 1,
+              height: 'auto',
+              my: { xs: 5, sm: 10 },
             }}
           />
         </m.div>
 
         <Button component={RouterLink} href="/" size="large" color="inherit" variant="contained">
-          Go to Home
+          Go to home
         </Button>
       </MotionContainer>
-    </CompactLayout>
+    </SimpleLayout>
   );
 }

@@ -1,9 +1,11 @@
+import { CONFIG } from 'src/config-global';
+
 import { _mock } from './_mock';
 import { _tags } from './assets';
 
 // ----------------------------------------------------------------------
 
-const TITLE = [
+const TITLES = [
   'Bank of America',
   'Technology Nixon',
   'Turn Key Smart',
@@ -15,17 +17,11 @@ const TITLE = [
 ];
 
 const CONTENT = `
-<h4>Project Brief</h4>
-<br/>
+<h4>Project brief</h4>
 <p>Nullam tincidunt adipiscing enim. Mauris sollicitudin fermentum libero. Pellentesque auctor neque nec urna. Sed fringilla mauris sit amet nibh. Phasellus viverra nulla ut metus varius laoreet.</p>
 
-<br/>
-<br/>
-
-<h4>How We Work</h4>
-<br/>
+<h4>How we work</h4>
 <p>Nullam tincidunt adipiscing enim. Mauris sollicitudin fermentum libero. Pellentesque auctor neque nec urna. Sed fringilla mauris sit amet nibh. Phasellus viverra nulla ut metus varius laoreet.</p>
-<br/>
 <ul>
     <li>Medical Assistant</li>
     <li>Web Designer</li>
@@ -34,10 +30,7 @@ const CONTENT = `
     <li>President of Sales</li>
 </ul>
 
-<br/>
-<br/>
 <h4>Results</h4>
-<br/>
 <p>Nullam tincidunt adipiscing enim. Mauris sollicitudin fermentum libero. Pellentesque auctor neque nec urna. Sed fringilla mauris sit amet nibh. Phasellus viverra nulla ut metus varius laoreet.</p>
 <ul>
     <li>Medical Assistant</li>
@@ -48,30 +41,32 @@ const CONTENT = `
 </ul>
 `;
 
-export const _caseStudies = TITLE.map((_, index) => {
-  const galleryImgs = [
-    _mock.image.marketing(0),
-    _mock.image.marketing(1),
-    _mock.image.marketing(2),
-    _mock.image.marketing(3),
-    _mock.image.marketing(4),
-    _mock.image.marketing(5),
-  ];
+// ----------------------------------------------------------------------
 
-  return {
-    id: _mock.id(index),
-    content: CONTENT,
-    title: TITLE[index],
-    category: _tags[index],
-    createdAt: _mock.time(index),
-    website: 'https://example.com/',
-    description: _mock.description(index),
-    heroUrl: '/assets/images/marketing/marketing_post_hero.jpg',
-    coverUrl: `/assets/images/marketing/marketing_${index + 1}.jpg`,
-    how_we_work:
-      'Nullam tincidunt adipiscing enim. Mauris sollicitudin fermentum libero. Pellentesque auctor neque nec urna. Sed fringi',
-    results:
-      'Nullam tincidunt adipiscing enim. Mauris sollicitudin fermentum libero. Pellentesque auctor neque nec urna. Sed fringi',
-    galleryImgs,
-  };
-});
+const getCategory = (index) => {
+  if ([1, 2].includes(index)) return _tags[1];
+  if ([3, 4].includes(index)) return _tags[2];
+  if ([5, 6].includes(index)) return _tags[3];
+  return _tags[0];
+};
+
+const getGalleryImgs = () => [...Array(6)].map((_, index) => _mock.image.marketing(index));
+
+// ----------------------------------------------------------------------
+
+export const _caseStudies = TITLES.map((_, index) => ({
+  id: _mock.id(index),
+  content: CONTENT,
+  title: TITLES[index],
+  createdAt: _mock.time(index),
+  website: 'https://example.com/',
+  description: _mock.description(index),
+  coverUrl: _mock.image.marketing(index + 1),
+  heroUrl: `${CONFIG.assetsDir}/assets/images/marketing/marketing-large-1.webp`,
+  how_we_work:
+    'Nullam tincidunt adipiscing enim. Mauris sollicitudin fermentum libero. Pellentesque auctor neque nec urna. Sed fringi',
+  results:
+    'Nullam tincidunt adipiscing enim. Mauris sollicitudin fermentum libero. Pellentesque auctor neque nec urna. Sed fringi',
+  category: getCategory(index),
+  galleryImgs: getGalleryImgs(),
+}));

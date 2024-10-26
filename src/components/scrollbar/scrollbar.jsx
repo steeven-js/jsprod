@@ -1,44 +1,42 @@
-import PropTypes from 'prop-types';
-import { memo, forwardRef } from 'react';
+import { forwardRef } from 'react';
+import SimpleBar from 'simplebar-react';
 
 import Box from '@mui/material/Box';
 
-import { StyledScrollbar, StyledRootScrollbar } from './styles';
+import { scrollbarClasses } from './classes';
 
 // ----------------------------------------------------------------------
 
-const Scrollbar = forwardRef(({ children, sx, ...other }, ref) => {
-  const userAgent = typeof navigator === 'undefined' ? 'SSR' : navigator.userAgent;
+export const Scrollbar = forwardRef(
+  ({ slotProps, children, fillContent, naturalScroll, sx, className, ...other }, ref) => (
+    <Box
+      component={SimpleBar}
+      scrollableNodeProps={{ ref }}
+      clickOnTrack={false}
+      className={scrollbarClasses.root.concat(className ? ` ${className}` : '')}
+      sx={{
+        minWidth: 0,
+        minHeight: 0,
+        flexGrow: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        '& .simplebar-wrapper': slotProps?.wrapper,
+        '& .simplebar-content-wrapper': slotProps?.contentWrapper,
+        '& .simplebar-content': {
+          ...(fillContent && {
+            minHeight: 1,
+            display: 'flex',
+            flex: '1 1 auto',
+            flexDirection: 'column',
+          }),
 
-  const mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
-
-  if (mobile) {
-    return (
-      <Box ref={ref} sx={{ overflow: 'auto', ...sx }} {...other}>
-        {children}
-      </Box>
-    );
-  }
-
-  return (
-    <StyledRootScrollbar>
-      <StyledScrollbar
-        scrollableNodeProps={{
-          ref,
-        }}
-        clickOnTrack={false}
-        sx={sx}
-        {...other}
-      >
-        {children}
-      </StyledScrollbar>
-    </StyledRootScrollbar>
-  );
-});
-
-Scrollbar.propTypes = {
-  children: PropTypes.node,
-  sx: PropTypes.object,
-};
-
-export default memo(Scrollbar);
+          ...slotProps?.content,
+        },
+        ...sx,
+      }}
+      {...other}
+    >
+      {children}
+    </Box>
+  )
+);

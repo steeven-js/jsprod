@@ -1,1 +1,1 @@
-export { default as LocalizationProvider } from './localization-provider';
+export * from './localization-provider';

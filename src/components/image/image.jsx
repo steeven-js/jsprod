@@ -1,23 +1,45 @@
-import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 import Box from '@mui/material/Box';
-import { alpha, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 
-import { getRatio } from './utils';
+import { CONFIG } from 'src/config-global';
+
+import { imageClasses } from './classes';
 
 // ----------------------------------------------------------------------
 
-const Image = forwardRef(
+const ImageWrapper = styled(Box)({
+  overflow: 'hidden',
+  position: 'relative',
+  verticalAlign: 'bottom',
+  display: 'inline-block',
+  [`& .${imageClasses.wrapper}`]: {
+    width: '100%',
+    height: '100%',
+    verticalAlign: 'bottom',
+    backgroundSize: 'cover !important',
+  },
+});
+
+const Overlay = styled('span')({
+  top: 0,
+  left: 0,
+  zIndex: 1,
+  width: '100%',
+  height: '100%',
+  position: 'absolute',
+});
+
+// ----------------------------------------------------------------------
+
+export const Image = forwardRef(
   (
     {
-      ratio,
-      overlay,
-      disabledEffect = false,
       alt,
       src,
-      afterLoad,
+      ratio,
       delayTime,
       threshold,
       beforeLoad,
@@ -28,33 +50,21 @@ const Image = forwardRef(
       effect = 'blur',
       visibleByDefault,
       wrapperClassName,
+      disabledEffect = false,
       useIntersectionObserver,
+      //
       sx,
+      slotProps,
+      className,
       ...other
     },
     ref
   ) => {
-    const theme = useTheme();
-
-    const overlayStyles = !!overlay && {
-      '&:before': {
-        content: "''",
-        top: 0,
-        left: 0,
-        width: 1,
-        height: 1,
-        zIndex: 1,
-        position: 'absolute',
-        background: overlay || alpha(theme.palette.grey[900], 0.48),
-      },
-    };
-
     const content = (
       <Box
         component={LazyLoadImage}
         alt={alt}
         src={src}
-        afterLoad={afterLoad}
         delayTime={delayTime}
         threshold={threshold}
         beforeLoad={beforeLoad}
@@ -63,77 +73,36 @@ const Image = forwardRef(
         wrapperProps={wrapperProps}
         scrollPosition={scrollPosition}
         visibleByDefault={visibleByDefault}
-        effect={disabledEffect ? undefined : effect}
+        effect={visibleByDefault || disabledEffect ? undefined : effect}
         useIntersectionObserver={useIntersectionObserver}
-        wrapperClassName={wrapperClassName || 'component-image-wrapper'}
-        placeholderSrc={disabledEffect ? '/assets/transparent.png' : '/assets/placeholder.svg'}
-        //
+        wrapperClassName={wrapperClassName || imageClasses.wrapper}
+        placeholderSrc={
+          visibleByDefault || disabledEffect
+            ? `${CONFIG.assetsDir}/assets/core/transparent.png`
+            : `${CONFIG.assetsDir}/assets/core/placeholder.svg`
+        }
         sx={{
           width: 1,
           height: 1,
           objectFit: 'cover',
           verticalAlign: 'bottom',
-          ...(!!ratio && {
-            top: 0,
-            left: 0,
-            position: 'absolute',
-          }),
+          aspectRatio: ratio,
         }}
       />
     );
 
     return (
-      <Box
+      <ImageWrapper
         ref={ref}
         component="span"
-        className="component-image"
-        sx={{
-          overflow: 'hidden',
-          position: 'relative',
-          verticalAlign: 'bottom',
-          display: 'inline-block',
-          ...(!!ratio && {
-            width: 1,
-          }),
-          '& span.component-image-wrapper': {
-            width: 1,
-            height: 1,
-            verticalAlign: 'bottom',
-            backgroundSize: 'cover !important',
-            ...(!!ratio && {
-              pt: getRatio(ratio),
-            }),
-          },
-          ...overlayStyles,
-          ...sx,
-        }}
+        className={imageClasses.root.concat(className ? ` ${className}` : '')}
+        sx={{ ...(!!ratio && { width: 1 }), ...sx }}
         {...other}
       >
+        {slotProps?.overlay && <Overlay className={imageClasses.overlay} sx={slotProps?.overlay} />}
+
         {content}
-      </Box>
+      </ImageWrapper>
     );
   }
 );
-
-Image.propTypes = {
-  afterLoad: PropTypes.func,
-  alt: PropTypes.string,
-  beforeLoad: PropTypes.func,
-  delayMethod: PropTypes.string,
-  delayTime: PropTypes.number,
-  disabledEffect: PropTypes.bool,
-  effect: PropTypes.string,
-  overlay: PropTypes.string,
-  placeholder: PropTypes.element,
-  ratio: PropTypes.oneOf(['4/3', '3/4', '6/4', '4/6', '16/9', '9/16', '21/9', '9/21', '1/1']),
-  scrollPosition: PropTypes.object,
-  src: PropTypes.string,
-  sx: PropTypes.object,
-  threshold: PropTypes.number,
-  useIntersectionObserver: PropTypes.bool,
-  visibleByDefault: PropTypes.bool,
-  wrapperClassName: PropTypes.string,
-  wrapperProps: PropTypes.object,
-};
-
-export default Image;

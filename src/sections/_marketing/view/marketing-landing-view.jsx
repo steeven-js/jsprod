@@ -1,34 +1,34 @@
-
-import useFetchPosts from 'src/hooks/use-fetchPosts';
-import useFetchStudies from 'src/hooks/use-fetchStudies';
-
 import {
   _brands,
+  _members,
+  _caseStudies,
+  _testimonials,
+  _marketingPosts,
+  _pricingMarketing,
 } from 'src/_mock';
 
-import { SplashScreen } from 'src/components/loading-screen';
-
-import MarketingOurClients from '../marketing-our-clients';
-import MarketingLandingHero from '../landing/marketing-landing-hero';
-import MarketingLandingFaqs from '../landing/marketing-landing-faqs';
-import MarketingLandingAbout from '../landing/marketing-landing-about';
-import MarketingLandingProcess from '../landing/marketing-landing-process';
-import MarketingLandingServices from '../landing/marketing-landing-services';
-import BlogMarketingLatestPosts from '../../blog/marketing/marketing-latest-posts';
-import MarketingLandingCaseStudies from '../landing/marketing-landing-case-studies';
+import { MarketingTeam } from '../marketing-team';
+import { MarketingPricing } from './marketing-pricing';
+import { MarketingNewsletter } from '../marketing-newsletter';
+import { MarketingOurClients } from '../marketing-our-clients';
+import { MarketingTestimonial } from '../marketing-testimonial';
+import { MarketingLatestPosts } from '../posts/marketing-latest-posts';
+import { MarketingLandingHero } from '../landing/marketing-landing-hero';
+import { MarketingLandingFaqs } from '../landing/marketing-landing-faqs';
+import { MarketingLandingAbout } from '../landing/marketing-landing-about';
+import { MarketingLandingProcess } from '../landing/marketing-landing-process';
+import { MarketingLandingFreeSEO } from '../landing/marketing-landing-free-seo';
+import { MarketingLandingServices } from '../landing/marketing-landing-services';
+import { MarketingLandingCaseStudies } from '../landing/marketing-landing-case-studies';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingLandingView() {
+const caseStudies = _caseStudies.slice(0, 6);
+const latestPosts = _marketingPosts.slice(0, 4);
 
-  const { studies, isStudiesLoading } = useFetchStudies();
+// ----------------------------------------------------------------------
 
-  const { posts } = useFetchPosts();
-
-  if (isStudiesLoading) {
-    return <SplashScreen />;
-  }
-
+export function MarketingLandingView() {
   return (
     <>
       <MarketingLandingHero />
@@ -41,21 +41,21 @@ export default function MarketingLandingView() {
 
       <MarketingLandingProcess />
 
-      {studies.length > 5 ? <MarketingLandingCaseStudies caseStudies={studies.slice(-6)} /> : null}
+      <MarketingLandingCaseStudies caseStudies={caseStudies} />
 
-      {/* <MarketingTeam members={_members} /> */}
+      <MarketingTeam members={_members} />
 
-      {/* <PricingMarketing plans={_pricingMarketing} /> */}
+      <MarketingPricing plans={_pricingMarketing} />
 
       <MarketingLandingFaqs />
 
-      {/* <MarketingTestimonial testimonials={_testimonials} /> */}
+      <MarketingTestimonial testimonials={_testimonials} />
 
-      {studies.length > 5 ? <BlogMarketingLatestPosts posts={posts.slice(0, 4)} /> : null}
+      <MarketingLatestPosts posts={latestPosts} />
 
-      {/* <MarketingLandingFreeSEO /> */}
+      <MarketingLandingFreeSEO />
 
-      {/* <MarketingNewsletter /> */}
+      <MarketingNewsletter />
     </>
   );
 }

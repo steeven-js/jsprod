@@ -1,9 +1,11 @@
 import path from 'path';
+import checker from 'vite-plugin-checker';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
-import checker from 'vite-plugin-checker';
 
 // ----------------------------------------------------------------------
+
+const PORT = 3001;
 
 export default defineConfig({
   plugins: [
@@ -11,8 +13,10 @@ export default defineConfig({
     checker({
       eslint: {
         lintCommand: 'eslint "./src/**/*.{js,jsx,ts,tsx}"',
+        dev: { logLevel: ['error'] },
       },
       overlay: {
+        position: 'tl',
         initialIsOpen: false,
       },
     }),
@@ -29,10 +33,6 @@ export default defineConfig({
       },
     ],
   },
-  server: {
-    port: 3001,
-  },
-  preview: {
-    port: 3001,
-  },
+  server: { port: PORT, host: true },
+  preview: { port: PORT, host: true },
 });

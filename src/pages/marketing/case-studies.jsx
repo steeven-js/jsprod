@@ -1,25 +1,22 @@
 import { Helmet } from 'react-helmet-async';
 
-import useFetchStudies from 'src/hooks/use-fetchStudies';
+import { _caseStudies } from 'src/_mock';
+import { CONFIG } from 'src/config-global';
 
-import { SplashScreen } from 'src/components/loading-screen';
-
-import MarketingCaseStudiesView from 'src/sections/_marketing/view/marketing-case-studies-view';
+import { MarketingCaseStudiesView } from 'src/sections/_marketing/view/marketing-case-studies-view';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingCaseStudiesPage() {
+const metadata = { title: `Case studies | Marketing - ${CONFIG.appName}` };
 
-  const { studies, categories, studyCoverUrls, isStudiesLoading } = useFetchStudies();
-
+export default function Page() {
   return (
     <>
       <Helmet>
-        <title> Marketing: Case Studies</title>
+        <title> {metadata.title}</title>
       </Helmet>
 
-      {isStudiesLoading ? <SplashScreen /> : <MarketingCaseStudiesView studies={studies} categories={categories} studyCoverUrls={studyCoverUrls} />}
-
+      <MarketingCaseStudiesView caseStudies={_caseStudies} />
     </>
   );
 }

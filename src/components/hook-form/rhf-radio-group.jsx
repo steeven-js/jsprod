@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import Radio from '@mui/material/Radio';
@@ -10,55 +9,50 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 
 // ----------------------------------------------------------------------
 
-export default function RHFRadioGroup({
-  row,
-  name,
-  label,
-  options,
-  spacing,
-  helperText,
-  ...other
-}) {
+export function RHFRadioGroup({ name, label, options, helperText, slotProps, ...other }) {
   const { control } = useFormContext();
 
-  const labelledby = label ? `${name}-${label}` : '';
+  const labelledby = `${name}-radio-buttons-group-label`;
+  const ariaLabel = (val) => `Radio ${val}`;
 
   return (
     <Controller
       name={name}
       control={control}
       render={({ field, fieldState: { error } }) => (
-        <FormControl component="fieldset">
+        <FormControl component="fieldset" sx={slotProps?.wrap}>
           {label && (
-            <FormLabel component="legend" id={labelledby} sx={{ typography: 'body2' }}>
+            <FormLabel
+              id={labelledby}
+              component="legend"
+              {...slotProps?.formLabel}
+              sx={{ mb: 1, typography: 'body2', ...slotProps?.formLabel.sx }}
+            >
               {label}
             </FormLabel>
           )}
 
-          <RadioGroup {...field} aria-labelledby={labelledby} row={row} {...other}>
+          <RadioGroup {...field} aria-labelledby={labelledby} {...other}>
             {options.map((option) => (
               <FormControlLabel
                 key={option.value}
                 value={option.value}
-                control={<Radio />}
+                control={
+                  <Radio
+                    {...slotProps?.radio}
+                    inputProps={{
+                      ...(!option.label && { 'aria-label': ariaLabel(option.label) }),
+                      ...slotProps?.radio?.inputProps,
+                    }}
+                  />
+                }
                 label={option.label}
-                sx={{
-                  '&:not(:last-of-type)': {
-                    mb: spacing || 0,
-                  },
-                  ...(row && {
-                    mr: 0,
-                    '&:not(:last-of-type)': {
-                      mr: spacing || 2,
-                    },
-                  }),
-                }}
               />
             ))}
           </RadioGroup>
 
           {(!!error || helperText) && (
-            <FormHelperText error={!!error} sx={{ mx: 0 }}>
+            <FormHelperText error={!!error} sx={{ mx: 0 }} {...slotProps?.formHelperText}>
               {error ? error?.message : helperText}
             </FormHelperText>
           )}
@@ -67,12 +61,3 @@ export default function RHFRadioGroup({
     />
   );
 }
-
-RHFRadioGroup.propTypes = {
-  helperText: PropTypes.string,
-  label: PropTypes.string,
-  name: PropTypes.string,
-  options: PropTypes.array,
-  row: PropTypes.bool,
-  spacing: PropTypes.number,
-};

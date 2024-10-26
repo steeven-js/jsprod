@@ -1,1 +1,3 @@
-export { default } from './markdown';
+export * from './styles';
+
+export * from './markdown';

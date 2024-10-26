@@ -1,36 +1,27 @@
 import { m } from 'framer-motion';
-import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material/styles';
+import Portal from '@mui/material/Portal';
 
-import { bgBlur } from 'src/theme/css';
-
-import Logo from '../logo';
+import { Logo } from '../logo';
 
 // ----------------------------------------------------------------------
 
-export default function SplashScreen({ sx, ...other }) {
-  const theme = useTheme();
-
-  return (
-    <>
+export function SplashScreen({ portal = true, sx, ...other }) {
+  const content = (
+    <Box sx={{ overflow: 'hidden' }}>
       <Box
         sx={{
-          ...bgBlur({
-            blur: 2,
-            opacity: 0.24,
-            color: theme.palette.background.default,
-          }),
-          top: 0,
-          left: 0,
+          right: 0,
           width: 1,
+          bottom: 0,
           height: 1,
-          zIndex: 9999,
+          zIndex: 9998,
           display: 'flex',
-          position: 'absolute',
+          position: 'fixed',
           alignItems: 'center',
           justifyContent: 'center',
+          bgcolor: 'background.default',
           ...sx,
         }}
         {...other}
@@ -42,20 +33,20 @@ export default function SplashScreen({ sx, ...other }) {
           }}
           transition={{
             duration: 2,
-            ease: 'easeInOut',
             repeatDelay: 1,
             repeat: Infinity,
+            ease: 'easeInOut',
           }}
         >
-          <Logo single sx={{ width: 128, height: 128 }} />
+          <Logo isSingle sx={{ width: 128, height: 128 }} />
         </m.div>
       </Box>
-
-      <Box sx={{ width: 1, height: '100vh' }} />
-    </>
+    </Box>
   );
-}
 
-SplashScreen.propTypes = {
-  sx: PropTypes.object,
-};
+  if (portal) {
+    return <Portal>{content}</Portal>;
+  }
+
+  return content;
+}

@@ -1,53 +1,95 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+
+function formatTime(value) {
+  return String(value).length === 1 ? `0${value}` : `${value}`;
+}
+
+function calculateTimeDifference(futureDate, currentDate) {
+  const distance = futureDate.getTime() - currentDate.getTime();
+
+  return {
+    days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+    minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+    seconds: Math.floor((distance % (1000 * 60)) / 1000),
+  };
+}
 
 // ----------------------------------------------------------------------
 
-export function useCountdown(date) {
-  const [countdown, setCountdown] = useState({
-    days: '00',
-    hours: '00',
-    minutes: '00',
-    seconds: '00',
+export function useCountdownDate(targetDate, placeholder = '- -') {
+  const [value, setValue] = useState({
+    days: placeholder,
+    hours: placeholder,
+    minutes: placeholder,
+    seconds: placeholder,
   });
 
+  const handleUpdate = useCallback(() => {
+    const now = new Date();
+    const { days, hours, minutes, seconds } = calculateTimeDifference(targetDate, now);
+
+    setValue({
+      days: formatTime(days),
+      hours: formatTime(hours),
+      minutes: formatTime(minutes),
+      seconds: formatTime(seconds),
+    });
+  }, [targetDate]);
+
   useEffect(() => {
-    const interval = setInterval(() => setNewTime(), 1000);
+    handleUpdate();
+    const interval = setInterval(handleUpdate, 1000);
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const setNewTime = () => {
-    const startTime = date;
+  return value;
+}
 
-    const endTime = new Date();
+// ----------------------------------------------------------------------
 
-    const distanceToNow = startTime.valueOf() - endTime.valueOf();
+export function useCountdownSeconds(initialSeconds) {
+  const [value, setValue] = useState(initialSeconds);
 
-    const getDays = Math.floor(distanceToNow / (1000 * 60 * 60 * 24));
+  const [isCounting, setIsCounting] = useState(false);
 
-    const getHours = `0${Math.floor(
-      (distanceToNow % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    )}`.slice(-2);
+  const handleStart = useCallback(() => {
+    setIsCounting(true);
+  }, []);
 
-    const getMinutes = `0${Math.floor((distanceToNow % (1000 * 60 * 60)) / (1000 * 60))}`.slice(-2);
+  const handleReset = useCallback(() => {
+    setIsCounting(false);
+    setValue(initialSeconds);
+  }, [initialSeconds]);
 
-    const getSeconds = `0${Math.floor((distanceToNow % (1000 * 60)) / 1000)}`.slice(-2);
+  useEffect(() => {
+    let interval = null;
 
-    setCountdown({
-      days: getDays.toString() || '000',
-      hours: getHours || '000',
-      minutes: getMinutes || '000',
-      seconds: getSeconds || '000',
-    });
-  };
+    if (isCounting && value > 0) {
+      interval = setInterval(() => {
+        setValue((prevValue) => prevValue - 1);
+      }, 1000);
+    } else if (value <= 0) {
+      setIsCounting(false);
+    }
+
+    return () => {
+      if (interval) clearInterval(interval);
+    };
+  }, [isCounting, value]);
 
   return {
-    days: countdown.days,
-    hours: countdown.hours,
-    minutes: countdown.minutes,
-    seconds: countdown.seconds,
+    value,
+    setValue,
+    isCounting,
+    start: handleStart,
+    reset: handleReset,
   };
 }
 
-// Usage
-// const countdown = useCountdown(new Date('07/07/2022 21:30'));
+/**
+ * Usage
+ * const countdown = useCountdownSeconds(10);
+ * const { value, start, reset, isCounting } = useCountdownSeconds(30);
+ */

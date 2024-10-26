@@ -1,14 +1,18 @@
 import { Helmet } from 'react-helmet-async';
 
-import VerifyView from 'src/sections/auth/verify-view';
+import { CONFIG } from 'src/config-global';
+
+import { VerifyView } from 'src/sections/auth/verify-view';
 
 // ----------------------------------------------------------------------
 
-export default function VerifyPage() {
+const metadata = { title: `Verify - ${CONFIG.appName}` };
+
+export default function Page() {
   return (
     <>
       <Helmet>
-        <title> Verify</title>
+        <title> {metadata.title}</title>
       </Helmet>
 
       <VerifyView />

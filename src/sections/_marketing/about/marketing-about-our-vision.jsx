@@ -1,94 +1,92 @@
+import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
-import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import { alpha, styled, useTheme } from '@mui/material/styles';
 
-import { _MarketingAboutOurVision } from 'src/assets/data';
+import { CONFIG } from 'src/config-global';
+import { varAlpha } from 'src/theme/styles';
 
-import Image from 'src/components/image';
-import Iconify from 'src/components/iconify';
-
-// ----------------------------------------------------------------------
-
-const StyledTypography = styled(Typography)(({ theme }) => ({
-  maxWidth: 564,
-  margin: 'auto',
-  textAlign: 'center',
-  [theme.breakpoints.up('md')]: {
-    left: 0,
-    right: 0,
-    zIndex: 9,
-    position: 'absolute',
-    color: theme.palette.common.white,
-  },
-}));
+import { Image } from 'src/components/image';
+import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingAboutOurVision() {
-  const theme = useTheme();
-
+export function MarketingAboutOurVision({ sx, ...other }) {
   return (
-    <Container>
-      <Stack alignItems="center" justifyContent="center" sx={{ position: 'relative' }}>
+    <Box
+      component="section"
+      sx={{
+        position: 'relative',
+        textAlign: 'center',
+        ...sx,
+      }}
+      {...other}
+    >
+      <Container>
         <Typography
           variant="h2"
-          sx={{
+          sx={(theme) => ({
             mb: 5,
-            textAlign: 'center',
-            top: { md: 80 },
-            left: { md: 0 },
-            right: { md: 0 },
-            zIndex: { md: 9 },
-            position: { md: 'absolute' },
-            color: { md: 'common.white' },
-          }}
+            mx: 'auto',
+            [theme.breakpoints.up('md')]: {
+              top: 80,
+              zIndex: 9,
+              left: '50%',
+              position: 'absolute',
+              color: 'common.white',
+              transform: 'translateX(-50%)',
+            },
+          })}
         >
-          {_MarketingAboutOurVision[0].title}
+          Our vision
         </Typography>
 
-        <Stack
+        <Box
+          display="flex"
           alignItems="center"
           justifyContent="center"
-          sx={{
-            position: 'relative',
-            width: 1,
-            borderRadius: 2,
-            overflow: 'hidden',
-          }}
+          sx={{ borderRadius: 2, overflow: 'hidden', position: 'relative' }}
         >
-          <Fab
-            color="primary"
-            sx={{
-              zIndex: 9,
-              position: 'absolute',
-            }}
-          >
-            <Iconify icon="carbon:play" width={24} />
+          <Fab color="primary" sx={{ zIndex: 9, position: 'absolute' }}>
+            <Iconify width={22} icon="solar:play-outline" />
           </Fab>
 
           <Image
-            alt="hero"
-            src="/assets/images/marketing/marketing_post_01.jpg"
+            alt="Hero"
+            src={`${CONFIG.assetsDir}/assets/images/marketing/marketing-large-2.webp`}
             ratio="16/9"
-            overlay={`linear-gradient(to bottom, ${alpha(theme.palette.common.black, 0)} 0%, ${
-              theme.palette.common.black
-            } 100%)`}
+            slotProps={{
+              overlay: {
+                backgroundImage: (theme) =>
+                  `linear-gradient(to bottom, ${varAlpha(theme.vars.palette.common.blackChannel, 0)}, ${
+                    theme.vars.palette.common.black
+                  })`,
+              },
+            }}
           />
-        </Stack>
+        </Box>
 
-        <StyledTypography
+        <Typography
           variant="h5"
-          sx={{
+          component="p"
+          sx={(theme) => ({
             mt: 5,
-            bottom: { md: 80 },
-            opacity: { md: 0.72 },
-          }}
+            mx: 'auto',
+            maxWidth: 564,
+            [theme.breakpoints.up('md')]: {
+              zIndex: 9,
+              bottom: 80,
+              left: '50%',
+              opacity: 0.72,
+              position: 'absolute',
+              transform: 'translateX(-50%)',
+              color: theme.vars.palette.common.white,
+            },
+          })}
         >
-          {_MarketingAboutOurVision[0].description}
-        </StyledTypography>
-      </Stack>
-    </Container>
+          Our vision offering the best product nulla vehicula tortor scelerisque ultrices malesuada.
+        </Typography>
+      </Container>
+    </Box>
   );
 }

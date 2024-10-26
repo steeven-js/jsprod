@@ -1,113 +1,149 @@
-import PropTypes from 'prop-types';
-
 import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
+import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
 
+import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
-import { _SERVICESLANDING, _MarketingLandingServices } from 'src/assets/data';
+import { CONFIG } from 'src/config-global';
+import { varAlpha, stylesMode } from 'src/theme/styles';
 
-import Iconify from 'src/components/iconify';
-import SvgColor from 'src/components/svg-color';
-import TextMaxLine from 'src/components/text-max-line';
+import { Iconify } from 'src/components/iconify';
+import { SvgColor } from 'src/components/svg-color';
 
 // ----------------------------------------------------------------------
+
+const iconPath = (name) => `${CONFIG.assetsDir}/assets/icons/duotone/${name}`;
 
 const COLORS = ['primary', 'secondary', 'success', 'warning'];
 
+const SERVICES = [
+  {
+    name: 'SEO',
+    icon: iconPath('ic-seo.svg'),
+    content: 'Nunc nonummy metus. Donec elit libero',
+    path: paths.marketing.services,
+  },
+  {
+    name: 'Email marketing',
+    icon: iconPath('ic-marketing-mail.svg'),
+    content: 'Nunc nonummy metus. Donec elit libero',
+    path: paths.marketing.services,
+  },
+  {
+    name: 'Search engine oprimization',
+    icon: iconPath('ic-search-oprimization.svg'),
+    content: 'Nunc nonummy metus. Donec elit libero',
+    path: paths.marketing.services,
+  },
+  {
+    name: 'Social marketing',
+    icon: iconPath('ic-marketing-bullhorn.svg'),
+    content: 'Nunc nonummy metus. Donec elit libero',
+    path: paths.marketing.services,
+  },
+];
+
 // ----------------------------------------------------------------------
 
-export default function MarketingLandingServices() {
+export function MarketingLandingServices({ sx, ...other }) {
   return (
-    <Container
+    <Box
+      component="section"
       sx={{
         py: { xs: 5, md: 10 },
+        ...sx,
       }}
+      {...other}
     >
-      <Stack
-        spacing={3}
-        sx={{
-          maxWidth: 480,
-          mb: { xs: 8, md: 5 },
-          mx: { xs: 'auto', md: 'unset' },
-          textAlign: { xs: 'center', md: 'unset' },
-        }}
-      >
-        <Typography variant="overline" sx={{ color: 'text.disabled' }}>
-          {_MarketingLandingServices[0].label}
-        </Typography>
+      <Container>
+        <Stack
+          spacing={3}
+          sx={{
+            mb: 5,
+            maxWidth: 480,
+            mx: { xs: 'auto', md: 'unset' },
+            textAlign: { xs: 'center', md: 'unset' },
+          }}
+        >
+          <Typography variant="overline" sx={{ color: 'text.disabled' }}>
+            Our services
+          </Typography>
 
-        <Typography variant="h2">{_MarketingLandingServices[1].label}</Typography>
+          <Typography variant="h2">We provide</Typography>
 
-        <Typography sx={{ color: 'text.secondary' }}>
-          {_MarketingLandingServices[2].label}
-        </Typography>
-      </Stack>
+          <Typography sx={{ color: 'text.secondary' }}>
+            Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.
+          </Typography>
+        </Stack>
 
-      <Box
-        sx={{
-          gap: 4,
-          display: 'grid',
-          alignItems: 'center',
-          gridTemplateColumns: {
+        <Box
+          gap={4}
+          display="grid"
+          gridTemplateColumns={{
             xs: 'repeat(1, 1fr)',
             sm: 'repeat(2, 1fr)',
             md: 'repeat(4, 1fr)',
-          },
-        }}
-      >
-        {_SERVICESLANDING.map((service, index) => (
-          <ServiceItem key={service.name} service={service} index={index} />
-        ))}
-      </Box>
-    </Container>
+          }}
+          sx={{ alignItems: 'center' }}
+        >
+          {SERVICES.map((item, index) => (
+            <ServiceItem key={item.name} item={item} index={index} />
+          ))}
+        </Box>
+      </Container>
+    </Box>
   );
 }
 
-// ----------------------------------------------------------------------
-
-function ServiceItem({ service, index }) {
-  const { name, icon, content, path } = service;
-
+function ServiceItem({ item, index }) {
   return (
-    <Card
-      sx={{
+    <Paper
+      variant="outlined"
+      sx={(theme) => ({
         px: 4,
         py: 5,
+        borderRadius: 2,
         textAlign: 'center',
-        ...(index === 1 && {
-          py: { xs: 5, md: 8 },
-        }),
-        ...(index === 2 && {
-          py: { xs: 5, md: 10 },
-          boxShadow: (theme) => ({ md: theme.customShadows.z24 }),
-        }),
-      }}
+        bgcolor: 'transparent',
+        boxShadow: theme.customShadows.card,
+        [theme.breakpoints.up('md')]: {
+          boxShadow: 'none',
+          ...(index === 1 && { py: 8 }),
+          ...(index === 2 && { py: 10 }),
+          ...([2, 3].includes(index) && {
+            boxShadow: `-24px 24px 72px -8px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.24)}`,
+            [stylesMode.dark]: {
+              boxShadow: `-24px 24px 72px -8px ${varAlpha(theme.vars.palette.common.blackChannel, 0.24)}`,
+            },
+          }),
+        },
+      })}
     >
       <SvgColor
-        src={icon}
+        src={item.icon}
+        width={88}
         sx={{
-          width: 88,
-          height: 88,
-          mx: 'auto',
-          color: (theme) => theme.palette[COLORS[index]].main,
+          background: (theme) =>
+            `linear-gradient(to bottom, ${theme.vars.palette[COLORS[index]].light}, ${theme.vars.palette[COLORS[index]].main})`,
         }}
       />
 
-      <Stack spacing={1} sx={{ my: 5 }}>
-        <TextMaxLine variant="h6">{name}</TextMaxLine>
-        <TextMaxLine variant="body2" sx={{ color: 'text.secondary' }}>
-          {content}
-        </TextMaxLine>
-      </Stack>
+      <Box sx={{ my: 5 }}>
+        <Typography variant="h6" sx={{ mb: 1 }}>
+          {item.name}
+        </Typography>
+        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+          {item.content}
+        </Typography>
+      </Box>
 
       <IconButton
         component={RouterLink}
-        href={path}
+        href={item.path}
         color={
           (index === 0 && 'primary') ||
           (index === 1 && 'secondary') ||
@@ -117,16 +153,6 @@ function ServiceItem({ service, index }) {
       >
         <Iconify icon="carbon:direction-straight-right" />
       </IconButton>
-    </Card>
+    </Paper>
   );
 }
-
-ServiceItem.propTypes = {
-  index: PropTypes.number,
-  service: PropTypes.shape({
-    name: PropTypes.string,
-    path: PropTypes.string,
-    content: PropTypes.string,
-    icon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  }),
-};

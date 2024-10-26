@@ -8,62 +8,69 @@ import Typography from '@mui/material/Typography';
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
-import {
-  _LISTS,
-  _LISTS1,
-  _LISTS2,
-  _LISTS3,
-  _MarketingServices,
-  _MarketingServices1,
-  _MarketingServices2,
-  _MarketingServices3,
-} from 'src/assets/data';
+import { CONFIG } from 'src/config-global';
 
-import Image from 'src/components/image';
-import Iconify from 'src/components/iconify';
+import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingServices() {
+export function MarketingServices({ sx, ...other }) {
   return (
-    <>
-      {/* UI/UI */}
-      <Container
-        sx={{
-          pt: { xs: 5, md: 10 },
-          pb: { xs: 5, md: 10 },
-        }}
-      >
-        <Grid container spacing={3} justifyContent="space-between" alignItems="center">
+    <Box
+      component="section"
+      sx={{
+        pt: { xs: 10, md: 15 },
+        pb: { xs: 5, md: 10 },
+        ...sx,
+      }}
+      {...other}
+    >
+      <Container>
+        <Grid
+          container
+          disableEqualOverflow
+          spacing={{ xs: 5, md: 3 }}
+          alignItems="center"
+          justifyContent="space-between"
+        >
           <Grid xs={12} md={6} lg={5}>
-            <Image alt="services" src="/assets/images/marketing/services/ic_service_uiux.jpg" />
+            <Box
+              component="img"
+              alt="Services"
+              src={`${CONFIG.assetsDir}/assets/illustrations/illustration-services.svg`}
+              sx={{ width: 480 }}
+            />
           </Grid>
 
           <Grid xs={12} md={6} lg={6}>
-            <Stack spacing={3} sx={{ mb: 5 }}>
-              <Typography variant="h2">{_MarketingServices[0].label}</Typography>
+            <Typography variant="h2">Offline SEO</Typography>
 
-              <Typography sx={{ color: 'text.secondary' }}>
-                {_MarketingServices[1].label}
-              </Typography>
+            <Typography sx={{ my: 3, color: 'text.secondary' }}>
+              Aenean commodo ligula eget dolor. Sed hendrerit. Vestibulum ante ipsum primis in
+              faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer
+              lacinia.
+            </Typography>
 
-              <Stack spacing={2}>
-                {_LISTS.map((text) => (
-                  <Stack key={text} direction="row" alignItems="center">
-                    <Box
-                      component="span"
-                      sx={{
-                        mr: 2,
-                        width: 6,
-                        height: 6,
-                        borderRadius: '50%',
-                        bgcolor: 'primary.main',
-                      }}
-                    />
-                    {text}
-                  </Stack>
-                ))}
-              </Stack>
+            <Stack component="ul" spacing={1.5} sx={{ mb: 5 }}>
+              {[
+                'First class flights',
+                '5 Star accommodations',
+                'Inclusive packages',
+                'Latest model vehicles',
+              ].map((text) => (
+                <Box component="li" key={text} gap={2} display="flex" alignItems="center">
+                  <Box
+                    component="span"
+                    sx={{
+                      width: 6,
+                      height: 6,
+                      borderRadius: '50%',
+                      bgcolor: 'primary.main',
+                    }}
+                  />
+                  {text}
+                </Box>
+              ))}
             </Stack>
 
             <Button
@@ -72,176 +79,13 @@ export default function MarketingServices() {
               size="large"
               color="inherit"
               variant="outlined"
-              endIcon={<Iconify icon="carbon:chevron-right" />}
+              endIcon={<Iconify icon="solar:alt-arrow-right-outline" />}
             >
-              {_MarketingServices[2].label}
+              Check our work
             </Button>
           </Grid>
         </Grid>
-
       </Container>
-
-      {/* Mobile */}
-      <Container
-        sx={{
-          pt: { xs: 10, md: 15 },
-          pb: { xs: 5, md: 10 },
-        }}
-      >
-        <Grid container spacing={3} justifyContent="space-between" alignItems="center">
-          <Grid xs={12} md={6} lg={5}>
-            <Image alt="services" src="/assets/images/marketing/services/ic_service_mobile.jpg" />
-          </Grid>
-
-          <Grid xs={12} md={6} lg={6}>
-            <Stack spacing={3} sx={{ mb: 5 }}>
-              <Typography variant="h2">{_MarketingServices1[0].label}</Typography>
-
-              <Typography sx={{ color: 'text.secondary' }}>
-                {_MarketingServices1[1].label}
-              </Typography>
-
-              <Stack spacing={2}>
-                {_LISTS1.map((text) => (
-                  <Stack key={text} direction="row" alignItems="center">
-                    <Box
-                      component="span"
-                      sx={{
-                        mr: 2,
-                        width: 6,
-                        height: 6,
-                        borderRadius: '50%',
-                        bgcolor: 'primary.main',
-                      }}
-                    />
-                    {text}
-                  </Stack>
-                ))}
-              </Stack>
-            </Stack>
-
-            <Button
-              component={RouterLink}
-              href={paths.marketing.caseStudies}
-              size="large"
-              color="inherit"
-              variant="outlined"
-              endIcon={<Iconify icon="carbon:chevron-right" />}
-            >
-              {_MarketingServices1[2].label}
-            </Button>
-          </Grid>
-        </Grid>
-
-      </Container>
-
-      {/* Desktop */}
-      <Container
-        sx={{
-          pt: { xs: 10, md: 15 },
-          pb: { xs: 5, md: 10 },
-        }}
-      >
-        <Grid container spacing={3} justifyContent="space-between" alignItems="center">
-          <Grid xs={12} md={6} lg={5}>
-            <Image alt="services" src="/assets/images/marketing/services/ic_service-desktop.jpg" />
-          </Grid>
-
-          <Grid xs={12} md={6} lg={6}>
-            <Stack spacing={3} sx={{ mb: 5 }}>
-              <Typography variant="h2">{_MarketingServices2[0].label}</Typography>
-
-              <Typography sx={{ color: 'text.secondary' }}>
-                {_MarketingServices2[1].label}
-              </Typography>
-
-              <Stack spacing={2}>
-                {_LISTS2.map((text) => (
-                  <Stack key={text} direction="row" alignItems="center">
-                    <Box
-                      component="span"
-                      sx={{
-                        mr: 2,
-                        width: 6,
-                        height: 6,
-                        borderRadius: '50%',
-                        bgcolor: 'primary.main',
-                      }}
-                    />
-                    {text}
-                  </Stack>
-                ))}
-              </Stack>
-            </Stack>
-
-            <Button
-              component={RouterLink}
-              href={paths.marketing.caseStudies}
-              size="large"
-              color="inherit"
-              variant="outlined"
-              endIcon={<Iconify icon="carbon:chevron-right" />}
-            >
-              {_MarketingServices2[2].label}
-            </Button>
-          </Grid>
-        </Grid>
-
-      </Container>
-
-      {/* API */}
-      <Container
-        sx={{
-          pt: { xs: 10, md: 15 },
-          pb: { xs: 5, md: 10 },
-        }}
-      >
-        <Grid container spacing={3} justifyContent="space-between" alignItems="center">
-          <Grid xs={12} md={6} lg={5}>
-            <Image alt="services" src="/assets/images/marketing/services/ic_service_api.jpg" />
-          </Grid>
-
-          <Grid xs={12} md={6} lg={6}>
-            <Stack spacing={3} sx={{ mb: 5 }}>
-              <Typography variant="h2">{_MarketingServices3[0].label}</Typography>
-
-              <Typography sx={{ color: 'text.secondary' }}>
-                {_MarketingServices3[1].label}
-              </Typography>
-
-              <Stack spacing={2}>
-                {_LISTS3.map((text) => (
-                  <Stack key={text} direction="row" alignItems="center">
-                    <Box
-                      component="span"
-                      sx={{
-                        mr: 2,
-                        width: 6,
-                        height: 6,
-                        borderRadius: '50%',
-                        bgcolor: 'primary.main',
-                      }}
-                    />
-                    {text}
-                  </Stack>
-                ))}
-              </Stack>
-            </Stack>
-
-            <Button
-              component={RouterLink}
-              href={paths.marketing.caseStudies}
-              size="large"
-              color="inherit"
-              variant="outlined"
-              endIcon={<Iconify icon="carbon:chevron-right" />}
-            >
-              {_MarketingServices3[2].label}
-            </Button>
-          </Grid>
-        </Grid>
-
-      </Container>
-    </>
+    </Box>
   );
 }

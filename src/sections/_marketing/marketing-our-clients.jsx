@@ -1,58 +1,45 @@
-import PropTypes from 'prop-types';
+import AutoScroll from 'embla-carousel-auto-scroll';
 
-import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
-import SvgColor from 'src/components/svg-color';
-import Carousel, { useCarousel } from 'src/components/carousel';
+import { SvgColor } from 'src/components/svg-color';
+import { Carousel, useCarousel } from 'src/components/carousel';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingOurClients({ brands }) {
-  const theme = useTheme();
-
-  const carousel = useCarousel({
-    speed: 5000,
-    autoplay: true,
-    slidesToShow: 6,
-    slidesToScroll: 1,
-    cssEase: 'linear',
-    autoplaySpeed: 5000,
-    responsive: [
-      {
-        breakpoint: theme.breakpoints.values.md,
-        settings: { slidesToShow: 4 },
-      },
-      {
-        breakpoint: theme.breakpoints.values.sm,
-        settings: { slidesToShow: 2 },
-      },
-    ],
-  });
+export function MarketingOurClients({ brands, sx, ...other }) {
+  const carousel = useCarousel(
+    {
+      loop: true,
+      slidesToShow: 'auto',
+      slideSpacing: '80px',
+    },
+    [AutoScroll({ playOnInit: true, speed: 0.5 })]
+  );
 
   return (
-    <Container
+    <Box
+      component="section"
       sx={{
-        pt: { xs: 5, md: 10 },
+        py: { xs: 5, md: 10 },
+        ...sx,
       }}
+      {...other}
     >
-      <Carousel {...carousel.carouselSettings}>
-        {brands.map((brand) => (
-          <SvgColor
-            key={brand.id}
-            src={brand.image}
-            sx={{
-              width: 106,
-              height: 32,
-              color: 'text.disabled',
-            }}
-          />
-        ))}
-      </Carousel>
-    </Container>
+      <Container>
+        <Carousel carousel={carousel}>
+          {brands.map((brand) => (
+            <SvgColor
+              key={brand.id}
+              src={brand.image}
+              width={106}
+              height={32}
+              sx={{ color: 'text.disabled' }}
+            />
+          ))}
+        </Carousel>
+      </Container>
+    </Box>
   );
 }
-
-MarketingOurClients.propTypes = {
-  brands: PropTypes.array,
-};

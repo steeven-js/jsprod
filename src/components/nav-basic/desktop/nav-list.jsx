@@ -1,32 +1,30 @@
-import PropTypes from 'prop-types';
 import { useRef, useState, useEffect, useCallback } from 'react';
 
-import Stack from '@mui/material/Stack';
+import Paper from '@mui/material/Paper';
 import Popover from '@mui/material/Popover';
+import { useTheme } from '@mui/material/styles';
 
 import { usePathname } from 'src/routes/hooks';
+import { isExternalLink } from 'src/routes/utils';
 import { useActiveLink } from 'src/routes/hooks/use-active-link';
 
-import NavItem from './nav-item';
+import { paper } from 'src/theme/styles';
+
+import { NavItem } from './nav-item';
+import { NavLi, NavUl, navSectionClasses } from '../../nav-section';
 
 // ----------------------------------------------------------------------
 
-export default function NavList({ data, depth, slotProps }) {
-  const navRef = useRef(null);
+export function NavList({ data, depth, render, cssVars, slotProps, enabledRootRedirect }) {
+  const theme = useTheme();
 
   const pathname = usePathname();
 
-  // Vérifier si le chemin commence par "/plantmed/plante/"
-  const isStudy = pathname.startsWith('/marketing/projet/');
+  const navItemRef = useRef(null);
 
-  // Vérifier si le chemin commence par "/plantmed/symptome/"
-  const isPost = pathname.startsWith('/marketing/post/');
+  const active = useActiveLink(data.path, !!data.children);
 
-  const active = useActiveLink(data.path, !!data.children) ||
-    (isStudy && data.title === 'Projets') ||
-    (isPost && data.title === 'Blog');
-
-    const [openMenu, setOpenMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
 
   useEffect(() => {
     if (openMenu) {
@@ -45,33 +43,41 @@ export default function NavList({ data, depth, slotProps }) {
     setOpenMenu(false);
   }, []);
 
-  return (
-    <>
-      <NavItem
-        ref={navRef}
-        open={openMenu}
-        onMouseEnter={handleOpenMenu}
-        onMouseLeave={handleCloseMenu}
-        //
-        title={data.title}
-        path={data.path}
-        caption={data.caption}
-        icon={data.icon}
-        //
-        depth={depth}
-        hasChild={!!data.children}
-        externalLink={!!data.path.includes('http')}
-        //
-        active={active}
-        className={active ? 'active' : ''}
-        sx={depth === 1 ? slotProps?.rootItem : slotProps?.subItem}
-      />
+  const renderNavItem = (
+    <NavItem
+      ref={navItemRef}
+      render={render}
+      // slots
+      path={data.path}
+      icon={data.icon}
+      info={data.info}
+      title={data.title}
+      caption={data.caption}
+      // state
+      depth={depth}
+      active={active}
+      disabled={data.disabled}
+      hasChild={!!data.children}
+      open={data.children && openMenu}
+      enabledRootRedirect={enabledRootRedirect}
+      externalLink={isExternalLink(data.path)}
+      // styles
+      slotProps={depth === 1 ? slotProps?.rootItem : slotProps?.subItem}
+      // actions
+      onMouseEnter={handleOpenMenu}
+      onMouseLeave={handleCloseMenu}
+    />
+  );
 
-      {!!data.children && (
+  if (data.children) {
+    return (
+      <NavLi disabled={data.disabled}>
+        {renderNavItem}
+
         <Popover
           disableScrollLock
           open={openMenu}
-          anchorEl={navRef.current}
+          anchorEl={navItemRef.current}
           anchorOrigin={
             depth === 1
               ? { vertical: 'bottom', horizontal: 'left' }
@@ -87,45 +93,55 @@ export default function NavList({ data, depth, slotProps }) {
               onMouseEnter: handleOpenMenu,
               onMouseLeave: handleCloseMenu,
               sx: {
-                mt: '-2px',
-                minWidth: 160,
-                ...(openMenu && {
-                  pointerEvents: 'auto',
-                }),
+                px: 0.75,
+                overflow: 'unset',
+                boxShadow: 'none',
+                backdropFilter: 'none',
+                background: 'transparent',
+                ...(depth === 1 && { pt: 1, ml: -0.75 }),
+                ...(openMenu && { pointerEvents: 'auto' }),
               },
             },
           }}
-          sx={{
-            pointerEvents: 'none',
-          }}
+          sx={{ ...cssVars, pointerEvents: 'none' }}
         >
-          <NavSubList data={data.children} depth={depth} slotProps={slotProps} />
+          <Paper
+            className={navSectionClasses.paper}
+            sx={{ minWidth: 180, ...paper({ theme, dropdown: true }), ...slotProps?.paper }}
+          >
+            <NavSubList
+              data={data.children}
+              depth={depth}
+              render={render}
+              cssVars={cssVars}
+              slotProps={slotProps}
+              enabledRootRedirect={enabledRootRedirect}
+            />
+          </Paper>
         </Popover>
-      )}
-    </>
-  );
-}
+      </NavLi>
+    );
+  }
 
-NavList.propTypes = {
-  data: PropTypes.object,
-  depth: PropTypes.number,
-  slotProps: PropTypes.object,
-};
+  return <NavLi disabled={data.disabled}>{renderNavItem}</NavLi>;
+}
 
 // ----------------------------------------------------------------------
 
-function NavSubList({ data, depth, slotProps }) {
+function NavSubList({ data, depth, render, cssVars, slotProps, enabledRootRedirect }) {
   return (
-    <Stack spacing={0.5}>
+    <NavUl sx={{ gap: 0.5 }}>
       {data.map((list) => (
-        <NavList key={list.title} data={list} depth={depth + 1} slotProps={slotProps} />
+        <NavList
+          key={list.title}
+          data={list}
+          render={render}
+          depth={depth + 1}
+          cssVars={cssVars}
+          slotProps={slotProps}
+          enabledRootRedirect={enabledRootRedirect}
+        />
       ))}
-    </Stack>
+    </NavUl>
   );
 }
-
-NavSubList.propTypes = {
-  data: PropTypes.array,
-  depth: PropTypes.number,
-  slotProps: PropTypes.object,
-};

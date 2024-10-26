@@ -1,5 +1,5 @@
 import { m } from 'framer-motion';
-import PropTypes from 'prop-types';
+import { forwardRef } from 'react';
 
 import Box from '@mui/material/Box';
 
@@ -7,37 +7,18 @@ import { varContainer } from './variants';
 
 // ----------------------------------------------------------------------
 
-export default function MotionContainer({ animate, action = false, children, ...other }) {
-  if (action) {
-    return (
-      <Box
-        component={m.div}
-        initial={false}
-        animate={animate ? 'animate' : 'exit'}
-        variants={varContainer()}
-        {...other}
-      >
-        {children}
-      </Box>
-    );
+export const MotionContainer = forwardRef(
+  ({ animate, action = false, children, ...other }, ref) => {
+    const commonProps = {
+      ref,
+      component: m.div,
+      variants: varContainer(),
+      initial: action ? false : 'initial',
+      animate: action ? (animate ? 'animate' : 'exit') : 'animate',
+      exit: action ? undefined : 'exit',
+      ...other,
+    };
+
+    return <Box {...commonProps}>{children}</Box>;
   }
-
-  return (
-    <Box
-      component={m.div}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      variants={varContainer()}
-      {...other}
-    >
-      {children}
-    </Box>
-  );
-}
-
-MotionContainer.propTypes = {
-  action: PropTypes.bool,
-  animate: PropTypes.bool,
-  children: PropTypes.node,
-};
+);

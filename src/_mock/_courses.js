@@ -1,16 +1,18 @@
+import dayjs from 'dayjs';
+
 import { _mock } from './_mock';
 import { _tags } from './assets';
 
 // ----------------------------------------------------------------------
 
-const TEACHERS = [...Array(5)].map((_, index) => ({
+const TEACHERS = [...Array(8)].map((_, index) => ({
   id: _mock.id(index),
-  role: _mock.role(index),
-  name: _mock.fullName(index),
-  avatarUrl: _mock.image.avatar(index),
   totalCourses: 48,
   totalReviews: 3458,
   totalStudents: 18000,
+  role: _mock.role(index),
+  name: _mock.fullName(index),
+  avatarUrl: _mock.image.avatar(index),
   ratingNumber: _mock.number.rating(index),
 }));
 
@@ -23,56 +25,70 @@ const LESSONS = [...Array(9)].map((_, index) => ({
   unLocked: [0, 1, 2].includes(index),
 }));
 
-export const _courses = [...Array(12)].map((_, index) => {
-  const languages = ['Russian', 'Spanish', 'English'];
+const getPrice = (index) => (index % 2 ? 159.99 : 269.99);
 
-  const skills = _tags.slice(0, 5);
+const getPriceSale = (index) => {
+  if (index === 2) return 89.99;
+  if (index === 5) return 69.99;
+  return 0;
+};
 
-  const level =
-    (index % 2 && 'Intermediate') ||
-    (index % 4 && 'Expert') ||
-    (index % 5 && 'All Levels') ||
-    'Beginner';
+const getTeachers = (index) => {
+  if (index === 0) return TEACHERS.slice(0, 5);
+  if (index === 1) return TEACHERS.slice(3, 7);
+  if (index === 2) return TEACHERS.slice(5, 7);
+  return [TEACHERS[4]];
+};
 
-  const learnList = [
-    'A fermentum in morbi pretium aliquam adipiscing donec tempus.',
-    'Vulputate placerat amet pulvinar lorem nisl.',
-    'Consequat feugiat habitant gravida quisque elit bibendum id adipiscing sed.',
-    'Etiam duis lobortis in fames ultrices commodo nibh.',
-    'Fusce neque. Nulla neque dolor, sagittis eget, iaculis quis, molestie non, velit.',
-    'Curabitur a felis in nunc fringilla tristique. Praesent congue erat at massa.',
-  ];
+const getLevel = (index) => {
+  if (index % 2) return 'Intermediate';
+  if (index % 4) return 'Expert';
+  if (index % 5) return 'All levels';
+  return 'Beginner';
+};
 
-  return {
-    id: _mock.id(index),
-    level,
-    skills,
-    languages,
-    learnList,
-    resources: 12,
-    totalHours: 100,
-    lessons: LESSONS,
-    totalQuizzes: 100,
-    totalReviews: 3458,
-    teachers: TEACHERS,
-    totalStudents: 180000,
-    createdAt: new Date(),
-    category: _tags[index],
-    slug: _mock.courseTitle(index),
-    bestSeller: index === 2 || false,
-    coverUrl: _mock.image.course(index),
-    ratingNumber: _mock.number.rating(index),
-    description: _mock.description(index),
-    price: (index % 2 && 159.99) || 269.99,
-    priceSale: (index === 2 && 89.99) || (index === 5 && 69.99) || 0,
-    shareLinks: {
-      facebook: `facebook/user-name`,
-      instagram: `instagram/user-name`,
-      linkedin: `linkedin/user-name`,
-      twitter: `twitter/user-name`,
-    },
-  };
-});
+const getLearnList = () => [
+  'A fermentum in morbi pretium aliquam adipiscing donec tempus.',
+  'Vulputate placerat amet pulvinar lorem nisl.',
+  'Consequat feugiat habitant gravida quisque elit bibendum id adipiscing sed.',
+  'Etiam duis lobortis in fames ultrices commodo nibh.',
+  'Fusce neque. Nulla neque dolor, sagittis eget, iaculis quis, molestie non, velit.',
+  'Curabitur a felis in nunc fringilla tristique. Praesent congue erat at massa.',
+];
+
+// ----------------------------------------------------------------------
+
+export const _courses = [...Array(12)].map((_, index) => ({
+  id: _mock.id(index),
+  resources: 12,
+  totalHours: 100,
+  lessons: LESSONS,
+  totalQuizzes: 100,
+  totalReviews: 3458,
+  totalStudents: 180000,
+  level: getLevel(index),
+  category: _tags[index],
+  price: getPrice(index),
+  skills: _tags.slice(0, 5),
+  learnList: getLearnList(),
+  teachers: getTeachers(index),
+  slug: _mock.courseNames(index),
+  priceSale: getPriceSale(index),
+  isBestSeller: index === 2 || false,
+  coverUrl: _mock.image.course(index),
+  createdAt: dayjs(new Date()).format(),
+  description: _mock.description(index),
+  ratingNumber: _mock.number.rating(index),
+  languages: ['English', 'Spanish', 'Chinese'],
+  shareLinks: {
+    facebook: 'https://facebook.example.com',
+    instagram: 'https://instagram.example.com',
+    linkedin: 'https://linkedin.example.com',
+    twitter: 'https://twitter.example.com',
+  },
+}));
+
+// ----------------------------------------------------------------------
 
 export const _coursesByCategories = [...Array(9)].map((_, index) => ({
   id: _mock.id(index),

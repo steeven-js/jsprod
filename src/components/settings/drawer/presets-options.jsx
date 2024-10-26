@@ -1,136 +1,81 @@
-import PropTypes from 'prop-types';
-
 import Box from '@mui/material/Box';
-import Radio from '@mui/material/Radio';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
-import RadioGroup from '@mui/material/RadioGroup';
-import { alpha, styled } from '@mui/material/styles';
-import CardActionArea from '@mui/material/CardActionArea';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import ButtonBase from '@mui/material/ButtonBase';
 
-import { presetOptions } from 'src/theme/options/presets';
+import { varAlpha, stylesMode } from 'src/theme/styles';
+
+import { Block } from './styles';
 
 // ----------------------------------------------------------------------
 
-const BOX_BORDER_RADIUS = 1.5;
-
-const StyledBoxWrap = styled('div')(() => ({
-  height: 104,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledBoxPrimary = styled('div')(() => ({
-  width: 64,
-  height: 64,
-  overflow: 'hidden',
-  borderRadius: '50%',
-  position: 'relative',
-}));
-
-const StyledBoxSecondary = styled('div')(({ theme }) => ({
-  top: 0,
-  bottom: 0,
-  right: 0,
-  margin: 'auto',
-  width: '50%',
-  height: '120%',
-  position: 'absolute',
-  borderRadius: '50%',
-  [theme.breakpoints.up('md')]: {
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.complex,
-      easing: theme.transitions.easing.sharp,
-    }),
-  },
-}));
-
-// ----------------------------------------------------------------------
-
-export default function PresetsOptions({ value, onChange }) {
+export function PresetsOptions({ value, options, onClickOption }) {
   return (
-    <Box sx={{ px: 3 }}>
-      <Typography variant="subtitle2" sx={{ py: 3 }}>
-        Presets
-      </Typography>
+    <Block title="Presets">
+      <Box component="ul" gap={1} display="grid" gridTemplateColumns="repeat(3, 1fr)">
+        {options.map((option) => {
+          const selected = value === option.name;
 
-      <RadioGroup
-        dir="ltr"
-        value={value}
-        onChange={onChange}
-        sx={{ gap: 2, display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}
-      >
-        {presetOptions.map((color) => (
-          <OptionItem
-            key={color.name}
-            colorName={color.name}
-            primaryColor={color.value[0]}
-            secondaryColor={color.value[1]}
-            selected={color.name === value}
-          />
-        ))}
-      </RadioGroup>
-    </Box>
+          const primaryColor = option.value[0];
+          const secondaryColor = option.value[1];
+
+          return (
+            <Box component="li" key={option.name} sx={{ display: 'flex' }}>
+              <ButtonBase
+                disableRipple
+                onClick={() => onClickOption(option.name)}
+                sx={(theme) => ({
+                  py: 2.5,
+                  width: 1,
+                  borderWidth: 1,
+                  borderRadius: 1.75,
+                  borderStyle: 'solid',
+                  border: `solid 1px transparent`,
+                  ...(selected && {
+                    bgcolor: 'background.paper',
+                    borderColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.08),
+                    boxShadow: `-8px 8px 20px -4px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.12)}`,
+                    [stylesMode.dark]: {
+                      boxShadow: `-8px 8px 20px -4px ${varAlpha(theme.vars.palette.common.blackChannel, 0.12)}`,
+                    },
+                  }),
+                })}
+              >
+                <Box
+                  sx={{
+                    width: 44,
+                    height: 44,
+                    overflow: 'hidden',
+                    borderRadius: '50%',
+                    position: 'relative',
+                    bgcolor: primaryColor,
+                  }}
+                >
+                  <Box
+                    sx={(theme) => ({
+                      top: 0,
+                      right: 0,
+                      bottom: 0,
+                      m: 'auto',
+                      width: 0.5,
+                      height: '120%',
+                      position: 'absolute',
+                      borderRadius: 'inherit',
+                      bgcolor: secondaryColor,
+                      transition: theme.transitions.create('transform', {
+                        duration: theme.transitions.duration.complex,
+                        easing: theme.transitions.easing.sharp,
+                      }),
+                      ...(selected && {
+                        transformOrigin: 'left',
+                        transform: 'rotate(45deg)',
+                      }),
+                    })}
+                  />
+                </Box>
+              </ButtonBase>
+            </Box>
+          );
+        })}
+      </Box>
+    </Block>
   );
 }
-
-PresetsOptions.propTypes = {
-  onChange: PropTypes.func,
-  value: PropTypes.string,
-};
-
-// ----------------------------------------------------------------------
-
-function OptionItem({ colorName, selected, primaryColor, secondaryColor }) {
-  return (
-    <Paper
-      variant={selected ? 'elevation' : 'outlined'}
-      sx={{
-        borderRadius: BOX_BORDER_RADIUS,
-        ...(selected && {
-          bgcolor: alpha(primaryColor, 0.08),
-          border: `solid 1px ${primaryColor}`,
-          boxShadow: `inset 0 4px 12px 0 ${alpha(primaryColor, 0.32)}`,
-        }),
-      }}
-    >
-      <CardActionArea sx={{ borderRadius: BOX_BORDER_RADIUS, color: primaryColor }}>
-        <StyledBoxWrap>
-          <StyledBoxPrimary sx={{ bgcolor: primaryColor }}>
-            <StyledBoxSecondary
-              sx={{
-                bgcolor: secondaryColor,
-                ...(selected && {
-                  transformOrigin: 'left',
-                  transform: 'rotate(25deg)',
-                }),
-              }}
-            />
-          </StyledBoxPrimary>
-        </StyledBoxWrap>
-
-        <FormControlLabel
-          label=""
-          value={colorName}
-          control={<Radio sx={{ display: 'none' }} />}
-          sx={{
-            top: 0,
-            margin: 0,
-            width: 1,
-            height: 1,
-            position: 'absolute',
-          }}
-        />
-      </CardActionArea>
-    </Paper>
-  );
-}
-
-OptionItem.propTypes = {
-  selected: PropTypes.bool,
-  colorName: PropTypes.string,
-  primaryColor: PropTypes.string,
-  secondaryColor: PropTypes.string,
-};

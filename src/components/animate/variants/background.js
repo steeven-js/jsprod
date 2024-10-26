@@ -5,12 +5,7 @@ export const varBgColor = (props) => {
   const duration = props?.duration || 5;
   const ease = props?.ease || 'linear';
 
-  return {
-    animate: {
-      background: colors,
-      transition: { duration, ease },
-    },
-  };
+  return { animate: { background: colors, transition: { duration, ease } } };
 };
 
 // ----------------------------------------------------------------------

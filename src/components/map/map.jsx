@@ -1,71 +1,101 @@
-import PropTypes from 'prop-types';
-import GoogleMapReact from 'google-map-react';
-import { useState, useCallback } from 'react';
+import { useMemo, useState, useCallback } from 'react';
+import { APIProvider, Map as ReactGoogleMap } from '@vis.gl/react-google-maps';
 
 import Box from '@mui/material/Box';
 
-import { GOOGLE_MAP_API } from 'src/config-global';
+import { CONFIG } from 'src/config-global';
 
-import MapPopup from './map-popup';
-import { mapStyle } from './styles';
-import MapMarker from './map-marker';
+import { MarkerWithInfo } from './marker-with-info';
 
 // ----------------------------------------------------------------------
 
-export default function Map({ offices, sx, ...other }) {
-  const [tooltip, setTooltip] = useState(null);
+export function Map({ locations, sx, ...other }) {
+  const defaultMarker = locations[0];
 
-  const [centerMap, setCenterMap] = useState({
-    lat: offices[0].latlng[0],
-    lng: offices[0].latlng[1],
-  });
+  const [activeMarkerId, setActiveMarkerId] = useState(defaultMarker.id);
 
-  const handleOpen = useCallback(
-    (lat, lng, office) => {
-      setCenterMap({
-        ...centerMap,
-        lat: lat - 32,
-        lng,
-      });
-      setTooltip(office);
+  const defaultCenter = useMemo(() => defaultMarker.position, [defaultMarker.position]);
+
+  const handleOpenInfo = useCallback(
+    (markerId) => {
+      if (markerId && activeMarkerId === markerId) {
+        setActiveMarkerId(null);
+      } else {
+        setActiveMarkerId(markerId);
+      }
     },
-    [centerMap]
+    [activeMarkerId]
   );
 
-  return (
-    <Box sx={{ height: 480, overflow: 'hidden', ...sx }} {...other}>
-      <GoogleMapReact
-        bootstrapURLKeys={{ key: GOOGLE_MAP_API }}
-        center={centerMap}
-        zoom={2}
-        options={{
-          styles: mapStyle,
-          disableDefaultUI: true,
-        }}
-      >
-        {offices.map((office, index) => (
-          <MapMarker
-            key={index}
-            lat={office.latlng[0]}
-            lng={office.latlng[1]}
-            onOpen={() => handleOpen(office.latlng[0], office.latlng[1], office)}
-          />
-        ))}
+  const handleCloseInfo = useCallback(() => setActiveMarkerId(null), []);
 
-        {tooltip && (
-          <MapPopup
-            lat={tooltip.latlng[0]}
-            lng={tooltip.latlng[1]}
-            office={tooltip}
-            onClose={() => setTooltip(null)}
-          />
-        )}
-      </GoogleMapReact>
+  return (
+    <Box
+      component="section"
+      sx={{
+        height: 480,
+        overflow: 'hidden',
+        //  Remove outline when focused
+        '& .gm-style iframe + div': {
+          border: 'none !important',
+        },
+        // Info: wrapper
+        '& .gm-style .gm-style-iw-c': {
+          borderRadius: 1.5,
+          padding: '0px !important',
+          boxShadow: (theme) => theme.customShadows.z8,
+        },
+        // Info: content
+        '& .gm-style .gm-style-iw-d': {
+          overflow: 'unset !important',
+          maxHeight: 'unset !important',
+        },
+        // Info: close button
+        '& .gm-style-iw-chr': {
+          top: 4,
+          right: 4,
+          position: 'absolute',
+          '& button': {
+            width: '20px !important',
+            height: '20px !important',
+            borderRadius: '50%',
+            alignItems: 'center',
+            justifyContent: 'center',
+            display: 'flex !important',
+            padding: '4px !important',
+            bgcolor: 'black !important',
+          },
+          '& .gm-ui-hover-effect>span': {
+            bgcolor: 'white',
+            margin: '0 !important',
+            width: '100% !important',
+            height: '100% !important',
+          },
+        },
+        ...sx,
+      }}
+    >
+      <APIProvider apiKey={CONFIG.googleMapApiKey}>
+        <ReactGoogleMap
+          mapId="49ae42fed52588c3"
+          minZoom={1.5}
+          defaultZoom={3}
+          defaultCenter={defaultCenter}
+          gestureHandling="greedy"
+          disableDefaultUI
+          {...other}
+        >
+          {locations.map((location) => (
+            <MarkerWithInfo
+              key={location.id}
+              location={location}
+              onClose={handleCloseInfo}
+              open={location.id === activeMarkerId}
+              onClick={() => handleOpenInfo(location.id)}
+            />
+          ))}
+        </ReactGoogleMap>
+      </APIProvider>
     </Box>
   );
 }
-
-Map.propTypes = {
-  offices: PropTypes.array,
-  sx: PropTypes.object,
-};

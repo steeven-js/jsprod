@@ -1,21 +1,13 @@
-import PropTypes from 'prop-types';
-
-import StyledMarkdown from './styles';
+import { StyledRoot } from './styles';
 
 // ----------------------------------------------------------------------
 
-export default function Markdown({ content, firstLetter = false, sx }) {
+export function Markdown({ content, firstLetter = false, ...other }) {
   return (
-    <StyledMarkdown
+    <StyledRoot
       firstLetter={firstLetter}
       dangerouslySetInnerHTML={{ __html: content }}
-      sx={sx}
+      {...other}
     />
   );
 }
-
-Markdown.propTypes = {
-  content: PropTypes.string,
-  firstLetter: PropTypes.bool,
-  sx: PropTypes.object,
-};

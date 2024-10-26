@@ -8,6 +8,8 @@ const users = [...Array(12)].map((_, index) => ({
   avatarUrl: _mock.image.avatar(index),
 }));
 
+// ----------------------------------------------------------------------
+
 export const _reviews = [
   {
     id: _mock.id(0),

@@ -1,12 +1,9 @@
-import remarkGfm from 'remark-gfm'
-import Markdown from 'react-markdown'
-import { useParams } from 'react-router';
 import { useState, useCallback } from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
+import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import Popover from '@mui/material/Popover';
 import Checkbox from '@mui/material/Checkbox';
@@ -18,207 +15,182 @@ import IconButton from '@mui/material/IconButton';
 
 import { paths } from 'src/routes/paths';
 
-import useFetchPost from 'src/hooks/use-fetchPost';
-import useFetchPosts from 'src/hooks/use-fetchPosts';
+import { usePopover } from 'src/hooks/use-popover';
 
 import { fDate } from 'src/utils/format-time';
 
-import Image from 'src/components/image';
-import Iconify from 'src/components/iconify';
-import { SplashScreen } from 'src/components/loading-screen';
-import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
+import { CONFIG } from 'src/config-global';
+import { _socials, _marketingPosts } from 'src/_mock';
 
-import BlogMarketingLatestPosts from 'src/sections/blog/marketing/marketing-latest-posts';
+import { Iconify } from 'src/components/iconify';
+import { Markdown } from 'src/components/markdown';
+import { SvgColor } from 'src/components/svg-color';
+import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 
-import PostTags from '../../blog/common/post-tags';
-import PostAuthor from '../../blog/common/post-author';
-import PostSocialsShare from '../../blog/common/post-socials-share';
+import { PostTags } from '../../blog/post-tags';
+import { PostAuthor } from '../../blog/post-author';
+import { MarketingNewsletter } from '../marketing-newsletter';
+import { MarketingLatestPosts } from '../posts/marketing-latest-posts';
+import { MarketingLandingFreeSEO } from '../landing/marketing-landing-free-seo';
 
 // ----------------------------------------------------------------------
 
-export const _socials = [
-  {
-    value: 'facebook',
-    label: 'FaceBook',
-    icon: 'carbon:logo-facebook',
-    color: '#1877F2',
-  },
-  {
-    value: 'instagram',
-    label: 'Instagram',
-    icon: 'carbon:logo-instagram',
-    color: '#E02D69',
-  },
-  {
-    value: 'linkedin',
-    label: 'Linkedin',
-    icon: 'carbon:logo-linkedin',
-    color: '#007EBB',
-  },
-  {
-    value: 'twitter',
-    label: 'Twitter',
-    icon: 'carbon:logo-twitter',
-    color: '#00AAEC',
-  },
-];
+const post = _marketingPosts[0];
+const latestPosts = _marketingPosts.slice(0, 4);
 
-export default function MarketingPostView() {
+// ----------------------------------------------------------------------
 
-  const { id } = useParams();
+export function MarketingPostView() {
+  const openSocial = usePopover();
 
-  const { post, authorName, authorAvatar, authorBio, authorSince, tags, authorRole, isPostLoading } = useFetchPost(id);
-
-  const { posts } = useFetchPosts();
-
-  const [favorite, setFavorite] = useState();
-
-  const [open, setOpen] = useState(null);
-
-  const handleOpen = useCallback((event) => {
-    setOpen(event.currentTarget);
-  }, []);
-
-  const handleClose = useCallback(() => {
-    setOpen(null);
-  }, []);
+  const [favorite, setFavorite] = useState(post.favorited);
 
   const handleChangeFavorite = useCallback((event) => {
     setFavorite(event.target.checked);
   }, []);
 
+  const renderSocials = (
+    <Box gap={1.5} display="flex" sx={{ mt: 5 }}>
+      <Box component="span" sx={{ lineHeight: '30px', typography: 'subtitle2' }}>
+        Share:
+      </Box>
+      <Box gap={1} display="flex" alignItems="center" flexWrap="wrap">
+        {_socials.map((social) => (
+          <Button
+            key={social.value}
+            size="small"
+            variant="outlined"
+            startIcon={
+              (social.value === 'twitter' && (
+                <SvgColor
+                  width={20}
+                  src={`${CONFIG.assetsDir}/assets/icons/socials/ic-${social.value}.svg`}
+                />
+              )) || (
+                <Box
+                  component="img"
+                  loading="lazy"
+                  alt={social.label}
+                  src={`${CONFIG.assetsDir}/assets/icons/socials/ic-${social.value}.svg`}
+                  sx={{ width: 20, height: 20 }}
+                />
+              )
+            }
+          >
+            {social.label}
+          </Button>
+        ))}
+      </Box>
+    </Box>
+  );
+
+  const renderToolbar = (
+    <Box
+      gap={1.5}
+      display="flex"
+      sx={(theme) => ({
+        py: 3,
+        my: 5,
+        borderTop: `solid 1px ${theme.vars.palette.divider}`,
+        borderBottom: `solid 1px ${theme.vars.palette.divider}`,
+      })}
+    >
+      <Avatar src={post.author.avatarUrl} sx={{ width: 48, height: 48 }} />
+
+      <Stack spacing={0.5} flexGrow={1}>
+        <Typography variant="subtitle2">{post.author.name}</Typography>
+        <Typography variant="caption" sx={{ color: 'text.secondary' }}>
+          {fDate(post.createdAt)}
+        </Typography>
+      </Stack>
+
+      <Box display="flex" alignItems="center">
+        <IconButton onClick={openSocial.onOpen} color={openSocial.open ? 'primary' : 'default'}>
+          <Iconify icon="solar:share-outline" />
+        </IconButton>
+
+        <Checkbox
+          color="error"
+          checked={favorite}
+          onChange={handleChangeFavorite}
+          icon={<Iconify icon="solar:heart-outline" />}
+          checkedIcon={<Iconify icon="solar:heart-bold" />}
+          inputProps={{ id: 'favorite-checkbox', 'aria-label': 'Favorite checkbox' }}
+        />
+      </Box>
+    </Box>
+  );
+
   return (
     <>
-      {isPostLoading ?
+      <Box
+        component="img"
+        alt="Post hero"
+        src={post.heroUrl}
+        sx={{ aspectRatio: '21/9', objectFit: 'cover' }}
+      />
 
-        <SplashScreen />
-
-        : (
-
-          <Image alt="hero"
-            src={
-              post.media && post.media[0].original_url ? post.media[0].original_url : '/assets/images/marketing/marketing_post_hero.jpg'
-            }
-            ratio="21/9"
-          />
-        )}
-
-      <Container>
+      <Container component="section">
         <CustomBreadcrumbs
           sx={{ my: 3 }}
           links={[
             { name: 'Home', href: '/' },
             { name: 'Blog', href: paths.marketing.posts },
-            { name: post.title ?? '...' },
+            { name: post.title },
           ]}
         />
       </Container>
 
       <Divider />
 
-      <Container>
+      <Container component="section">
         <Grid container spacing={3} justifyContent={{ md: 'center' }}>
           <Grid xs={12} md={8}>
             <Stack
               spacing={3}
               sx={{
                 textAlign: 'center',
-                pt: { xs: 5, md: 10 },
-                pb: 5,
+                mt: { xs: 5, md: 10 },
               }}
             >
               <Typography variant="body2" sx={{ color: 'text.disabled' }}>
-                {post.duration ?? ''} {post.duration > 1 ? 'minutes' : 'minute'}
+                {post.duration}
               </Typography>
-
-              <Typography variant="h2" component="h1">
-                {post.title ?? '...'}
+              <Typography component="h1" variant="h2">
+                {post.title}
               </Typography>
-              <Typography variant="h5">{post.description ?? '...'}</Typography>
+              <Typography component="p" variant="h5">
+                {post.description}
+              </Typography>
             </Stack>
 
-            <Divider />
-            <Stack direction="row" justifyContent="space-between" spacing={1.5} sx={{ py: 3 }}>
-              <Avatar src={authorAvatar} sx={{ width: 48, height: 48 }} />
+            {renderToolbar}
 
-              <Stack spacing={0.5} flexGrow={1}>
-                <Typography variant="subtitle2">{authorName}</Typography>
-                <Typography variant="caption" sx={{ color: 'text.secondary' }}>
-                  {fDate(post.created_at, 'dd/MM/yyyy p') ?? '...'}
-                </Typography>
-              </Stack>
+            <Markdown content={post.content} firstLetter />
 
-              <Stack direction="row" alignItems="center">
-                <IconButton onClick={handleOpen} color={open ? 'primary' : 'default'}>
-                  <Iconify icon="carbon:share" />
-                </IconButton>
+            {!!post.tags.length && <PostTags tags={post.tags} />}
 
-                <Checkbox
-                  color="error"
-                  checked={favorite === 'true'} // Utiliser une chaîne pour la propriété checked
-                  onChange={handleChangeFavorite}
-                  icon={<Iconify icon="carbon:favorite" />}
-                  checkedIcon={<Iconify icon="carbon:favorite-filled" />}
-                />
-              </Stack>
-            </Stack>
+            {renderSocials}
 
-            <Divider sx={{ mb: 6 }} />
+            <Divider sx={{ mt: 10 }} />
 
-            <Markdown
-              children={post.content}
-              remarkPlugins={[remarkGfm]}
-              components={{
-                code(props) {
-                  // eslint-disable-next-line react/prop-types, no-unused-vars
-                  const { children, className, node, ...rest } = props
-                  const match = /language-(\w+)/.exec(className || '')
-                  return match ? (
-                    <SyntaxHighlighter
-                      {...rest}
-                      PreTag="div"
-                      children={String(children).replace(/\n$/, '')}
-                      language={match[1]}
-                      style={dracula}
-                    />
-                  ) : (
-                    <code {...rest} className={className}>
-                      {children}
-                    </code>
-                  )
-                }
-              }}
-            />
-
-            {tags.length > 0 && <PostTags tags={tags} />}
-
-            <PostSocialsShare />
-
-            <Divider sx={{ mt: 8 }} />
-
-            <PostAuthor
-              authorName={authorName}
-              authorAvatar={authorAvatar}
-              authorBio={authorBio}
-              authorSince={authorSince}
-              authorRole={authorRole}
-            />
+            <PostAuthor author={post.author} />
           </Grid>
         </Grid>
       </Container>
 
       <Divider />
 
-      {posts.length > 4 ? <BlogMarketingLatestPosts posts={posts.slice(0, 4)} /> : null}
+      <MarketingLatestPosts posts={latestPosts} />
 
-      {/* <MarketingLandingFreeSEO />
+      <MarketingLandingFreeSEO />
 
-      <MarketingNewsletter /> */}
+      <MarketingNewsletter />
 
       <Popover
-        open={!!open}
-        onClose={handleClose}
-        anchorEl={open}
+        open={openSocial.open}
+        anchorEl={openSocial.anchorEl}
+        onClose={openSocial.onClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
         transformOrigin={{ vertical: 'top', horizontal: 'center' }}
         slotProps={{
@@ -228,12 +200,25 @@ export default function MarketingPostView() {
         }}
       >
         {_socials.map((social) => (
-          <MenuItem key={social.value} onClick={handleClose}>
-            <Iconify icon={social.icon} width={24} sx={{ mr: 1, color: social.color }} />
+          <MenuItem key={social.value} onClick={() => openSocial.onClose()} sx={{ gap: 1 }}>
+            {(social.value === 'twitter' && (
+              <SvgColor
+                width={20}
+                src={`${CONFIG.assetsDir}/assets/icons/socials/ic-${social.value}.svg`}
+              />
+            )) || (
+              <Box
+                component="img"
+                loading="lazy"
+                alt={social.label}
+                src={`${CONFIG.assetsDir}/assets/icons/socials/ic-${social.value}.svg`}
+                sx={{ width: 20, height: 20 }}
+              />
+            )}
             Share via {social.label}
           </MenuItem>
         ))}
       </Popover>
     </>
   );
-};
+}

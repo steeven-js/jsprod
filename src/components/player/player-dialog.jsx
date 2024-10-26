@@ -1,18 +1,17 @@
-import PropTypes from 'prop-types';
-
 import Dialog from '@mui/material/Dialog';
-import { alpha } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
-import Iconify from '../iconify';
+import { varAlpha } from 'src/theme/styles';
+
+import { Iconify } from '../iconify';
 import { StyledReactPlayer } from './styles';
 
 // ----------------------------------------------------------------------
 
-export default function PlayerDialog({ videoPath, open, onClose, ...other }) {
+export function PlayerDialog({ videoPath, open, onClose, ...other }) {
   const loading = useBoolean(true);
 
   return (
@@ -31,14 +30,14 @@ export default function PlayerDialog({ videoPath, open, onClose, ...other }) {
           right: 24,
           zIndex: 9,
           position: 'fixed',
-          color: (theme) => alpha(theme.palette.common.white, 0.72),
-          bgcolor: (theme) => alpha(theme.palette.common.white, 0.08),
+          color: (theme) => varAlpha(theme.vars.palette.common.whiteChannel, 0.72),
+          bgcolor: (theme) => varAlpha(theme.vars.palette.common.whiteChannel, 0.08),
           '&:hover': {
-            bgcolor: (theme) => alpha(theme.palette.common.white, 0.16),
+            bgcolor: (theme) => varAlpha(theme.vars.palette.common.whiteChannel, 0.16),
           },
         }}
       >
-        <Iconify icon="carbon:close" width={24} />
+        <Iconify icon="eva:close-outline" />
       </IconButton>
 
       {loading.value && (
@@ -63,9 +62,3 @@ export default function PlayerDialog({ videoPath, open, onClose, ...other }) {
     </Dialog>
   );
 }
-
-PlayerDialog.propTypes = {
-  onClose: PropTypes.func,
-  open: PropTypes.bool,
-  videoPath: PropTypes.string,
-};

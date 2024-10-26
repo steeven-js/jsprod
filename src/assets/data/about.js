@@ -1,4 +1,4 @@
-export const _MarketingAbout = [
+export const _About = [
   { label: 'Qui suis-je ?' },
   {
     label: "Avec une solide expérience en conception d'applications et développement web, j'ai récemment embrassé une reconversion professionnelle motivée par ma passion pour le numérique. Ma compréhension approfondie des besoins des utilisateurs et des exigences techniques me permet de façonner des solutions innovantes qui dépassent les attentes des clients. Je reste constamment à l'affût des dernières tendances technologiques pour rester pertinent et créer un impact positif à travers chaque projet."
@@ -17,13 +17,13 @@ export const _SUMMARY = [
 ];
 // ----------------------------------------------------------------------
 
-export const _MarketingAboutOurVision = [
+export const _AboutOurVision = [
   { label: 'Mes Valeurs Fondamentales' },
 ];
 
 // ----------------------------------------------------------------------
 
-export const _MarketingAboutCoreValues = [
+export const _AboutCoreValues = [
   { label: 'Mes Valeurs Fondamentales' },
 ];
 
@@ -31,28 +31,28 @@ export const _CORE_VALUES = [
   {
     title: 'Satisfaction Client',
     description: 'Je place la satisfaction de mes clients au cœur de tout ce que je fais.',
-    icon: '/assets/icons/ic_agreement.svg',
+    icon: '/assets/icons/about/ic_agreement.svg',
   },
   {
     title: 'Transparence',
     description: 'Je crois en une communication ouverte et transparente avec mes clients.',
-    icon: '/assets/icons/ic_transparency.svg',
+    icon: '/assets/icons/about/ic_transparency.svg',
   },
   {
     title: 'Réputation',
     description: 'Je construis et protège une réputation d\'excellence et de fiabilité.',
-    icon: '/assets/icons/ic_reputation.svg',
+    icon: '/assets/icons/about/ic_reputation.svg',
   },
   {
     title: 'Collaboration',
     description: 'Je travaille en étroite collaboration avec mes clients pour réaliser leurs visions.',
-    icon: '/assets/icons/ic_popularity.svg',
+    icon: '/assets/icons/about/ic_popularity.svg',
   },
 ];
 
 // ----------------------------------------------------------------------
 
-export const _MarketingAboutStory = [
+export const _AboutStory = [
   { value: 'Notre Histoire', label: 'Notre Histoire' },
   {
     value: 'Découvrez notre parcours et comment nous sommes devenus leaders dans la conception d\'applications innovantes.',
@@ -89,7 +89,7 @@ export const _TIMELINESABOUT = [
 
 // ----------------------------------------------------------------------
 
-export const _MarketingAboutOurClients = [
+export const _AboutOurClients = [
   { value: 'Mes Clients', label: 'Mes Clients' },
   {
     value: 'Découvrez les marques qui nous font confiance pour la conception de leurs applications et services numériques.',

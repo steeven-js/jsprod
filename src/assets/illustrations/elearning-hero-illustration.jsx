@@ -1,18 +1,16 @@
 import { memo } from 'react';
 import { m } from 'framer-motion';
-import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import { alpha, useTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/styles';
 
-import Image from 'src/components/image';
+import { CONFIG } from 'src/config-global';
+import { varAlpha } from 'src/theme/styles';
 
-import Icon from './pattern/icon';
-import Label from './pattern/label';
-import Shape from './pattern/shape';
-import Pattern01 from './pattern/pattern-01';
-import Pattern02 from './pattern/pattern-02';
+import { Shape } from './components/shape';
+import { CirclePattern } from './components/circle-pattern';
+import { TrianglePattern } from './components/shape-pattern';
+import { FloatIcon, FloatLabel } from './components/float-elements';
 
 // ----------------------------------------------------------------------
 
@@ -38,151 +36,149 @@ const varRight = {
 
 // ----------------------------------------------------------------------
 
+const iconPath = (name) => `${CONFIG.assetsDir}/assets/icons/banner/${name}`;
+
 function ElearningHeroIllustration({ sx, ...other }) {
   const theme = useTheme();
 
-  const GREEN = theme.palette.success.main;
+  const GREEN = theme.vars.palette.success.mainChannel;
+  const YELLOW = theme.vars.palette.warning.mainChannel;
+  const BLUE = '53 94 201';
+  const PURPLE = '155 58 177';
 
-  const YELLOW = theme.palette.warning.main;
-
-  const BLUE = '#355EC9';
-
-  const PURPLE = '#9B3AB1';
-
-  const styleIconContent = {
-    fontSize: 22,
+  const textStyles = {
     color: 'common.black',
     fontWeight: 'fontWeightBold',
+    fontSize: theme.typography.pxToRem(22),
   };
 
-  return (
-    <Box
-      sx={{
-        width: 670,
-        height: 670,
-        display: 'flex',
-        alignItems: 'center',
-        position: 'relative',
-        justifyContent: 'center',
-        ...sx,
-      }}
-      {...other}
-    >
-      <Box sx={{ position: 'absolute', right: 18, bottom: 28, zIndex: 8 }}>
-        <Image
-          visibleByDefault
-          disabledEffect
-          alt="teacher"
-          src="/assets/images/course/course_teacher_hero.png"
-          sx={{ width: 546, height: 650 }}
-        />
-      </Box>
+  const baseStyles = {
+    zIndex: 8,
+    position: 'absolute',
+  };
 
-      <Box
-        {...varDown}
-        component={m.div}
-        sx={{ position: 'absolute', left: 115, bottom: 115, zIndex: 8 }}
-      >
-        <Image
-          visibleByDefault
-          disabledEffect
-          alt="book icon"
-          src="/assets/icons/ic_book.png"
+  const renderCharacter = (
+    <Box
+      component="img"
+      alt="Teacher hero"
+      src={`${CONFIG.assetsDir}/assets/images/course/teacher-hero.webp`}
+      sx={{
+        ...baseStyles,
+        right: 18,
+        width: 546,
+        bottom: 24,
+        height: 650,
+      }}
+    />
+  );
+
+  const renderShapes = (
+    <>
+      <TrianglePattern sx={{ left: 0, top: 0 }} />
+      <CirclePattern sx={{ top: 0, left: 0, opacity: 0.48, transform: 'scale(1.2)' }} />
+      <Shape sx={{ position: 'absolute', right: 32, bottom: 32 }} />
+    </>
+  );
+
+  const renderIcons = (
+    <>
+      <Box {...varDown} component={m.div} sx={{ ...baseStyles, left: 115, bottom: 115 }}>
+        <Box
+          component="img"
+          alt="Book icon"
+          src={iconPath('ic-book.png')}
           sx={{ width: 52, height: 62 }}
         />
       </Box>
 
-      <Box
-        {...varRight}
-        component={m.div}
-        sx={{ position: 'absolute', left: 18, top: 220, zIndex: 8 }}
-      >
-        <Image
-          visibleByDefault
-          disabledEffect
-          alt="pencil icon"
-          src="/assets/icons/ic_pencil.png"
+      <Box {...varRight} component={m.div} sx={{ ...baseStyles, left: 18, top: 220 }}>
+        <Box
+          component="img"
+          alt="Pencil icon"
+          src={iconPath('ic-pencil.png')}
           sx={{ width: 60, height: 77 }}
+        />
+      </Box>
+
+      <Box {...varLeft} component={m.div} sx={{ ...baseStyles, ...textStyles, top: 88, right: 72 }}>
+        <FloatIcon color={GREEN} icon="Dw" sx={{ transform: 'scale(1.2) rotate(15deg)' }} />
+      </Box>
+
+      <Box {...varRight} component={m.div} sx={{ ...baseStyles, ...textStyles, bottom: 160 }}>
+        <FloatIcon
+          color={YELLOW}
+          icon="Ai"
+          sx={{ transform: 'translateX(40px) scale(1.2) rotate(-15deg)' }}
         />
       </Box>
 
       <Box
         {...varUp}
         component={m.div}
-        sx={{ zIndex: 9, left: 120, bottom: 168, position: 'absolute' }}
+        sx={{ ...baseStyles, ...textStyles, color: 'common.white', right: 90 }}
       >
-        <Label
-          text="Python"
-          icon={
-            <Image
-              visibleByDefault
-              disabledEffect
-              alt="python"
-              src="/assets/icons/platforms/ic_python.svg"
-              sx={{ width: 56, height: 56 }}
-            />
-          }
-          sx={{
-            py: 1.75,
-            typography: 'h3',
-            color: '#2994FF',
-            boxShadow: `0px 24px 48px rgba(0, 0, 0, 0.24), inset 0px -4px 10px ${alpha(
-              theme.palette.grey[600],
-              0.48
-            )}`,
-          }}
-        />
-      </Box>
-
-      {/* Icon */}
-
-      <Box
-        {...varLeft}
-        component={m.div}
-        sx={{ top: 88, right: 72, zIndex: 8, position: 'absolute' }}
-      >
-        <Icon
-          color={GREEN}
-          content={<Typography sx={{ ...styleIconContent }}>Dw</Typography>}
-          sx={{ transform: 'scale(1.2) rotate(15deg)' }}
-        />
-      </Box>
-
-      <Box {...varRight} component={m.div} sx={{ zIndex: 8, bottom: 160, position: 'absolute' }}>
-        <Icon
-          color={YELLOW}
-          content={<Typography sx={{ ...styleIconContent }}>Ai</Typography>}
-          sx={{ transform: 'translateX(40px) scale(1.2) rotate(-15deg)' }}
-        />
-      </Box>
-
-      <Box {...varUp} component={m.div} sx={{ zIndex: 8, right: 90, position: 'absolute' }}>
-        <Icon
+        <FloatIcon
           color={PURPLE}
-          content={<Typography sx={{ ...styleIconContent, color: 'common.white' }}>Ae</Typography>}
+          icon="Ae"
           sx={{ transform: 'scale(1.2) translateY(20px) rotate(15deg)' }}
         />
       </Box>
 
-      <Box {...varDown} component={m.div} sx={{ zIndex: 8, position: 'absolute' }}>
-        <Icon
+      <Box
+        {...varDown}
+        component={m.div}
+        sx={{ ...baseStyles, ...textStyles, color: 'common.white' }}
+      >
+        <FloatIcon
           color={BLUE}
-          content={<Typography sx={{ ...styleIconContent, color: 'common.white' }}>Ps</Typography>}
-          sx={{
-            transform: 'scale(1.2) translate(-135px, -75px) rotate(15deg)',
-          }}
+          icon="Ps"
+          sx={{ transform: 'scale(1.2) translate(-135px, -75px) rotate(15deg)' }}
         />
       </Box>
+    </>
+  );
 
-      <Pattern01 sx={{ left: 0, top: 0 }} />
-      <Pattern02 sx={{ top: 0, left: 0, opacity: 0.24, transform: 'scale(1.2)' }} />
-      <Shape sx={{ position: 'absolute', right: 32, bottom: 32 }} />
+  const renderLabels = (
+    <Box
+      {...varUp}
+      component={m.div}
+      sx={{ zIndex: 9, left: 120, bottom: 168, position: 'absolute' }}
+    >
+      <FloatLabel
+        text="Python"
+        icon={
+          <Box
+            component="img"
+            alt="Python"
+            src={iconPath('ic-python.svg')}
+            sx={{ width: 56, height: 56 }}
+          />
+        }
+        sx={{
+          py: 1.75,
+          typography: 'h3',
+          color: '#2994FF',
+          fontWeight: 'fontWeightBold',
+          boxShadow: `0px 24px 48px rgba(0, 0, 0, 0.24), inset 0px -4px 10px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.48)}`,
+        }}
+      />
+    </Box>
+  );
+
+  return (
+    <Box
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      sx={{ width: 670, height: 670, position: 'relative', ...sx }}
+      {...other}
+    >
+      {renderCharacter}
+      {renderLabels}
+      {renderIcons}
+      {renderShapes}
     </Box>
   );
 }
-
-ElearningHeroIllustration.propTypes = {
-  sx: PropTypes.object,
-};
 
 export default memo(ElearningHeroIllustration);

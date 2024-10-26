@@ -1,121 +1,110 @@
-import PropTypes from 'prop-types';
-
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import TextField from '@mui/material/TextField';
+import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Unstable_Grid2';
+import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
+import MuiTextField from '@mui/material/TextField';
 import { inputBaseClasses } from '@mui/material/InputBase';
 import { inputLabelClasses } from '@mui/material/InputLabel';
-import { alpha, styled, useTheme } from '@mui/material/styles';
 
-import { bgGradient } from 'src/theme/css';
+import { CONFIG } from 'src/config-global';
+import { varAlpha, textGradient } from 'src/theme/styles';
 
-import Iconify from 'src/components/iconify';
+import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-const StyledInput = styled((props) => <TextField fullWidth {...props} />)(({ theme }) => ({
+const TextField = styled((props) => <MuiTextField fullWidth {...props} />)(({ theme }) => ({
+  [`& .${inputBaseClasses.root}`]: {
+    backgroundColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.16),
+  },
   [`& .${inputBaseClasses.input}`]: {
-    color: theme.palette.common.white,
+    color: theme.vars.palette.common.white,
   },
   [`& .${inputLabelClasses.root}.${inputLabelClasses.shrink}`]: {
-    color: theme.palette.grey[500],
+    color: theme.vars.palette.grey[500],
     [`&.${inputLabelClasses.focused}`]: {
-      color: theme.palette.grey[500],
+      color: theme.vars.palette.grey[500],
     },
   },
 }));
 
-StyledInput.propTypes = {
-  theme: PropTypes.shape({
-    palette: PropTypes.shape({
-      common: PropTypes.shape({
-        white: PropTypes.string,
-      }),
-      grey: PropTypes.string,
-    }),
-  }),
-};
-
 // ----------------------------------------------------------------------
 
-export default function MarketingLandingFreeSEO() {
-  const theme = useTheme();
-
+export function MarketingLandingFreeSEO({ sx, ...other }) {
   return (
     <Box
+      component="section"
       sx={{
-        ...bgGradient({
-          color: alpha(theme.palette.grey[900], 0),
-          imgUrl: '/assets/images/marketing/marketing_get_free_seo.jpg',
-        }),
-        overflow: 'hidden',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center center',
+        backgroundImage: `url(${CONFIG.assetsDir}/assets/images/marketing/get-free-seo.webp)`,
         py: { xs: 10, md: 15 },
+        ...sx,
       }}
+      {...other}
     >
       <Container>
         <Grid
           container
-          spacing={{
-            xs: 5,
-            md: 3,
-          }}
+          disableEqualOverflow
+          spacing={{ xs: 5, md: 3 }}
           justifyContent="space-between"
         >
-          <Grid xs={12} md={5}>
+          <Grid xs={12} md={5} sx={{ textAlign: { xs: 'center', md: 'left' } }}>
             <Typography
               variant="h1"
               component="h2"
-              sx={{
-                color: 'primary.main',
-                mb: { xs: 3, md: 8 },
-                textAlign: { xs: 'center', md: 'left' },
-              }}
+              sx={(theme) => ({
+                ...textGradient(
+                  `90deg, ${theme.vars.palette.primary.main} 20%, ${theme.vars.palette.secondary.main} 100%`
+                ),
+                mb: { xs: 3, md: 5 },
+                display: 'inline-flex',
+              })}
             >
-              Get Free
-              <br /> SEO Analysis
+              Get free
+              <br /> SEO analysis
             </Typography>
 
-            <Stack
-              direction="row"
+            <Box
+              gap={1.5}
+              display="flex"
               alignItems="center"
               justifyContent={{ xs: 'center', md: 'flex-start' }}
               sx={{ color: 'common.white', mb: 2 }}
             >
-              <Iconify icon="carbon:email" width={24} sx={{ mr: 2 }} />
+              <Iconify width={24} icon="carbon:email" />
 
               <Link color="inherit" href="mailto:hello@example.com">
                 hello@example.com
               </Link>
-            </Stack>
+            </Box>
 
-            <Stack
-              direction="row"
+            <Box
+              gap={1.5}
+              display="flex"
               alignItems="center"
               justifyContent={{ xs: 'center', md: 'flex-start' }}
               sx={{ color: 'common.white' }}
             >
-              <Iconify icon="carbon:location" width={24} sx={{ mr: 2 }} />
+              <Iconify width={24} icon="carbon:location" />
               508 Bridle Avenue Newnan, GA 30263
-            </Stack>
+            </Box>
           </Grid>
 
           <Grid xs={12} md={5}>
-            <Stack alignItems={{ xs: 'center', md: 'flex-start' }}>
-              <StyledInput label="Name" sx={{ mb: 2.5 }} />
-
-              <StyledInput label="Email" sx={{ mb: 2.5 }} />
-
-              <StyledInput label="Phone" sx={{ mb: 2.5 }} />
-
-              <StyledInput label="Website URL" sx={{ mb: 5 }} />
-
+            <Stack spacing={3} alignItems={{ xs: 'center', md: 'flex-start' }}>
+              <TextField label="Name" />
+              <TextField label="Email" />
+              <TextField label="Phone" />
+              <TextField label="Website URL" />
               <Button size="large" variant="contained" color="primary">
-                Send Request
+                Send request
               </Button>
             </Stack>
           </Grid>

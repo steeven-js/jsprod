@@ -1,84 +1,74 @@
-import PropTypes from 'prop-types';
-
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 
-import LinkItem from './link-item';
+import { BreadcrumbsLink } from './breadcrumb-link';
 
 // ----------------------------------------------------------------------
 
-export default function CustomBreadcrumbs({
+export function CustomBreadcrumbs({
   links,
   action,
   heading,
   moreLink,
   activeLast,
+  slotProps,
   sx,
   ...other
 }) {
   const lastLink = links[links.length - 1].name;
 
-  return (
-    <Box sx={{ ...sx }}>
-      <Stack direction="row" alignItems="center">
-        <Box sx={{ flexGrow: 1 }}>
-          {/* HEADING */}
-          {heading && (
-            <Typography variant="h4" gutterBottom>
-              {heading}
-            </Typography>
-          )}
+  const renderHeading = (
+    <Typography variant="h4" sx={{ mb: 2, ...slotProps?.heading }}>
+      {heading}
+    </Typography>
+  );
 
-          {/* BREADCRUMBS */}
-          {!!links.length && (
-            <Breadcrumbs separator={<Separator />} {...other}>
-              {links.map((link) => (
-                <LinkItem
-                  key={link.name || ''}
-                  link={link}
-                  activeLast={activeLast}
-                  disabled={link.name === lastLink}
-                />
-              ))}
-            </Breadcrumbs>
-          )}
+  const renderLinks = (
+    <Breadcrumbs separator={<Separator />} sx={slotProps?.breadcrumbs} {...other}>
+      {links.map((link, index) => (
+        <BreadcrumbsLink
+          key={link.name ?? index}
+          link={link}
+          activeLast={activeLast}
+          disabled={link.name === lastLink}
+        />
+      ))}
+    </Breadcrumbs>
+  );
+
+  const renderAction = <Box sx={{ flexShrink: 0, ...slotProps?.action }}> {action} </Box>;
+
+  const renderMoreLink = (
+    <Box component="ul">
+      {moreLink?.map((href) => (
+        <Box key={href} component="li" sx={{ display: 'flex' }}>
+          <Link href={href} variant="body2" target="_blank" rel="noopener" sx={slotProps?.moreLink}>
+            {href}
+          </Link>
         </Box>
-
-        {action && <Box sx={{ flexShrink: 0 }}> {action} </Box>}
-      </Stack>
-
-      {/* MORE LINK */}
-      {!!moreLink && (
-        <Box sx={{ mt: 2 }}>
-          {moreLink.map((href) => (
-            <Link
-              key={href}
-              href={href}
-              variant="body2"
-              target="_blank"
-              rel="noopener"
-              sx={{ display: 'table' }}
-            >
-              {href}
-            </Link>
-          ))}
-        </Box>
-      )}
+      ))}
     </Box>
   );
-}
 
-CustomBreadcrumbs.propTypes = {
-  action: PropTypes.node,
-  activeLast: PropTypes.bool,
-  heading: PropTypes.string,
-  links: PropTypes.array,
-  moreLink: PropTypes.array,
-  sx: PropTypes.object,
-};
+  return (
+    <Stack spacing={2} sx={sx}>
+      <Box display="flex" alignItems="center">
+        <Box sx={{ flexGrow: 1 }}>
+          {heading && renderHeading}
+
+          {!!links.length && renderLinks}
+        </Box>
+
+        {action && renderAction}
+      </Box>
+
+      {!!moreLink && renderMoreLink}
+    </Stack>
+  );
+}
 
 // ----------------------------------------------------------------------
 

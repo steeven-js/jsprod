@@ -1,19 +1,25 @@
+import { _testimonials, _marketingPosts } from 'src/_mock';
 
-import useFetchPosts from 'src/hooks/use-fetchPosts';
-
-import MarketingServices from '../services/marketing-services';
-import MarketingServicesInclude from '../services/marketing-services-include';
-import MarketingServicesBenefits from '../services/marketing-services-benefits';
-import BlogMarketingLatestPosts from '../../blog/marketing/marketing-latest-posts';
-import MarketingServicesHowItWork from '../services/marketing-services-how-it-work';
+import { MarketingNewsletter } from '../marketing-newsletter';
+import { MarketingTestimonial } from '../marketing-testimonial';
+import { MarketingServices } from '../services/marketing-services';
+import { MarketingLatestPosts } from '../posts/marketing-latest-posts';
+import { MarketingServicesHero } from '../services/marketing-services-hero';
+import { MarketingLandingFreeSEO } from '../landing/marketing-landing-free-seo';
+import { MarketingServicesInclude } from '../services/marketing-services-include';
+import { MarketingServicesBenefits } from '../services/marketing-services-benefits';
+import { MarketingServicesHowItWork } from '../services/marketing-services-how-it-work';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingServicesView() {
-  const { posts, postCoverUrls } = useFetchPosts();
+const latestPosts = _marketingPosts.slice(0, 4);
+
+// ----------------------------------------------------------------------
+
+export function MarketingServicesView() {
   return (
     <>
-      {/* <MarketingServicesHero /> */}
+      <MarketingServicesHero />
 
       <MarketingServices />
 
@@ -23,13 +29,13 @@ export default function MarketingServicesView() {
 
       <MarketingServicesHowItWork />
 
-      {/* <MarketingTestimonial testimonials={_testimonials} /> */}
+      <MarketingTestimonial testimonials={_testimonials} />
 
-      {posts.length > 6 ? <BlogMarketingLatestPosts posts={posts} postCoverUrls={postCoverUrls} /> : null}
+      <MarketingLatestPosts posts={latestPosts} />
 
-      {/* <MarketingLandingFreeSEO /> */}
+      <MarketingLandingFreeSEO />
 
-      {/* <MarketingNewsletter /> */}
+      <MarketingNewsletter />
     </>
   );
 }

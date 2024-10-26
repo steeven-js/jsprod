@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 
-import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
@@ -8,62 +8,65 @@ import IconButton from '@mui/material/IconButton';
 import { useBoolean } from 'src/hooks/use-boolean';
 
 import { _faqsSupport } from 'src/_mock';
+import { CONFIG } from 'src/config-global';
 
-import Iconify from 'src/components/iconify';
+import { Iconify } from 'src/components/iconify';
 
-import SupportNav from '../support-nav';
-import SupportHero from '../support-hero';
-import SupportContent from '../support-content';
+import { SupportNav } from '../support-nav';
+import { SupportHero } from '../support-hero';
+import { SupportContent } from '../support-content';
 
 // ----------------------------------------------------------------------
+
+const iconPath = (name) => `${CONFIG.assetsDir}/assets/icons/support/${name}`;
 
 const TOPICS = [
   {
     title: 'Account',
-    icon: '/assets/icons/faq/ic_faq_account.svg',
-    content: <SupportContent contents={_faqsSupport} />,
+    icon: iconPath('ic-account.svg'),
+    content: <SupportContent contents={_faqsSupport.slice(0, 6)} />,
   },
   {
     title: 'Payment',
-    icon: '/assets/icons/faq/ic_faq_payment.svg',
-    content: <SupportContent contents={_faqsSupport} />,
+    icon: iconPath('ic-payment.svg'),
+    content: <SupportContent contents={_faqsSupport.slice(0, 5)} />,
   },
   {
     title: 'Delivery',
-    icon: '/assets/icons/faq/ic_faq_delivery.svg',
-    content: <SupportContent contents={_faqsSupport} />,
+    icon: iconPath('ic-delivery.svg'),
+    content: <SupportContent contents={_faqsSupport.slice(0, 4)} />,
   },
   {
     title: 'Product',
-    icon: '/assets/icons/faq/ic_faq_package.svg',
+    icon: iconPath('ic-package.svg'),
     content: <SupportContent contents={_faqsSupport} />,
   },
   {
-    title: 'Return & Refund',
-    icon: '/assets/icons/faq/ic_faq_refund.svg',
-    content: <SupportContent contents={_faqsSupport} />,
+    title: 'Return & refund',
+    icon: iconPath('ic-refund.svg'),
+    content: <SupportContent contents={_faqsSupport.slice(0, 6)} />,
   },
   {
     title: 'Assurances',
-    icon: '/assets/icons/faq/ic_faq_assurances.svg',
-    content: <SupportContent contents={_faqsSupport} />,
+    icon: iconPath('ic-assurances.svg'),
+    content: <SupportContent contents={_faqsSupport.slice(0, 7)} />,
   },
 ];
 
 // ----------------------------------------------------------------------
 
-export default function SupportView() {
+export function SupportView() {
   const [topic, setTopic] = useState('Payment');
 
-  const mobileOpen = useBoolean();
+  const openNavMobile = useBoolean();
 
   const handleChangeTopic = useCallback((event, newValue) => {
     setTopic(newValue);
   }, []);
 
   useEffect(() => {
-    if (mobileOpen.value) {
-      mobileOpen.onFalse();
+    if (openNavMobile.value) {
+      openNavMobile.onFalse();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [topic]);
@@ -72,36 +75,35 @@ export default function SupportView() {
     <>
       <SupportHero />
 
-      <Stack
-        alignItems="flex-end"
+      <Box
         sx={{
+          px: 2,
           py: 1.5,
-          px: 2.5,
           display: { md: 'none' },
-          borderBottom: (theme) => `solid 1px ${theme.palette.divider}`,
+          borderBottom: (theme) => `solid 1px ${theme.vars.palette.divider}`,
         }}
       >
-        <IconButton onClick={mobileOpen.onTrue}>
+        <IconButton onClick={openNavMobile.onTrue}>
           <Iconify icon="carbon:menu" />
         </IconButton>
-      </Stack>
+      </Box>
 
-      <Container>
-        <Typography variant="h3" sx={{ py: { xs: 3, md: 10 } }}>
-          Frequently Asked Questions
+      <Container component="section" sx={{ pb: { xs: 10, md: 15 } }}>
+        <Typography variant="h3" sx={{ my: { xs: 3, md: 10 } }}>
+          Frequently asked questions
         </Typography>
 
-        <Stack direction="row" sx={{ pb: { xs: 10, md: 15 } }}>
+        <Box gap={10} display="flex">
           <SupportNav
             data={TOPICS}
             topic={topic}
-            open={mobileOpen.value}
+            open={openNavMobile.value}
             onChangeTopic={handleChangeTopic}
-            onClose={mobileOpen.onFalse}
+            onClose={openNavMobile.onFalse}
           />
 
           {TOPICS.map((item) => item.title === topic && <div key={item.title}>{item.content}</div>)}
-        </Stack>
+        </Box>
       </Container>
     </>
   );

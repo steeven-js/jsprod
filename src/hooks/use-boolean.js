@@ -1,9 +1,9 @@
-import { useState, useCallback } from 'react';
+import { useMemo, useState, useCallback } from 'react';
 
 // ----------------------------------------------------------------------
 
-export function useBoolean(defaultValue) {
-  const [value, setValue] = useState(!!defaultValue);
+export function useBoolean(defaultValue = false) {
+  const [value, setValue] = useState(defaultValue);
 
   const onTrue = useCallback(() => {
     setValue(true);
@@ -17,11 +17,16 @@ export function useBoolean(defaultValue) {
     setValue((prev) => !prev);
   }, []);
 
-  return {
-    value,
-    onTrue,
-    onFalse,
-    onToggle,
-    setValue,
-  };
+  const memoizedValue = useMemo(
+    () => ({
+      value,
+      onTrue,
+      onFalse,
+      onToggle,
+      setValue,
+    }),
+    [value, onTrue, onFalse, onToggle, setValue]
+  );
+
+  return memoizedValue;
 }

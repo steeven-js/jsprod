@@ -1,199 +1,143 @@
 import { memo } from 'react';
 import { m } from 'framer-motion';
-import PropTypes from 'prop-types';
 
 import Box from '@mui/material/Box';
 import { useTheme } from '@mui/material/styles';
 
 import { useHoverParallax } from 'src/hooks/use-hover-parallax';
 
-import Image from 'src/components/image';
-import SvgColor from 'src/components/svg-color';
+import { CONFIG } from 'src/config-global';
 
-import Icon from './pattern/icon';
-import Label from './pattern/label';
-import Character from './pattern/character';
-import Pattern02 from './pattern/pattern-02';
-import Pattern01 from './pattern/pattern-01';
+import { SvgColor } from 'src/components/svg-color';
+
+import { Character } from './components/character';
+import { CirclePattern } from './components/circle-pattern';
+import { TrianglePattern } from './components/shape-pattern';
+import { FloatIcon, FloatLabel } from './components/float-elements';
+
+// ----------------------------------------------------------------------
+
+const IconLabel = ({ label, icon, offsetX, offsetY, sx, ...other }) => (
+  <Box component="span" sx={{ zIndex: 9, position: 'absolute', ...sx }} {...other}>
+    <FloatLabel
+      text={label}
+      icon={<Box component="img" alt={label} src={icon} sx={{ width: 48, height: 48 }} />}
+      style={{ x: offsetX, y: offsetY }}
+    />
+  </Box>
+);
+
+const IconBox = ({ color, icon, offsetX, offsetY, sx, ...other }) => (
+  <Box component="span" sx={{ zIndex: 9, position: 'absolute', ...sx }} {...other}>
+    <FloatIcon
+      color={color}
+      style={{ x: offsetX, y: offsetY }}
+      icon={<SvgColor width={40} src={icon} sx={{ color: 'common.black' }} />}
+    />
+  </Box>
+);
 
 // ----------------------------------------------------------------------
 
-const stylesIcon = {
-  width: 40,
-  height: 40,
-  color: 'common.black',
-};
+const DISTANCE = 40;
 
-// ----------------------------------------------------------------------
+const iconPath = (name) => `${CONFIG.assetsDir}/assets/icons/${name}`;
 
 function CareerHeroIllustration({ sx, ...other }) {
   const theme = useTheme();
 
-  const { offsetX, offsetY, onMouseMoveHandler, onMouseLeaveHandler } = useHoverParallax();
+  const { offsetX, offsetY, onMouseMove, onMouseLeave } = useHoverParallax(120, 16);
 
-  const BLUE = theme.palette.info.main;
+  const characterStyles = {
+    bottom: 16,
+    width: 300,
+    position: 'absolute',
+  };
 
-  const GREEN = theme.palette.success.main;
+  const renderShapes = (
+    <>
+      <TrianglePattern />
+      <CirclePattern />
+    </>
+  );
 
-  const YELLOW = theme.palette.warning.main;
+  const renderLabels = (
+    <>
+      <IconLabel
+        label="Accounting"
+        icon={iconPath('banner/ic-accounting.svg')}
+        offsetX={offsetX(-DISTANCE)}
+        offsetY={offsetY(-DISTANCE)}
+        sx={{ top: 170, transform: 'translateX(-125px) rotate(-15deg)' }}
+      />
+      <Character sx={{ ...characterStyles }} />
+      <IconLabel
+        label="Banking"
+        icon={iconPath('banner/ic-banking.svg')}
+        offsetX={offsetX(DISTANCE * 2)}
+        offsetY={offsetY(DISTANCE * 2)}
+        sx={{ transform: 'translate(175px, 90px) rotate(15deg)' }}
+      />
+      <IconLabel
+        label="Health care"
+        icon={iconPath('banner/ic-health-care.svg')}
+        offsetX={offsetX(DISTANCE * 3)}
+        offsetY={offsetY(DISTANCE * 3)}
+        sx={{ transform: 'translate(170px, -110px) rotate(15deg)' }}
+      />
+      <IconLabel
+        label="Software"
+        icon={iconPath('banner/ic-software-development.svg')}
+        offsetX={offsetX(DISTANCE * -4)}
+        offsetY={offsetY(DISTANCE * -4)}
+        sx={{ zIndex: 11, bottom: 160, transform: 'translateX(-110px)' }}
+      />
+    </>
+  );
+
+  const renderIcons = (
+    <>
+      <IconBox
+        color={theme.palette.warning.mainChannel}
+        icon={iconPath('solid-64/ic-creativity.svg')}
+        offsetX={offsetX(DISTANCE)}
+        offsetY={offsetY(DISTANCE)}
+        sx={{ top: 16, transform: 'translateX(20px)' }}
+      />
+      <IconBox
+        color={theme.palette.success.mainChannel}
+        icon={iconPath('solid-64/ic-marketing-bullhorn.svg')}
+        offsetX={offsetX(-DISTANCE * 2)}
+        offsetY={offsetY(DISTANCE * 2)}
+        sx={{ bottom: 16, transform: 'translateX(40px)' }}
+      />
+      <IconBox
+        color={theme.palette.info.mainChannel}
+        icon={iconPath('solid-64/ic-customer-service.svg')}
+        offsetX={offsetX(DISTANCE * 3)}
+        offsetY={offsetY(DISTANCE * 3)}
+        sx={{ bottom: 220, transform: 'translateX(-220px)' }}
+      />
+    </>
+  );
 
   return (
     <Box
       component={m.div}
-      onMouseMove={onMouseMoveHandler}
-      onMouseLeave={onMouseLeaveHandler}
-      sx={{
-        width: 564,
-        height: 564,
-        display: 'flex',
-        alignItems: 'center',
-        position: 'relative',
-        justifyContent: 'center',
-        ...sx,
-      }}
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      sx={{ width: 560, height: 560, position: 'relative', ...sx }}
       {...other}
     >
-      <>
-        <Character front sx={{ position: 'absolute', bottom: 16, zIndex: 10, width: 300 }} />
-        {/* Accounting */}
-        <Box
-          sx={{
-            top: 170,
-            zIndex: 9,
-            position: 'absolute',
-            transform: 'translateX(-125px) rotate(-15deg)',
-          }}
-        >
-          <m.div style={{ y: offsetY(-50) }}>
-            <Label
-              text="Accounting"
-              icon={
-                <Image
-                  alt="accounting"
-                  src="/assets/icons/ic_accounting.svg"
-                  sx={{ width: 48, height: 48 }}
-                />
-              }
-            />
-          </m.div>
-        </Box>
-        <Character sx={{ position: 'absolute', bottom: 16, zIndex: 8, width: 300 }} />
-      </>
-
-      {/* Banking */}
-      <Box
-        sx={{
-          position: 'absolute',
-          transform: 'translate(175px, 90px) rotate(15deg)',
-        }}
-      >
-        <m.div style={{ x: offsetX(80), y: offsetY(80) }}>
-          <Label
-            text="Banking"
-            icon={
-              <Image
-                alt="banking"
-                src="/assets/icons/ic_banking_currency.svg"
-                sx={{ width: 48, height: 48 }}
-              />
-            }
-          />
-        </m.div>
-      </Box>
-
-      {/* Health Care */}
-      <Box
-        sx={{
-          position: 'absolute',
-          transform: 'translate(170px, -110px) rotate(15deg)',
-        }}
-      >
-        <m.div style={{ y: offsetY(80) }}>
-          <Label
-            text="Health Care"
-            icon={
-              <Image
-                alt="health care"
-                src="/assets/icons/ic_health_care.svg"
-                sx={{ width: 48, height: 48 }}
-              />
-            }
-          />
-        </m.div>
-      </Box>
-
-      {/* Software */}
-      <Box
-        sx={{
-          zIndex: 10,
-          bottom: 160,
-          position: 'absolute',
-          transform: 'translateX(-110px)',
-        }}
-      >
-        <m.div style={{ y: offsetY(-60) }}>
-          <Label
-            text="Software"
-            icon={
-              <Image
-                alt="software development"
-                src="/assets/icons/ic_software_development.svg"
-                sx={{ width: 48, height: 48 }}
-              />
-            }
-          />
-        </m.div>
-      </Box>
-
-      {/* Icon */}
-      <Box sx={{ position: 'absolute', top: 16, transform: 'translateX(20px)' }}>
-        <m.div style={{ x: offsetX(50), y: offsetY(50) }}>
-          <Icon
-            color={YELLOW}
-            content={<SvgColor src="/assets/icons/ic_creativity.svg" sx={{ ...stylesIcon }} />}
-          />
-        </m.div>
-      </Box>
-
-      {/* Icon */}
-      <Box sx={{ position: 'absolute', bottom: 16, transform: 'translateX(40px)' }}>
-        <m.div style={{ x: offsetX(-60), y: offsetY(60) }}>
-          <Icon
-            color={GREEN}
-            content={
-              <SvgColor src="/assets/icons/ic_marketing_bullhorn.svg" sx={{ ...stylesIcon }} />
-            }
-          />
-        </m.div>
-      </Box>
-
-      {/* Icon */}
-      <Box
-        sx={{
-          position: 'absolute',
-          bottom: 220,
-          transform: 'translateX(-220px)',
-        }}
-      >
-        <m.div style={{ x: offsetX(70), y: offsetY(70) }}>
-          <Icon
-            color={BLUE}
-            content={
-              <SvgColor src="/assets/icons/ic_customer_service.svg" sx={{ ...stylesIcon }} />
-            }
-          />
-        </m.div>
-      </Box>
-
-      <Pattern01 />
-
-      <Pattern02 />
+      <Character isFront sx={{ ...characterStyles, zIndex: 10 }} />
+      {renderLabels}
+      {renderIcons}
+      {renderShapes}
     </Box>
   );
 }
-
-CareerHeroIllustration.propTypes = {
-  sx: PropTypes.object,
-};
 
 export default memo(CareerHeroIllustration);

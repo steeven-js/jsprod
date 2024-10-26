@@ -1,21 +1,21 @@
-import PropTypes from 'prop-types';
 import { useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import Radio from '@mui/material/Radio';
 import Button from '@mui/material/Button';
-import { alpha } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel, { formControlLabelClasses } from '@mui/material/FormControlLabel';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 
 import { useBoolean } from 'src/hooks/use-boolean';
 
-import Iconify from 'src/components/iconify';
+import { varAlpha } from 'src/theme/styles';
 
-import PaymentNewCardForm from './payment-new-card-form';
+import { Iconify } from 'src/components/iconify';
+
+import { PaymentNewCardForm } from './payment-new-card-form';
 
 // ----------------------------------------------------------------------
 
@@ -25,7 +25,7 @@ const PAYMENT_OPTIONS = [
     value: 'paypal',
   },
   {
-    label: 'Credit / Debit',
+    label: 'Credit / debit',
     value: 'creditcard',
   },
 ];
@@ -47,111 +47,108 @@ const CARD_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-export default function PaymentMethods() {
+export function PaymentMethods({ sx, ...other }) {
+  const openForm = useBoolean();
+
   const [method, setMethod] = useState('paypal');
 
-  const formOpen = useBoolean();
-
-  const handleChangeMethod = useCallback((event) => {
-    setMethod(event.target.value);
+  const handleChangeMethod = useCallback((newValue) => {
+    setMethod(newValue);
   }, []);
 
   return (
     <>
-      <Stack spacing={5}>
-        <Typography variant="h5">Payment Method</Typography>
+      <Box sx={sx} {...other}>
+        <Typography component="h6" variant="h5" sx={{ mb: { xs: 3, md: 5 } }}>
+          Payment method
+        </Typography>
 
-        <RadioGroup value={method} onChange={handleChangeMethod}>
-          <Stack spacing={2.5}>
-            {PAYMENT_OPTIONS.map((option) => (
-              <OptionItem
-                key={option.value}
-                option={option}
-                selected={method === option.value}
-                isCredit={option.value === 'creditcard' && method === 'creditcard'}
-                onOpen={formOpen.onTrue}
-              />
-            ))}
-          </Stack>
-        </RadioGroup>
-      </Stack>
+        <Box gap={3} display="flex" flexDirection="column">
+          {PAYMENT_OPTIONS.map((option) => (
+            <OptionItem
+              key={option.value}
+              option={option}
+              selected={method === option.value}
+              isCredit={option.value === 'creditcard' && method === 'creditcard'}
+              onOpen={openForm.onTrue}
+              onClick={() => handleChangeMethod(option.value)}
+            />
+          ))}
+        </Box>
+      </Box>
 
-      <PaymentNewCardForm open={formOpen.value} onClose={formOpen.onFalse} />
+      <Dialog fullWidth maxWidth="xs" open={openForm.value} onClose={openForm.onFalse}>
+        <DialogTitle> Add new card </DialogTitle>
+
+        <DialogContent sx={{ overflow: 'unset' }}>
+          <PaymentNewCardForm />
+        </DialogContent>
+
+        <DialogActions>
+          <Button color="inherit" variant="outlined" onClick={openForm.onFalse}>
+            Cancel
+          </Button>
+
+          <Button color="inherit" variant="contained" onClick={openForm.onFalse}>
+            Add
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 }
 
-// ----------------------------------------------------------------------
-
-function OptionItem({ option, onOpen, selected, isCredit }) {
-  const { value, label } = option;
-
-  const renderLabel = (
-    <Stack direction="row" alignItems="center">
-      <Box component="span" sx={{ typography: 'subtitle1', flexGrow: 1 }}>
-        {label}
-      </Box>
-
-      <Stack spacing={1} direction="row" alignItems="center">
-        {value === 'creditcard' ? (
-          <>
-            <Iconify icon="logos:mastercard" width={24} />,
-            <Iconify icon="logos:visa" width={24} />
-          </>
-        ) : (
-          <Iconify icon="logos:paypal" width={24} />
-        )}
-      </Stack>
-    </Stack>
-  );
-
+function OptionItem({ option, onOpen, selected, isCredit, sx, ...other }) {
   return (
     <Box
       sx={{
-        borderRadius: 1,
-        border: (theme) => `solid 1px ${alpha(theme.palette.grey[500], 0.24)}`,
+        borderRadius: 1.5,
+        border: (theme) => `solid 1px ${varAlpha(theme.vars.palette.grey['500Channel'], 0.24)}`,
+        transition: (theme) =>
+          theme.transitions.create(['box-shadow'], {
+            easing: theme.transitions.easing.sharp,
+            duration: theme.transitions.duration.shortest,
+          }),
         ...(selected && {
-          boxShadow: (theme) => `0 0 0 2px ${theme.palette.text.primary}`,
+          boxShadow: (theme) => `0 0 0 2px ${theme.vars.palette.text.primary}`,
         }),
+        ...sx,
       }}
+      {...other}
     >
-      <FormControlLabel
-        value={value}
-        control={
-          <Radio
-            disableRipple
-            checkedIcon={<Iconify icon="carbon:checkmark-outline" />}
-            sx={{ mx: 1 }}
-          />
-        }
-        label={renderLabel}
-        sx={{
-          m: 0,
-          py: 2,
-          pr: 2.5,
-          width: 1,
-          [`& .${formControlLabelClasses.label}`]: {
-            width: 1,
-          },
-        }}
-      />
+      <Box
+        display="flex"
+        alignItems="center"
+        sx={{ px: 2, gap: 1.5, height: 80, cursor: 'pointer' }}
+      >
+        <Iconify
+          width={24}
+          icon={selected ? 'solar:check-circle-bold' : 'carbon:radio-button'}
+          sx={{
+            color: 'text.disabled',
+            ...(selected && { color: 'primary.main' }),
+          }}
+        />
+
+        <Box component="span" sx={{ typography: 'subtitle1', flexGrow: 1 }}>
+          {option.label}
+        </Box>
+
+        <Box gap={1} display="flex" alignItems="center">
+          {option.value === 'creditcard' ? (
+            <>
+              <Iconify width={24} icon="logos:mastercard" />
+              <Iconify width={24} icon="logos:visa" />
+            </>
+          ) : (
+            <Iconify width={24} icon="logos:paypal" />
+          )}
+        </Box>
+      </Box>
 
       {isCredit && (
-        <Stack
-          alignItems="flex-start"
-          sx={{
-            px: 3,
-            width: 1,
-          }}
-        >
-          <TextField
-            select
-            fullWidth
-            label="Card"
-            SelectProps={{
-              native: true,
-            }}
-          >
+        <Box sx={{ px: 3 }}>
+          <TextField select fullWidth label="Card" SelectProps={{ native: true }}>
             {CARD_OPTIONS.map((card) => (
               <option key={card.value} value={card.value}>
                 {card.label}
@@ -162,24 +159,14 @@ function OptionItem({ option, onOpen, selected, isCredit }) {
           <Button
             size="small"
             color="inherit"
-            startIcon={<Iconify icon="carbon:add" />}
+            startIcon={<Iconify icon="eva:plus-outline" sx={{ mr: -0.5 }} />}
             onClick={onOpen}
             sx={{ my: 3 }}
           >
             Add new card
           </Button>
-        </Stack>
+        </Box>
       )}
     </Box>
   );
 }
-
-OptionItem.propTypes = {
-  isCredit: PropTypes.bool,
-  onOpen: PropTypes.func,
-  option: PropTypes.shape({
-    label: PropTypes.string,
-    value: PropTypes.string,
-  }),
-  selected: PropTypes.bool,
-};

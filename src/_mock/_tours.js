@@ -1,5 +1,6 @@
-import { add } from 'date-fns';
+import { fAdd } from 'src/utils/format-time';
 
+import { CONFIG } from 'src/config-global';
 import { countries } from 'src/assets/data';
 
 import { _mock } from './_mock';
@@ -23,35 +24,49 @@ export const TOUR_SERVICE_OPTIONS = [
   },
 ];
 
-export const _tours = [...Array(12)].map((_, index) => {
-  const location = countries.map((option) => option.label)[index + 1];
+const determineContinent = (index) => {
+  if ([1, 2].includes(index)) return 'Asia';
+  if ([3, 4].includes(index)) return 'Europe';
+  if ([5, 6].includes(index)) return 'Africa';
+  if ([7, 8].includes(index)) return 'Australia';
+  if ([9, 10].includes(index)) return 'South America';
+  return 'Africa';
+};
 
-  const gallery = [...Array(6)].map((__, itemIndex) => _mock.image.travel(itemIndex + 2));
+const generateServices = (index) => {
+  if (index % 2 === 0) return ['Audio guide', 'Food and drinks'];
+  if (index % 3 === 0) return ['Lunch', 'Private tour'];
+  if (index % 4 === 0) return ['Special activities', 'Entrance fees'];
+  return [
+    'Gratuities',
+    'Pick-up and drop off',
+    'Professional guide',
+    'Transport by air-conditioned',
+  ];
+};
 
-  const highlights = [...Array(6)].map((__, itemIndex) => _mock.sentence(itemIndex));
-
-  const heroUrl = [
-    '/assets/images/travel/travel_post_hero.jpg',
-    '/assets/images/travel/travel_post_01.jpg',
-    '/assets/images/travel/travel_post_02.jpg',
-    '/assets/images/travel/travel_post_03.jpg',
-    '/assets/images/travel/travel_post_04.jpg',
-  ][index];
-
-  const program = [...Array(3)].map((__, itemIndex) => ({
+const generateProgram = () =>
+  [...Array(3)].map((_, itemIndex) => ({
     label: `Day ${itemIndex + 1}`,
     text: _mock.description(itemIndex),
   }));
 
-  const services = (index % 2 && ['Audio guide', 'Food and drinks']) ||
-    (index % 3 && ['Lunch', 'Private tour']) ||
-    (index % 4 && ['Special activities', 'Entrance fees']) || [
-      'Gratuities',
-      'Pick-up and drop off',
-      'Professional guide',
-      'Transport by air-conditioned',
-    ];
+const generateGallery = () => [...Array(6)].map((_, index) => _mock.image.travel(index));
 
+const generateHighlights = () => [...Array(6)].map((_, index) => _mock.sentence(index));
+
+const generateHeroUrl = (index) =>
+  [
+    `${CONFIG.assetsDir}/assets/images/travel/travel-large-1.webp`,
+    `${CONFIG.assetsDir}/assets/images/travel/travel-large-2.webp`,
+    `${CONFIG.assetsDir}/assets/images/travel/travel-large-3.webp`,
+    `${CONFIG.assetsDir}/assets/images/travel/travel-large-4.webp`,
+    `${CONFIG.assetsDir}/assets/images/travel/travel-large-5.webp`,
+  ][index];
+
+// ----------------------------------------------------------------------
+
+export const _tours = [...Array(12)].map((_, index) => {
   const tourGuide = {
     verified: true,
     role: _mock.role(index),
@@ -64,44 +79,44 @@ export const _tours = [...Array(12)].map((_, index) => {
     about:
       'Integer tincidunt. Nullam dictum felis eu pede mollis pretium. Maecenas ullamcorper, dui et placerat feugiat, eros pede varius nisi, condimentum viverra felis nunc et lorem.',
     shareLinks: {
-      facebook: `facebook/user-name`,
-      instagram: `instagram/user-name`,
-      linkedin: `linkedin/user-name`,
-      twitter: `twitter/user-name`,
+      facebook: 'https://facebook.example.com',
+      instagram: 'https://instagram.example.com',
+      linkedin: 'https://linkedin.example.com',
+      twitter: 'https://twitter.example.com',
     },
   };
 
   return {
     id: _mock.id(index),
-    heroUrl,
-    gallery,
-    program,
-    location,
-    services,
     tourGuide,
-    highlights,
-    continent: location,
     tags: _tags.slice(0, 5),
+    gallery: generateGallery(),
+    program: generateProgram(),
     slug: _mock.tourName(index),
     duration: '3 days 2 nights',
     createdAt: _mock.time(index),
+    heroUrl: generateHeroUrl(index),
     favorited: _mock.boolean(index),
+    highlights: generateHighlights(),
     price: _mock.number.price(index),
-    languages: ['Russian', 'Spanish'],
+    services: generateServices(index),
     coverUrl: _mock.image.travel(index),
+    continent: determineContinent(index),
     description: _mock.description(index),
     ratingNumber: _mock.number.rating(index),
     totalReviews: _mock.number.nativeL(index),
+    languages: ['English', 'Russian', 'Spanish'],
+    location: countries.map((option) => option.label)[index + 1],
     priceSale: (index === 2 && 89.99) || (index === 5 && 69.99) || 0,
     available: {
-      start: add(new Date(), { months: 2 }),
-      end: add(new Date(), { months: 4 }),
+      start: fAdd({ months: 2 }),
+      end: fAdd({ months: 4 }),
     },
     shareLinks: {
-      facebook: `facebook/user-name`,
-      instagram: `instagram/user-name`,
-      linkedin: `linkedin/user-name`,
-      twitter: `twitter/user-name`,
+      facebook: 'https://facebook.example.com',
+      instagram: 'https://instagram.example.com',
+      linkedin: 'https://linkedin.example.com',
+      twitter: 'https://twitter.example.com',
     },
   };
 });

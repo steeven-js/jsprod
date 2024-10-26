@@ -1,37 +1,42 @@
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import { alpha, useTheme } from '@mui/material/styles';
 import InputAdornment from '@mui/material/InputAdornment';
 
-import { bgGradient } from 'src/theme/css';
+import { CONFIG } from 'src/config-global';
+import { varAlpha, bgGradient } from 'src/theme/styles';
 
-import Iconify from 'src/components/iconify';
+import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export default function SupportHero() {
+export function SupportHero({ sx, ...other }) {
   const theme = useTheme();
 
   return (
-    <Stack
+    <Box
+      component="section"
       sx={{
         ...bgGradient({
-          color: alpha(theme.palette.grey[900], 0.8),
-          imgUrl: '/assets/background/overlay_2.jpg',
+          color: `to bottom, ${varAlpha(theme.vars.palette.common.blackChannel, 0.8)}, ${varAlpha(theme.vars.palette.common.blackChannel, 0.8)}`,
+          imgUrl: `${CONFIG.assetsDir}/assets/background/overlay-2.webp`,
         }),
-        py: 15,
         px: 2.5,
+        display: 'flex',
         alignItems: 'center',
+        py: { xs: 10, md: 15 },
+        flexDirection: 'column',
+        ...sx,
       }}
+      {...other}
     >
       <Typography variant="h2" sx={{ textAlign: 'center', color: 'common.white', mb: 5 }}>
         Welcome to <br />
         <Box component="span" sx={{ color: 'primary.main' }}>
           {`ZONE `}
         </Box>
-        Support
+        support
       </Typography>
 
       <TextField
@@ -41,13 +46,16 @@ export default function SupportHero() {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <Iconify icon="carbon:search" width={24} sx={{ color: 'text.disabled' }} />
+              <Iconify width={24} icon="carbon:search" sx={{ color: 'text.disabled' }} />
             </InputAdornment>
           ),
-          sx: { color: 'common.white' },
+          sx: {
+            color: 'common.white',
+            bgcolor: varAlpha(theme.vars.palette.grey['500Channel'], 0.16),
+          },
         }}
-        sx={{ maxWidth: 366 }}
+        sx={{ maxWidth: 360 }}
       />
-    </Stack>
+    </Box>
   );
 }

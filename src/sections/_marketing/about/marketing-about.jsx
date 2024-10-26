@@ -1,29 +1,32 @@
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
-import { alpha, styled } from '@mui/material/styles';
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { CONFIG } from 'src/config-global';
+import { varAlpha } from 'src/theme/styles';
 
-import { fShortenNumber } from 'src/utils/format-number';
-
-import { _SUMMARY, _MarketingAbout } from 'src/assets/data';
-
-import Image from 'src/components/image';
-import Iconify from 'src/components/iconify';
-import CountUp from 'src/components/count-up';
+import { Iconify } from 'src/components/iconify';
+import { AnimateCountUp } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
 
 const COLORS = ['primary', 'secondary', 'warning', 'success'];
 
+const SUMMARY = [
+  { title: 'Years of experience', total: 12, icon: 'carbon:increase-level' },
+  { title: 'Awards', total: 20, icon: 'carbon:trophy' },
+  { title: 'Projects', total: 150, icon: 'carbon:data-vis-4' },
+  { title: 'Happy clients', total: 32000, icon: 'carbon:user-certification' },
+];
+
 // ----------------------------------------------------------------------
 
-const StyledIcon = styled('div', {
-  shouldForwardProp: (prop) => prop !== 'color',
-})(({ color, theme }) => ({
+const IconWrap = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'deg' && prop !== 'color',
+})(({ color, deg, theme }) => ({
   width: 160,
   height: 160,
   margin: 'auto',
@@ -32,8 +35,8 @@ const StyledIcon = styled('div', {
   alignItems: 'center',
   position: 'relative',
   justifyContent: 'center',
-  color: theme.palette[color].darker,
-  border: `dashed 2px ${alpha(theme.palette[color].main, 0.24)}`,
+  color: theme.vars.palette[color].darker,
+  border: `dashed 2px ${varAlpha(theme.vars.palette[color].mainChannel, 0.24)}`,
   '&:before': {
     zIndex: 8,
     content: '""',
@@ -41,7 +44,7 @@ const StyledIcon = styled('div', {
     position: 'absolute',
     width: 'calc(100% - 48px)',
     height: 'calc(100% - 48px)',
-    background: `conic-gradient(from 0deg at 50% 50%, ${theme.palette[color].main} 0deg, ${theme.palette[color].light} 360deg)`,
+    background: `conic-gradient(from ${deg}deg at 50% 50%, ${theme.vars.palette[color].main} 0deg, ${theme.vars.palette[color].light} 360deg)`,
   },
   '& svg': {
     zIndex: 9,
@@ -50,82 +53,80 @@ const StyledIcon = styled('div', {
 
 // ----------------------------------------------------------------------
 
-export default function MarketingAbout() {
-  const mdUp = useResponsive('up', 'md');
-
+export function MarketingAbout({ sx, ...other }) {
   return (
-    <Container
+    <Box
+      component="section"
       sx={{
-        pt: { xs: 5, md: 10 },
         pb: 10,
+        pt: { xs: 3, md: 10 },
+        ...sx,
       }}
+      {...other}
     >
-      <Grid container spacing={3} justifyContent="space-between" alignItems="center">
-        {mdUp && (
-          <Grid xs={12} md={6} lg={5}>
-            <Image alt="teams" src="/assets/illustrations/illustration_teams.svg" />
+      <Container>
+        <Grid container spacing={3} justifyContent="space-between" alignItems="center">
+          <Grid xs={12} md={6} lg={5} sx={{ display: { xs: 'none', md: 'block' } }}>
+            <Box
+              component="img"
+              alt="About teams illustration"
+              src={`${CONFIG.assetsDir}/assets/illustrations/illustration-teams.svg`}
+              sx={{ width: 480, height: 480 }}
+            />
           </Grid>
-        )}
 
-        <Grid
-          xs={12}
-          md={6}
-          lg={6}
-          sx={{
-            textAlign: { xs: 'center', md: 'left' },
-          }}
-        >
-          <Typography variant="h2">{_MarketingAbout[0].label}</Typography>
+          <Grid xs={12} md={6} lg={6} sx={{ textAlign: { xs: 'center', md: 'left' } }}>
+            <Typography variant="h2">Who we are?</Typography>
 
-          <Typography sx={{ mt: 3, mb: 5, color: 'text.secondary' }}>
-            {_MarketingAbout[1].label}
-            <br />
-            <br />
-            {_MarketingAbout[2].label}
-          </Typography>
+            <Typography sx={{ mt: 3, mb: 5, color: 'text.secondary' }}>
+              Vivamus consectetuer hendrerit lacus. Curabitur a felis in nunc fringilla tristique.
+              Nulla neque dolor, sagittis eget, iaculis quis, molestie non, velit.
+              <br />
+              <br />
+              Nam pretium turpis et arcu. Praesent porttitor, nulla vitae posuere iaculis, arcu nisl
+              dignissim dolor, a pretium mi sem ut ipsum. Praesent venenatis metus at tortor
+              pulvinar varius.
+            </Typography>
 
-          <Button
-            variant="outlined"
-            color="inherit"
-            size="large"
-            endIcon={<Iconify icon="carbon:chevron-right" />}
-          >
-            {_MarketingAbout[3].label}
-          </Button>
+            <Button
+              variant="outlined"
+              color="inherit"
+              size="large"
+              endIcon={<Iconify icon="solar:alt-arrow-right-outline" />}
+            >
+              Check our work
+            </Button>
+          </Grid>
         </Grid>
-      </Grid>
 
-      <Box
-        sx={{
-          mt: 10,
-          textAlign: 'center',
-          display: 'grid',
-          gap: { xs: 5, md: 8 },
-          gridTemplateColumns: {
+        <Box
+          display="grid"
+          gap={{ xs: 5, md: 8 }}
+          gridTemplateColumns={{
             xs: 'repeat(1, 1fr)',
             sm: 'repeat(2, 1fr)',
             md: 'repeat(4, 1fr)',
-          },
-        }}
-      >
-        {_SUMMARY.map((value, index) => (
-          <div key={value.title}>
-            <StyledIcon color={COLORS[index]}>
-              <Iconify icon={value.icon} width={48} />
-            </StyledIcon>
+          }}
+          sx={{ mt: 10, textAlign: 'center' }}
+        >
+          {SUMMARY.map((value, index) => (
+            <div key={value.title}>
+              <IconWrap
+                color={COLORS[index]}
+                deg={
+                  (index === 1 && 45 * 2) || (index === 2 && 45 * 4) || (index === 3 && 45 * 6) || 0
+                }
+              >
+                <Iconify icon={value.icon} width={48} />
+              </IconWrap>
 
-            <Typography variant="h2" sx={{ mt: 2, mb: 1 }}>
-              <CountUp
-                start={value.total / 5}
-                end={value.total}
-                formattingFn={(newValue) => fShortenNumber(newValue)}
-              />
-            </Typography>
+              <AnimateCountUp variant="h2" to={value.total} sx={{ mt: 2, mb: 1 }} />
 
-            <Typography sx={{ color: 'text.secondary' }}>{value.title}</Typography>
-          </div>
-        ))}
-      </Box>
-    </Container>
+              <Typography sx={{ color: 'text.secondary' }}>{value.title}</Typography>
+            </div>
+          ))}
+        </Box>
+      </Container>
+    </Box>
   );
 }

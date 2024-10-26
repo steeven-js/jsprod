@@ -1,14 +1,6 @@
+import { CONFIG } from 'src/config-global';
+
 import { _mock } from './_mock';
-
-// ----------------------------------------------------------------------
-
-export const _categories = [
-  { label: 'Marketing', path: '' },
-  { label: 'Community', path: '' },
-  { label: 'Tutorials', path: '' },
-  { label: 'Business', path: '' },
-  { label: 'Management', path: '' },
-];
 
 // ----------------------------------------------------------------------
 
@@ -19,60 +11,38 @@ export const _testimonials = [...Array(8)].map((_, index) => ({
   avatarUrl: _mock.image.avatar(index),
   createdAt: _mock.time(index),
   ratingNumber: 5,
-  review:
+  content:
     'Amazing experience i love it a lot. Thanks to the team that dreams come true, great! I appreciate there attitude and approach.',
 }));
 
 // ----------------------------------------------------------------------
 
 export const _socials = [
-  {
-    value: 'facebook',
-    label: 'FaceBook',
-    icon: 'carbon:logo-facebook',
-    color: '#1877F2',
-  },
-  {
-    value: 'instagram',
-    label: 'Instagram',
-    icon: 'carbon:logo-instagram',
-    color: '#E02D69',
-  },
-  {
-    value: 'linkedin',
-    label: 'Linkedin',
-    icon: 'carbon:logo-linkedin',
-    color: '#007EBB',
-  },
-  {
-    value: 'twitter',
-    label: 'Twitter',
-    icon: 'carbon:logo-twitter',
-    color: '#00AAEC',
-  },
+  { value: 'facebook', label: 'Facebook' },
+  { value: 'instagram', label: 'Instagram' },
+  { value: 'linkedin', label: 'Linkedin' },
+  { value: 'twitter', label: 'Twitter' },
 ];
 
 // ----------------------------------------------------------------------
 
-const LAT_LONG = [
-  [33, 65],
-  [-12.5, 18.5],
-  [20.96, 26.27],
-];
-
-export const _offices = ['Jordan', 'Canada', 'Portugal'].map((office, index) => ({
+export const _offices = ['Jordan', 'Canada', 'Portugal'].map((country, index) => ({
+  country,
   id: _mock.id(index),
-  country: office,
+  email: _mock.email(index),
+  photoUrl: _mock.image.travel(index),
   address: _mock.fullAddress(index),
   phoneNumber: _mock.phoneNumber(index),
-  email: _mock.email(index),
-  photo: _mock.image.travel(index + 4),
-  latlng: LAT_LONG[index],
+  position: [
+    { lat: 33, lng: 65 },
+    { lat: -12.5, lng: 18.5 },
+    { lat: 20.96, lng: 26.27 },
+  ][index],
 }));
 
 // ----------------------------------------------------------------------
 
-const BRANDS_NAME = [
+export const _brands = [
   'airbnb',
   'dropbox',
   'facebook',
@@ -85,18 +55,10 @@ const BRANDS_NAME = [
   'spotify',
   'tripadvisor',
   'vimeo',
-];
-
-export const _brands = BRANDS_NAME.map((brand, index) => ({
+].map((brand, index) => ({
   id: _mock.id(index),
   name: brand,
-  image: `/assets/logo/${brand}.svg`,
-}));
-
-export const _brandsColor = BRANDS_NAME.map((brand, index) => ({
-  id: _mock.id(index),
-  name: brand,
-  image: `/assets/logo/${brand}_original.svg`,
+  image: `${CONFIG.assetsDir}/assets/icons/brands/${brand}.svg`,
 }));
 
 // ----------------------------------------------------------------------
@@ -113,6 +75,8 @@ export const _faqs = [
   answer:
     'Amazing experience i love it a lot. Thanks to the team that dreams come true, great! I appreciate there attitude and approach.',
 }));
+
+// ----------------------------------------------------------------------
 
 export const _faqsSupport = [
   `[Covid] Seasonal Shopping Guide`,

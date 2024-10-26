@@ -1,89 +1,107 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useMemo, useState, useEffect, useCallback } from 'react';
+
+import { isEqual } from 'src/utils/helper';
+import { localStorageGetItem } from 'src/utils/storage-available';
 
 // ----------------------------------------------------------------------
 
 export function useLocalStorage(key, initialState) {
-  const [state, setState] = useState(initialState);
+  const [state, set] = useState(initialState);
+
+  const multiValue = initialState && typeof initialState === 'object';
+
+  const canReset = !isEqual(state, initialState);
 
   useEffect(() => {
-    const restored = getStorage(key);
+    const restoredValue = getStorage(key);
 
-    if (restored) {
-      setState((prevValue) => ({
-        ...prevValue,
-        ...restored,
-      }));
+    if (restoredValue) {
+      if (multiValue) {
+        set((prevValue) => ({ ...prevValue, ...restoredValue }));
+      } else {
+        set(restoredValue);
+      }
     }
-  }, [key]);
+  }, [key, multiValue]);
 
-  const updateState = useCallback(
-    (updateValue) => {
-      setState((prevValue) => {
-        setStorage(key, {
-          ...prevValue,
-          ...updateValue,
+  const setState = useCallback(
+    (updateState) => {
+      if (multiValue) {
+        set((prevValue) => {
+          setStorage(key, { ...prevValue, ...updateState });
+          return { ...prevValue, ...updateState };
         });
-
-        return {
-          ...prevValue,
-          ...updateValue,
-        };
-      });
+      } else {
+        setStorage(key, updateState);
+        set(updateState);
+      }
     },
-    [key]
+    [key, multiValue]
   );
 
-  const update = useCallback(
+  const setField = useCallback(
     (name, updateValue) => {
-      updateState({
-        [name]: updateValue,
-      });
+      if (multiValue) {
+        setState({
+          [name]: updateValue,
+        });
+      }
     },
-    [updateState]
+    [multiValue, setState]
   );
 
-  const reset = useCallback(() => {
+  const resetState = useCallback(() => {
+    set(initialState);
     removeStorage(key);
-    setState(initialState);
   }, [initialState, key]);
 
-  return {
-    state,
-    update,
-    reset,
-  };
+  const memoizedValue = useMemo(
+    () => ({
+      state,
+      setState,
+      setField,
+      resetState,
+      canReset,
+    }),
+    [canReset, resetState, setField, setState, state]
+  );
+
+  return memoizedValue;
 }
 
 // ----------------------------------------------------------------------
 
-export const getStorage = (key) => {
-  let value = null;
-
+export function getStorage(key) {
   try {
-    const result = window.localStorage.getItem(key);
+    const result = localStorageGetItem(key);
 
     if (result) {
-      value = JSON.parse(result);
+      return JSON.parse(result);
     }
   } catch (error) {
-    console.error(error);
+    console.error('Error while getting from storage:', error);
   }
 
-  return value;
-};
+  return null;
+}
 
-export const setStorage = (key, value) => {
+// ----------------------------------------------------------------------
+
+export function setStorage(key, value) {
   try {
-    window.localStorage.setItem(key, JSON.stringify(value));
+    const serializedValue = JSON.stringify(value);
+    window.localStorage.setItem(key, serializedValue);
   } catch (error) {
-    console.error(error);
+    console.error('Error while setting storage:', error);
   }
-};
+}
 
-export const removeStorage = (key) => {
+// ----------------------------------------------------------------------
+
+export function removeStorage(key) {
   try {
     window.localStorage.removeItem(key);
   } catch (error) {
-    console.error(error);
+    console.error('Error while removing from storage:', error);
   }
-};
+}

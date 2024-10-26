@@ -1,37 +1,67 @@
-import PropTypes from 'prop-types';
-
+import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
 
 import { fDate } from 'src/utils/format-time';
 
-import Iconify from 'src/components/iconify';
+import { _socials } from 'src/_mock';
+import { CONFIG } from 'src/config-global';
+
+import { SvgColor } from 'src/components/svg-color';
 
 // ----------------------------------------------------------------------
 
-export const _socials = [
-  {
-    value: 'linkedin',
-    label: 'Linkedin',
-    icon: 'carbon:logo-linkedin',
-    color: '#007EBB',
-  },
-];
-export default function MarketingCaseStudyDetailsSummary({ study }) {
+export function MarketingCaseStudyDetailsSummary({
+  sx,
+  title,
+  website,
+  category,
+  createdAt,
+  description,
+  ...other
+}) {
+  const renderSocials = (
+    <Box display="flex">
+      {_socials.map((social) => (
+        <IconButton key={social.value} color="inherit">
+          {(social.value === 'twitter' && (
+            <SvgColor
+              width={20}
+              src={`${CONFIG.assetsDir}/assets/icons/socials/ic-${social.value}.svg`}
+            />
+          )) || (
+            <Box
+              component="img"
+              loading="lazy"
+              alt={social.label}
+              src={`${CONFIG.assetsDir}/assets/icons/socials/ic-${social.value}.svg`}
+              sx={{ width: 20, height: 20 }}
+            />
+          )}
+        </IconButton>
+      ))}
+    </Box>
+  );
 
   return (
-    <Stack spacing={3} sx={{ p: 5, borderRadius: 2, bgcolor: 'background.neutral' }}>
+    <Box
+      gap={3}
+      display="flex"
+      flexDirection="column"
+      sx={{ p: 5, borderRadius: 2, bgcolor: 'background.neutral', ...sx }}
+      {...other}
+    >
       <Stack spacing={2}>
         <Typography variant="overline" sx={{ color: 'text.disabled' }}>
-          Sommaire
+          summary
         </Typography>
 
-        <Typography variant="h6">{study.title}</Typography>
+        <Typography variant="h6">{title}</Typography>
 
-        <Typography variant="body2">{study.description}</Typography>
+        <Typography variant="body2">{description}</Typography>
       </Stack>
 
       <Divider sx={{ borderStyle: 'dashed' }} />
@@ -42,41 +72,32 @@ export default function MarketingCaseStudyDetailsSummary({ study }) {
         </Typography>
 
         <Link variant="body2" color="inherit">
-          {study.website}
+          {website}
         </Link>
 
         <Typography variant="overline" sx={{ color: 'text.disabled', pt: 1 }}>
-          Categorie
+          Category
         </Typography>
 
         <Typography variant="body2" sx={{ pb: 1 }}>
-          {study.category && study.category.name ? study.category.name : 'Uncategorized'}
+          {category}
         </Typography>
 
         <Typography variant="overline" sx={{ color: 'text.disabled' }}>
           Date
         </Typography>
 
-        <Typography variant="body2">{fDate(study.created_at)}</Typography>
+        <Typography variant="body2">{fDate(createdAt)}</Typography>
       </Stack>
 
       <Divider sx={{ borderStyle: 'dashed' }} />
 
-      <Stack direction="row" alignItems="center" spacing={0.5}>
-        <Typography variant="subtitle2">Share:</Typography>
-
-        <Stack direction="row">
-          {_socials.map((social) => (
-            <IconButton key={social.value}>
-              <Iconify icon={social.icon} sx={{ color: social.color }} />
-            </IconButton>
-          ))}
-        </Stack>
-      </Stack>
-    </Stack>
+      <Box display="flex" alignItems="center">
+        <Typography variant="subtitle2" sx={{ mr: 1 }}>
+          Share:
+        </Typography>
+        {renderSocials}
+      </Box>
+    </Box>
   );
 }
-
-MarketingCaseStudyDetailsSummary.propTypes = {
-  study: PropTypes.object,
-};

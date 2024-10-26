@@ -1,0 +1,42 @@
+{
+  "preset1": {
+    "lighter": "#FEE7E4",
+    "light": "#FBAEB5",
+    "main": "#F2779A",
+    "dark": "#AE3B72",
+    "darker": "#741655",
+    "contrastText": "#FFFFFF"
+  },
+  "preset2": {
+    "lighter": "#D0FCE0",
+    "light": "#72F2B9",
+    "main": "#1AD5A6",
+    "dark": "#0D9991",
+    "darker": "#045966",
+    "contrastText": "#1C252E"
+  },
+  "preset3": {
+    "lighter": "#CCF4FE",
+    "light": "#68CDF9",
+    "main": "#078DEE",
+    "dark": "#0351AB",
+    "darker": "#012972",
+    "contrastText": "#FFFFFF"
+  },
+  "preset4": {
+    "lighter": "#C8FAD6",
+    "light": "#5BE49B",
+    "main": "#00A76F",
+    "dark": "#007867",
+    "darker": "#004B50",
+    "contrastText": "#FFFFFF"
+  },
+  "preset5": {
+    "lighter": "#F9E9D1",
+    "light": "#DBA573",
+    "main": "#87431D",
+    "dark": "#61210E",
+    "darker": "#400C05",
+    "contrastText": "#FFFFFF"
+  }
+}

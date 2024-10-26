@@ -1,24 +1,25 @@
 import { m } from 'framer-motion';
 
+import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import { RouterLink } from 'src/routes/components';
 
-import CompactLayout from 'src/layouts/compact';
+import { CONFIG } from 'src/config-global';
+import { SimpleLayout } from 'src/layouts/simple';
 
-import Image from 'src/components/image';
 import { varBounce, MotionContainer } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
 
-export default function NotFoundView() {
+export function NotFoundView() {
   return (
-    <CompactLayout>
+    <SimpleLayout content={{ compact: true }}>
       <MotionContainer>
         <m.div variants={varBounce().in}>
-          <Typography variant="h3" paragraph>
-            Page Not Found!
+          <Typography variant="h3" sx={{ mb: 2 }}>
+            Page not found!
           </Typography>
         </m.div>
 
@@ -30,21 +31,24 @@ export default function NotFoundView() {
         </m.div>
 
         <m.div variants={varBounce().in}>
-          <Image
-            alt="404"
-            src="/assets/illustrations/illustration_404.svg"
+          <Box
+            component="img"
+            alt="Page not found!"
+            src={`${CONFIG.assetsDir}/assets/illustrations/illustration-404.svg`}
             sx={{
               mx: 'auto',
-              maxWidth: 320,
-              my: { xs: 5, sm: 8 },
+              width: 320,
+              maxWidth: 1,
+              height: 'auto',
+              my: { xs: 5, sm: 10 },
             }}
           />
         </m.div>
 
         <Button component={RouterLink} href="/" size="large" color="inherit" variant="contained">
-          Go to Home
+          Go to home
         </Button>
       </MotionContainer>
-    </CompactLayout>
+    </SimpleLayout>
   );
 }

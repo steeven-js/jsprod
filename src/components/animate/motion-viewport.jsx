@@ -1,5 +1,5 @@
 import { m } from 'framer-motion';
-import PropTypes from 'prop-types';
+import { forwardRef } from 'react';
 
 import Box from '@mui/material/Box';
 
@@ -9,28 +9,24 @@ import { varContainer } from './variants';
 
 // ----------------------------------------------------------------------
 
-export default function MotionViewport({ children, disableAnimatedMobile = true, ...other }) {
+export const MotionViewport = forwardRef(({ children, disableAnimate = true, ...other }, ref) => {
   const smDown = useResponsive('down', 'sm');
 
-  if (smDown && disableAnimatedMobile) {
-    return <Box {...other}>{children}</Box>;
-  }
+  const disabled = smDown && disableAnimate;
+
+  const props = disabled
+    ? {}
+    : {
+        component: m.div,
+        initial: 'initial',
+        whileInView: 'animate',
+        variants: varContainer(),
+        viewport: { once: true, amount: 0.3 },
+      };
 
   return (
-    <Box
-      component={m.div}
-      initial="initial"
-      whileInView="animate"
-      viewport={{ once: true, amount: 0.3 }}
-      variants={varContainer()}
-      {...other}
-    >
+    <Box ref={ref} {...props} {...other}>
       {children}
     </Box>
   );
-}
-
-MotionViewport.propTypes = {
-  children: PropTypes.node,
-  disableAnimatedMobile: PropTypes.bool,
-};
+});

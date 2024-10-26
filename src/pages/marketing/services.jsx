@@ -1,14 +1,18 @@
 import { Helmet } from 'react-helmet-async';
 
-import MarketingServicesView from 'src/sections/_marketing/view/marketing-services-view';
+import { CONFIG } from 'src/config-global';
+
+import { MarketingServicesView } from 'src/sections/_marketing/view/marketing-services-view';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingServicesPage() {
+const metadata = { title: `Services | Marketing - ${CONFIG.appName}` };
+
+export default function Page() {
   return (
     <>
       <Helmet>
-        <title> Marketing: Services</title>
+        <title> {metadata.title}</title>
       </Helmet>
 
       <MarketingServicesView />

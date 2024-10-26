@@ -1,14 +1,18 @@
 import { Helmet } from 'react-helmet-async';
 
-import MarketingPostView from 'src/sections/_marketing/view/marketing-post-view';
+import { CONFIG } from 'src/config-global';
+
+import { MarketingPostView } from 'src/sections/_marketing/view/marketing-post-view';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingPostPage() {
+const metadata = { title: `Post details | Marketing - ${CONFIG.appName}` };
+
+export default function Page() {
   return (
     <>
       <Helmet>
-        <title> Marketing: Blog Post</title>
+        <title> {metadata.title}</title>
       </Helmet>
 
       <MarketingPostView />

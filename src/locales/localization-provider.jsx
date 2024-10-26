@@ -1,14 +1,8 @@
-import PropTypes from 'prop-types';
-
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { LocalizationProvider as MuiLocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider as Provider } from '@mui/x-date-pickers/LocalizationProvider';
 
 // ----------------------------------------------------------------------
 
-export default function LocalizationProvider({ children }) {
-  return <MuiLocalizationProvider dateAdapter={AdapterDateFns}>{children}</MuiLocalizationProvider>;
+export function LocalizationProvider({ children }) {
+  return <Provider dateAdapter={AdapterDayjs}>{children}</Provider>;
 }
-
-LocalizationProvider.propTypes = {
-  children: PropTypes.node,
-};

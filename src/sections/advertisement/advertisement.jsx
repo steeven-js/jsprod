@@ -1,18 +1,14 @@
-import PropTypes from 'prop-types';
-
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { alpha, useTheme } from '@mui/material/styles';
 
-import Image from 'src/components/image';
+import { varAlpha } from 'src/theme/styles';
+
+import { Image } from 'src/components/image';
 
 // ----------------------------------------------------------------------
 
-export default function Advertisement({ advertisement, sx, ...other }) {
-  const theme = useTheme();
-
+export function Advertisement({ sx, title, action, imageUrl, description, ...other }) {
   return (
     <Box sx={{ position: 'relative', borderRadius: 2, overflow: 'hidden', ...sx }} {...other}>
       <Stack
@@ -26,37 +22,32 @@ export default function Advertisement({ advertisement, sx, ...other }) {
           position: 'absolute',
         }}
       >
-        <Typography variant="h4" sx={{ color: 'primary.main' }}>
-          {advertisement.title}
+        <Typography component="h6" variant="h5" sx={{ color: 'primary.main' }}>
+          {title}
         </Typography>
 
-        <Typography variant="body2" sx={{ mt: 1, mb: 3, color: 'common.white' }}>
-          {advertisement.description}
-        </Typography>
+        {description && (
+          <Typography variant="body2" sx={{ mt: 1, mb: 3, color: 'common.white' }}>
+            {description}
+          </Typography>
+        )}
 
-        <Button href={advertisement.path} variant="contained" color="primary">
-          Go Now
-        </Button>
+        {action}
       </Stack>
 
       <Image
-        alt="advertisement"
-        src={advertisement.imageUrl}
+        alt="Advertisement"
+        src={imageUrl}
         ratio="1/1"
-        overlay={`linear-gradient(to bottom, ${alpha(theme.palette.common.black, 0)} 0%, ${
-          theme.palette.common.black
-        } 100%)`}
+        slotProps={{
+          overlay: {
+            backgroundImage: (theme) =>
+              `linear-gradient(to bottom, ${varAlpha(theme.vars.palette.common.blackChannel, 0)}, ${
+                theme.vars.palette.common.black
+              })`,
+          },
+        }}
       />
     </Box>
   );
 }
-
-Advertisement.propTypes = {
-  advertisement: PropTypes.shape({
-    description: PropTypes.string,
-    imageUrl: PropTypes.string,
-    path: PropTypes.string,
-    title: PropTypes.string,
-  }),
-  sx: PropTypes.object,
-};

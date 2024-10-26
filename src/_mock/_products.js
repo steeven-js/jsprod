@@ -2,7 +2,7 @@ import { _mock } from './_mock';
 
 // ----------------------------------------------------------------------
 
-const NAME = [
+const NAMES = [
   'Apple iPhone',
   'Samsung Galaxy',
   'Nike Air Max',
@@ -31,45 +31,66 @@ const NAME = [
 
 const CATEGORIES = [
   'Electronics',
-  'Fashion and Apparel',
-  'Home and Garden',
-  'Beauty and Personal Care',
-  'Health and Wellness',
-  'Toys and Games',
-  'Sports and Outdoors',
-  'Baby and Kids',
-  'Automotive and Industrial',
-  'Pet Supplies',
-  'Food and Beverage',
-  'Office and School Supplies',
-  'Jewelry and Accessories',
-  'Arts and Crafts',
-  'Books and Media',
-  'Travel and Luggage',
-  'Gifts and Flowers',
-  'Musical Instruments',
-  'Party Supplies',
-  'Business and Industrial Supplies',
-  'Tools and Hardware',
-  'Electronics Accessories',
-  'Furniture and Decor',
-  'Computer and Software',
+  'Fashion and apparel',
+  'Home and garden',
+  'Beauty and Personal care',
+  'Health and wellness',
+  'Toys and games',
+  'Sports and outdoors',
+  'Baby and kids',
+  'Automotive and industrial',
+  'Pet supplies',
+  'Food and beverage',
+  'Office and School supplies',
+  'Jewelry and accessories',
+  'Arts and crafts',
+  'Books and media',
+  'Travel and luggage',
+  'Gifts and flowers',
+  'Musical instruments',
+  'Party supplies',
+  'Business and Industrial supplies',
+  'Tools and hardware',
+  'Electronics accessories',
+  'Furniture and decor',
+  'Computer and software',
 ];
 
 const DESCRIPTION = `
-<p>Aenean viverra rhoncus pede. Etiam feugiat lorem non metus. Quisque malesuada placerat nisl.</p>
+<h5>Specifications</h5>
+<table>
+  <tbody>
+    <tr>
+      <td>Category</td>
+      <td>Mobile</td>
+    </tr>
+    <tr>
+      <td>Manufacturer</td>
+      <td>Apple</td>
+    </tr>
+    <tr>
+      <td>Warranty</td>
+      <td>12 Months</td>
+    </tr>
+    <tr>
+      <td>Serial number</td>
+      <td>358607726380311</td>
+    </tr>
+    <tr>
+      <td>Ships from</td>
+      <td>United States</td>
+    </tr>
+  </tbody>
+</table>
 
-<br/>
+<h5>Description</h5>
+<p>Aenean viverra rhoncus pede. Etiam feugiat lorem non metus. Quisque malesuada placerat nisl.</p>
 <ul>
   <li> Updated with a more matte texture, perfect for casual styling. </li>
   <li> Durable water-repellent coating. </li>
-  <li> dsdsds </li>
-  <li> dsdsds </li>
   <li> Anti-static lining. </li>
 </ul>
-<br/>
-
-<p>Living in today’s metropolitan world of cellular phones, mobile computers and other high-tech gadgets is not just hectic but very impersonal. We make money and then invest our time and effort in making more money..</p>
+<p>Living in today’s metropolitan world of cellular phones, mobile computers and other high-tech gadgets is not just hectic but very impersonal. We make money and then invest our time and effort in making more money.</p>
 `;
 
 // ----------------------------------------------------------------------
@@ -77,19 +98,23 @@ const DESCRIPTION = `
 export const _productsTable = [...Array(12)].map((_, index) => ({
   id: _mock.id(index),
   orderId: `#011120${index + 1}`,
-  item: NAME[index],
+  item: NAMES[index],
   deliveryDate: _mock.time(index),
   price: _mock.number.price(index),
-  status: ['Completed', 'To Process', 'Cancelled', 'Return'][index] || 'Completed',
+  status: ['Completed', 'To process', 'Cancelled', 'Return'][index] || 'Completed',
 }));
+
+// ----------------------------------------------------------------------
 
 export const _productsCarousel = [...Array(4)].map((_, index) => ({
   id: _mock.id(index),
-  title: _mock.productName(index),
+  name: _mock.productName(index),
   caption: _mock.description(index),
   coverUrl: _mock.image.product(index),
   label: 'Opening Sale Discount 50%',
 }));
+
+// ----------------------------------------------------------------------
 
 export const _productsCompare = [
   'Apple iPhone 12 Pro',
@@ -111,14 +136,16 @@ export const _productsCompare = [
   ]) || ['Super Retina XDR (OLED)', '', 'A14 Bionic', '', 'IP68', '2017'],
 }));
 
+// ----------------------------------------------------------------------
+
 export const _products = [...Array(24)].map((_, index) => ({
   id: _mock.id(index),
   stock: 100,
-  name: NAME[index],
+  name: NAMES[index],
   description: DESCRIPTION,
   category: CATEGORIES[index],
   price: _mock.number.price(index),
-  sold: _mock.number.nativeM(index),
+  sold: Math.round(100 / (index + 1)),
   caption: _mock.description(index),
   coverUrl: _mock.image.product(index),
   ratingNumber: _mock.number.rating(index),

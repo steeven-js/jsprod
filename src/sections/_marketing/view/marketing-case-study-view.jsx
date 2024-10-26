@@ -1,109 +1,90 @@
-import remarkGfm from 'remark-gfm'
-import PropTypes from 'prop-types';
-import Markdown from 'react-markdown'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
-
+import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
 
 import { paths } from 'src/routes/paths';
 
-import useFetchStudies from 'src/hooks/use-fetchStudies';
+import { _testimonials } from 'src/_mock';
 
-import Image from 'src/components/image';
-import CustomBreadcrumbs from 'src/components/custom-breadcrumbs';
+import { Markdown } from 'src/components/markdown';
+import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 
-import MarketingCaseStudyListSimilar from '../list/marketing-case-study-list-similar';
-import MarketingCaseStudyDetailsGallery from '../details/marketing-case-study-details-gallery';
-import MarketingCaseStudyDetailsSummary from '../details/marketing-case-study-details-summary';
+import { MarketingNewsletter } from '../marketing-newsletter';
+import { MarketingTestimonial } from '../marketing-testimonial';
+import { MarketingLandingFreeSEO } from '../landing/marketing-landing-free-seo';
+import { MarketingCaseStudyListSimilar } from '../list/marketing-case-study-list-similar';
+import { MarketingCaseStudyDetailsGallery } from '../details/marketing-case-study-details-gallery';
+import { MarketingCaseStudyDetailsSummary } from '../details/marketing-case-study-details-summary';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingCaseStudyView({ study }) {
-
-  // Récupérez l'URL de la couverture de l'étude
-  const studyCover = study.media && study.media.length > 0 ? study.media.find(media => media.collection_name === 'study-cover') : null;
-  const studyCoverUrl = studyCover ? studyCover.original_url : null;
-
-  // Tableau d'image pour la galerie
-  const galleryImgs = study.media && study.media.length > 0 ? study.media.filter(media => media.collection_name === 'study-gallery') : [];
-  const galleryImages = galleryImgs.map(media => media.original_url);
-
-  const { studies } = useFetchStudies();
-
+export function MarketingCaseStudyView({ caseStudy, relatedCaseStudies, sx, ...other }) {
   return (
     <>
-      <Container
+      <Box
+        component="section"
         sx={{
-          overflow: 'hidden',
-          pt: 5,
+          pt: { xs: 3, md: 5 },
           pb: { xs: 10, md: 15 },
+          ...sx,
         }}
+        {...other}
       >
-        <Image alt="hero" src={
-          studyCoverUrl || '/assets/images/marketing/marketing_post_hero.jpg'
-        } ratio="16/9" sx={{ borderRadius: 2 }} />
+        <Container>
+          <Box
+            component="img"
+            alt="Hero cover"
+            src={caseStudy?.heroUrl}
+            sx={{
+              width: 1,
+              borderRadius: 2,
+              objectFit: 'cover',
+              aspectRatio: '16/9',
+            }}
+          />
 
-        <CustomBreadcrumbs
-          sx={{ my: 5 }}
-          links={[
-            { name: 'Home', href: '/' },
-            { name: 'Case Studies', href: paths.marketing.caseStudies },
-            { name: study.title },
-          ]}
-        />
+          <CustomBreadcrumbs
+            sx={{ my: 5 }}
+            links={[
+              { name: 'Home', href: '/' },
+              { name: 'Case studies', href: paths.marketing.caseStudies },
+              { name: caseStudy?.title },
+            ]}
+          />
 
-        <Grid container spacing={{ xs: 5, md: 8 }} direction={{ md: 'row-reverse' }}>
-          <Grid xs={12} md={4}>
-            <MarketingCaseStudyDetailsSummary study={study} />
+          <Grid
+            container
+            disableEqualOverflow
+            spacing={{ xs: 5, md: 8 }}
+            direction={{ md: 'row-reverse' }}
+          >
+            <Grid xs={12} md={4}>
+              <MarketingCaseStudyDetailsSummary
+                title={caseStudy?.title || ''}
+                website={caseStudy?.website || ''}
+                category={caseStudy?.category || ''}
+                createdAt={caseStudy?.createdAt || ''}
+                description={caseStudy?.description || ''}
+              />
+            </Grid>
+
+            <Grid xs={12} md={8}>
+              <Markdown content={caseStudy?.content || ''} />
+              <MarketingCaseStudyDetailsGallery images={caseStudy?.galleryImgs || []} />
+            </Grid>
           </Grid>
+        </Container>
+      </Box>
 
-          <Grid xs={12} md={8}>
+      <MarketingTestimonial testimonials={_testimonials} />
 
-            <Markdown
-              children={study.content}
-              remarkPlugins={[remarkGfm]}
-              components={{
-                code(props) {
-                  // eslint-disable-next-line react/prop-types, no-unused-vars
-                  const { children, className, node, ...rest } = props
-                  const match = /language-(\w+)/.exec(className || '')
-                  return match ? (
-                    <SyntaxHighlighter
-                      {...rest}
-                      PreTag="div"
-                      children={String(children).replace(/\n$/, '')}
-                      language={match[1]}
-                      style={dracula}
-                    />
-                  ) : (
-                    <code {...rest} className={className}>
-                      {children}
-                    </code>
-                  )
-                }
-              }}
-            />
+      {!!relatedCaseStudies?.length && (
+        <MarketingCaseStudyListSimilar caseStudies={relatedCaseStudies} />
+      )}
 
-            {galleryImages.length > 2 && (<MarketingCaseStudyDetailsGallery images={galleryImages} />)}
-
-          </Grid>
-        </Grid>
-      </Container>
-
-      {/* <MarketingTestimonial testimonials={_testimonials} /> */}
-
-      {studies.length > 3 ? <MarketingCaseStudyListSimilar studies={studies.slice(0, 3)} /> : null}
-
-      {/*
       <MarketingLandingFreeSEO />
 
-      <MarketingNewsletter /> */}
+      <MarketingNewsletter />
     </>
   );
 }
-
-MarketingCaseStudyView.propTypes = {
-  study: PropTypes.object
-};

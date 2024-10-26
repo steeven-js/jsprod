@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { MuiOtpInput } from 'mui-one-time-password-input';
 import { Controller, useFormContext } from 'react-hook-form';
 
@@ -6,7 +5,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 
 // ----------------------------------------------------------------------
 
-export default function RHFCode({ name, ...other }) {
+export function RHFCode({ name, ...other }) {
   const { control } = useFormContext();
 
   return (
@@ -20,10 +19,7 @@ export default function RHFCode({ name, ...other }) {
             autoFocus
             gap={1.5}
             length={6}
-            TextFieldsProps={{
-              error: !!error,
-              placeholder: '-',
-            }}
+            TextFieldsProps={{ error: !!error, placeholder: '-' }}
             {...other}
           />
 
@@ -37,7 +33,3 @@ export default function RHFCode({ name, ...other }) {
     />
   );
 }
-
-RHFCode.propTypes = {
-  name: PropTypes.string,
-};

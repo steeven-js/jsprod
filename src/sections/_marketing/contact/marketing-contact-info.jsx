@@ -1,70 +1,74 @@
+import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
-import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { CONFIG } from 'src/config-global';
 
-import { _MarketingContactInfo } from 'src/assets/data';
-
-import Image from 'src/components/image';
-import Iconify from 'src/components/iconify';
+import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingContactInfo() {
-  const mdUp = useResponsive('up', 'md');
+export function MarketingContactInfo({ sx, ...other }) {
+  const rowProps = {
+    gap: 2,
+    display: 'flex',
+    alignItems: 'flex-start',
+  };
 
   return (
-    <Stack spacing={3}>
-      {mdUp && (
-        <Image
-          alt="marketing contact"
-          src="/assets/illustrations/illustration_marketing_contact_1.svg"
-          sx={{ maxWidth: 380 }}
-        />
-      )}
+    <Box gap={3} display="flex" flexDirection="column" sx={sx} {...other}>
+      <Box
+        component="img"
+        alt="Marketing contact"
+        src={`${CONFIG.assetsDir}/assets/illustrations/illustration-marketing-contact.svg`}
+        sx={{ width: 380, height: 380, display: { xs: 'none', md: 'block' } }}
+      />
 
-      <Stack spacing={2} direction="row" alignItems="flex-start">
-        <Iconify icon="carbon:location" width={28} />
+      <Box {...rowProps}>
+        <Iconify width={24} icon="carbon:location" sx={{ mt: '2px' }} />
+        <div>
+          <Box gap={1} display="flex" alignItems="center" sx={{ mb: 0.5, typography: 'h6' }}>
+            Visit us
+            <Link>
+              <Iconify inline width={18} icon="carbon:launch" />
+            </Link>
+          </Box>
 
-        <Stack spacing={0.5}>
-          <Stack spacing={1} direction="row" alignItems="center">
-            <Typography variant="h6">{_MarketingContactInfo[0].label}</Typography>
+          <Typography variant="body2">508 Bridle Avenue Newnan, GA 30263e</Typography>
+        </div>
+      </Box>
 
-            {/* <Link sx={{ lineHeight: 0 }}>
-              <Iconify icon="carbon:launch" width={18} />
-            </Link> */}
-          </Stack>
+      <Box {...rowProps}>
+        <Iconify width={24} icon="solar:smartphone-outline" sx={{ mt: '2px' }} />
+        <div>
+          <Typography variant="h6" sx={{ mb: 0.5 }}>
+            Call us
+          </Typography>
+          <Typography variant="body2">+1 234 567 890</Typography>
+        </div>
+      </Box>
 
-          <Typography variant="body2">{_MarketingContactInfo[1].label}</Typography>
-        </Stack>
-      </Stack>
-
-      <Stack spacing={2} alignItems="flex-start" direction="row">
-        <Iconify width={28} icon="carbon:mobile" />
-        <Stack spacing={0.5}>
-          <Typography variant="h6">{_MarketingContactInfo[2].label}</Typography>
-          <Typography variant="body2">{_MarketingContactInfo[3].label}</Typography>
-        </Stack>
-      </Stack>
-
-      <Stack spacing={2} alignItems="flex-start" direction="row">
-        <Iconify width={28} icon="carbon:email" />
-        <Stack spacing={0.5}>
-          <Typography variant="h6">{_MarketingContactInfo[4].label}</Typography>
-          <Link color="inherit" variant="body2" href={_MarketingContactInfo[5].label}>
-            {_MarketingContactInfo[6].label}
+      <Box {...rowProps}>
+        <Iconify width={24} icon="carbon:email" sx={{ mt: '2px' }} />
+        <div>
+          <Typography variant="h6" sx={{ mb: 0.5 }}>
+            Talk to us
+          </Typography>
+          <Link color="inherit" variant="body2" href="mailto:hello@example.com">
+            hello@example.com
           </Link>
-        </Stack>
-      </Stack>
+        </div>
+      </Box>
 
-      <Stack spacing={2} alignItems="flex-start" direction="row">
-        <Iconify width={28} icon="carbon:time" />
-        <Stack spacing={0.5}>
-          <Typography variant="h6">{_MarketingContactInfo[7].label}</Typography>
-          <Typography variant="body2">{_MarketingContactInfo[8].label}</Typography>
-        </Stack>
-      </Stack>
-    </Stack>
+      <Box {...rowProps}>
+        <Iconify width={24} icon="solar:clock-circle-outline" sx={{ mt: '2px' }} />
+        <div>
+          <Typography variant="h6" sx={{ mb: 0.5 }}>
+            Working hours
+          </Typography>
+          <Typography variant="body2">Mon-Fri: 9 am — 6 pm</Typography>
+        </div>
+      </Box>
+    </Box>
   );
 }

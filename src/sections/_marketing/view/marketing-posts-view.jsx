@@ -1,63 +1,71 @@
-import PropTypes from 'prop-types';
-
+import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 
-import useFetchStudies from 'src/hooks/use-fetchStudies';
+import { _mock, _tags, _marketingPosts } from 'src/_mock';
 
-import { _mock } from 'src/_mock';
-
-import PostSidebar from '../../blog/common/post-sidebar';
-import PostSearchMobile from '../../blog/common/post-search-mobile';
-import BlogMarketingPosts from '../../blog/marketing/marketing-posts';
-import BlogMarketingFeaturedPosts from '../../blog/marketing/marketing-featured-posts';
+import { Advertisement } from '../../advertisement';
+import { PostSidebar } from '../../blog/post-sidebar';
+import { MarketingPosts } from '../posts/marketing-posts';
+import { MarketingNewsletter } from '../marketing-newsletter';
+import { PostSearchMobile } from '../../blog/post-search-mobile';
+import { MarketingFeaturedPosts } from '../posts/marketing-featured-posts';
+import { MarketingLandingFreeSEO } from '../landing/marketing-landing-free-seo';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingPostsView({ posts, tags }) {
+const posts = _marketingPosts.slice(0, 8);
+const recentPosts = _marketingPosts.slice(-4);
+const featuredPosts = _marketingPosts.slice(0, 5);
 
-  const {categories} =useFetchStudies();
+// ----------------------------------------------------------------------
 
+export function MarketingPostsView() {
   return (
     <>
       <PostSearchMobile />
 
-      <BlogMarketingFeaturedPosts posts={posts.slice(0, 5)} />
+      <MarketingFeaturedPosts posts={featuredPosts} />
 
-      <Container
-        sx={{
-          mt: 10,
-        }}
-      >
-        <Grid container columnSpacing={{ xs: 0, md: 8 }}>
+      <Container component="section" sx={{ mt: 10 }}>
+        <Grid disableEqualOverflow container spacing={{ md: 8 }}>
           <Grid xs={12} md={8}>
-            <BlogMarketingPosts />
+            <MarketingPosts posts={posts} />
           </Grid>
 
           <Grid xs={12} md={4}>
             <PostSidebar
-              popularTags={tags}
-              categories={categories}
-              recentPosts={{ list: posts.slice(0, 5) }}
-              advertisement={{
-                title: 'Advertisement',
-                description: 'Duis leo. Donec orci lectus, aliquam ut, faucibus non',
-                imageUrl: _mock.image.marketing(9),
-                path: '',
+              tags={_tags}
+              categories={[
+                { label: 'Marketing', path: '' },
+                { label: 'Community', path: '' },
+                { label: 'Tutorials', path: '' },
+                { label: 'Business', path: '' },
+                { label: 'Management', path: '' },
+              ]}
+              recentPosts={recentPosts}
+              slots={{
+                bottomNode: (
+                  <Advertisement
+                    title="Advertisement"
+                    description="Duis leo. Donec orci lectus, aliquam ut, faucibus non"
+                    imageUrl={_mock.image.marketing(9)}
+                    action={
+                      <Button variant="contained" color="primary">
+                        Go now
+                      </Button>
+                    }
+                  />
+                ),
               }}
             />
           </Grid>
         </Grid>
       </Container>
-      {/* <MarketingLandingFreeSEO /> */}
 
-      {/* <MarketingNewsletter /> */}
+      <MarketingLandingFreeSEO />
+
+      <MarketingNewsletter />
     </>
   );
 }
-
-MarketingPostsView.propTypes = {
-  posts: PropTypes.array.isRequired,
-  tags: PropTypes.array.isRequired,
-
-};

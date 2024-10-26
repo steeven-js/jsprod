@@ -1,6 +1,6 @@
 import { paths } from "src/routes/paths";
 
-export const _MarketingLandingHero = [
+export const _LandingHero = [
   { label: "Conception d'applications" },
   { label: 'Je réalise votre application.' },
   {
@@ -12,7 +12,7 @@ export const _MarketingLandingHero = [
 
 // ----------------------------------------------------------------------
 
-export const _MarketingLandingAbout = [
+export const _LandingAbout = [
   { value: 'About us', label: 'À propos' },
   { value: 'Who We Are', label: 'Qui suis-je?' },
   {
@@ -42,7 +42,7 @@ export const _ROWS = [
 
 // ----------------------------------------------------------------------
 
-export const _MarketingLandingServices = [
+export const _LandingServices = [
   { value: 'Our Services', label: 'Nos services' },
   { value: 'We Provide', label: 'Ce que j\' offre' },
   {
@@ -54,25 +54,25 @@ export const _MarketingLandingServices = [
 export const _SERVICESLANDING = [
   {
     name: 'Conception UX/UI',
-    icon: '/assets/icons/service/ic_service_ux.svg',
+    icon: 'ic_service_ux.svg',
     content: "Je conçois des expériences numériques intuitives et esthétiquement plaisantes pour les utilisateurs.",
     path: paths.marketing.services,
   },
   {
     name: 'Conception d\'Applications Mobiles',
-    icon: '/assets/icons/service/ic_service_mobile.svg',
+    icon: 'ic_service_mobile.svg',
     content: "Je crée des applications mobiles qui offrent une expérience utilisateur fluide et engageante.",
     path: paths.marketing.services,
   },
   {
     name: 'Développement Web',
-    icon: '/assets/icons/service/ic_service_desktop.svg',
+    icon: 'ic_service_desktop.svg',
     content: "Je développe des sites web innovants et fonctionnels, centrés sur l'expérience utilisateur.",
     path: paths.marketing.services,
   },
   {
     name: 'Développement Api',
-    icon: '/assets/icons/service/ic_service_api.svg',
+    icon: 'ic_service_api.svg',
     content: "Je construis des API robustes et évolutives pour connecter et dynamiser les applications et les services.",
     path: paths.marketing.services,
   },
@@ -80,7 +80,7 @@ export const _SERVICESLANDING = [
 
 // ----------------------------------------------------------------------
 
-export const _MarketingLandingProcess = [
+export const _LandingProcess = [
   { value: 'Work Flow', label: 'Flux de travail' },
   { value: 'Working Process', label: 'Processus de travail' },
   {
@@ -92,25 +92,25 @@ export const _MarketingLandingProcess = [
 export const _LANDINGPROCESS = [
   {
     name: 'Planification',
-    icon: '/assets/icons/ic_sketch_design.svg',
+    icon: 'ic_sketch_design.svg',
   },
   {
     name: 'Recherche',
-    icon: '/assets/icons/ic_search.svg',
+    icon: 'ic_search.svg',
   },
   {
     name: 'Optimisation',
-    icon: '/assets/icons/ic_optimization.svg',
+    icon: 'ic_optimization.svg',
   },
   {
     name: 'Résultats',
-    icon: '/assets/icons/ic_analysis.svg',
+    icon: 'ic_analysis.svg',
   },
 ];
 
 // ----------------------------------------------------------------------
 
-export const _MarketingLandingFaqs = [
+export const _LandingFaqs = [
   { label: 'FAQS' },
   { label: 'Questions fréquentes' },
 ];

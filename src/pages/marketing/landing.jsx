@@ -1,15 +1,18 @@
 import { Helmet } from 'react-helmet-async';
 
-import MarketingLandingView from 'src/sections/_marketing/view/marketing-landing-view';
+import { CONFIG } from 'src/config-global';
+
+import { MarketingLandingView } from 'src/sections/_marketing/view/marketing-landing-view';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingLandingPage() {
+const metadata = { title: `Home | Marketing - ${CONFIG.appName}` };
 
+export default function Page() {
   return (
     <>
       <Helmet>
-        <title> Marketing: Home</title>
+        <title> {metadata.title}</title>
       </Helmet>
 
       <MarketingLandingView />

@@ -1,258 +1,229 @@
-import { m } from 'framer-motion';
-import PropTypes from 'prop-types';
-
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
+import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
-import { alpha, useTheme } from '@mui/material/styles';
 
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { maxLine, varAlpha } from 'src/theme/styles';
 
-import Image from 'src/components/image';
-import Iconify from 'src/components/iconify';
-import TextMaxLine from 'src/components/text-max-line';
-import { varHover, varTranHover } from 'src/components/animate';
+import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingLandingCaseStudies({ caseStudies }) {
-  const mdUp = useResponsive('up', 'md');
-
-  // console.log('caseStudies', caseStudies)
-
+export function MarketingLandingCaseStudies({ caseStudies, sx, ...other }) {
   return (
-    <Container
+    <Box
+      component="section"
       sx={{
+        pb: 10,
         overflow: 'hidden',
         pt: { xs: 5, md: 10 },
-        pb: 10,
+        ...sx,
       }}
+      {...other}
     >
-      <Stack
-        spacing={3}
-        sx={{
-          textAlign: { xs: 'center', md: 'unset' },
-        }}
-      >
-        <Typography variant="overline" sx={{ color: 'text.disabled' }}>
-          Our Work
-        </Typography>
+      <Container>
+        <Stack spacing={3} sx={{ textAlign: { xs: 'center', md: 'unset' } }}>
+          <Typography variant="overline" sx={{ color: 'text.disabled' }}>
+            Our work
+          </Typography>
 
-        <Typography variant="h2">Case Studies</Typography>
-      </Stack>
+          <Typography variant="h2">Case studies</Typography>
+        </Stack>
 
-      <Grid
-        spacing={3}
-        container
-        alignItems="center"
-        sx={{
-          py: { xs: 8, md: 10 },
-        }}
-      >
-        <Grid xs={6} md={2}>
-          {caseStudies.length > 0 ? <SmallItem caseStudy={caseStudies[0]} /> : 'No data'}
-        </Grid>
-
-        {!mdUp && (
+        <Grid spacing={3} container alignItems="center" sx={{ py: { xs: 5, md: 10 } }}>
           <Grid xs={6} md={2}>
-            {caseStudies.length > 5 ? <SmallItem caseStudy={caseStudies[5]} /> : 'No data'}
-          </Grid>
-        )}
-
-        <Grid container xs={12} sm={12} md={8}>
-          <Grid xs={6} md={9}>
-            {caseStudies.length > 1 && (
-              mdUp ? (
-                <LargeItem caseStudy={caseStudies[1]} />
-              ) : (
-                <SmallItem caseStudy={caseStudies[1]} square />
-              )
-            )}
+            <SmallItem item={caseStudies[0]} />
           </Grid>
 
-          <Grid xs={6} md={3}>
-            <Stack justifyContent={{ md: 'flex-end' }} sx={{ height: { md: 1 } }}>
-              {caseStudies.length > 2 ? <SmallItem caseStudy={caseStudies[2]} square /> : 'No data'}
-            </Stack>
+          <Grid xs={6} md={2} sx={{ display: { md: 'none' } }}>
+            <SmallItem item={caseStudies[5]} />
           </Grid>
 
-          <Grid xs={6} md={3}>
-            {caseStudies.length > 3 ? <SmallItem caseStudy={caseStudies[3]} square /> : 'No data'}
+          <Grid container xs={12} sm={12} md={8}>
+            <Grid xs={6} md={9}>
+              <LargeItem item={caseStudies[1]} sx={{ display: { xs: 'none', md: 'flex' } }} />
+              <SmallItem item={caseStudies[1]} isSquare sx={{ display: { md: 'none' } }} />
+            </Grid>
+
+            <Grid xs={6} md={3}>
+              <Stack justifyContent={{ md: 'flex-end' }} sx={{ height: { md: 1 } }}>
+                <SmallItem item={caseStudies[2]} isSquare />
+              </Stack>
+            </Grid>
+
+            <Grid xs={6} md={3}>
+              <SmallItem item={caseStudies[3]} isSquare />
+            </Grid>
+
+            <Grid xs={6} md={9}>
+              <LargeItem item={caseStudies[4]} sx={{ display: { xs: 'none', md: 'flex' } }} />
+              <SmallItem item={caseStudies[4]} isSquare sx={{ display: { md: 'none' } }} />
+            </Grid>
           </Grid>
 
-          <Grid xs={6} md={9}>
-            {caseStudies.length > 4 && (
-              mdUp ? (
-                <LargeItem caseStudy={caseStudies[4]} />
-              ) : (
-                <SmallItem caseStudy={caseStudies[4]} square />
-              )
-            )}
+          <Grid xs={6} md={2} sx={{ display: { xs: 'none', md: 'block' } }}>
+            <SmallItem item={caseStudies[5]} />
           </Grid>
         </Grid>
 
-        {mdUp && (
-          <Grid xs={6} md={2}>
-            {caseStudies.length > 5 ? <SmallItem caseStudy={caseStudies[5]} square /> : 'No data'}
-          </Grid>
-        )}
-      </Grid>
-
-      <Stack alignItems={{ xs: 'center', md: 'flex-end' }}>
-        <Button
-          component={RouterLink}
-          to={paths.marketing.caseStudies}
-          size="large"
-          color="inherit"
-          endIcon={<Iconify icon="carbon:chevron-right" />}
-        >
-          Tout voir
-        </Button>
-      </Stack>
-    </Container>
+        <Stack alignItems={{ xs: 'center', md: 'flex-end' }}>
+          <Button
+            component={RouterLink}
+            href={paths.marketing.caseStudies}
+            size="large"
+            color="inherit"
+            endIcon={<Iconify icon="solar:alt-arrow-right-outline" />}
+          >
+            View all
+          </Button>
+        </Stack>
+      </Container>
+    </Box>
   );
 }
 
-MarketingLandingCaseStudies.propTypes = {
-  caseStudies: PropTypes.array,
-};
-
-// ----------------------------------------------------------------------
-
-function LargeItem({ caseStudy }) {
+function LargeItem({ item, sx }) {
   return (
     <Paper
       sx={{
-        display: 'grid',
+        p: 0.75,
+        display: 'flex',
         borderRadius: 2,
+        bgcolor: 'background.paper',
         boxShadow: (theme) => theme.customShadows.z24,
-        gridTemplateColumns: {
-          xs: 'repeat(1, 1fr)',
-          md: 'repeat(2, 1fr)',
+        img: {
+          transition: (theme) =>
+            theme.transitions.create(['transform'], {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.short,
+            }),
         },
+        '&:hover img': { transform: 'scale(1.2)' },
+        ...sx,
       }}
     >
-      <Box sx={{ p: 0.75 }}>
-        <Image alt="cover" src={
-          caseStudy ? caseStudy.media[0].original_url : '/assets/images/marketing/marketing_6.jpg'
-        } ratio="3/4" sx={{ borderRadius: 2 }} />
+      <Box component="span" sx={{ overflow: 'hidden', borderRadius: 2, width: 0.5 }}>
+        <Box
+          component="img"
+          loading="lazy"
+          alt={item.title}
+          src={item.coverUrl}
+          sx={{
+            aspectRatio: '3/4',
+            objectFit: 'cover',
+          }}
+        />
       </Box>
 
-      <Stack alignItems="flex-end" justifyContent="space-between" sx={{ p: 3, pt: 5, height: 1 }}>
-        <div>
-          <Typography variant="overline" sx={{ color: 'primary.main' }}>
-            {caseStudy.category.name}
-          </Typography>
+      <Box display="flex" flexDirection="column" sx={{ p: 3, pt: 5, width: 0.5 }}>
+        <Typography variant="overline" sx={{ color: 'primary.main' }}>
+          {item.category}
+        </Typography>
 
-          <Typography variant="h4" sx={{ mt: 1, mb: 2 }}>
-            {caseStudy.title}
-          </Typography>
+        <Typography variant="h4" component="h6" sx={{ mt: 1, mb: 2 }}>
+          {item.title}
+        </Typography>
 
-          <TextMaxLine variant="body2" sx={{ color: 'text.secondary' }}>
-            {caseStudy.description}
-          </TextMaxLine>
-        </div>
+        <Typography variant="body2" sx={{ ...maxLine({ line: 2 }), color: 'text.secondary' }}>
+          {item.description}
+        </Typography>
+
+        <Box component="span" flexGrow={1} />
 
         <Button
           component={RouterLink}
-          to={`${paths.marketing.caseStudy}/${caseStudy.id}`}
+          href={paths.marketing.caseStudy(item.id)}
           size="small"
           color="inherit"
-          endIcon={<Iconify icon="carbon:chevron-right" />}
+          endIcon={<Iconify width={16} icon="solar:alt-arrow-right-outline" sx={{ ml: -0.5 }} />}
+          sx={{ alignSelf: 'flex-end' }}
         >
           Learn more
         </Button>
-      </Stack>
+      </Box>
     </Paper>
   );
 }
 
-LargeItem.propTypes = {
-  caseStudy: PropTypes.shape({
-    id: PropTypes.number,
-    category: PropTypes.shape({
-      name: PropTypes.string,
-    }),
-    media: PropTypes.array,
-    coverUrl: PropTypes.string,
-    description: PropTypes.string,
-    title: PropTypes.string,
-  }),
-};
-
 // ----------------------------------------------------------------------
 
-function SmallItem({ caseStudy, square }) {
-  const theme = useTheme();
-
-  const mdUp = useResponsive('up', 'md');
-
+function SmallItem({ item, isSquare, sx }) {
   return (
-    <Link component={RouterLink} to={`${paths.marketing.caseStudy}/${caseStudy.id}`}>
-      <Paper
-        component={m.div}
-        whileHover="hover"
+    <Paper
+      sx={{
+        borderRadius: 2,
+        overflow: 'hidden',
+        position: 'relative',
+        img: {
+          transition: (theme) =>
+            theme.transitions.create(['transform'], {
+              easing: theme.transitions.easing.sharp,
+              duration: theme.transitions.duration.shorter,
+            }),
+        },
+        '&:hover img': { transform: 'scale(1.2)' },
+        '&::before': {
+          top: 0,
+          left: 0,
+          width: 1,
+          height: 1,
+          zIndex: 8,
+          content: "''",
+          position: 'absolute',
+          bgcolor: (theme) => varAlpha(theme.vars.palette.common.blackChannel, 0.48),
+        },
+        ...sx,
+      }}
+    >
+      <Box
+        gap={1}
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
         sx={{
-          position: 'relative',
-          cursor: 'pointer',
-          borderRadius: 2,
-          overflow: 'hidden',
+          px: 2,
+          top: 0,
+          left: 0,
+          width: 1,
+          height: 1,
+          zIndex: 9,
+          textAlign: 'center',
+          position: 'absolute',
+          color: 'common.white',
         }}
       >
-        <Stack
-          spacing={1}
-          alignItems="center"
-          justifyContent="center"
-          sx={{
-            width: 1,
-            height: 1,
-            zIndex: 9,
-            position: 'absolute',
-            color: 'common.white',
-            textAlign: 'center',
-          }}
+        <Box component="span" sx={{ opacity: 0.48, typography: 'overline' }}>
+          {item.category}
+        </Box>
+        <Link
+          component={RouterLink}
+          href={paths.marketing.caseStudy(item.id)}
+          variant="h6"
+          color="inherit"
+          underline="none"
         >
-          <Typography variant="overline" sx={{ opacity: 0.48 }}>
-            {caseStudy.category.name}
-          </Typography>
-          <Typography variant="h6">
-            {caseStudy.title.length > 20 ? `${caseStudy.title.substring(0, 50)}...` : caseStudy.title}
-          </Typography>
-        </Stack>
+          {item.title}
+        </Link>
+      </Box>
 
-        <m.div variants={varHover(1.25)} transition={varTranHover()}>
-          <Image
-            alt="cover"
-            src={
-              caseStudy && caseStudy.media[0] ? caseStudy.media[0].original_url : '/assets/images/marketing/marketing_6.jpg'
-            }
-            ratio={(square && '1/1') || (mdUp && '3/4') || '1/1'}
-            overlay={alpha(theme.palette.grey[900], 0.48)}
-          />
-        </m.div>
-      </Paper>
-    </Link>
+      <Box
+        component="img"
+        loading="lazy"
+        alt={item.title}
+        src={item.coverUrl}
+        sx={{
+          objectFit: 'cover',
+          aspectRatio: { xs: '1/1', md: '3/4' },
+          ...(isSquare && { aspectRatio: '1/1' }),
+        }}
+      />
+    </Paper>
   );
 }
-
-SmallItem.propTypes = {
-  caseStudy: PropTypes.shape({
-    id: PropTypes.number,
-    category: PropTypes.shape({
-      name: PropTypes.string,
-    }),
-    media: PropTypes.array,
-    coverUrl: PropTypes.string,
-    description: PropTypes.string,
-    title: PropTypes.string,
-  }),
-  square: PropTypes.bool,
-};

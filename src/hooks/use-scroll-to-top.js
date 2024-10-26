@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-
-import { usePathname } from 'src/routes/hooks';
+import { useLocation } from 'react-router-dom';
 
 // ----------------------------------------------------------------------
 
 export function useScrollToTop() {
-  const pathname = usePathname();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     window.scrollTo(0, 0);

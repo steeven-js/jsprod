@@ -1,75 +1,86 @@
-import PropTypes from 'prop-types';
-
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
+import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from '@mui/material/InputAdornment';
 
-import Iconify from 'src/components/iconify';
+import { useBoolean } from 'src/hooks/use-boolean';
+
+import { Field } from 'src/components/hook-form';
+import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export default function PaymentNewCardForm({ onClose, ...other }) {
+export function PaymentNewCardForm({
+  sx,
+  isRHF,
+  cvvField,
+  dateField,
+  numberField,
+  holderField,
+  ...other
+}) {
+  const FormField = isRHF ? Field.Text : TextField;
+
+  const showPassword = useBoolean();
+
   return (
-    <Dialog maxWidth="xs" onClose={onClose} {...other}>
-      <DialogTitle> Add new card </DialogTitle>
+    <Box gap={2.5} display="flex" flexDirection="column" sx={{ width: 1, ...sx }} {...other}>
+      <FormField
+        label="Card number"
+        placeholder="xxxx xxxx xxxx xxxx"
+        InputLabelProps={{ shrink: true }}
+        {...numberField}
+        name={numberField?.name ?? ''}
+      />
 
-      <DialogContent sx={{ overflow: 'unset' }}>
-        <Stack spacing={2.5}>
-          <TextField
-            label="Card Number"
-            placeholder="XXXX XXXX XXXX XXXX"
-            InputLabelProps={{ shrink: true }}
-          />
+      <FormField
+        label="Card holder"
+        placeholder="John Doe"
+        InputLabelProps={{ shrink: true }}
+        {...holderField}
+        name={holderField?.name ?? ''}
+      />
 
-          <TextField
-            label="Card Holder"
-            placeholder="JOHN DOE"
-            InputLabelProps={{ shrink: true }}
-          />
+      <Box gap={2} display="flex">
+        <FormField
+          fullWidth
+          label="Expiration date"
+          placeholder="MM/YY"
+          InputLabelProps={{ shrink: true }}
+          {...dateField}
+          name={dateField?.name ?? ''}
+        />
+        <FormField
+          fullWidth
+          label="Cvv/Cvc"
+          placeholder="***"
+          InputLabelProps={{ shrink: true }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton onClick={showPassword.onToggle} edge="end">
+                  <Iconify
+                    icon={showPassword.value ? 'solar:eye-outline' : 'solar:eye-closed-outline'}
+                  />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+          type={showPassword.value ? 'text' : 'password'}
+          {...cvvField}
+          name={cvvField?.name ?? ''}
+        />
+      </Box>
 
-          <Stack spacing={2} direction="row">
-            <TextField
-              fullWidth
-              label="Expiration Date"
-              placeholder="MM/YY"
-              InputLabelProps={{ shrink: true }}
-            />
-            <TextField
-              fullWidth
-              label="CVV/CVC"
-              placeholder="***"
-              InputLabelProps={{ shrink: true }}
-            />
-          </Stack>
-
-          <Stack
-            direction="row"
-            alignItems="center"
-            sx={{ typography: 'caption', color: 'text.disabled' }}
-          >
-            <Iconify icon="carbon:locked" sx={{ mr: 0.5 }} />
-            Your transaction is secured with SSL encryption
-          </Stack>
-        </Stack>
-      </DialogContent>
-
-      <DialogActions>
-        <Button color="inherit" variant="outlined" onClick={onClose}>
-          Cancel
-        </Button>
-
-        <Button color="inherit" variant="contained" onClick={onClose}>
-          Add
-        </Button>
-      </DialogActions>
-    </Dialog>
+      <Box
+        gap={1}
+        display="flex"
+        alignItems="center"
+        sx={{ typography: 'caption', color: 'text.disabled' }}
+      >
+        <Iconify icon="solar:lock-password-outline" />
+        Your transaction is secured with SSL encryption
+      </Box>
+    </Box>
   );
 }
-
-PaymentNewCardForm.propTypes = {
-  onClose: PropTypes.func,
-};

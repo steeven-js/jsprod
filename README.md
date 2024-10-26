@@ -1,13 +1,32 @@
-## NODE.JS
+## Prerequisites
 
-- Node 16.x || 18.x
+- Node.js 20.x (Recommended)
 
-## USING YARN (Recommend)
+## Installation
 
-- yarn install
-- yarn start
+**Using Yarn (Recommended)**
 
-## USING NPM
+```sh
+yarn install
+yarn dev
+```
 
-- npm i OR npm i --legacy-peer-deps
-- npm start
+**Using Npm**
+
+```sh
+npm i
+npm run dev
+```
+
+## Build
+
+```sh
+yarn build
+# or
+npm run build
+```
+
+---
+
+**NOTE:**
+_When copying folders remember to also copy hidden files like .env. This is important because .env files often contain environment variables that are crucial for the application to run correctly._

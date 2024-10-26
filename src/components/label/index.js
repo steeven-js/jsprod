@@ -1,1 +1,5 @@
-export { default } from './label';
+export * from './label';
+
+export * from './styles';
+
+export * from './classes';

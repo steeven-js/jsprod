@@ -1,27 +1,28 @@
-import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
-// icons
-import { Icon } from '@iconify/react';
+import { Icon, disableCache } from '@iconify/react';
 
 import Box from '@mui/material/Box';
 
+import { iconifyClasses } from './classes';
+
 // ----------------------------------------------------------------------
 
-const Iconify = forwardRef(({ icon, width = 20, sx, ...other }, ref) => (
+export const Iconify = forwardRef(({ className, width = 20, sx, ...other }, ref) => (
   <Box
+    ssr
     ref={ref}
     component={Icon}
-    className="component-iconify"
-    icon={icon}
-    sx={{ width, height: width, ...sx }}
+    className={iconifyClasses.root.concat(className ? ` ${className}` : '')}
+    sx={{
+      width,
+      height: width,
+      flexShrink: 0,
+      display: 'inline-flex',
+      ...sx,
+    }}
     {...other}
   />
 ));
 
-Iconify.propTypes = {
-  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  sx: PropTypes.object,
-  width: PropTypes.number,
-};
-
-export default Iconify;
+// https://iconify.design/docs/iconify-icon/disable-cache.html
+disableCache('local');

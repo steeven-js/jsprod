@@ -4,93 +4,107 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Unstable_Grid2';
 import Container from '@mui/material/Container';
+import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import { alpha, useTheme } from '@mui/material/styles';
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { CONFIG } from 'src/config-global';
+import { varAlpha, bgGradient, textGradient } from 'src/theme/styles';
 
-import { bgGradient } from 'src/theme/css';
-import {_MarketingLandingHero} from 'src/assets/data';
-
-import Image from 'src/components/image';
-import Iconify from 'src/components/iconify';
+import { Iconify } from 'src/components/iconify';
+import { MotionViewport } from 'src/components/animate';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingLandingHero() {
+export function MarketingLandingHero({ sx, ...other }) {
   const theme = useTheme();
 
-  const mdUp = useResponsive('up', 'md');
+  const renderContent = (
+    <Stack
+      alignItems={{ xs: 'center', md: 'flex-start' }}
+      sx={{ textAlign: { xs: 'center', md: 'left' } }}
+    >
+      <Typography
+        variant="overline"
+        sx={{
+          ...textGradient(
+            `90deg, ${theme.vars.palette.primary.main} 20%, ${theme.vars.palette.secondary.main} 100%`
+          ),
+        }}
+      >
+        Digital marketing
+      </Typography>
+
+      <Typography variant="h1" sx={{ my: 3 }}>
+        Boosts your website traffic
+      </Typography>
+
+      <Typography sx={{ mb: 5, color: 'text.secondary', maxWidth: 420 }}>
+        Etiam sollicitudin, ipsum eu pulvinar rutrum, tellus ipsum laoreet sapien, quis venenatis
+        ante odio sit amet eros.
+      </Typography>
+
+      <Box
+        gap={2.5}
+        display="flex"
+        flexWrap="wrap"
+        alignItems="center"
+        justifyContent={{ xs: 'center', md: 'unset' }}
+      >
+        <Button variant="contained" color="inherit" size="large">
+          Try for free
+        </Button>
+
+        <Box gap={1.5} display="flex" alignItems="center" sx={{ typography: 'h6' }}>
+          <Fab size="medium">
+            <Iconify width={22} icon="solar:play-outline" />
+          </Fab>
+          See our work
+        </Box>
+      </Box>
+    </Stack>
+  );
+
+  const renderImage = (
+    <Box
+      component="img"
+      alt="Marketing market"
+      src={`${CONFIG.assetsDir}/assets/illustrations/illustration-marketing-market.svg`}
+      sx={{ width: 720 }}
+    />
+  );
 
   return (
     <Box
+      component="section"
       sx={{
         ...bgGradient({
-          color: alpha(theme.palette.background.default, 0.9),
-          imgUrl: '/assets/background/overlay_1.jpg',
+          color: `to bottom, ${varAlpha(theme.vars.palette.background.defaultChannel, 0.9)}, ${varAlpha(theme.vars.palette.background.defaultChannel, 0.9)}`,
+          imgUrl: `${CONFIG.assetsDir}/assets/background/overlay-1.webp`,
         }),
+        py: 10,
         overflow: 'hidden',
-      }}
-    >
-      <Container
-        sx={{
+        position: 'relative',
+        [theme.breakpoints.up('md')]: {
           py: 15,
-          display: { md: 'flex' },
-          alignItems: { md: 'center' },
-          height: { md: `100vh` },
-        }}
-      >
-        <Grid container columnSpacing={{ xs: 0, md: 10 }}>
-          <Grid
-            xs={12}
-            md={6}
-            lg={5}
-            sx={{
-              textAlign: { xs: 'center', md: 'left' },
-            }}
-          >
-            <Typography variant="overline" sx={{ color: 'secondary.main' }}>
-              {_MarketingLandingHero[0].label}
-            </Typography>
-
-            <Typography variant="h1" sx={{ my: 3 }}>
-              {_MarketingLandingHero[1].label}
-            </Typography>
-
-            <Typography sx={{ color: 'text.secondary' }}>
-              {_MarketingLandingHero[2].label}
-            </Typography>
-
-            <Stack
-              spacing={3}
-              direction={{ xs: 'column', sm: 'row' }}
-              alignItems={{ xs: 'center', md: 'unset' }}
-              justifyContent={{ xs: 'center', md: 'unset' }}
-              sx={{ mt: 5 }}
-            >
-              <Button variant="contained" color="inherit" size="large">
-                {_MarketingLandingHero[3].label}
-              </Button>
-
-              <Stack direction="row" alignItems="center" sx={{ typography: 'h6' }}>
-                <Fab size="medium" sx={{ mr: 1 }}>
-                  <Iconify width={24} icon="carbon:play" />
-                </Fab>
-                {_MarketingLandingHero[4].label}
-              </Stack>
-            </Stack>
+          minHeight: 760,
+          height: '100vh',
+          maxHeight: 1440,
+          display: 'flex',
+          alignItems: 'center',
+        },
+        ...sx,
+      }}
+      {...other}
+    >
+      <Container component={MotionViewport}>
+        <Grid container alignItems="center" justifyContent="space-between">
+          <Grid xs={12} md={6} lg={5}>
+            {renderContent}
           </Grid>
 
-          {mdUp && (
-            <Grid xs={12} md={6} lg={7}>
-              <Image
-                visibleByDefault
-                disabledEffect
-                alt="marketing market"
-                src="/assets/illustrations/illustration_marketing_market_2.svg"
-              />
-            </Grid>
-          )}
+          <Grid xs={12} md={6} lg={6} sx={{ display: { xs: 'none', md: 'block' } }}>
+            {renderImage}
+          </Grid>
         </Grid>
       </Container>
     </Box>

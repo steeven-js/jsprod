@@ -1,111 +1,118 @@
+import { useState } from 'react';
+
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import InputBase from '@mui/material/InputBase';
 import Container from '@mui/material/Container';
-import Grid from '@mui/material/Unstable_Grid2';
+import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import { alpha, useTheme } from '@mui/material/styles';
 import InputAdornment from '@mui/material/InputAdornment';
+import InputBase, { inputBaseClasses } from '@mui/material/InputBase';
 
-import { useResponsive } from 'src/hooks/use-responsive';
+import { CONFIG } from 'src/config-global';
+import { varAlpha, bgGradient, textGradient } from 'src/theme/styles';
 
-import { bgGradient } from 'src/theme/css';
-
-import Iconify from 'src/components/iconify';
+import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export default function MarketingServicesHero() {
+export function MarketingServicesHero({ sx, ...other }) {
   const theme = useTheme();
 
-  const mdUp = useResponsive('up', 'md');
+  const [email, setEmail] = useState('');
+
+  const [websiteURL, setWebsiteURL] = useState('');
 
   const renderForm = (
-    <Stack spacing={2} direction={{ xs: 'column', md: 'row' }} alignItems={{ md: 'center' }}>
+    <Box
+      display="flex"
+      gap={{ xs: 2.5, md: 2 }}
+      alignItems={{ md: 'center' }}
+      flexDirection={{ xs: 'column', md: 'row' }}
+      sx={{
+        mx: 'auto',
+        maxWidth: 760,
+        [`& .${inputBaseClasses.root}`]: {
+          pl: 1.5,
+          height: 48,
+          borderRadius: 1,
+          color: 'grey.800',
+          bgcolor: 'common.white',
+        },
+      }}
+    >
       <InputBase
         fullWidth
+        value={email}
+        onChange={(event) => setEmail(event.target.value)}
         startAdornment={
           <InputAdornment position="start">
-            <Iconify icon="carbon:email" width={24} sx={{ color: 'text.disabled' }} />
+            <Iconify width={24} icon="carbon:email" sx={{ color: 'text.disabled' }} />
           </InputAdornment>
         }
         placeholder="Email"
-        sx={{
-          pl: 1.5,
-          height: 48,
-          borderRadius: 1,
-          color: 'grey.800',
-          bgcolor: 'common.white',
-        }}
+        inputProps={{ id: 'email-input' }}
       />
-
       <InputBase
         fullWidth
+        value={websiteURL}
+        onChange={(event) => setWebsiteURL(event.target.value)}
         startAdornment={
           <InputAdornment position="start">
-            <Iconify icon="carbon:license-global" width={24} sx={{ color: 'text.disabled' }} />
+            <Iconify width={24} icon="carbon:license-global" sx={{ color: 'text.disabled' }} />
           </InputAdornment>
         }
         placeholder="Website URL"
-        sx={{
-          pl: 1.5,
-          height: 48,
-          borderRadius: 1,
-          color: 'grey.800',
-          bgcolor: 'common.white',
-        }}
+        inputProps={{ id: 'website-url-input' }}
       />
-
-      <Button
-        fullWidth={!mdUp}
-        color="primary"
-        size="large"
-        variant="contained"
-        sx={{ flexShrink: 0 }}
-      >
+      <Button color="primary" size="large" variant="contained" sx={{ flexShrink: 0 }}>
         Analyse
       </Button>
-    </Stack>
+    </Box>
   );
 
   return (
     <Box
+      component="section"
       sx={{
         ...bgGradient({
-          startColor: `${alpha(theme.palette.common.black, 0)} 0%`,
-          endColor: `${theme.palette.common.black} 75%`,
-          imgUrl: '/assets/images/marketing/marketing_services_hero.jpg',
+          color: `to bottom, ${varAlpha(theme.vars.palette.common.blackChannel, 0)} 0%, ${theme.vars.palette.common.black} 75%`,
+          imgUrl: `${CONFIG.assetsDir}/assets/images/marketing/services-hero.webp`,
         }),
-        py: { xs: 15, md: 20 },
+        py: { xs: 10, md: 20 },
+        ...sx,
       }}
+      {...other}
     >
       <Container>
-        <Grid container spacing={3} justifyContent="center">
-          <Grid xs={12} md={8}>
-            <Stack
-              spacing={3}
-              sx={{
-                mb: 5,
-                mx: 'auto',
-                maxWidth: 480,
-                textAlign: 'center',
-                color: 'common.white',
-              }}
-            >
-              <Typography variant="h1" sx={{ color: 'primary.main' }}>
-                Offline SEO
-              </Typography>
+        <Box
+          sx={{
+            mb: 5,
+            mx: 'auto',
+            maxWidth: 480,
+            textAlign: 'center',
+            color: 'common.white',
+          }}
+        >
+          <Typography
+            variant="h1"
+            sx={{
+              ...textGradient(
+                `90deg, ${theme.vars.palette.primary.main} 20%, ${theme.vars.palette.secondary.main} 100%`
+              ),
+              mb: 3,
+              display: 'inline-flex',
+            }}
+          >
+            Offline SEO
+          </Typography>
 
-              <Typography sx={{ opacity: 0.72 }}>
-                Etiam sollicitudin, ipsum eu pulvinar rutrum, tellus ipsum laoreet sapien, quis
-                venenatis ante odio sit amet eros.
-              </Typography>
-            </Stack>
+          <Typography sx={{ opacity: 0.72 }}>
+            Etiam sollicitudin, ipsum eu pulvinar rutrum, tellus ipsum laoreet sapien, quis
+            venenatis ante odio sit amet eros.
+          </Typography>
+        </Box>
 
-            {renderForm}
-          </Grid>
-        </Grid>
+        {renderForm}
       </Container>
     </Box>
   );

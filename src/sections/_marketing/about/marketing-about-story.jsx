@@ -9,53 +9,70 @@ import TimelineContent from '@mui/lab/TimelineContent';
 import TimelineConnector from '@mui/lab/TimelineConnector';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 
-import { useResponsive } from 'src/hooks/use-responsive';
-
-import { _TIMELINESABOUT, _MarketingAboutStory } from 'src/assets/data';
-
 // ----------------------------------------------------------------------
+
+const TIMELINES = [
+  {
+    year: '2021',
+    title: 'Customer satisfaction',
+    description:
+      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
+  },
+  {
+    year: '2020',
+    title: 'Transparency',
+    description:
+      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
+  },
+  {
+    year: '2019',
+    title: 'Reputation',
+    description:
+      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
+  },
+  {
+    year: '2018',
+    title: 'Cooperation',
+    description:
+      'Curabitur ullamcorper ultricies nisi. Praesent nonummy mi in odio. Donec mollis hendrerit risus.',
+  },
+];
 
 const COLORS = ['primary', 'secondary', 'warning', 'success'];
 
 // ----------------------------------------------------------------------
 
-export default function MarketingAboutStory() {
-  const mdUp = useResponsive('up', 'md');
-
+export function MarketingAboutStory({ sx, ...other }) {
   return (
     <Box
+      component="section"
       sx={{
-        bgcolor: 'background.neutral',
         py: { xs: 10, md: 15 },
+        bgcolor: 'background.neutral',
+        ...sx,
       }}
+      {...other}
     >
       <Container>
         <Stack
           spacing={3}
           sx={{
-            maxWidth: 480,
             mx: 'auto',
+            maxWidth: 480,
             textAlign: 'center',
-            mb: { xs: 8, md: 10 },
+            mb: { xs: 5, md: 10 },
           }}
         >
-          <Typography variant="h2">{_MarketingAboutStory[0].label}</Typography>
+          <Typography variant="h2">Our story</Typography>
 
           <Typography sx={{ color: 'text.secondary' }}>
-            {_MarketingAboutStory[1].label}
+            Nunc nonummy metus. Donec elit libero, sodales nec, volutpat a, suscipit non, turpis.
           </Typography>
         </Stack>
 
-        <Timeline position={mdUp ? 'alternate' : 'right'}>
-          {_TIMELINESABOUT.map((value, index) => (
-            <TimelineItem
-              key={value.title}
-              sx={{
-                '&:before': {
-                  ...(!mdUp && { display: 'none' }),
-                },
-              }}
-            >
+        <Timeline position="alternate">
+          {TIMELINES.map((value, index) => (
+            <TimelineItem key={value.title}>
               <TimelineSeparator>
                 <TimelineDot color={COLORS[index]} />
                 <TimelineConnector />
@@ -75,9 +92,7 @@ export default function MarketingAboutStory() {
                   sx={{
                     color: 'text.secondary',
                     maxWidth: { md: 360 },
-                    ...(index % 2 && {
-                      ml: 'auto',
-                    }),
+                    ...(index % 2 && { ml: 'auto' }),
                   }}
                 >
                   {value.description}

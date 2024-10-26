@@ -1,4 +1,6 @@
-import { sub } from 'date-fns';
+import { fSub } from 'src/utils/format-time';
+
+import { CONFIG } from 'src/config-global';
 
 import {
   _id,
@@ -20,7 +22,7 @@ import {
   _sentences,
   _firstNames,
   _postTitles,
-  _courseTitle,
+  _courseNames,
   _fullAddress,
   _phoneNumbers,
   _descriptions,
@@ -32,11 +34,11 @@ import {
 
 export const _mock = {
   id: (index) => _id[index],
-  time: (index) => sub(new Date(), { days: index, hours: index }),
+  time: (index) => fSub({ days: index, hours: index }),
   boolean: (index) => _booleans[index],
   role: (index) => _roles[index],
   // Text
-  courseTitle: (index) => _courseTitle[index],
+  courseNames: (index) => _courseNames[index],
   taskNames: (index) => _taskNames[index],
   postTitle: (index) => _postTitles[index],
   jobTitle: (index) => _jobTitles[index],
@@ -63,21 +65,21 @@ export const _mock = {
     nativeM: (index) => _nativeM[index],
     nativeL: (index) => _nativeL[index],
   },
-  // Image
+  // Media
   image: {
-    cover: (index) => `/assets/images/cover/cover_${index + 1}.jpg`,
-    avatar: (index) => `/assets/images/avatar/avatar_${index + 1}.jpg`,
-    travel: (index) => `/assets/images/travel/travel_${index + 1}.jpg`,
-    company: (index) => `/assets/images/company/company_${index + 1}.png`,
-    product: (index) => `/assets/images/z_product/product_${index + 1}.png`,
-    portrait: (index) => `/assets/images/portrait/portrait_${index + 1}.jpg`,
-    career: (index) => `/assets/images/career/career_${index + 1}.jpg`,
-    marketing: (index) => `/assets/images/marketing/marketing_${index + 1}.jpg`,
-    course: (index) => `/assets/images/course/course_${index + 1}.jpg`,
+    cover: (index) => `${CONFIG.assetsDir}/assets/images/cover/cover-${index + 1}.webp`,
+    course: (index) => `${CONFIG.assetsDir}/assets/images/course/course-${index + 1}.webp`,
+    avatar: (index) => `${CONFIG.assetsDir}/assets/images/avatar/avatar-${index + 1}.webp`,
+    travel: (index) => `${CONFIG.assetsDir}/assets/images/travel/travel-${index + 1}.webp`,
+    career: (index) => `${CONFIG.assetsDir}/assets/images/career/career-${index + 1}.webp`,
+    company: (index) => `${CONFIG.assetsDir}/assets/images/company/company-${index + 1}.webp`,
+    product: (index) => `${CONFIG.assetsDir}/assets/images/z-product/product-${index + 1}.webp`,
+    portrait: (index) => `${CONFIG.assetsDir}/assets/images/portrait/portrait-${index + 1}.webp`,
+    marketing: (index) => `${CONFIG.assetsDir}/assets/images/marketing/marketing-${index + 1}.webp`,
   },
   video: (index) =>
     [
-      `https://www.dropbox.com/s/odzycivuo9cy5rg/video_01.mp4?dl=0`,
-      `https://www.dropbox.com/s/7cx04n8rr4w5rbg/video_02.mp4?dl=0`,
+      `${CONFIG.assetsDir}/assets/video/video-1.mp4`,
+      `${CONFIG.assetsDir}/assets/video/video-2.mp4`,
     ][index],
 };
