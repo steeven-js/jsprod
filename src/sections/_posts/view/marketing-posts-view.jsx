@@ -1,3 +1,4 @@
+import { Box } from '@mui/system';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
@@ -15,40 +16,40 @@ import { MarketingFeaturedPosts } from '../marketing-featured-posts';
 
 export function MarketingPostsView({ postCategories, posts, recentPosts }) {
   return (
-    <>
-      <PostSearchMobile />
+    <Box sx={{ mt: 10 }}>
+        <PostSearchMobile />
 
-      <MarketingFeaturedPosts posts={recentPosts} />
+        <MarketingFeaturedPosts posts={recentPosts} />
 
-      <Container component="section" sx={{ mt: 10 }}>
-        <Grid disableEqualOverflow container spacing={{ md: 8 }}>
-          <Grid xs={12} md={8}>
-            <MarketingPosts posts={posts} />
+        <Container component="section" sx={{ mt: 10 }}>
+          <Grid disableEqualOverflow container spacing={{ md: 8 }}>
+            <Grid xs={12} md={8}>
+              <MarketingPosts posts={posts} />
+            </Grid>
+
+            <Grid xs={12} md={4}>
+              <PostSidebar
+                tags={_tags}
+                categories={postCategories}
+                recentPosts={recentPosts}
+                slots={{
+                  bottomNode: (
+                    <Advertisement
+                      title="Advertisement"
+                      description="Duis leo. Donec orci lectus, aliquam ut, faucibus non"
+                      imageUrl={_mock.image.marketing(9)}
+                      action={
+                        <Button variant="contained" color="primary">
+                          Go now
+                        </Button>
+                      }
+                    />
+                  ),
+                }}
+              />
+            </Grid>
           </Grid>
-
-          <Grid xs={12} md={4}>
-            <PostSidebar
-              tags={_tags}
-              categories={postCategories}
-              recentPosts={recentPosts}
-              slots={{
-                bottomNode: (
-                  <Advertisement
-                    title="Advertisement"
-                    description="Duis leo. Donec orci lectus, aliquam ut, faucibus non"
-                    imageUrl={_mock.image.marketing(9)}
-                    action={
-                      <Button variant="contained" color="primary">
-                        Go now
-                      </Button>
-                    }
-                  />
-                ),
-              }}
-            />
-          </Grid>
-        </Grid>
-      </Container>
-    </>
+        </Container>
+      </Box>
   );
 }

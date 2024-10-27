@@ -17,7 +17,7 @@ const latestPosts = _marketingPosts.slice(0, 4);
 export function ProjetsLandingView({ categories, posts }) {
   return (
     <>
-      <Box component="section">
+      <Box component="section" sx={{ mt: 10 }}>
         <Container>
           <Stack
             spacing={3}
