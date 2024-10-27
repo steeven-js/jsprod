@@ -20,11 +20,11 @@ export const paths = {
     projet: (id) => `/projets/${id}`,
   },
   /**
-   * Posts
+   * Blogs
    */
-  posts: {
-    root: '/posts',
-    post: (id) => `/posts/${id}`,
+  blog: {
+    root: '/blog/posts',
+    post: (id) => `/blog/post/${id}`,
   },
   /**
    * Marketing

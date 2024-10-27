@@ -2,7 +2,7 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 
-import { _mock, _tags, _marketingPosts } from 'src/_mock';
+import { _mock, _tags } from 'src/_mock';
 
 import { Advertisement } from 'src/sections/advertisement';
 
@@ -13,19 +13,12 @@ import { MarketingFeaturedPosts } from '../marketing-featured-posts';
 
 // ----------------------------------------------------------------------
 
-const posts = _marketingPosts.slice(0, 8);
-const recentPosts = _marketingPosts.slice(-4);
-const featuredPosts = _marketingPosts.slice(0, 5);
-
-// ----------------------------------------------------------------------
-
-export function MarketingPostsView() {
-  console.log('featuredPosts:', featuredPosts);
+export function MarketingPostsView({ postCategories, posts, recentPosts }) {
   return (
     <>
       <PostSearchMobile />
 
-      <MarketingFeaturedPosts posts={featuredPosts} />
+      <MarketingFeaturedPosts posts={recentPosts} />
 
       <Container component="section" sx={{ mt: 10 }}>
         <Grid disableEqualOverflow container spacing={{ md: 8 }}>
@@ -36,13 +29,7 @@ export function MarketingPostsView() {
           <Grid xs={12} md={4}>
             <PostSidebar
               tags={_tags}
-              categories={[
-                { label: 'Marketing', path: '' },
-                { label: 'Community', path: '' },
-                { label: 'Tutorials', path: '' },
-                { label: 'Business', path: '' },
-                { label: 'Management', path: '' },
-              ]}
+              categories={postCategories}
               recentPosts={recentPosts}
               slots={{
                 bottomNode: (

@@ -14,7 +14,7 @@ import {
 
 import { db } from 'src/utils/firebase';
 
-export function useProjetsPosts(sortBy = 'latest', searchQuery = '', publish = 'all') {
+export function usePosts(sortBy = 'latest', searchQuery = '', publish = 'all') {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -24,14 +24,14 @@ export function useProjetsPosts(sortBy = 'latest', searchQuery = '', publish = '
 
     const q = searchQuery
       ? query(
-          collection(db, 'projets'),
+          collection(db, 'posts'),
           orderBy('title'),
           startAt(searchQuery),
           endAt(`${searchQuery}\uf8ff`),
           limit(10)
         )
       : query(
-          collection(db, 'projets'),
+          collection(db, 'posts'),
           ...[
             orderBy(sortBy === 'popular' ? 'totalViews' : 'createdAt', sortBy === 'oldest' ? 'asc' : 'desc'),
             limit(20),
@@ -49,10 +49,10 @@ export function useProjetsPosts(sortBy = 'latest', searchQuery = '', publish = '
         setPosts(fetchedPosts);
         setLoading(false);
       },
-      (projetsError) => {
-        console.error('Error fetching posts:', projetsError);
-        setError(projetsError);
+      (_error) => {
+        console.error('Error fetching posts:', _error);
         setLoading(false);
+        setError(_error);
       }
     );
 
@@ -62,7 +62,38 @@ export function useProjetsPosts(sortBy = 'latest', searchQuery = '', publish = '
   return { posts, loading, error };
 }
 
-export function useFetchProjetsPostById(id) {
+export function useLatestPosts(count = 4) {
+  const [latestPosts, setLatestPosts] = useState([]);
+  const [latestPostsLoading, setLatestPostsLoading] = useState(true);
+  const [latestPostsError, setLatestPostsError] = useState(null);
+
+  useEffect(() => {
+    const q = query(collection(db, 'posts'), orderBy('createdAt', 'desc'), limit(count));
+
+    const unsubscribe = onSnapshot(
+      q,
+      (querySnapshot) => {
+        const fetchedPosts = querySnapshot.docs.map((_doc) => ({
+          id: _doc.id,
+          ..._doc.data(),
+        }));
+        setLatestPosts(fetchedPosts);
+        setLatestPostsLoading(false);
+      },
+      (error) => {
+        console.error('Error fetching latest posts:', error);
+        setLatestPostsLoading(false);
+        setLatestPostsError(error);
+      }
+    );
+
+    return () => unsubscribe();
+  }, [count]);
+
+  return { latestPosts, latestPostsLoading, latestPostsError };
+}
+
+export function useFetchPostById(id) {
   const [postById, setPostById] = useState(null);
   const [postByIdLoading, setPostByIdLoading] = useState(true);
   const [postError, setPostError] = useState(null);
@@ -71,7 +102,7 @@ export function useFetchProjetsPostById(id) {
     let unsubscribe = () => {};
 
     if (id) {
-      const docRef = doc(db, 'projets', id);
+      const docRef = doc(db, 'posts', id);
 
       unsubscribe = onSnapshot(
         docRef,
@@ -101,14 +132,14 @@ export function useFetchProjetsPostById(id) {
   return { postById, postByIdLoading, postError };
 }
 
-export const useProjectCategories = () => {
+export const usePostCategories = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   // Récupérer les catégories
   useEffect(() => {
-    const q = query(collection(db, 'projectCategories'), orderBy('name'));
+    const q = query(collection(db, 'postCategories'), orderBy('name'));
 
     const unsubscribe = onSnapshot(
       q,
@@ -133,7 +164,7 @@ export const useProjectCategories = () => {
   // Récupérer une catégorie par ID
   const getCategoryById = async (categoryId) => {
     try {
-      const categoryRef = doc(db, 'projectCategories', categoryId);
+      const categoryRef = doc(db, 'postCategories', categoryId);
       const categorySnap = await getDoc(categoryRef);
 
       if (categorySnap.exists()) {

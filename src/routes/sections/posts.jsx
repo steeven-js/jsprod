@@ -1,16 +1,19 @@
 import { lazy } from 'react';
+import { Outlet } from 'react-router-dom';
 
 import { MainLayout } from 'src/layouts/main';
 
 // ----------------------------------------------------------------------
 
 const LandingPage = lazy(() => import('src/pages/posts/landing'));
+const PostPage = lazy(() => import('src/pages/posts/landing'));
+// const PostDetailsPage = lazy(() => import('src/pages/posts/post'));
 
 // ----------------------------------------------------------------------
 
 export const postsRoutes = [
   {
-    path: 'posts',
+    path: 'blog',
     children: [
       {
         index: true,
@@ -24,32 +27,22 @@ export const postsRoutes = [
           </MainLayout>
         ),
       },
-      // {
-      //   element: (
-      //     <MainLayout>
-      //       <Outlet />
-      //     </MainLayout>
-      //   ),
-      //   children: [
-      //     { path: 'services', element: <ServicesPage /> },
-      //     { path: 'about', element: <AboutPage /> },
-      //     { path: 'contact', element: <ContactPage /> },
-      //     {
-      //       path: 'case-studies',
-      //       children: [
-      //         { index: true, element: <CaseStudiesPage /> },
-      //         { path: ':id', element: <CaseStudyPage /> },
-      //       ],
-      //     },
-      //     {
-      //       path: 'posts',
-      //       children: [
-      //         { index: true, element: <PostsPage /> },
-      //         { path: 'details', element: <PostPage /> },
-      //       ],
-      //     },
-      //   ],
-      // },
+      {
+        element: (
+          <MainLayout>
+            <Outlet />
+          </MainLayout>
+        ),
+        children: [
+          {
+            path: 'posts',
+            children: [
+              { index: true, element: <PostPage /> },
+              // { path: ':id', element: <CaseStudyPage /> },
+            ],
+          },
+        ],
+      },
     ],
   },
 ];

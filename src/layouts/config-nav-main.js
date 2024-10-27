@@ -115,7 +115,7 @@ export const navData = [
   { title: 'Services', path: paths.services.root },
   { title: 'About', path: paths.about.root },
   { title: 'Projets', path: paths.projets.root },
-  { title: 'blogs', path: paths.posts.root },
+  { title: 'blogs', path: paths.blog.root },
 ];
 
 // ----------------------------------------------------------------------

@@ -1,7 +1,6 @@
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Avatar from '@mui/material/Avatar';
-import Pagination, { paginationClasses } from '@mui/material/Pagination';
 
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
@@ -33,7 +32,7 @@ export function MarketingPosts({ posts, sx, ...other }) {
         ))}
       </Box>
 
-      <Pagination
+      {/* <Pagination
         count={10}
         sx={{
           my: 10,
@@ -41,7 +40,7 @@ export function MarketingPosts({ posts, sx, ...other }) {
             justifyContent: 'center',
           },
         }}
-      />
+      /> */}
     </>
   );
 }
@@ -123,8 +122,8 @@ export function PostItem({ post, sx, ...other }) {
         <Box flexGrow={1} />
 
         <Box gap={1} display="flex" alignItems="center" sx={{ typography: 'body2' }}>
-          <Avatar src={post.author.avatarUrl} />
-          {post.author.name}
+          <Avatar src={post.author[0].avatarUrl} />
+          {post.authorName}
         </Box>
       </Box>
     </Box>

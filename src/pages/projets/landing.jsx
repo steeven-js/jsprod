@@ -1,9 +1,11 @@
-import { Alert, CircularProgress } from '@mui/material';
-import { Box } from '@mui/system';
 import { Helmet } from 'react-helmet-async';
 
+import { Box } from '@mui/system';
+import { Alert, CircularProgress } from '@mui/material';
+
+import { useProjetsPosts, useProjectCategories } from 'src/hooks/use-projet';
+
 import { CONFIG } from 'src/config-global';
-import { useProjectCategories, useProjetsPosts } from 'src/hooks/use-projet';
 
 import { ProjetsLandingView } from 'src/sections/_projets/view/projets-landing-view';
 

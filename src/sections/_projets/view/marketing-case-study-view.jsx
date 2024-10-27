@@ -4,12 +4,9 @@ import Container from '@mui/material/Container';
 
 import { paths } from 'src/routes/paths';
 
-import { _testimonials } from 'src/_mock';
-
 import { Markdown } from 'src/components/markdown';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 
-import { MarketingCaseStudyListSimilar } from '../list/marketing-case-study-list-similar';
 import { MarketingCaseStudyDetailsGallery } from '../details/marketing-case-study-details-gallery';
 import { MarketingCaseStudyDetailsSummary } from '../details/marketing-case-study-details-summary';
 
