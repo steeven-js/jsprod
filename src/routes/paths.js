@@ -24,7 +24,7 @@ export const paths = {
    */
   posts: {
     root: '/posts',
-    post: (id) => `/post/${id}`,
+    post: (id) => `/posts/${id}`,
   },
   /**
    * Marketing

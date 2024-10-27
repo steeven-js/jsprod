@@ -5,7 +5,7 @@ import { MainLayout } from 'src/layouts/main';
 // ----------------------------------------------------------------------
 
 const LandingPage = lazy(() => import('src/pages/posts/landing'));
-// const PostDetailsPage = lazy(() => import('src/pages/posts/post'));
+const PostDetailsPage = lazy(() => import('src/pages/posts/post'));
 
 // ----------------------------------------------------------------------
 
@@ -25,16 +25,14 @@ export const postsRoutes = [
           </MainLayout>
         ),
       },
-      // {
-      //   element: (
-      //     <MainLayout>
-      //       <Outlet />
-      //     </MainLayout>
-      //   ),
-      //   children: [
-      //     { path: ':id', element: <CaseStudyPage /> },
-      //   ],
-      // },
+      {
+        path: ':id',
+        element: (
+          <MainLayout>
+            <PostDetailsPage />
+          </MainLayout>
+        ),
+      },
     ],
   },
 ];

@@ -4,6 +4,8 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 
+import { fDate } from 'src/utils/format-time';
+
 import { _socials } from 'src/_mock';
 import { CONFIG } from 'src/config-global';
 
@@ -45,7 +47,7 @@ export function PostAuthor({ author, sx, ...other }) {
       }}
       {...other}
     >
-      <Avatar src={author?.avatarUrl} sx={{ width: 96, height: 96 }} />
+      <Avatar src={author?.photoURL} sx={{ width: 96, height: 96 }} />
 
       <Stack spacing={2}>
         <Stack
@@ -55,7 +57,7 @@ export function PostAuthor({ author, sx, ...other }) {
           justifyContent={{ md: 'space-between' }}
         >
           <Stack spacing={0.5}>
-            <Typography variant="h5">{author?.name}</Typography>
+            <Typography variant="h5">{author?.displayName}</Typography>
 
             <Typography variant="body2" sx={{ color: 'text.secondary' }}>
               {author?.role}
@@ -70,7 +72,7 @@ export function PostAuthor({ author, sx, ...other }) {
         </Typography>
 
         <Typography variant="caption" sx={{ color: 'text.disabled' }}>
-          {author?.quotes}
+          {fDate(author?.createdAt)}
         </Typography>
       </Stack>
     </Box>

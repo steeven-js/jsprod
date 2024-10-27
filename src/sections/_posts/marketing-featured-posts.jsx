@@ -128,7 +128,7 @@ export function PostItem({ post }) {
 
           <Link
             component={RouterLink}
-            href={paths.marketing.post}
+            href={paths.posts.post(post.id)}
             color="inherit"
             variant="h4"
             sx={{

@@ -94,42 +94,65 @@ export function useLatestPosts(count = 4) {
 }
 
 export function useFetchPostById(id) {
-  const [postById, setPostById] = useState(null);
-  const [postByIdLoading, setPostByIdLoading] = useState(true);
-  const [postError, setPostError] = useState(null);
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    let unsubscribe = () => {};
+    setLoading(true);
+    setError(null);
 
-    if (id) {
-      const docRef = doc(db, 'posts', id);
-
-      unsubscribe = onSnapshot(
-        docRef,
-        (docSnapshot) => {
-          if (docSnapshot.exists()) {
-            setPostById({ id: docSnapshot.id, ...docSnapshot.data() });
-            setPostError(null);
-          } else {
-            setPostError('Post not found');
-            setPostById(null);
-          }
-          setPostByIdLoading(false);
-        },
-        (error) => {
-          console.error('Error fetching post:', error);
-          setPostError(error.message);
-          setPostByIdLoading(false);
-        }
-      );
-    } else {
-      setPostByIdLoading(false);
+    if (!id) {
+      setLoading(false);
+      return undefined;
     }
+
+    const postRef = doc(db, 'posts', id);
+
+    // Première récupération immédiate avec getDoc
+    const fetchInitialData = async () => {
+      try {
+        const docSnap = await getDoc(postRef);
+        if (docSnap.exists()) {
+          setPost({ id: docSnap.id, ...docSnap.data() });
+        } else {
+          setError('Post not found');
+          setPost(null);
+        }
+      } catch (err) {
+        console.error('Error fetching post:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInitialData();
+
+    // Mise en place de l'écoute en temps réel
+    const unsubscribe = onSnapshot(
+      postRef,
+      (docSnapshot) => {
+        if (docSnapshot.exists()) {
+          setPost({ id: docSnapshot.id, ...docSnapshot.data() });
+          setError(null);
+        } else {
+          setError('Post not found');
+          setPost(null);
+        }
+        setLoading(false);
+      },
+      (err) => {
+        console.error('Error in snapshot:', err);
+        setError(err.message);
+        setLoading(false);
+      }
+    );
 
     return () => unsubscribe();
   }, [id]);
 
-  return { postById, postByIdLoading, postError };
+  return { post, loading, error };
 }
 
 export const usePostCategories = () => {
