@@ -67,13 +67,23 @@ export function MarketingCaseStudyDetailsSummary({
       <Divider sx={{ borderStyle: 'dashed' }} />
 
       <Stack spacing={1}>
-        <Typography variant="overline" sx={{ color: 'text.disabled' }}>
-          Website
-        </Typography>
+        {website && (
+          <>
+            <Typography variant="overline" sx={{ color: 'text.disabled' }}>
+              Website
+            </Typography>
 
-        <Link variant="body2" color="inherit">
-          {website}
-        </Link>
+            <Link
+              href={website}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="body2"
+              color="inherit"
+            >
+              {website}
+            </Link>
+          </>
+        )}
 
         <Typography variant="overline" sx={{ color: 'text.disabled', pt: 1 }}>
           Category

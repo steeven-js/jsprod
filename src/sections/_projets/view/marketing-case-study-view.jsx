@@ -9,9 +9,6 @@ import { _testimonials } from 'src/_mock';
 import { Markdown } from 'src/components/markdown';
 import { CustomBreadcrumbs } from 'src/components/custom-breadcrumbs';
 
-import { MarketingNewsletter } from '../marketing-newsletter';
-import { MarketingTestimonial } from '../marketing-testimonial';
-import { MarketingLandingFreeSEO } from '../landing/marketing-landing-free-seo';
 import { MarketingCaseStudyListSimilar } from '../list/marketing-case-study-list-similar';
 import { MarketingCaseStudyDetailsGallery } from '../details/marketing-case-study-details-gallery';
 import { MarketingCaseStudyDetailsSummary } from '../details/marketing-case-study-details-summary';
@@ -70,21 +67,17 @@ export function MarketingCaseStudyView({ caseStudy, relatedCaseStudies, sx, ...o
 
             <Grid xs={12} md={8}>
               <Markdown content={caseStudy?.content || ''} />
-              <MarketingCaseStudyDetailsGallery images={caseStudy?.galleryImgs || []} />
+              {caseStudy?.galleryImgs && (
+                <MarketingCaseStudyDetailsGallery images={caseStudy?.galleryImgs || []} />
+              )}
             </Grid>
           </Grid>
         </Container>
       </Box>
 
-      <MarketingTestimonial testimonials={_testimonials} />
-
-      {!!relatedCaseStudies?.length && (
+      {/* {!!relatedCaseStudies?.length && (
         <MarketingCaseStudyListSimilar caseStudies={relatedCaseStudies} />
-      )}
-
-      <MarketingLandingFreeSEO />
-
-      <MarketingNewsletter />
+      )} */}
     </>
   );
 }
