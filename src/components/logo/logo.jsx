@@ -17,8 +17,8 @@ export const Logo = forwardRef(
 
     const singleLogo = (
       <svg
-        width="1017"
-        height="479"
+        width="100%"
+        height="100%"
         viewBox="0 0 1017 479"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
