@@ -9,14 +9,14 @@ import { Image } from 'src/components/image';
 
 // ----------------------------------------------------------------------
 
-export function MarketingCaseStudyItem({ project, sx, ...other }) {
+export function MarketingCaseStudyItem({ project, categories, sx, ...other }) {
   return (
     <Box sx={{ minWidth: 0, ...sx }} {...other}>
       <Image src={project.coverUrl} alt={project.title} ratio="1/1" sx={{ borderRadius: 2 }} />
 
       <Box display="flex" flexDirection="column" sx={{ pt: 2.5, px: 2.5 }}>
         <Typography variant="overline" sx={{ mb: 1, color: 'text.disabled' }}>
-          {project.category}
+          {project.metaKeywords ? project.metaKeywords.join(', ') : ''}
         </Typography>
 
         <Link

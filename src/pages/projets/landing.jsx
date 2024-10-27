@@ -1,7 +1,9 @@
+import { Alert, CircularProgress } from '@mui/material';
+import { Box } from '@mui/system';
 import { Helmet } from 'react-helmet-async';
 
-import { _caseStudies } from 'src/_mock';
 import { CONFIG } from 'src/config-global';
+import { useProjectCategories, useProjetsPosts } from 'src/hooks/use-projet';
 
 import { ProjetsLandingView } from 'src/sections/_projets/view/projets-landing-view';
 
@@ -10,13 +12,29 @@ import { ProjetsLandingView } from 'src/sections/_projets/view/projets-landing-v
 const metadata = { title: `Case studies | Marketing - ${CONFIG.appName}` };
 
 export default function Page() {
+  const { categories, loading, error } = useProjectCategories();
+  const { posts, loading: projetsLoading, error: projetError } = useProjetsPosts();
+
+  if (loading && projetsLoading) {
+    return (
+      <Box
+        sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (error && projetError) {
+    return <Alert severity="error">Une erreur est survenue: {error.message}</Alert>;
+  }
   return (
     <>
       <Helmet>
         <title> {metadata.title}</title>
       </Helmet>
 
-      <ProjetsLandingView caseStudies={_caseStudies} />
+      <ProjetsLandingView categories={categories} posts={posts} />
     </>
   );
 }

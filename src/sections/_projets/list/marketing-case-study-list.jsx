@@ -1,3 +1,4 @@
+// marketing-case-study-list.jsx
 import { useState, useCallback } from 'react';
 
 import Tab from '@mui/material/Tab';
@@ -9,14 +10,18 @@ import { MarketingCaseStudyItem } from './marketing-case-study-item';
 
 // ----------------------------------------------------------------------
 
-export function MarketingCaseStudyList({ caseStudies, sx, ...other }) {
-  const [currentTab, setCurrentTab] = useState('All');
+export function MarketingCaseStudyList({ projetsCategories, posts, sx, ...other }) {
+  const [currentTab, setCurrentTab] = useState('all');
 
-  const getCategories = caseStudies.map((project) => project.category);
+  // Créer un tableau de catégories avec "All" en première position
+  const categories = [{ id: 'all', name: 'All' }, ...projetsCategories];
 
-  const categories = ['All', ...Array.from(new Set(getCategories))];
-
-  const dataFiltered = applyFilter({ inputData: caseStudies, query: currentTab });
+  // Modifier la fonction de filtrage pour utiliser les posts et les metaKeywords
+  const dataFiltered = applyFilter({
+    inputData: posts,
+    currentTab,
+    categories,
+  });
 
   const handleChangeTab = useCallback((event, newValue) => {
     setCurrentTab(newValue);
@@ -32,7 +37,7 @@ export function MarketingCaseStudyList({ caseStudies, sx, ...other }) {
         onChange={handleChangeTab}
       >
         {categories.map((category) => (
-          <Tab key={category} value={category} label={category} />
+          <Tab key={category.id} value={category.id} label={category.name} />
         ))}
       </Tabs>
 
@@ -47,8 +52,8 @@ export function MarketingCaseStudyList({ caseStudies, sx, ...other }) {
         sx={{ pt: 5, pb: 10, ...sx }}
         {...other}
       >
-        {dataFiltered.map((project) => (
-          <MarketingCaseStudyItem key={project.id} project={project} />
+        {dataFiltered.map((post) => (
+          <MarketingCaseStudyItem key={post.id} project={post} categories={categories} />
         ))}
       </Box>
 
@@ -63,10 +68,17 @@ export function MarketingCaseStudyList({ caseStudies, sx, ...other }) {
   );
 }
 
-function applyFilter({ inputData, query }) {
-  if (query !== 'All') {
-    inputData = inputData.filter((project) => project.category === query);
+function applyFilter({ inputData, currentTab, categories }) {
+  if (!inputData) return [];
+
+  if (currentTab === 'all') {
+    return inputData;
   }
 
-  return inputData;
+  const selectedCategory = categories.find((cat) => cat.id === currentTab);
+  if (!selectedCategory) return inputData;
+
+  return inputData.filter(
+    (post) => post.metaKeywords && post.metaKeywords.includes(selectedCategory.name)
+  );
 }

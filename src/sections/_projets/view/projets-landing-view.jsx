@@ -14,7 +14,7 @@ const latestPosts = _marketingPosts.slice(0, 4);
 
 // ----------------------------------------------------------------------
 
-export function ProjetsLandingView({ caseStudies }) {
+export function ProjetsLandingView({ categories, posts }) {
   return (
     <>
       <Box component="section">
@@ -34,7 +34,7 @@ export function ProjetsLandingView({ caseStudies }) {
             </Typography>
           </Stack>
 
-          <MarketingCaseStudyList caseStudies={caseStudies} />
+          <MarketingCaseStudyList projetsCategories={categories} posts={posts} />
         </Container>
       </Box>
 
