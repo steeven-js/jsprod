@@ -3,8 +3,6 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { _marketingPosts } from 'src/_mock';
-
 import { MarketingCaseStudyList } from '../list/marketing-case-study-list';
 
 // ----------------------------------------------------------------------
