@@ -16,8 +16,6 @@ export default function Page() {
 
   const { postById } = useFetchProjetsPostById(id);
 
-  // console.log('postById:', postById);
-
   return (
     <>
       <Helmet>

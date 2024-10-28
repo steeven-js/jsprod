@@ -142,4 +142,7 @@ export const paths = {
   figmaUrl: 'https://www.figma.com/design/NnFigTvU16Mk9lsLZR7bzR/%5BPreview%5D-Zone_Web.v3.0.0',
   linkedin: 'https://www.linkedin.com/in/steeven-jacques-1337a9238',
   github: 'https://github.com/steeven-js',
+  twitter: 'https://x.com/jsprod972',
+  instagram: 'https://www.instagram.com/steevenjsprod',
+  facebook: 'https://www.facebook.com/profile.php?id=61567697286202',
 };

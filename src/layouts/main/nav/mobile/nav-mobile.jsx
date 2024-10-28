@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useTheme } from '@emotion/react';
 
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -7,16 +8,24 @@ import Button from '@mui/material/Button';
 import { paths } from 'src/routes/paths';
 import { usePathname } from 'src/routes/hooks';
 
+import { varAlpha } from 'src/theme/styles';
+
 import { Logo } from 'src/components/logo';
+import { Iconify } from 'src/components/iconify';
 import { NavUl } from 'src/components/nav-section';
 import { Scrollbar } from 'src/components/scrollbar';
+import { AnimateBorder } from 'src/components/animate';
 
 import { NavList } from './nav-mobile-list';
 
 // ----------------------------------------------------------------------
 
 export function NavMobile({ data, open, onClose, slots, sx }) {
+  const theme = useTheme();
+
   const pathname = usePathname();
+
+  const layoutQuery = 'md';
 
   useEffect(() => {
     if (open) {
@@ -56,16 +65,37 @@ export function NavMobile({ data, open, onClose, slots, sx }) {
 
       {slots?.bottomArea ?? (
         <Box gap={1.5} display="flex" sx={{ px: 2.5, py: 3 }}>
-          <Button
-            fullWidth
-            size="large"
-            variant="contained"
-            rel="noopener"
-            target="_blank"
-            href={paths.zoneStore}
+          <Box
+            sx={{
+              borderRadius: 1,
+              position: 'relative',
+              bgcolor: 'text.primary',
+              color: 'background.paper',
+              width: '100%',
+            }}
           >
-            Purchase
-          </Button>
+            <AnimateBorder
+              animate={{
+                duration: 12,
+                distance: 40,
+                color: [theme.vars.palette.primary.main, theme.vars.palette.warning.main],
+                outline: `135deg, ${varAlpha(theme.vars.palette.primary.mainChannel, 0.04)}, ${varAlpha(theme.vars.palette.primary.mainChannel, 0.04)}`,
+              }}
+              sx={{ width: 1, height: 1, minHeight: 'auto', position: 'absolute' }}
+            />
+
+            <Button
+              fullWidth
+              size="large"
+              variant="text"
+              rel="noopener"
+              target="_blank"
+              href={paths.linkedin}
+              startIcon={<Iconify icon="mdi:linkedin" />}
+            >
+              Linkedin
+            </Button>
+          </Box>
         </Box>
       )}
     </Drawer>

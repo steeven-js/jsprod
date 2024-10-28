@@ -1,4 +1,3 @@
-
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
@@ -48,7 +47,7 @@ export function MarketingPostView({ post, userProfile }) {
   const renderSocials = (
     <Box gap={1.5} display="flex" sx={{ mt: 5 }}>
       <Box component="span" sx={{ lineHeight: '30px', typography: 'subtitle2' }}>
-        Share:
+        Me suivre
       </Box>
       <Box gap={1} display="flex" alignItems="center" flexWrap="wrap">
         {_socials.map((social) => (
@@ -56,6 +55,8 @@ export function MarketingPostView({ post, userProfile }) {
             key={social.value}
             size="small"
             variant="outlined"
+            href={social.url}
+            target="_blank"
             startIcon={
               (social.value === 'twitter' && (
                 <SvgColor

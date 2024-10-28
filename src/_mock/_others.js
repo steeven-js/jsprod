@@ -1,3 +1,5 @@
+import { paths } from 'src/routes/paths';
+
 import { CONFIG } from 'src/config-global';
 
 import { _mock } from './_mock';
@@ -18,10 +20,26 @@ export const _testimonials = [...Array(8)].map((_, index) => ({
 // ----------------------------------------------------------------------
 
 export const _socials = [
-  { value: 'facebook', label: 'Facebook' },
-  { value: 'instagram', label: 'Instagram' },
-  { value: 'linkedin', label: 'Linkedin' },
-  { value: 'twitter', label: 'Twitter' },
+  {
+    value: 'facebook',
+    label: 'Facebook',
+    url: paths.facebook
+  },
+  {
+    value: 'instagram',
+    label: 'Instagram',
+    url: paths.instagram
+  },
+  {
+    value: 'linkedin',
+    label: 'Linkedin',
+    url: paths.linkedin
+  },
+  {
+    value: 'twitter',
+    label: 'Twitter',
+    url: paths.twitter
+  }
 ];
 
 // ----------------------------------------------------------------------

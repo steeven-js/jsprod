@@ -17,7 +17,7 @@ export function PostAuthor({ author, sx, ...other }) {
   const renderSocials = (
     <Box display="flex">
       {_socials.map((social) => (
-        <IconButton key={social.value} color="inherit">
+        <IconButton key={social.value} href={social.url} target="_blank" color="inherit">
           {(social.value === 'twitter' && (
             <SvgColor
               width={20}

@@ -7,8 +7,6 @@ import { _marketingPosts } from 'src/_mock';
 
 import { MarketingCaseStudyList } from '../list/marketing-case-study-list';
 
-const latestPosts = _marketingPosts.slice(0, 4);
-
 // ----------------------------------------------------------------------
 
 export function ProjetsLandingView({ categories, posts }) {
@@ -26,8 +24,8 @@ export function ProjetsLandingView({ categories, posts }) {
             <Typography variant="h2"> Mes réalisations</Typography>
 
             <Typography sx={{ color: 'text.secondary' }}>
-              Découvrez mes derniers projets de marketing digital,
-              <br /> de développement web et de design graphique.
+              Découvrez mes derniers projets de,
+              <br /> conception et développement d&apos;application.
             </Typography>
           </Stack>
 

@@ -26,7 +26,19 @@ export function MarketingCaseStudyDetailsSummary({
   const renderSocials = (
     <Box display="flex">
       {_socials.map((social) => (
-        <IconButton key={social.value} color="inherit">
+        <IconButton
+          key={social.value}
+          color="inherit"
+          component="a"
+          href={social.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{
+            '&:hover': {
+              opacity: 0.8,
+            },
+          }}
+        >
           {(social.value === 'twitter' && (
             <SvgColor
               width={20}
@@ -56,7 +68,7 @@ export function MarketingCaseStudyDetailsSummary({
     >
       <Stack spacing={2}>
         <Typography variant="overline" sx={{ color: 'text.disabled' }}>
-          summary
+          sommaire
         </Typography>
 
         <Typography variant="h6">{title}</Typography>
@@ -70,7 +82,7 @@ export function MarketingCaseStudyDetailsSummary({
         {website && (
           <>
             <Typography variant="overline" sx={{ color: 'text.disabled' }}>
-              Website
+              Site web
             </Typography>
 
             <Link
@@ -86,7 +98,7 @@ export function MarketingCaseStudyDetailsSummary({
         )}
 
         <Typography variant="overline" sx={{ color: 'text.disabled', pt: 1 }}>
-          Category
+          Catégorie
         </Typography>
 
         <Stack direction="row" flexWrap="wrap" spacing={1}>
@@ -110,7 +122,7 @@ export function MarketingCaseStudyDetailsSummary({
         </Stack>
 
         <Typography variant="overline" sx={{ color: 'text.disabled' }}>
-          Date
+          Date de création
         </Typography>
 
         <Typography variant="body2">{fDate(createdAt)}</Typography>
@@ -120,7 +132,7 @@ export function MarketingCaseStudyDetailsSummary({
 
       <Box display="flex" alignItems="center">
         <Typography variant="subtitle2" sx={{ mr: 1 }}>
-          Share:
+          Me suivre
         </Typography>
         {renderSocials}
       </Box>
