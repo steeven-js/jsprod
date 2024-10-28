@@ -7,14 +7,15 @@ import Container from '@mui/material/Container';
 import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 
+import { paths } from 'src/routes/paths';
+import { RouterLink } from 'src/routes/components';
+
 import { CONFIG } from 'src/config-global';
 import { _LandingHero } from 'src/assets/data/landing';
 import { varAlpha, bgGradient, textGradient } from 'src/theme/styles';
 
 import { Iconify } from 'src/components/iconify';
 import { MotionViewport } from 'src/components/animate';
-import { RouterLink } from 'src/routes/components';
-import { paths } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
