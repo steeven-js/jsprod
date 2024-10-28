@@ -26,11 +26,11 @@ export function ProjetsLandingView({ categories, posts }) {
               textAlign: { xs: 'center', md: 'left' },
             }}
           >
-            <Typography variant="h2"> Case studies</Typography>
+            <Typography variant="h2"> Mes réalisations</Typography>
 
             <Typography sx={{ color: 'text.secondary' }}>
-              Nullam tincidunt adipiscing enim.
-              <br /> Mauris sollicitudin fermentum libero.
+              Découvrez mes derniers projets de marketing digital,
+              <br /> de développement web et de design graphique.
             </Typography>
           </Stack>
 
@@ -38,11 +38,11 @@ export function ProjetsLandingView({ categories, posts }) {
         </Container>
       </Box>
 
-      <MarketingTestimonial testimonials={_testimonials} />
+      {/* <MarketingTestimonial testimonials={_testimonials} />
 
       <MarketingLatestPosts posts={latestPosts} />
 
-      <MarketingNewsletter />
+      <MarketingNewsletter /> */}
     </>
   );
 }

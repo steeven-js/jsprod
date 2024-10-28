@@ -25,8 +25,7 @@ export function PostTime({ createdAt, duration, sx, ...other }) {
               backgroundColor: 'currentColor',
             }}
           />
-
-          {duration}
+          {duration} {duration > 1 ? 'mins' : 'min'}
         </>
       )}
     </Box>

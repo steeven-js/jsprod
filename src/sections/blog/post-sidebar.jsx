@@ -78,14 +78,14 @@ export function PostSidebar({
       <Typography variant="h5">Categories</Typography>
 
       {categories.map((category) => (
-        <Box key={category.label} gap={2} display="flex" alignItems="center">
+        <Box key={category?.label} gap={2} display="flex" alignItems="center">
           <Box
             component="span"
             sx={{ width: 6, height: 6, borderRadius: '50%', bgcolor: 'primary.main' }}
           />
 
-          <Link variant="body2" href={category.path} color="inherit">
-            {category.label}
+          <Link variant="body2" href={category?.path} color="inherit">
+            {category?.label}
           </Link>
         </Box>
       ))}

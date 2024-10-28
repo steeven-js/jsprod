@@ -2,6 +2,8 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 
+import { paths } from 'src/routes/paths';
+
 import { fDate } from 'src/utils/format-time';
 
 import { maxLine } from 'src/theme/styles';
@@ -22,14 +24,15 @@ export function PostItemMobile({ post, onSiderbar, sx, ...other }) {
       {...other}
     >
       <Image
-        alt={post.title}
-        src={post.coverUrl}
+        alt={post?.title}
+        src={post?.coverUrl}
         sx={{ width: 64, height: 64, flexShrink: 0, borderRadius: 1.5 }}
       />
 
       <Stack spacing={onSiderbar ? 0.5 : 1}>
         <Link
           color="inherit"
+          href={paths.posts.post(post?.id)}
           variant={onSiderbar ? 'subtitle2' : 'subtitle1'}
           sx={(theme) => ({
             ...maxLine({
@@ -38,10 +41,10 @@ export function PostItemMobile({ post, onSiderbar, sx, ...other }) {
             }),
           })}
         >
-          {post.title}
+          {post?.title}
         </Link>
 
-        <PostTime createdAt={fDate(post.createdAt)} duration={post.duration} />
+        <PostTime createdAt={fDate(post?.createdAt)} duration={post?.readingTime} />
       </Stack>
     </Box>
   );

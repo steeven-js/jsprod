@@ -111,11 +111,11 @@ export const pageLinks = [
 // ----------------------------------------------------------------------
 
 export const navData = [
-  { title: 'Home', path: '/' },
-  { title: 'Services', path: paths.services.root },
-  { title: 'About', path: paths.about.root },
-  { title: 'Projets', path: paths.projets.root },
-  { title: 'Posts', path: paths.posts.root },
+  { title: 'Accueil', path: '/' },
+  { title: 'Mes Services', path: paths.services.root },
+  { title: 'A propos', path: paths.about.root },
+  { title: 'Mes Projets', path: paths.projets.root },
+  { title: 'Mes Posts', path: paths.posts.root },
 ];
 
 // ----------------------------------------------------------------------

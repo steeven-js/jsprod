@@ -84,8 +84,8 @@ export function PostItem({ post, sx, ...other }) {
       <Box
         component="img"
         loading="lazy"
-        alt={post.title}
-        src={post.coverUrl}
+        alt={post?.title}
+        src={post?.coverUrl}
         sx={{ aspectRatio: '3/4', objectFit: 'cover' }}
       />
 
@@ -104,26 +104,26 @@ export function PostItem({ post, sx, ...other }) {
         }}
       >
         <PostTime
-          createdAt={fDate(post.createdAt)}
-          duration={post.duration}
+          createdAt={fDate(post?.createdAt)}
+          duration={post?.readingTime}
           sx={{ mb: 2, color: 'inherit', opacity: 0.72 }}
         />
 
         <Link
           component={RouterLink}
-          href={paths.marketing.post}
+          href={paths.posts.post(post?.id)}
           variant="h5"
           color="inherit"
           underline="none"
         >
-          {post.title}
+          {post?.title}
         </Link>
 
         <Box flexGrow={1} />
 
         <Box gap={1} display="flex" alignItems="center" sx={{ typography: 'body2' }}>
-          <Avatar src={post.author[0].avatarUrl} />
-          {post.authorName}
+          <Avatar src={post?.author[0].avatarUrl} />
+          {post?.authorName}
         </Box>
       </Box>
     </Box>

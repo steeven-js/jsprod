@@ -66,7 +66,7 @@ export default function Services() {
 
             <Button
               component={RouterLink}
-              href={paths.marketing.caseStudies}
+              href={paths.projets.root}
               size="large"
               color="inherit"
               variant="outlined"
@@ -117,7 +117,7 @@ export default function Services() {
 
             <Button
               component={RouterLink}
-              href={paths.marketing.caseStudies}
+              href={paths.projets.root}
               size="large"
               color="inherit"
               variant="outlined"
@@ -168,7 +168,7 @@ export default function Services() {
 
             <Button
               component={RouterLink}
-              href={paths.marketing.caseStudies}
+              href={paths.projets.root}
               size="large"
               color="inherit"
               variant="outlined"
@@ -219,7 +219,7 @@ export default function Services() {
 
             <Button
               component={RouterLink}
-              href={paths.marketing.caseStudies}
+              href={paths.projets.root}
               size="large"
               color="inherit"
               variant="outlined"

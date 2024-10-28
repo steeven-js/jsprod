@@ -54,7 +54,7 @@ export function MarketingFeaturedPosts({ posts, sx, ...other }) {
           />
           <Carousel carousel={carousel} sx={{ borderRadius: 2, bgcolor: 'background.default' }}>
             {posts.map((post) => (
-              <PostItem key={post.id} post={post} />
+              <PostItem key={post?.id} post={post} />
             ))}
           </Carousel>
         </Box>
@@ -77,9 +77,9 @@ export function MarketingFeaturedPosts({ posts, sx, ...other }) {
         (post, index) =>
           index === carousel.dots.selectedIndex && (
             <Image
-              key={post.id}
+              key={post?.id}
               alt="Post cover"
-              src={post.coverUrl}
+              src={post?.coverUrl}
               slotProps={{
                 overlay: {
                   backgroundImage: (theme) =>
@@ -104,8 +104,8 @@ export function PostItem({ post }) {
       <Grid xs={12} md={8}>
         <Box
           component="img"
-          alt={post.title}
-          src={post.coverUrl}
+          alt={post?.title}
+          src={post?.coverUrl}
           sx={{
             width: 1,
             objectFit: 'cover',
@@ -124,18 +124,18 @@ export function PostItem({ post }) {
         }}
       >
         <Box gap={1} display="flex" flexDirection="column" flexGrow={1}>
-          <PostTime createdAt={fDate(post.createdAt)} duration={post.duration} />
+          <PostTime createdAt={fDate(post?.createdAt)} duration={post?.readingTime} />
 
           <Link
             component={RouterLink}
-            href={paths.posts.post(post.id)}
+            href={paths.posts.post(post?.id)}
             color="inherit"
             variant="h4"
             sx={{
               ...maxLine({ line: 3 }),
             }}
           >
-            {post.title}
+            {post?.title}
           </Link>
 
           <Typography
@@ -145,13 +145,13 @@ export function PostItem({ post }) {
               color: 'text.secondary',
             })}
           >
-            {post.description}
+            {post?.description}
           </Typography>
         </Box>
 
         <Box gap={1.5} display="flex" alignItems="center" sx={{ pt: 2, typography: 'body2' }}>
-          <Avatar src={post.author.avatarUrl} />
-          {post.author.name}
+          <Avatar src={post?.author[0].avatarUrl} />
+          {post?.authorName}
         </Box>
       </Grid>
     </Grid>

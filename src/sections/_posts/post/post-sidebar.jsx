@@ -37,17 +37,17 @@ export function PostSidebar({
         ...slotProps?.author,
       }}
     >
-      <Avatar src={author.avatarUrl} sx={{ width: 64, height: 64 }} />
+      <Avatar src={author?.avatarUrl} sx={{ width: 64, height: 64 }} />
       <div>
         <Typography component="span" variant="h6">
-          {author.name}
+          {author?.name}
         </Typography>
         <Typography
           component="span"
           variant="body2"
           sx={{ mb: 1, mt: 0.5, display: 'block', color: 'text.secondary' }}
         >
-          {author.role}
+          {author?.role}
         </Typography>
 
         <Box display="flex">
@@ -84,7 +84,7 @@ export function PostSidebar({
           />
 
           <Link variant="body2" href={category.path} color="inherit">
-            {category.name}
+            {category?.name}
           </Link>
         </Box>
       ))}
