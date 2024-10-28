@@ -3,11 +3,8 @@ import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { _testimonials, _marketingPosts } from 'src/_mock';
+import { _marketingPosts } from 'src/_mock';
 
-import { MarketingNewsletter } from '../marketing-newsletter';
-import { MarketingTestimonial } from '../marketing-testimonial';
-import { MarketingLatestPosts } from '../posts/marketing-latest-posts';
 import { MarketingCaseStudyList } from '../list/marketing-case-study-list';
 
 const latestPosts = _marketingPosts.slice(0, 4);

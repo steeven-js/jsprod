@@ -81,8 +81,8 @@ export function Footer({ layoutQuery, sx, ...other }) {
     <>
       <Logo />
       <Typography variant="body2" sx={{ maxWidth: 360, color: 'text.secondary' }}>
-        The starting point for your next project based on easy-to-customize Material-UI © helps you
-        build apps faster and better.
+        Concepteur développeur d&apos;applications web et mobiles. Je réalise vos projets digitaux
+        de A à Z.
       </Typography>
     </>
   );
@@ -246,7 +246,7 @@ export function Footer({ layoutQuery, sx, ...other }) {
                 {renderInfo}
               </SectionBlock>
 
-              <SectionBlock layoutQuery={layoutQuery} sx={{ gap: 1 }}>
+              {/* <SectionBlock layoutQuery={layoutQuery} sx={{ gap: 1 }}>
                 {renderCommunity}
               </SectionBlock>
 
@@ -254,7 +254,7 @@ export function Footer({ layoutQuery, sx, ...other }) {
 
               <SectionBlock layoutQuery={layoutQuery}>{renderSocials}</SectionBlock>
 
-              <SectionBlock layoutQuery={layoutQuery}>{renderApps}</SectionBlock>
+              <SectionBlock layoutQuery={layoutQuery}>{renderApps}</SectionBlock> */}
             </Stack>
           </Grid>
 
@@ -277,9 +277,9 @@ export function Footer({ layoutQuery, sx, ...other }) {
           flexDirection: { xs: 'column', md: 'row' },
         }}
       >
-        <Typography variant="caption"> © All rights reserved.</Typography>
+        <Typography variant="caption">JSProd.fr © All rights reserved.</Typography>
 
-        <Box component="span" gap={1.5} display="flex" alignItems="center" justifyContent="center">
+        {/* <Box component="span" gap={1.5} display="flex" alignItems="center" justifyContent="center">
           <Link variant="caption" color="inherit">
             Help center
           </Link>
@@ -295,7 +295,7 @@ export function Footer({ layoutQuery, sx, ...other }) {
           <Link variant="caption" color="inherit">
             Terms of service
           </Link>
-        </Box>
+        </Box> */}
       </Container>
     </Box>
   );

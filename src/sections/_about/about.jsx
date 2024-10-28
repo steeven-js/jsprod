@@ -5,6 +5,8 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import Typography from '@mui/material/Typography';
 
+import { paths } from 'src/routes/paths';
+
 import { CONFIG } from 'src/config-global';
 import { varAlpha } from 'src/theme/styles';
 import { _About, _SUMMARY } from 'src/assets/data';
@@ -83,6 +85,7 @@ export function About({ sx, ...other }) {
               variant="outlined"
               color="inherit"
               size="large"
+              href={paths.projets.root}
               endIcon={<Iconify icon="carbon:chevron-right" />}
             >
               {_About[3].label}

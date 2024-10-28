@@ -141,4 +141,5 @@ export const paths = {
   zoneStore: 'https://mui.com/store/items/zone-landing-page/',
   figmaUrl: 'https://www.figma.com/design/NnFigTvU16Mk9lsLZR7bzR/%5BPreview%5D-Zone_Web.v3.0.0',
   linkedin: 'https://www.linkedin.com/in/steeven-jacques-1337a9238',
+  github: 'https://github.com/steeven-js',
 };

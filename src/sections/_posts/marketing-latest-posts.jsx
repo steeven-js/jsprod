@@ -26,7 +26,7 @@ export function MarketingLatestPosts({ posts, sx, ...other }) {
       <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Box display="flex" alignItems="center" sx={{ width: 1, mb: { xs: 5, md: 10 } }}>
           <Typography component="h6" variant="h3" sx={{ flexGrow: 1 }}>
-            Latest posts
+            Mes derniers articles
           </Typography>
 
           <CarouselArrowBasicButtons {...carousel.arrows} options={carousel.options} />

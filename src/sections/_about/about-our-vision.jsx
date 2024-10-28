@@ -1,14 +1,9 @@
 import Box from '@mui/material/Box';
-import Fab from '@mui/material/Fab';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 
-import { CONFIG } from 'src/config-global';
-import { varAlpha } from 'src/theme/styles';
 import { _AboutOurVision } from 'src/assets/data';
 
-import { Image } from 'src/components/image';
-import { Iconify } from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
@@ -42,7 +37,7 @@ export function AboutOurVision({ sx, ...other }) {
           {_AboutOurVision[0].title}
         </Typography>
 
-        <Box
+        {/* <Box
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -65,7 +60,7 @@ export function AboutOurVision({ sx, ...other }) {
               },
             }}
           />
-        </Box>
+        </Box> */}
 
         <Typography
           variant="h5"

@@ -13,6 +13,8 @@ import { varAlpha, bgGradient, textGradient } from 'src/theme/styles';
 
 import { Iconify } from 'src/components/iconify';
 import { MotionViewport } from 'src/components/animate';
+import { RouterLink } from 'src/routes/components';
+import { paths } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -50,16 +52,82 @@ export function HomeHero({ sx, ...other }) {
         alignItems="center"
         justifyContent={{ xs: 'center', md: 'unset' }}
       >
-        <Button variant="contained" color="inherit" size="large">
+        <Button
+          variant="contained"
+          color="inherit"
+          size="large"
+          component={RouterLink}
+          href={paths.services.root}
+        >
           {_LandingHero[3].label}
         </Button>
 
-        <Box gap={1.5} display="flex" alignItems="center" sx={{ typography: 'h6' }}>
+        <Box
+          gap={1.5}
+          display="flex"
+          alignItems="center"
+          sx={{
+            typography: 'h6',
+            textDecoration: 'none',
+            color: 'text.primary',
+            '&:hover': {
+              textDecoration: 'none',
+            },
+          }}
+          component={RouterLink}
+          href={paths.projets.root}
+        >
           <Fab size="medium">
             <Iconify width={22} icon="solar:play-outline" />
           </Fab>
-          {_LandingHero[4].label}
+          <Box
+            component="span"
+            sx={{
+              typography: 'h6',
+              textDecoration: 'none',
+              '&:hover': {
+                textDecoration: 'none',
+              },
+            }}
+          >
+            {_LandingHero[4].label}
+          </Box>
         </Box>
+      </Box>
+
+      <Box
+        gap={2.5}
+        display="flex"
+        flexWrap="wrap"
+        alignItems="center"
+        justifyContent={{ xs: 'center', md: 'unset' }}
+        sx={{ mt: 5 }}
+      >
+        <Button
+          component={RouterLink}
+          href={paths.github}
+          color="inherit"
+          size="large"
+          variant="contained"
+          target="_blank"
+          rel="noopener"
+          startIcon={<Iconify width={24} icon="mdi:github" />}
+        >
+          Github
+        </Button>
+
+        <Button
+          color="inherit"
+          size="large"
+          variant="outlined"
+          href={CONFIG.cv.url}
+          target="_blank"
+          rel="noopener"
+          startIcon={<Iconify width={24} icon="pepicons-pop:cv" />}
+          sx={{ borderColor: 'text.primary' }}
+        >
+          Téléchargez mon CV
+        </Button>
       </Box>
     </Stack>
   );
