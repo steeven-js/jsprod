@@ -1,6 +1,9 @@
+import { useState } from 'react';
+
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import Avatar from '@mui/material/Avatar';
+import Pagination, { paginationClasses } from '@mui/material/Pagination';
 
 import { paths } from 'src/routes/paths';
 import { RouterLink } from 'src/routes/components';
@@ -14,6 +17,21 @@ import { PostTime } from './post/post-time';
 // ----------------------------------------------------------------------
 
 export function MarketingPosts({ posts, sx, ...other }) {
+  const [page, setPage] = useState(1);
+  const postsPerPage = 4;
+
+  // Calculate pagination
+  const indexOfLastPost = page * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const pageCount = Math.ceil(posts.length / postsPerPage);
+
+  const handleChange = (event, value) => {
+    setPage(value);
+    // Scroll to top when page changes
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <>
       <Box
@@ -27,20 +45,24 @@ export function MarketingPosts({ posts, sx, ...other }) {
         sx={sx}
         {...other}
       >
-        {posts.map((post) => (
+        {currentPosts.map((post) => (
           <PostItem key={post.id} post={post} />
         ))}
       </Box>
 
-      {/* <Pagination
-        count={10}
-        sx={{
-          my: 10,
-          [`& .${paginationClasses.ul}`]: {
-            justifyContent: 'center',
-          },
-        }}
-      /> */}
+      {pageCount > 1 && (
+        <Pagination
+          page={page}
+          count={pageCount}
+          onChange={handleChange}
+          sx={{
+            my: 10,
+            [`& .${paginationClasses.ul}`]: {
+              justifyContent: 'center',
+            },
+          }}
+        />
+      )}
     </>
   );
 }
