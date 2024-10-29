@@ -56,25 +56,25 @@ export const _SERVICESLANDING = [
     name: 'Conception UX/UI',
     icon: 'ic_service_ux.svg',
     content: "Je conçois des expériences numériques intuitives et esthétiquement plaisantes pour les utilisateurs.",
-    path: paths.marketing.services,
+    path: paths.services.root,
   },
   {
     name: 'Conception d\'Applications Mobiles',
     icon: 'ic_service_mobile.svg',
     content: "Je crée des applications mobiles qui offrent une expérience utilisateur fluide et engageante.",
-    path: paths.marketing.services,
+    path: paths.services.root,
   },
   {
     name: 'Développement Web',
     icon: 'ic_service_desktop.svg',
     content: "Je développe des sites web innovants et fonctionnels, centrés sur l'expérience utilisateur.",
-    path: paths.marketing.services,
+    path: paths.services.root,
   },
   {
     name: 'Développement Api',
     icon: 'ic_service_api.svg',
     content: "Je construis des API robustes et évolutives pour connecter et dynamiser les applications et les services.",
-    path: paths.marketing.services,
+    path: paths.services.root,
   },
 ];
 
