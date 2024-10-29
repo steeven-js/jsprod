@@ -29,7 +29,7 @@ export function HomeAbout({ sx, ...other }) {
         <Box
           component="img"
           alt="Landing about"
-          src={`${CONFIG.assetsDir}/assets/images/marketing/marketing-large-1.webp`}
+          src={`${CONFIG.assetsDir}/assets/images/marketing/marketing-large-4.webp`}
           sx={{
             borderRadius: 1.5,
             mb: { xs: 5, md: 10 },
