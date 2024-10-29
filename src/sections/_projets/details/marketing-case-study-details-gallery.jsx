@@ -10,8 +10,11 @@ import { Carousel, useCarousel, CarouselArrowBasicButtons } from 'src/components
 // ----------------------------------------------------------------------
 
 export function MarketingCaseStudyDetailsGallery({ images, sx, ...other }) {
-  const slides = images.map((slide) => ({
-    src: slide,
+  // Adapter le format des slides pour inclure toutes les informations nécessaires
+  const slides = images.map((image) => ({
+    src: image.url,
+    name: image.name,
+    path: image.path,
   }));
 
   const lightbox = useLightBox(slides);
@@ -42,10 +45,10 @@ export function MarketingCaseStudyDetailsGallery({ images, sx, ...other }) {
         </Box>
 
         <Carousel carousel={carousel}>
-          {slides.map((slide) => (
+          {slides.map((slide, index) => (
             <Image
-              key={slide.src}
-              alt={slide.src}
+              key={index}
+              alt={slide.name}
               src={slide.src}
               ratio="4/3"
               onClick={() => lightbox.onOpen(slide.src)}
@@ -57,7 +60,7 @@ export function MarketingCaseStudyDetailsGallery({ images, sx, ...other }) {
 
       <Lightbox
         index={lightbox.selected}
-        slides={slides}
+        slides={slides.map((slide) => ({ src: slide.src }))}
         open={lightbox.open}
         close={lightbox.onClose}
         onGetCurrentIndex={(index) => lightbox.setSelected(index)}
