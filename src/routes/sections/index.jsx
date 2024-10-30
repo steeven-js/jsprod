@@ -10,7 +10,6 @@ import { aboutRoutes } from './about';
 import { postsRoutes } from './posts';
 import { projetsRoutes } from './projets';
 import { serviceRoutes } from './services';
-import { marketingRoutes } from './marketing';
 
 // ----------------------------------------------------------------------
 
@@ -55,9 +54,6 @@ export function Router() {
 
         // Posts
         ...postsRoutes,
-
-        // Marketing
-        ...marketingRoutes,
 
         // Error (404, 500...)
         { path: 'error', element: <Page500 /> },
