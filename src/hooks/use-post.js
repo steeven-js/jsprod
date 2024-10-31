@@ -46,7 +46,9 @@ export function usePosts(sortBy = 'latest', searchQuery = '', publish = 'all') {
           id: _doc.id,
           ..._doc.data(),
         }));
-        setPosts(fetchedPosts);
+        // Filtrer les posts publiés et récupérer les posts que si publish est égal à 'published'
+        const filteredPosts = fetchedPosts.filter((post) => post.publish === 'published');
+        setPosts(filteredPosts);
         setLoading(false);
       },
       (_error) => {
@@ -77,7 +79,9 @@ export function useLatestPosts(count = 4) {
           id: _doc.id,
           ..._doc.data(),
         }));
-        setLatestPosts(fetchedPosts);
+        // Filtrer les posts publiés et récupérer les posts que si publish est égal à 'published'
+        const filteredPosts = fetchedPosts.filter((post) => post.publish === 'published');
+        setLatestPosts(filteredPosts);
         setLatestPostsLoading(false);
       },
       (error) => {

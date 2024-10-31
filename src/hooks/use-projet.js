@@ -22,6 +22,7 @@ export function useProjetsPosts(sortBy = 'latest', searchQuery = '', publish = '
   useEffect(() => {
     let unsubscribe = () => {};
 
+    // Récupérer les projets quand publish est égal à 'published'
     const q = searchQuery
       ? query(
           collection(db, 'projets'),
@@ -46,13 +47,15 @@ export function useProjetsPosts(sortBy = 'latest', searchQuery = '', publish = '
           id: _doc.id,
           ..._doc.data(),
         }));
-        setPosts(fetchedPosts);
+        // Filtrer les projets publiés et récupérer les projets que si publish est égal à 'published'
+        const filteredPosts = fetchedPosts.filter((post) => post.publish === 'published');
+        setPosts(filteredPosts);
         setLoading(false);
       },
-      (projetsError) => {
-        console.error('Error fetching posts:', projetsError);
-        setError(projetsError);
+      (_error) => {
+        console.error('Erreur lors de la récupération des projets:', _error);
         setLoading(false);
+        setError(_error);
       }
     );
 
