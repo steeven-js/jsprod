@@ -5,9 +5,9 @@ import { HomeView } from 'src/sections/_home/view/home-view';
 // ----------------------------------------------------------------------
 
 const metadata = {
-  title: 'Steeven Jacques - Concepteur d&apos;application',
-  description: 'Concepteur d&apos;application',
-  keywords: 'Steeven Jacques, Concepteur d&apos;application',
+  title: "Steeven Jacques - Concepteur d'application",
+  description: "Concepteur d'application",
+  keywords: "Steeven Jacques, Concepteur d'application",
 };
 
 export default function Page() {

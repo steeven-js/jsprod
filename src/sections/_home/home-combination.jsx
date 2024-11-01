@@ -77,7 +77,7 @@ export function HomeMinimalUI({ sx, ...other }) {
       <Box
         component="img"
         loading="lazy"
-        alt="Minimal dashboard"
+        alt="Steeven Jacques"
         src={`${CONFIG.assetsDir}/assets/images/home/minimal-dashboard.webp`}
         sx={(theme) => ({
           width: 480,
