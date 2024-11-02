@@ -16,8 +16,8 @@ import { usePopover } from 'src/hooks/use-popover';
 
 import { fDate } from 'src/utils/format-time';
 
+import { _socials } from 'src/_mock';
 import { CONFIG } from 'src/config-global';
-import { _socials, _marketingPosts } from 'src/_mock';
 
 import { Iconify } from 'src/components/iconify';
 import { Markdown } from 'src/components/markdown';
@@ -28,10 +28,6 @@ import { PostAuthor } from '../../blog/post-author';
 // import { MarketingNewsletter } from '../marketing-newsletter';
 // import { MarketingLatestPosts } from '../posts/marketing-latest-posts';
 // import { MarketingLandingFreeSEO } from '../landing/marketing-landing-free-seo';
-
-// ----------------------------------------------------------------------
-
-const latestPosts = _marketingPosts.slice(0, 4);
 
 // ----------------------------------------------------------------------
 

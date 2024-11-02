@@ -1,15 +1,16 @@
-import Box from '@mui/material/Box';
+import ReactMarkdown from 'react-markdown';
+
 import { styled } from '@mui/material/styles';
 
 import { varAlpha, stylesMode } from 'src/theme/styles';
 
-const MARGIN = '0.75em';
+import { markdownClasses } from './classes';
 
 // ----------------------------------------------------------------------
 
-export const StyledRoot = styled(Box, {
-  shouldForwardProp: (prop) => prop !== 'firstLetter',
-})(({ firstLetter, theme }) => ({
+const MARGIN = '0.75em';
+
+export const StyledRoot = styled(ReactMarkdown)(({ theme }) => ({
   '> * + *': {
     marginTop: 0,
     marginBottom: MARGIN,
@@ -38,20 +39,13 @@ export const StyledRoot = styled(Box, {
     borderColor: theme.vars.palette.divider,
   },
   /**
-   * Link
+   * Image
    */
-  a: {
-    textDecoration: 'none',
-    color: theme.vars.palette.primary.main,
-    '&:hover': {
-      textDecoration: 'underline',
-    },
-  },
-  /**
-   * Link
-   */
-  img: {
-    borderRadius: theme.shape.borderRadius * 1.5,
+  [`& .${markdownClasses.content.image}`]: {
+    width: '100%',
+    height: 'auto',
+    maxWidth: '100%',
+    margin: 'auto auto 1.25em',
   },
   /**
    * List
@@ -98,11 +92,35 @@ export const StyledRoot = styled(Box, {
     },
   },
   /**
+   * Code inline
+   */
+  [`& .${markdownClasses.content.codeInline}`]: {
+    padding: theme.spacing(0.25, 0.5),
+    color: theme.vars.palette.text.secondary,
+    fontSize: theme.typography.body2.fontSize,
+    borderRadius: theme.shape.borderRadius / 2,
+    backgroundColor: varAlpha(theme.vars.palette.grey['500Channel'], 0.2),
+  },
+  /**
+   * Code Block
+   */
+  [`& .${markdownClasses.content.codeBlock}`]: {
+    position: 'relative',
+    '& pre': {
+      overflowX: 'auto',
+      padding: theme.spacing(3),
+      color: theme.vars.palette.common.white,
+      borderRadius: theme.shape.borderRadius,
+      backgroundColor: theme.vars.palette.grey[900],
+      fontFamily: "'JetBrainsMono', monospace",
+      '& code': { fontSize: theme.typography.body2.fontSize },
+    },
+  },
+  /**
    * Table
    */
   table: {
     width: '100%',
-    textAlign: 'left',
     borderCollapse: 'collapse',
     border: `1px solid ${theme.vars.palette.divider}`,
     'th, td': { padding: theme.spacing(1), border: `1px solid ${theme.vars.palette.divider}` },
@@ -144,18 +162,4 @@ export const StyledRoot = styled(Box, {
       },
     },
   },
-  /**
-   * First Letter
-   */
-  ...(firstLetter && {
-    '& > p:first-of-type': {
-      '&:first-letter': {
-        float: 'left',
-        fontSize: 80,
-        lineHeight: 1,
-        paddingRight: theme.spacing(2),
-        fontWeight: theme.typography.fontWeightBold,
-      },
-    },
-  }),
 }));
